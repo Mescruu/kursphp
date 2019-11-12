@@ -1,0 +1,62 @@
+main{
+    background: rgba(79,91,147,1);
+    padding-top: 50px;
+}
+body{
+    background: rgba(79,91,147,1);
+}
+
+.card{
+    border: 0px;
+}
+.card .card-header{
+    border: 0px;
+
+}
+.card-header a{
+    font-family: 'HandelGothicRegular', sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    font-style: italic;
+    height: 75px;
+    line-height: 65px;
+    width: 150px;
+}
+.card-header .short-des{
+    font-family: 'Roboto', sans-serif;
+    height: 75px;
+    line-height: 75px;
+    color:rgb(38,43,82);
+    font-size: 18px;
+}
+
+
+
+
+/*main{*/
+/*    background: rgba(79,91,147,1);*/
+/*    padding-top: 50px;*/
+/*}*/
+/*body{*/
+/*    background: rgba(79,91,147,1);*/
+/*}*/
+
+/*.card{*/
+/*border: 0px;*/
+/*}*/
+/*.card .card-header{*/
+/*    border: 0px;*/
+/*}*/
+/*.card-header a{*/
+/*    font-family: 'HandelGothicRegular', sans-serif;*/
+/*    font-size: 32px;*/
+/*    font-weight: bold;*/
+/*    font-style: italic;*/
+/*    margin: -0.75rem -1.25rem;*/
+/*    height: 75px;*/
+/*    line-height: 75px;*/
+/*    width: 150px;*/
+/*}*/
+
+
+

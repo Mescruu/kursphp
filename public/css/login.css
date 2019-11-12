@@ -1,0 +1,45 @@
+main{
+    background: rgba(79,91,147,1);
+    padding-top: 50px;
+}
+body{
+    background: rgba(79,91,147,1);
+}
+
+.card{
+    border-radius: 0px;
+    /*background-color: whitesmoke;*/
+}
+.card .form-control{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: rgba(240,240,255,0.8);
+    outline: none;
+    border: 2px solid rgba(119,123,179,1);
+    border-radius: 0px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
+}
+
+.card span strong{
+    text-align: center;
+    color: #902b2b;
+    width: 100%;
+}
+
+.card .forgetLink{
+    color: rgba(129,133,189,1);
+}
+
+.card .btn-info{
+    height: 40px;
+}
+
+/*small*/
+@media (max-width: 768px) {
+    .navbar-dark .navbar-toggler-icon,
+    .navbar-dark .navbar-toggler{
+        display: none;
+    }
+}
