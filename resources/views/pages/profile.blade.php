@@ -6,7 +6,7 @@
 
 @section('content')
 <h1>
-    {{$grupa->nazwa}}
+    {{$grupa->nazwa}} chuju
 </h1>
 
 <table class="table table-striped">
