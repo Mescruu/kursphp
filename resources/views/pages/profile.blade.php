@@ -6,7 +6,7 @@
 
 @section('content')
 <h1>
-    {{$grupa->nazwa}}
+
 </h1>
 <div class="container">
     <table class="table table-striped">

@@ -21,10 +21,10 @@
                     @if (!Auth::guest())
                         <!--                    jezeli jest "active" dodatkowo w klasie, wtedy pokazuje, na której stronie jesteśmy-->
                             <li class="nav-item d-flex align-items-start">
-                                @if(Auth::user()->typ==Auth::user()->admin))
+                                @if(Auth::user()->typ=="admin")
                                     <a class="nav-link" href="/panel">Panel administracyjny</a>
                                 @endif
-                                @if(Auth::user()->typ==Auth::user()->user)
+                                @if(Auth::user()->typ=="user")
                                         <a class="nav-link" href="/profile">Profil</a>
                                 @endif
                             </li>
