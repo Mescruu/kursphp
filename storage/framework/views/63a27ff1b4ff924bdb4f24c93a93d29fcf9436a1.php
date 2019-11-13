@@ -21,7 +21,12 @@
                     <?php if(!Auth::guest()): ?>
                         <!--                    jezeli jest "active" dodatkowo w klasie, wtedy pokazuje, na której stronie jesteśmy-->
                             <li class="nav-item d-flex align-items-start">
-                                <a class="nav-link" href="/profile">Profil</a>
+                                <?php if(Auth::user()->typ==Auth::user()->admin): ?>)
+                                    <a class="nav-link" href="/panel">Panel administracyjny</a>
+                                <?php endif; ?>
+                                <?php if(Auth::user()->typ==Auth::user()->user): ?>
+                                        <a class="nav-link" href="/profile">Profil</a>
+                                <?php endif; ?>
                             </li>
                             <!--                    submenu-->
                             <li class="nav-item dropdown">
@@ -47,9 +52,6 @@
 
                                 </div>
                             </li>
-                            <li class="nav-item d-flex align-items-start">
-                                <a class="nav-link" href="/services">Panel Administracyjny</a>
-                            </li>
                         <?php endif; ?>
 
                     <!--       na końcu znajduje się-->
@@ -68,7 +70,7 @@
                                 </div>
 
                                 <button type="submit"class="btn btn-info float-right btn-login btn-log">
-                                    Zaloguj
+                                    Zaloguj 
                                 </button>
                             </form>
 

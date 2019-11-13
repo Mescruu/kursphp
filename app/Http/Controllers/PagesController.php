@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Grupa;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {
@@ -35,11 +37,26 @@ class PagesController extends Controller
     public function profile(){
         //sposób na przerzucenie zmiennej:
 
-        $grupa  = Grupa::find(auth()->user()->idGrupa);
-
-        return view('pages.profile')->with('grupa', $grupa);   //drugi sposób
+        if(Auth::user()->typ==Auth::user()->admin)
+        {
+            return redirect('/panel');
+        }else{
+            $grupa  = Grupa::find(auth()->user()->idGrupa);
+            return view('pages.profile')->with('grupa', $grupa);   //drugi sposób
+        }
     }
 
+    public function panel(){//sposób na przerzucenie zmiennej:
+
+        //jezeli uzytkownik nie ma typu admin, wtedy zostaje przekierowany na adres profile
+        if(Auth::user()->typ==Auth::user()->user)
+        {
+            return redirect('/profile');
+        }
+        else{
+            return view('pages.panel');   //drugi sposób
+        }
+    }
 
     public function services(){
         $data = array(

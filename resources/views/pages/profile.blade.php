@@ -8,23 +8,24 @@
 <h1>
     {{$grupa->nazwa}}
 </h1>
-
-<table class="table table-striped">
-    <tr>
-        <td>
-            id
-        </td>
-        <td>
-            {{ Auth::user()->id}}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            nazwa
-        </td>
-        <td>
-            {{ Auth::user()->imie}}
-        </td>
-    </tr>
-</table>
+<div class="container">
+    <table class="table table-striped">
+        <tr>
+            <td>
+                id
+            </td>
+            <td>
+                {{ Auth::user()->id}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                nazwa
+            </td>
+            <td>
+                {{ Auth::user()->imie}}
+            </td>
+        </tr>
+    </table>
+</div>
 @endsection

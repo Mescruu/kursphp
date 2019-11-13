@@ -34,6 +34,8 @@ Route::get('/services', 'PagesController@services');
 
 Route::get('/profile', 'PagesController@profile');
 
+Route::get('/panel', 'PagesController@panel');
+
 
 Route::resource('posts', 'PostsController');
 
