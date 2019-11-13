@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGrupasTable extends Migration
+class CreateWynikTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateGrupasTable extends Migration
      */
     public function up()
     {
-        Schema::create('Grupa', function (Blueprint $table) {
+        Schema::create('wynik', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nazwa');
+            $table->integer('idQuiz');
+            $table->integer('idUzytkownik');
+            $table->string('wynik');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateGrupasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Grupa');
+        Schema::dropIfExists('wynik');
     }
 }

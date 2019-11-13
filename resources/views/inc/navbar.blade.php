@@ -67,7 +67,7 @@
                                 </div>
 
                                 <button type="submit"class="btn btn-info float-right btn-login btn-log">
-                                    Zaloguj
+                                    Zaloguj 
                                 </button>
                             </form>
 

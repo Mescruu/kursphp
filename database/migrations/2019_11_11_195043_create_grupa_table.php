@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTematsTable extends Migration
+class CreateGrupaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateTematsTable extends Migration
      */
     public function up()
     {
-        Schema::create('temat', function (Blueprint $table) {
+        Schema::create('Grupa', function (Blueprint $table) {
             $table->increments('id');
-
             $table->string('nazwa');
-            $table->string('trescAktualna');
-            $table->string('trescPoprzednia');
-
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ class CreateTematsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('temat');
+        Schema::dropIfExists('Grupa');
     }
 }

@@ -46,4 +46,24 @@ class User extends Authenticatable
     public  function  post(){
         return $this->hasMany('App\Post'); //User ma wiele postów., ale post ma jednego usera //Relacja jeden do wielu.
     }
+    //Nowe połączenia
+    public  function  grupa(){
+        return $this->belongsTo('App\Grupa','idGrupa'); 
+    }
+    
+    public  function  rozwiazanie(){
+        return $this->hasMany('App\Rozwiazanie','idUzytkownik'); 
+    }
+    
+    public  function  wynik(){
+        return $this->hasMany('App\Wynik','idUzytkownik'); 
+    }
+    
+    public  function  punktyZdobyte(){
+        return $this->hasMany('App\Punkty','idStudent'); 
+    }
+    
+    public  function  punktyNadane(){
+        return $this->hasMany('App\Punkty','idNauczyciel'); 
+    }
 }

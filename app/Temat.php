@@ -12,6 +12,15 @@ class Temat extends Model
     //Primary Key
     public $primaryKey = 'id';
 
-    //trzeba dodać relację
-
+    public function listaGrup(){
+        return $this->hasMany('App\ListaGrup','idTemat');
+    }
+    
+    public function zadanie(){
+        return $this->hasMany('App\Zadanie','idTemat');
+    }
+    
+    public function quiz(){
+        return $this->hasMany('App\Quiz','idTemat');
+    }
 }
