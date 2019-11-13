@@ -19,8 +19,13 @@ class PagesController extends Controller
 
     public function index(){
         //sposób na przerzucenie zmiennej:
-        $title  = 'Welcome to Laravel';
-        return view('pages.index', compact('title'));
+        $title  = 'Kurs PHP';
+        if(Auth::guest()){
+            return view('pages.index', compact('title'));
+        }else{
+            return redirect('/home');
+        }
+        
 
 //        return view('pages.index')->with('title', $title);   //drugi sposób
 

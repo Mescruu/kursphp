@@ -58,6 +58,7 @@
 
     <!-- bootstrap.js -->
     <script type="text/javascript" src="{{ URL::asset('bootstrap/js/bootstrap.js') }}"></script>
+    @yield('scripts')
 
 
 </body>

@@ -16,12 +16,12 @@ class CreateUzytkownikTable extends Migration
         Schema::create('uzytkownik', function (Blueprint $table) {
             $table->increments('id');
             $table->string('imie');
-            $table->string('nazwisko');
-            $table->integer('nrAlbumu')->unique();
+            $table->string('nazwisko')->nullable();
+            $table->integer('nrAlbumu')->unique()->nullable();
             $table->string('email')->unique();
             $table->string('haslo');
-            $table->integer('idGrupa');
-            $table->string('typ');
+            $table->integer('idGrupa')->nullable();
+            $table->string('typ')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
