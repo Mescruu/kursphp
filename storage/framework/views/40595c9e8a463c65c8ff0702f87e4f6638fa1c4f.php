@@ -44,7 +44,7 @@
                         </div>
                     <?php endif; ?>
 
-                    <form class="form-horizontal" method="POST" action="<?php echo e(route('password.email')); ?>">
+                    <form method="POST" action="<?php echo e(url('/reset_password_without_token')); ?>">
                         <?php echo e(csrf_field()); ?>
 
 

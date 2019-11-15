@@ -53,3 +53,7 @@ Route::get('/dashboard', 'DashBoardController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::post('reset_password_without_token', 'NewPasswordController@validatePasswordRequest');
+Route::post('reset_password_with_token', 'NewPasswordController@resetPassword');

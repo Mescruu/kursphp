@@ -42,10 +42,6 @@ class User extends Authenticatable
     {
         return $this->haslo;
     }
-    public function getAuthConfirmPassword()
-    {
-        return $this->potwierdz_haslo;
-    }
 
 
     public  function  post(){
