@@ -32,7 +32,8 @@ Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
 
-Route::get('/profile', 'PagesController@profile');
+Route::get('/profil', 'PagesController@profil');
+Route::get('/punkty', 'PagesController@punkty');
 
 Route::get('/panel', 'PagesController@panel');
 
