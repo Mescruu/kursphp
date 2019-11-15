@@ -25,7 +25,7 @@
                                     <a class="nav-link" href="/panel">Panel administracyjny</a>
                                 <?php endif; ?>
                                 <?php if(Auth::user()->typ==Auth::user()->user): ?>
-                                        <a class="nav-link" href="/profile">Profil</a>
+                                        <a class="nav-link" href="/profil">Profil</a>
                                 <?php endif; ?>
                             </li>
                             <!--                    submenu-->

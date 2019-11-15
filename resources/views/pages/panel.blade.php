@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <h1>
+    <h1>Panel
     </h1>
     <div class="container">
         <table class="table table-striped">
@@ -26,5 +26,8 @@
                 </td>
             </tr>
         </table>
+        @foreach($grupy as $grupa)
+            {{$grupa}}
+        @endforeach
     </div>
 @endsection

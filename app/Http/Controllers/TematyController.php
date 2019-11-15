@@ -32,7 +32,7 @@ class TematyController extends Controller
     {
         //dostarcza wszystkich danych do Kontrolera
 
-        $tematy = Temat::orderBy('id','desc')->get(); //pobiera z bazy posortowane po id malejąco
+        $tematy = Temat::orderBy('nazwa')->get(); //pobiera z bazy posortowane po id malejąco
 
 
         //wyswietlenie kontentu strony /posts ktory znajduje sie w resources/posts/index
