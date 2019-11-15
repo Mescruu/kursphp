@@ -42,6 +42,11 @@ class User extends Authenticatable
     {
         return $this->haslo;
     }
+    public function getAuthConfirmPassword()
+    {
+        return $this->potwierdz_haslo;
+    }
+
 
     public  function  post(){
         return $this->hasMany('App\Post'); //User ma wiele postów., ale post ma jednego usera //Relacja jeden do wielu.

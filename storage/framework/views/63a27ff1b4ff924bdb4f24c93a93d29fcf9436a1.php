@@ -21,7 +21,7 @@
                     <?php if(!Auth::guest()): ?>
                         <!--                    jezeli jest "active" dodatkowo w klasie, wtedy pokazuje, na której stronie jesteśmy-->
                             <li class="nav-item d-flex align-items-start">
-                                <?php if(Auth::user()->typ==Auth::user()->admin): ?>)
+                                <?php if(Auth::user()->typ==Auth::user()->admin): ?>
                                     <a class="nav-link" href="/panel">Panel administracyjny</a>
                                 <?php endif; ?>
                                 <?php if(Auth::user()->typ==Auth::user()->user): ?>

@@ -58,6 +58,7 @@
 
     <!-- bootstrap.js -->
     <script type="text/javascript" src="<?php echo e(URL::asset('bootstrap/js/bootstrap.js')); ?>"></script>
+    <?php echo $__env->yieldContent('scripts'); ?>
 
 
 </body>
