@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\SendEmail;
+use App\Mail\SendResetEmail;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,43 +16,46 @@ use Illuminate\Support\Facades\Validator;
 class NewPasswordController extends Controller
 {
     public function validatePasswordRequest (Request $request){
-        $user = DB::table('uzytkownik')->where('email', '=', $request->email)
-            ->first();
-//Check if the user exists
-        if ($user->id <= 0) {
-            return redirect()->back()->withErrors(['email' => trans('User does not exist')]);
+
+        $user = DB::table('uzytkownik')->where('email', '=', $request->email)->first();
+
+        //Sprawdz czy user istnieje.
+        if ($user==null) {
+            return redirect()->back()->withErrors(['email' => trans('Uzytkownik o takim mailu nie istnieje.')]);
         }
 
-//Create Password Reset Token
+//Tworzenie tokenu resetowania hasła
         DB::table('password_resets')->insert([
             'email' => $request->email,
             'token' => str_random(60),
             'created_at' => Carbon::now()
         ]);
 
-//Get the token just created above
-        $tokenData = DB::table('password_resets')
+        //pobranie tokenu potrzebnego do utworzenia nowego hasła.
+            $tokenData = DB::table('password_resets')
             ->where('email', $request->email)->first();
 
         if ($this->sendResetEmail($request->email, $tokenData->token)) {
-            return redirect()->back()->with('status', trans('A reset link has been sent to your email address.'));
+            //Jezeli się uda:
+            return redirect()->back()->with('status', trans('Link do zresetowania hasła został wysłany na Twój adres e-mail.'));
         } else {
-            return redirect()->back()->withErrors(['error' => trans('A Network Error occurred. Please try again.')]);
+            //w razie błędu z wysłaniem maila (bład w funkcji sendResetEmail)
+            return redirect()->back()->withErrors(['error' => trans('Wystąpił błąd sieci. Proszę spróbuj ponownie.')]);
         }
     }
 
 
     private function sendResetEmail($email, $token)
     {
-//Retrieve the user from the database
+        //Pobranie uzytkownika z bazy danych.
         $user = DB::table('uzytkownik')->where('email', $email)->select('imie', 'email')->first();
-//Generate, the password reset link. The token generated is embedded in the link
-        $link = config('base_url') . 'password/reset/' . $token . '?email=' . urlencode($user->email);
+        //Generowanie linku do resetowania hasła. Wygenerowany token jest w nim osadzony
+        $link = url('/').'/password/reset/' . $token . '?email=' . urlencode($user->email);
         try {
 
-            Mail::to($email)->send(new SendEmail('reset password', $link));
+            Mail::to($email)->send(new SendResetEmail('Resetowanie hasła.', $link, $user->imie));
 
-            //Here send the link with CURL with an external email API
+            //Wysylanie maila z linkiem
             return true;
         } catch (\Exception $e) {
             return false;
@@ -60,19 +63,34 @@ class NewPasswordController extends Controller
     }
     public function resetPassword(Request $request)
     {
-        //Validate input
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|exists:uzytkownik,email',
-            'password' => 'required|confirmed'
-        ]);
 
-        //check if input is valid before moving on
+        //Wyswietlany błąd.
+        $messages = [
+            'exists' => 'Ten :attribute - nie zgadzda się.',
+            'required' => 'Wszystkie pola są wymagane.',
+            'confirmed' => 'Hasła nie są takie same.',
+            'min' => 'Pole z hasłem musi zawierać conajmniej 6 znaków'
+        ];
+
+        //Sprawdzanie danych wejsiowych
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255|exists:uzytkownik,email',
+            'password' => 'required|min:6|confirmed'
+        ],$messages);
+
+
+
+        //Sprawdzenie czy dane są poprawne.
+
         if ($validator->fails()) {
-            return redirect()->back()->withErrors(['email' => 'Please complete the form']);
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
         }
 
+
         $password = $request->password;
-// Validate the token
+// Sprawdzenie tokena
         $tokenData = DB::table('password_resets')
             ->where('token', $request->token)->first();
 
@@ -94,18 +112,18 @@ class NewPasswordController extends Controller
         DB::table('password_resets')->where('email', $user->email)
             ->delete();
 
-        //Send Email Reset Success Email
+        //Jezeli się udało
         if ($this->sendSuccessEmail($tokenData->email)) {
-            return view('index');
+            return view('pages.profile')->with('status', trans('Udało się! Zapisz swoje nowe hasło.'));
         } else {
-            return redirect()->back()->withErrors(['email' => trans('A Network Error occurred. Please try again.')]);
+            return redirect()->back()->withErrors(['email' => trans('Coś poszło nie tak. Spróbuj ponownie za chwilę.')]);
         }
 
     }
     private function sendSuccessEmail($email)
     {
 
-            Mail::to($email)->send(new SendEmail('reset password', 'udalo sie'));
+            Mail::to($email)->send(new SendResetEmail('Resetowanie hasła!', 'Twoje hasło zostało ustawione','Uzytkowniku'));
 
     }
 

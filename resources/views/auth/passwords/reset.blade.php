@@ -13,9 +13,9 @@
 
         <div class="container-fluid"> <!--kontener/pojemnik calej siatki-->
             <div class="row">
-                <div class="col-md-2 col-sm-2 col-xs-2 float-left">
+                <div class="col-md-6 col-sm-6 col-xs-2 float-left">
                     <h2 >
-                        Logowanie
+                        Resetowanie hasła
                     </h2>
                 </div>
             </div>
@@ -26,20 +26,28 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
 
-                <div class="panel-body">
-                    <form method="POST" action="{{ url('/reset_password_with_token') }}">
+
+
+        <div class="col-12 col-sm-10 col-md-8 col-xl-6 mx-auto">
+            <!--  offset od rozmiaru "md" (medium) wzwyż o 1 kolumnę -->
+            <div class="card" style="width: 100%">
+
+                <h2 class="py-3">
+                    Uzupełnij danee
+                </h2>
+
+                <div class="signin">
+
+                    <form class="form-signin justify-content-center" method="POST" action="{{ url('/reset_password_with_token') }}">
                         {{ csrf_field() }}
 
                         <input type="hidden" name="token" value="{{ $token }}">
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="mx-auto mb-3 form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ $email or old('email') }}" required autofocus>
 
                                 @if ($errors->has('email'))
@@ -50,10 +58,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <div class="mx-auto mb-3 form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="password" type="password" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
@@ -64,9 +72,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                        <div class="mx-auto mb-3 form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                             <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
 
                                 @if ($errors->has('password_confirmation'))
@@ -78,12 +86,13 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Reset Password
+                            <div class="col-sm-12 col-md-6 mx-auto">
+                                <button type="submit" class="btn btn-info w-100 mx-auto">
+                                    Zatwierdź
                                 </button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
