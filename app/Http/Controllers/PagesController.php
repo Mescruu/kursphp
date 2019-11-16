@@ -40,6 +40,19 @@ class PagesController extends Controller
         return view('pages.about')->with('title', $title);   //drugi sposób
     }
 
+    public function services(){
+        $data = array(
+            'title'=>'Services',
+            'services'=>['Web Design','Programming','SEO']
+        );
+
+        return view('pages.services')->with($data);   //drugi sposób
+    }
+
+
+
+    ////PROFIL
+
     public function profil(){
         //sposób na przerzucenie zmiennej:
 
@@ -68,25 +81,7 @@ class PagesController extends Controller
         }
     }
 
-    public function panel(){//sposób na przerzucenie zmiennej:
 
-        //jezeli uzytkownik nie ma typu admin, wtedy zostaje przekierowany na adres profile
-        if(Auth::user()->typ==Auth::user()->user)
-        {
-            return redirect('/profil');
-        }
-        else{
-            $data = array(
-                //'usersNotAssigned' => DB::table('uzytkownik')->where('idGrupa', null)->get(),
-                'grupy' => DB::table('grupa')->pluck('nazwa'),
-                //'usersAssigned' => DB::table('uzytkownik')->where('idGrupa', !null)->get()
-                );
-            
-            //$grupy = DB::table('grupa')->get();
-            return view('pages.panel')->with($data);
-        }
-    }
-    
     public function punkty(){
         $punkty = DB::table('punkty')->where('idStudent', auth()->user()->id)->orderByRaw('created_at DESC')->get();
         $nauczyciele = array();
@@ -108,12 +103,6 @@ class PagesController extends Controller
         return view('pages.punkty')->with($data);
     }
 
-    public function services(){
-        $data = array(
-            'title'=>'Services',
-            'services'=>['Web Design','Programming','SEO']
-        );
 
-        return view('pages.services')->with($data);   //drugi sposób
-    }
+
 }

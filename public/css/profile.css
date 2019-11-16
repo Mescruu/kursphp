@@ -1,0 +1,59 @@
+body{
+    background-color: rgba(79,91,147,1);
+    min-height: 100vh;
+}
+
+
+.profile-section{
+    background-color: rgba(79,91,147,1);
+    padding-top: 50px;
+    height: 100%;
+}
+.profile-section .container{
+background-color: whitesmoke;
+}
+
+
+.profile-section .flex-column{
+    background-color: whitesmoke;
+    border-radius: 0px;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+
+.profile-section .nav-pills .nav-link.active{
+    background-color: rgba(79,91,147,1);
+    border-radius: 0px;
+}
+
+.badge {
+    color: whitesmoke;
+    background-color: rgb(38,43,82);
+}
+
+.profile-section h2{
+    color: rgb(38,43,82);
+}
+
+
+/*Group*/
+.profile-section a{
+    color: rgb(38,43,82);
+}
+
+.profile-section .add{
+    float: right;
+    height: 100%;
+    width: auto;
+    color: whitesmoke;
+}
+
+.profile-section .add a {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    color: whitesmoke;
+}
+.profile-section .add a:hover{
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    color: white;
+}

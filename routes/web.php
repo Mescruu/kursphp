@@ -35,7 +35,11 @@ Route::get('/services', 'PagesController@services');
 Route::get('/profil', 'PagesController@profil');
 Route::get('/punkty', 'PagesController@punkty');
 
-Route::get('/panel', 'PagesController@panel');
+
+
+Route::get('/panel', 'AdminFeaturesController@panel');
+Route::get('/panel/dodaj/grupa', 'AdminFeaturesController@addGroup');
+Route::get('/panel/dodaj/student', 'AdminFeaturesController@addUser');
 
 
 Route::resource('posts', 'PostsController');
