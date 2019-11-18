@@ -36,6 +36,13 @@ body{
     height: 40px;
 }
 
+.btn-info a{
+    color: whitesmoke;
+    text-decoration: none;
+}
+.btn-info a:hover{
+    color:white;
+}
 /*small*/
 @media (max-width: 768px) {
     .navbar-dark .navbar-toggler-icon,

@@ -1,3 +1,18 @@
+<!--css do poszczegolnej strony-->
+<?php $__env->startSection('assets'); ?>
+    <link href="<?php echo e(asset('css/underNav.css')); ?>" rel="stylesheet">
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('undernav'); ?>
+
+    <div class="col-md-4 col-sm-5 col-xs-3 float-left">
+        <h2 >
+            Strona Główna
+        </h2>
+    </div>
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('content'); ?>
 <div class="container">
     <div class="row">

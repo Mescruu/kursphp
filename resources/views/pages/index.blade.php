@@ -38,21 +38,45 @@
 
                                                 <div class="signin">
 
-                                                        <form class="form-signin justify-content-center ">
-                                                                <div class="text-center mx-auto mb-4">
+                                                        <form class="form-signin justify-content-center"  method="POST" action="/active">
+
+                                                                {{ csrf_field() }}
+
+                                                                <div class="text-center mx-auto mb-4" >
                                                                         <h2 class="mx-auto font-weight-normal">Pierwszy raz na stronie?</br>Aktywuj konto!</h2>
                                                                 </div>
 
                                                                 <div class="p-0 form-label-group mx-auto mb-3">
-                                                                        <input type="email" id="inputLogin" class="form-control" placeholder="Nr indeksu" required autofocus>
+                                                                        <input type="number"  name="nrAlbumu" id="nrAlbumu" class="form-control" placeholder="Nr indeksu" required autofocus>
+
+                                                                        @if ($errors->has('nrAlbumu'))
+                                                                                <span class="help-block">
+                                                                                <strong>{{ $errors->first('nrAlbumu') }}</strong>
+                                                                                </span>
+                                                                        @endif
+
                                                                 </div>
 
-                                                                <div class="form-label-group mx-auto mb-3">
-                                                                        <input type="password" id="inputPassword" class="form-control" placeholder="Hasło" required>
+                                                                <div class="form-label-group mx-auto mb-3 {{ $errors->has('haslo') ? ' has-error' : '' }}">
+                                                                        <input type="password" name="haslo" id="haslo" class="form-control" placeholder="Hasło" required>
+
+                                                                        @if ($errors->has('haslo'))
+                                                                                <span class="help-block">
+                                                                                <strong>{{ $errors->first('haslo') }}</strong>
+                                                                                </span>
+                                                                        @endif
+
                                                                 </div>
 
-                                                                <div class="form-label-group mx-auto mb-3">
-                                                                        <input type="email" id="inputEmail" class="form-control" placeholder="Email" required>
+                                                                <div class="form-label-group mx-auto mb-3 {{ $errors->has('email') ? ' has-error' : '' }}">
+
+                                                                        <input type="email" name="email" id="email" class="form-control" placeholder="Email" required value="{{ old('email') }}" required autofocus>
+
+                                                                        @if ($errors->has('email'))
+                                                                                <span class="help-block">
+                                                                                         <strong>{{ $errors->first('email') }}</strong>
+                                                                                 </span>
+                                                                        @endif
                                                                 </div>
 
                                                                 <button class="btn  btn-info  mx-auto" type="submit">Sign in</button>

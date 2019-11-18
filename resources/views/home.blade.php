@@ -1,4 +1,18 @@
 @extends('layouts.app')
+<!--css do poszczegolnej strony-->
+@section('assets')
+    <link href="{{ asset('css/underNav.css') }}" rel="stylesheet">
+
+@endsection
+
+@section('undernav')
+
+    <div class="col-md-4 col-sm-5 col-xs-3 float-left">
+        <h2 >
+            Strona Główna
+        </h2>
+    </div>
+@endsection
 
 @section('content')
 <div class="container">

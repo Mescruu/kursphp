@@ -23,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'imie', 'email', 'haslo',
+        'nrAlbumu', 'idGrupa', 'haslo',
     ];
 
 //    protected $primaryKey = 'id'; gdyby chciec ustawic primary key
@@ -44,27 +44,36 @@ class User extends Authenticatable
     }
 
 
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['haslo'] = bcrypt($password);
+    }
+
+
+
+
+
     public  function  post(){
         return $this->hasMany('App\Post'); //User ma wiele postów., ale post ma jednego usera //Relacja jeden do wielu.
     }
     //Nowe połączenia
     public  function  grupa(){
-        return $this->belongsTo('App\Grupa','idGrupa'); 
+        return $this->belongsTo('App\Grupa','idGrupa');
     }
-    
+
     public  function  rozwiazanie(){
-        return $this->hasMany('App\Rozwiazanie','idUzytkownik'); 
+        return $this->hasMany('App\Rozwiazanie','idUzytkownik');
     }
-    
+
     public  function  wynik(){
-        return $this->hasMany('App\Wynik','idUzytkownik'); 
+        return $this->hasMany('App\Wynik','idUzytkownik');
     }
-    
+
     public  function  punktyZdobyte(){
-        return $this->hasMany('App\Punkty','idStudent'); 
+        return $this->hasMany('App\Punkty','idStudent');
     }
-    
+
     public  function  punktyNadane(){
-        return $this->hasMany('App\Punkty','idNauczyciel'); 
+        return $this->hasMany('App\Punkty','idNauczyciel');
     }
 }

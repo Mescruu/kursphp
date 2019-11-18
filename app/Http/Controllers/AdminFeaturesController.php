@@ -39,12 +39,14 @@ class AdminFeaturesController extends Controller
     public function Groups()
     {//sposób na przerzucenie zmiennej:
 
-        return view('pages.admin.groups');
+        return view('pages.admin.editgroup');
     }
 
     public function Users()
     {//sposób na przerzucenie zmiennej:
 
-        return view('pages.admin.users');
+        $grupy = DB::table('grupa')->get();
+
+        return view('pages.admin.edituser')->with('grupy', $grupy);
     }
 }

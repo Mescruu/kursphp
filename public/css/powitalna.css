@@ -1,3 +1,13 @@
+.messages{
+    position: absolute;
+    width: 100%;
+    z-index: 4;
+}
+
+.messages .alert{
+    margin-top: 10px !important;
+}
+
 .col-left{
     background-color: rgba(79,91,147,1);
     padding-right: 50px;

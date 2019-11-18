@@ -57,7 +57,7 @@
                                                 <?php if($errors->has('password')): ?>
                                                     <span class="help-block">
                                         <strong><?php echo e($errors->first('password')); ?></strong>
-                                    </span>
+                                                </span>
                                                 <?php endif; ?>
                                             </div>
                                         </div>

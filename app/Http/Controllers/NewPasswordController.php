@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\SendResetEmail;
+use App\Temat;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,6 +17,8 @@ use Illuminate\Support\Facades\Validator;
 class NewPasswordController extends Controller
 {
     public function validatePasswordRequest (Request $request){
+
+            Auth::logout();
 
         $user = DB::table('uzytkownik')->where('email', '=', $request->email)->first();
 
@@ -108,14 +111,24 @@ class NewPasswordController extends Controller
         //login the user immediately they change password successfully
         Auth::login($user);
 
+        $tematy = Temat::orderBy('id','desc')->get(); //pobiera z bazy posortowane po id malejąco
+        session(['listaTematow' => $tematy]);
+
+
         //Delete the token
         DB::table('password_resets')->where('email', $user->email)
             ->delete();
 
         //Jezeli się udało
         if ($this->sendSuccessEmail($tokenData->email)) {
-            return view('pages.profile')->with('status', trans('Udało się! Zapisz swoje nowe hasło.'));
+            return view('pages.profil')->with('status', trans('Udało się! Zapisz swoje nowe hasło.'));
         } else {
+
+            if(!Auth::guest()){
+
+                return view('pages.profil')->with('status', trans('Udało się! Zapisz swoje nowe hasło.'));
+            }
+
             return redirect()->back()->withErrors(['email' => trans('Coś poszło nie tak. Spróbuj ponownie za chwilę.')]);
         }
 
