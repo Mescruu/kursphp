@@ -34,7 +34,7 @@
             <div class="card" style="width: 100%">
 
                 <h2 class="py-3">
-                    Uzupełnij danee
+                    Uzupełnij dane
                 </h2>
 
                 <div class="signin">

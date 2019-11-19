@@ -13,7 +13,7 @@ class InsertUserController extends Controller
 
 
 
-    public function store()
+    public function storeStudent()
     {
         $this->validate(request(), [
             'nrAlbumu' => 'required|max:10|unique:uzytkownik',
@@ -23,26 +23,50 @@ class InsertUserController extends Controller
 
         $array = [
             'nrAlbumu' => request('nrAlbumu'),
-            'idGrupa' => request('idGrupa'),
+            'idGrupa' => DB::table('grupa')->where('nazwa', request('grupa'))->value('id'),
             'haslo' =>  bcrypt(request('haslo')),
         ];
 
 
 
-        $user = User::create($array);
+        $student = User::create($array);
 
         //auth()->login($user);
 
-        return redirect()->back()->with('success', 'Udało się utworzyć użytkownika o numerze albumu: '.\request('nrAlbumu'));
+        return redirect()->back()->with('success', 'Udało się utworzyć studenta o numerze albumu: '.\request('nrAlbumu'));
+    }
+    
+    public function createTeacher() //NIE DZIAŁA?
+    {
+        $this->validate(request(), [
+            'email' => 'required|email|unique:uzytkownik',
+            'haslo' => 'required|confirmed|min:6',
+        ]);
+
+        $array = [
+            'imie' => request('imie'),
+            'nazwisko' => request('nazwisko'),
+            'email' => request('email'),
+            'haslo' =>  bcrypt(request('haslo')),
+            'typ' => 'nauczyciel',
+        ];
+
+        $nauczyciel = User::create($array);
+
+        //auth()->login($user);
+
+        return redirect()->back()->with('success', 'Udało się utworzyć nauczyciela: '.\request('imie')." ".\request('nazwisko'));
     }
 
 
     public function activate()
     {
         $this->validate(request(), [
+            'imie' => 'required',
+            'nazwisko' => 'required',
             'nrAlbumu' => 'required|max:10|',
             'haslo' => 'required|min:6',
-            'email' => 'required|email|unique:uzytkownik',
+            'email' => 'required|email|unique:uzytkownik'
         ]);
 
 
@@ -54,7 +78,7 @@ class InsertUserController extends Controller
 
             DB::table('uzytkownik')
                 ->where('nrAlbumu', request('nrAlbumu'))
-                ->update(['email' => request('email')]);
+                ->update(['email' => request('email'), 'imie' => request('imie'), 'nazwisko' => request('nazwisko'), 'typ' => 'student']);
 
 
             $userid = User::where('nrAlbumu', request('nrAlbumu'))->pluck('id');
@@ -62,7 +86,7 @@ class InsertUserController extends Controller
 
             Auth::loginUsingId($userid);
 
-            return redirect('/profil')->with('success', 'Aktywowales konto! Uzupelnij dane i zacznij korzystać z platformy');
+            return redirect('/profil')->with('success', 'Aktywowales konto! Uzupelnij dane i zacznij korzystać z platformy.');
 
 
         }else{
@@ -71,7 +95,7 @@ class InsertUserController extends Controller
 
 
 
-        return redirect('/')->with('success', 'Aktywowales konto! Uzupelnij dane i zacznij korzystać z platformy'.\request('nrAlbumu'));
+        //return redirect('/')->with('success', 'Aktywowales konto! Uzupelnij dane i zacznij korzystać z platformy'.\request('nrAlbumu'));
 
     }
 }

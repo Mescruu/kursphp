@@ -39,8 +39,9 @@ Route::get('/punkty', 'PagesController@punkty');
 
 Route::get('/panel', 'AdminFeaturesController@panel');
 
-Route::get('/panel/edytowanie/grupy', 'AdminFeaturesController@Groups');
-Route::get('/panel/edytowanie/uzytkownicy', 'AdminFeaturesController@Users');
+Route::get('/panel/dodajgrupe', 'AdminFeaturesController@Groups');
+Route::get('/panel/dodajstudenta', 'AdminFeaturesController@Student');
+Route::get('/panel/dodajnauczyciela', 'AdminFeaturesController@Nauczyciel');
 
 
 Route::resource('posts', 'PostsController');
@@ -64,7 +65,10 @@ Route::post('reset_password_without_token', 'NewPasswordController@validatePassw
 Route::post('reset_password_with_token', 'NewPasswordController@resetPassword');
 
 //wprowadzanie uzytkownika
-Route::post('register', 'InsertUserController@store');
+Route::post('registerstudent', 'InsertUserController@storeStudent');
+Route::post('registerteacher', 'InsertUserController@createTeacher');
+
+Route::get('/panel/uzytkownik/{id}', 'AdminFeaturesController@EditUser');
 
 //aktywowanie
 Route::post('active', 'InsertUserController@activate');

@@ -28,11 +28,13 @@ class AdminFeaturesController extends Controller
                 //'usersAssigned' => DB::table('uzytkownik')->where('idGrupa', !null)->get()
             );
 
+            $studenci = DB::table('uzytkownik')->where('typ', 'student')->get();
+            $nauczyciele = DB::table('uzytkownik')->where('typ', 'nauczyciel')->get();
             $user = User::get(); //pobierz wszystkich uzytkownikow
             $group = Grupa::get(); //pobierz wszystkie grupy
 
             //$grupy = DB::table('grupa')->get();
-            return view('pages.admin.panel',['user' => $user,'group'=>$group])->with($data);
+            return view('pages.admin.panel',['user' => $user,'group'=>$group, 'studenci'=>$studenci, 'nauczyciele'=>$nauczyciele])->with($data);
         }
     }
 
@@ -42,11 +44,38 @@ class AdminFeaturesController extends Controller
         return view('pages.admin.editgroup');
     }
 
-    public function Users()
+    public function Student()
     {//sposób na przerzucenie zmiennej:
 
         $grupy = DB::table('grupa')->get();
 
-        return view('pages.admin.edituser')->with('grupy', $grupy);
+        return view('pages.admin.dodajstudenta')->with('grupy', $grupy);
+    }
+    
+    public function Nauczyciel()
+    {//sposób na przerzucenie zmiennej:
+
+        return view('pages.admin.dodajnauczyciela');
+    }
+    
+    public function EditUser($id){
+        $user = DB::table('uzytkownik')->where('id', $id)->first();
+        $nazwaGrupy = DB::table('grupa')->where('id', $user->idGrupa)->value('nazwa');
+        $punkty = DB::table('punkty')->where('idStudent', $id);
+        $iloscPunktow = 0;
+        if($punkty){
+            $wpisy = $punkty->pluck('ilosc')->toArray();
+            foreach($wpisy as $wpis){
+                $iloscPunktow += $wpis;
+            }
+        }
+        
+        $data = array(
+                'user' => $user,
+                'nazwaGrupy' => $nazwaGrupy,
+                'iloscPunktow' => $iloscPunktow
+            );
+        
+        return view('pages.admin.edituser')->with($data);
     }
 }
