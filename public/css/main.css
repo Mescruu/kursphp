@@ -38,6 +38,14 @@ h2
     font-size: 38px;
 }
 
+.alert-info {
+    color: #0c5460;
+    background-color: rgba(119,123,179,1)!important;
+    border-color: #bee5eb;
+}
+
+
+
 .title-section{
 display: none;
 }

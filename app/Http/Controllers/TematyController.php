@@ -22,6 +22,12 @@ class TematyController extends Controller
         return view ('tematy.show')->with('temat', $temat);
     }
 
+    public function edit($id)
+    {
+        //wyswitla rzeczy zwiazane z konkretnym tematem o id $id
+        $temat = Temat::find($id);
+        return view ('tematy.edit')->with('temat', $temat);
+    }
 
     /**
      * Display a listing of the resource.
