@@ -18,7 +18,7 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'bartek.chom@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 1,
-            'typ' => 'student',
+            'typ' => 'student'
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -28,7 +28,7 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'mescruu@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 1,
-            'typ' => 'student',
+            'typ' => 'student'
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -38,7 +38,7 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'mitruskasia@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 1,
-            'typ' => 'student',
+            'typ' => 'student'
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -48,7 +48,7 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'kadzieja97@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 1,
-            'typ' => 'student',
+            'typ' => 'student'
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -58,7 +58,7 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'fizykajestglupia@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 1,
-            'typ' => 'student',
+            'typ' => 'student'
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -68,7 +68,7 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'pawel.pieczywo@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 2,
-            'typ' => 'student',
+            'typ' => 'student'
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -78,7 +78,7 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'fajar@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 2,
-            'typ' => 'student',
+            'typ' => 'student'
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -88,7 +88,7 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'kuladajefula@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 2,
-            'typ' => 'student',
+            'typ' => 'student'
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -98,17 +98,17 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'crazy.mike@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 2,
-            'typ' => 'student',
+            'typ' => 'student'
         ]);
         
         DB::table('uzytkownik')->insert([
             'imie' => 'Iwona',
             'nazwisko' => 'Ulewa',
-            'nrAlbumu' => 86441,
+            'nrAlbumu' => 86442,
             'email' => 'raiwona@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 3,
-            'typ' => 'student',
+            'typ' => 'student'
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -118,7 +118,7 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'ptakulina@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 3,
-            'typ' => 'student',
+            'typ' => 'student'
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -128,7 +128,7 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'denny.m@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 3,
-            'typ' => 'student',
+            'typ' => 'student'
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -138,7 +138,7 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'gumowaryba@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 3,
-            'typ' => 'student',
+            'typ' => 'student'
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -148,7 +148,7 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'anozwidelec@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 3,
-            'typ' => 'student',
+            'typ' => 'student'
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -156,7 +156,7 @@ class UzytkownikTableSeeder extends Seeder
             'nazwisko' => 'Pańczyk',
             'email' => 'b.panczyk@pollub.com',
             'haslo' => bcrypt('123456'),
-            'typ' => 'nauczyciel',
+            'typ' => 'nauczyciel'
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -164,7 +164,7 @@ class UzytkownikTableSeeder extends Seeder
             'nazwisko' => 'Dzieńkowski',
             'email' => 'm.dzienkowski@pollub.com',
             'haslo' => bcrypt('123456'),
-            'typ' => 'nauczyciel',
+            'typ' => 'nauczyciel'
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -172,7 +172,7 @@ class UzytkownikTableSeeder extends Seeder
             'nazwisko' => 'Szuster',
             'email' => 't.szuster@pollub.com',
             'haslo' => bcrypt('123456'),
-            'typ' => 'nauczyciel',
+            'typ' => 'nauczyciel'
         ]);
     }
 }

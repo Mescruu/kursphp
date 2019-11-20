@@ -42,7 +42,7 @@ class LoginController extends Controller
     {
         //po zatwierdzeniu zalogowania, do zmiennej sesyjnej zostaje pobrana zmienna z tematami do nawigacji
 
-        $tematy = Temat::orderBy('id','desc')->get(); //pobiera z bazy posortowane po id malejąco
+        $tematy = Temat::orderBy('nazwa','asc')->get(); //pobiera z bazy posortowane po id malejąco
 
             session(['listaTematow' => $tematy]);
     }

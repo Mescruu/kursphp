@@ -17,8 +17,9 @@ class CreateTematTable extends Migration
             $table->increments('id');
 
             $table->string('nazwa');
-            $table->string('trescAktualna');
-            $table->string('trescPoprzednia');
+            $table->string('opis')->nullable();
+            $table->string('trescAktualna')->nullable();
+            $table->string('trescPoprzednia')->nullable();
 
             $table->timestamps();
         });
