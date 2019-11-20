@@ -33,7 +33,7 @@ Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
 
 Route::get('/profil', 'PagesController@profil');
-Route::get('/punkty', 'PagesController@punkty');
+Route::get('/profil/punkty', 'PagesController@punkty');
 
 
 
@@ -72,3 +72,4 @@ Route::get('/panel/uzytkownik/{id}', 'AdminFeaturesController@EditUser');
 
 //aktywowanie
 Route::post('active', 'InsertUserController@activate');
+Route::post('changepassword','ChangePasswordController@changePassword');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use App\Grupa;
+use App\Punkty;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -61,21 +62,26 @@ class PagesController extends Controller
             return redirect('/panel');
         }else{
             $grupa  = Grupa::find(auth()->user()->idGrupa);
-            $punkty = DB::table('punkty')->where('idStudent', auth()->user()->id);
+            $punkty = Punkty::where('idStudent', (auth()->user()->id))->orderBy('created_at', 'desc')->get();
+            //$punkty = DB::table('punkty')->where('idStudent', auth()->user()->id);
             $nazwaGrupy = 'Brak';
             $iloscPunktow = 0;
+            $nauczyciele = [];
             if($grupa){
                 $nazwaGrupy = $grupa->nazwa;
             }
             if($punkty){
-                $wpisy = $punkty->pluck('ilosc')->toArray();
-                foreach($wpisy as $wpis){
-                    $iloscPunktow += $wpis;
+                foreach($punkty as $wpis){
+                    $iloscPunktow += $wpis->ilosc;
+                    $nauczyciel = DB::table('uzytkownik')->where('id', $wpis->idNauczyciel)->value('imie') . " " . DB::table('uzytkownik')->where('id', $wpis->idNauczyciel)->value('nazwisko');
+                    $nauczyciele[$wpis->id] = $nauczyciel;
                 }
             }
             $data = array(
                 'nazwaGrupy' => $nazwaGrupy,
-                'iloscPunktow' => $iloscPunktow
+                'iloscPunktow' => $iloscPunktow,
+                'punkty' => $punkty,
+                'nauczyciele' => $nauczyciele
             );
             return view('pages.profil')->with($data);
         }
