@@ -1,0 +1,672 @@
+body{
+    background-color: rgba(79,91,147,1);
+    min-height: 100vh;
+}
+
+.pokaz-temat-section{
+    padding: 20px 0;
+}
+
+.topic-section{
+    width: 100%;
+    padding: 20px 0;
+    flex-wrap: wrap;
+}
+
+.topic-section .editorFrame{
+    background-color: whitesmoke;
+}
+
+.topic-section form{
+    position: relative;
+}
+
+.topic-section{
+    background-color: rgba(79,91,147,1);
+}
+
+.topic-section form .title{
+    width: 100%;
+    height: 50px;
+    padding: 20px;
+    z-index: 2;
+    border: 2px solid rgb(38,43,82);
+    font-family: 'Roboto', sans-serif;
+
+    text-align: center;
+    margin: 0%;
+}
+
+.topic-section form .title::placeholder{
+    font-family: 'Roboto', sans-serif;
+    transition: 0.5s;
+}
+
+.topic-section form .title:focus{
+    background: rgba(240,240,255,0.8);
+    border: 2px solid whitesmoke;
+    transition: 0.5s;
+}
+
+.topic-section form textarea{
+    transition: 0.5s;
+    width: 100%;
+    border: 2px solid rgb(38,43,82);
+
+    height: auto;
+
+    z-index: 20;
+    position: relative;
+
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+}
+
+
+.topic-section form #buttons-left,
+.topic-section form #buttons-right{
+    width: 200px;
+    top: 200px;
+    background: whitesmoke;
+    left: 50%;
+    padding:  10px 10px;
+
+    position: fixed;
+    z-index: 0;
+}
+.topic-section form #buttons-left .btn-editor {
+    width: 25%;
+}
+.topic-section form #buttons-left .btn-editor input{
+    width: 98%;
+    margin: 1%;
+    position: relative;
+    background-color: rgba(129,133,189,1);
+    color: transparent;
+}
+.topic-section form #buttons-left .btn-editor input:hover{
+    background-color: rgba(139,143,199,1);
+    border: 1px rgba(129,133,189,0.8);
+    color: transparent;
+}
+.topic-section form #buttons-left .btn-editor input:focus{
+    background-color: rgba(119,123,179,1);
+    border: 1px rgba(129,133,189,0.8);
+    color: transparent;
+}
+
+.topic-section form #buttons-left .btn-img{
+    background: url("/storage/icons/Icons_editor/icon_image_white.svg");
+}
+.topic-section form #buttons-left .btn-table{
+    background: url("/storage/icons/Icons_editor/icon_table_white.svg");
+}
+.topic-section form #buttons-left .btn-b{
+    background: url("/storage/icons/Icons_editor/icon_b_white.svg");
+}
+.topic-section form #buttons-left .btn-i{
+    background: url("/storage/icons/Icons_editor/icon_i_white.svg");
+}
+.topic-section form #buttons-left .btn-u{
+    background: url("/storage/icons/Icons_editor/icon_u_white.svg");
+}
+.topic-section form #buttons-left .btn-code{
+    background: url("/storage/icons/Icons_editor/icon_code_white.svg");
+}
+.topic-section form #buttons-left .btn-hr{
+    background: url("/storage/icons/Icons_editor/icon_break_white.svg");
+}
+.topic-section form #buttons-left .btn-center{
+    background: url("/storage/icons/Icons_editor/icon_center_white.svg");
+}
+.topic-section form #buttons-left .btn-title{
+    background: url("/storage/icons/Icons_editor/icon_title_white.svg");
+}
+.topic-section form #buttons-left .btn-stitle{
+    background: url("/storage/icons/Icons_editor/icon_stitle_white.svg");
+}
+.topic-section form #buttons-left .btn-link{
+    background: url("/storage/icons/Icons_editor/icon_link_white.svg");
+}
+.topic-section form #buttons-left .btn-color{
+    background: url("/storage/icons/Icons_editor/icon_color_white.svg");
+}
+.topic-section form #buttons-left .btn-point{
+    background: url("/storage/icons/Icons_editor/icon_listpoint_white.svg");
+
+}
+
+.topic-section form #buttons-left .btn-img,
+.topic-section form #buttons-left .btn-table,
+.topic-section form #buttons-left .btn-b,
+.topic-section form #buttons-left .btn-i,
+.topic-section form #buttons-left .btn-u,
+.topic-section form #buttons-left .btn-code,
+.topic-section form #buttons-left .btn-hr,
+.topic-section form #buttons-left .btn-center,
+.topic-section form #buttons-left .btn-center,
+.topic-section form #buttons-left .btn-title,
+.topic-section form #buttons-left .btn-stitle,
+.topic-section form #buttons-left .btn-link,
+.topic-section form #buttons-left .btn-color,
+.topic-section form #buttons-left .btn-point{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    z-index: 30;
+}
+
+.topic-section form  input{
+    margin: 2px;
+    padding: 5px;
+    min-width: 35px;
+    min-height: 35px;
+
+}
+
+.topic-section form #buttons-right input{
+    width: 100%;
+    height: 40px;
+}
+
+/*.stickPos{*/
+/*    position: fixed;*/
+/*    top: 250px !important;*/
+/*    }*/
+
+/*.stickPosNext{*/
+/*    top: 150px !important;*/
+/*}*/
+
+
+.window-section{
+    width: 100%;
+    /*margin: auto;*/
+    line-height: 50px;
+    color: white;
+    position: relative;
+}
+
+
+/*#opcje{*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    padding: 10%;*/
+/*position: fixed;*/
+/*width: 100%;*/
+/*height: 500px;*/
+/*top: -999%;*/
+/*z-index: 22;*/
+/*}*/
+
+/*#frame{*/
+/*    background-color: whitesmoke;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    position: relative;*/
+/*    padding: 5px;*/
+/*    overflow: hidden;*/
+/*}*/
+
+
+#opcje, #formatted{
+    position: fixed; /* Stay in place */
+    z-index: 1031; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0%;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    transition: 0s;
+    top: -101% !important;
+}
+
+#opcje.show, #formatted.show{
+    top: 0px !important;
+    left: 0%;
+    transition: 0.5s;
+    height: 101%; /* Full height */
+}
+
+
+/* Modal Content */
+#frame {
+    background-color: whitesmoke;
+    margin: auto;
+    padding: 20px;
+    border: 2px solid rgb(38,43,82);
+    width: auto;
+    height: auto;
+    max-height: 60%;
+    max-width: 60%;
+    min-width: 600px;
+    position: relative;
+    display: table; /*e wartości sprawiają, że element zachowuje się jak odpowiadający element tabeli HTML, od którego te wartości wzięły nazwę. Wartość ta jest odpowiednikiem elementu table w HTML.*/
+    overflow: visible;
+}
+
+
+
+#frame .imgContainer{
+    overflow-y: scroll;
+    height: 70%;
+    background: whitesmoke;
+}
+
+.imgContainer img{
+    width: 18%;
+    margin: 1%;
+    height: auto;
+}
+
+
+
+#frame h2{
+    color: rgb(38,43,82);
+    font-family: 'HandelGothicRegular', sans-serif;
+    text-align: center;
+    font-weight: bold;
+    font-style: italic;
+    line-height: 50px;
+
+}
+
+
+#frame .btn-left,#frame .btn-right{
+    width: 42.5%;
+    margin: 5%;
+    height:300px;
+    background-color: whitesmoke;
+    border: 2px solid rgb(38,43,82);
+    transition: 0.5s;
+    min-height: 200px;
+    position: relative;
+    align-items: stretch;
+    padding: 20px;
+    border-radius: 0px;
+}
+#frame .btn-left span,#frame .btn-right span{
+    color: rgb(38,43,82);
+    width: 100%;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+
+}
+
+#frame .btn-left {
+    background: url("/storage/icons/Icon_upload_disc_darkblue.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-right: 2.5%;
+
+}
+#frame .btn-right {
+    background: url("/storage/icons/Icon_upload_server_darkblue.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-left: 2.5%;
+
+}
+
+#frame .btn-left:hover{
+    background-color: white;
+    transition: 0.5s;
+
+    background: url("/storage/icons/Icon_upload_disc_php.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 2px solid rgba(129,133,189,1);
+
+}
+
+#frame .btn-right:hover{
+    background-color: white;
+    transition: 0.5s;
+
+    background: url("/storage/icons/Icon_upload_server_php.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 2px solid rgba(129,133,189,1);
+
+}
+
+#frame .btn-right:hover span, #frame .btn-left:hover span{
+    color: rgba(129,133,189,1);
+}
+
+#frame .btn-left input[type="file"] {
+    display: none;
+}
+.imageUpload {
+
+    cursor: pointer;
+
+    width: 100%;
+    height: 100%;
+
+    color: transparent;
+}
+
+.imageGet{
+    cursor: pointer;
+
+    border: 0px;
+    width: 100%;
+    height: 100%;
+    color: transparent;
+    background-color: transparent;
+
+}
+
+#frame .tableContainer{
+    max-width: 60vw;
+    max-height: 60vh;
+    overflow-x: auto;
+    overflow-y: auto;
+
+    color: rgb(38,43,82);
+    width: 100%;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+#frame .tableContainer table{
+    margin: auto;
+}
+#frame .container{
+    max-width: 100%;
+    margin: 0%;
+}
+#frame .container span{
+    height: 50px;
+    color: rgb(38,43,82);
+    line-height: 30px;
+    position: absolute;
+    left: 1%;
+    font-size: 20px;
+}
+#frame .container span.text{
+    left: 70px;
+    line-height: 50px;
+    height: 50px;
+    font-family: 'Roboto', sans-serif;
+    color: rgb(38,43,82);
+    font-size: 20px;
+}
+#frame .btn-wstaw{
+    float: right;
+    height: 50px;
+    width: 100px;
+}
+
+
+#cols,#rows{
+    width: 250px;
+    height: 50px;
+}
+
+/* The container */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: rgb(38,43,82);
+}
+
+.col-form-label{
+    width: 150px;
+    height: 50px;
+    font-size: 22px;
+    color: rgb(38,43,82);
+    font-family: 'Roboto', sans-serif;
+
+}
+.btn-zatwierdz{
+    width: 400px;
+    height: 50px;
+}
+
+
+/* Hide the browser's default checkbox */
+.container input[type='checkbox'] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 50px;
+    background-color: whitesmoke;
+    border: solid 2px rgba(129,133,189,1);
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: whitesmoke;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color:whitesmoke;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    width: 100%;
+    height:  100%;
+    content: 'X';
+    text-align: center;
+    line-height: 50px;
+    color: rgba(129,133,189,1);
+}
+
+
+
+.btn-back{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 90px; /*tyle ile padding w #frame*/
+    top: 20px;
+    font-size: 24px;
+}
+
+
+#exit{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 20px; /*tyle ile padding w #frame*/
+    top: 20px;
+}
+
+/*PODGLĄD*/
+.label-preview{
+    background-color: whitesmoke;
+    width: 100%;
+    margin-left: 16.5%;
+    height: 100px;
+    max-width: 67%;
+    position: relative;
+    border: 2px solid rgb(38,43,82);
+    border-bottom: 0px;
+
+}
+.label-preview h2{
+    margin-bottom: 0;
+    line-height: 100px;
+    height: 100px;
+    color: rgb(38,43,82);
+    font-family: 'Roboto', sans-serif;
+}
+
+#page {
+    background-color: whitesmoke;
+    margin: auto;
+    padding: 20px;
+    border: 2px solid rgb(38,43,82);
+    width: 100%;
+    height: 70%;
+    max-width: 67%;
+    position: relative;
+    display: table; /*e wartości sprawiają, że element zachowuje się jak odpowiadający element tabeli HTML, od którego te wartości wzięły nazwę. Wartość ta jest odpowiednikiem elementu table w HTML.*/
+    overflow: visible;
+    margin-bottom: 50px;
+}
+
+#page img{
+    max-width: 100%;
+    height: auto;
+    width: auto;
+}
+
+/* Large devices (desktops, less than 1200px) */
+@media (max-width: 1199.98px) {
+
+
+    .topic-section form textarea{
+        min-height: 500px;
+    }
+
+    .topic-section form #buttons-left,
+    .topic-section form #buttons-right{
+        background: whitesmoke;
+        position: relative;
+        z-index: 0;
+        top: 0px;
+        left: 0%!important;
+        display: inline-flex;
+        padding: 5px 5px;
+        width: 100%;
+    }
+    .topic-section form #buttons-left .btn-editor{
+        width: 8.3333%;
+    }
+
+    .topic-section form #buttons-left .btn-editor input{
+        width: 96%;
+        margin: 2%;
+    }
+
+
+
+}
+
+/* Medium devices (tablets, less than 992px)*/
+@media (max-width: 991.98px) {
+
+
+    #frame {
+        max-height: 80%;
+        max-width: 80%;
+        min-width: 300px;
+    }
+
+
+
+    .label-preview {
+        margin-left: 8%;
+        width: 84%;
+        max-width: 84%;
+    }
+    #page{
+        margin-left: 8%;
+        width: 84%;
+        max-width: 84%;
+    }
+
+}
+
+/* Small devices (landscape phones, less than 768px)*/
+@media (max-width: 767.98px) {
+
+
+    .topic-section form #buttons-left .btn-editor{
+        width: 16.66666%;
+    }
+
+
+    .label-preview {
+        margin-left: 0%;
+        width: 100%;
+        max-width: 100%;
+    }
+    #page{
+        margin-left: 0%;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #frame h2 {
+
+        text-align: left;
+    }
+
+    .imgContainer img {
+
+        width: 31.333%;
+        margin: 1%;
+        height: auto;
+
+    }
+}
+
+/* Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 575.98px) {
+
+    #frame {
+        max-height: 100%;
+        max-width: 100%;
+        width: 100%;
+        min-width: 0px;
+    }
+    #frame .tableContainer{
+        width: 80%;
+    }
+
+    #frame .btn-left, #frame .btn-right {
+        width: 100%;
+        margin: 0px;
+    }
+    #frame .btn-left{
+        margin-bottom: 15px;
+    }
+}
+
+
+
+

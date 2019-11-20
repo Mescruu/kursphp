@@ -47,7 +47,12 @@ Route::get('/panel/dodajnauczyciela', 'AdminFeaturesController@Nauczyciel');
 Route::resource('posts', 'PostsController');
 
 //Kontroler do tematów
-Route::resource('tematy', 'TematyController');
+//Route::resource('tematy', 'TematyController');
+
+
+Route::get('tematy', 'TematyController@index');
+Route::get('tematy/{id}', 'TematyController@show');
+Route::get('tematy/edycja/{id}', 'TematyController@edit');
 
 
 //automatycznie dodane po komendzie artisan make:auth
