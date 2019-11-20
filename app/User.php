@@ -76,4 +76,8 @@ class User extends Authenticatable
     public  function  punktyNadane(){
         return $this->hasMany('App\Punkty','idNauczyciel');
     }
+    
+    public function powiadomienie(){
+        return $this->hasMany('App\Powiadomienie','idUzytkownik');
+    }
 }
