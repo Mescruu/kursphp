@@ -42,6 +42,7 @@ Route::get('/panel', 'AdminFeaturesController@panel');
 Route::get('/panel/dodajgrupe', 'AdminFeaturesController@Groups');
 Route::get('/panel/dodajstudenta', 'AdminFeaturesController@Student');
 Route::get('/panel/dodajnauczyciela', 'AdminFeaturesController@Nauczyciel');
+Route::get('/panel/dodajzpliku', 'AdminFeaturesController@zPliku');
 
 
 Route::resource('posts', 'PostsController');

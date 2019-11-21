@@ -18,7 +18,7 @@ class CreateUzytkownikTable extends Migration
             $table->string('imie');
             $table->string('nazwisko')->nullable();
             $table->integer('nrAlbumu')->unique()->nullable();
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->string('haslo');
             $table->integer('idGrupa')->nullable();
             $table->string('typ')->nullable();

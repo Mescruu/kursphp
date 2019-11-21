@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Grupa;
 use App\User;
+use App\Punkty;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -22,20 +23,23 @@ class AdminFeaturesController extends Controller
         if (Auth::user()->typ == Auth::user()->user) {
             return redirect('/profil');
         } else {
-            $data = array(
-                //'usersNotAssigned' => DB::table('uzytkownik')->where('idGrupa', null)->get(),
-                'grupy' => DB::table('grupa')->pluck('nazwa'),
-                //'usersAssigned' => DB::table('uzytkownik')->where('idGrupa', !null)->get()
-            );
-
-            $studenci = DB::table('uzytkownik')->where('typ', 'student')->get();
+            $studenci = DB::table('uzytkownik')->where('typ', 'student')->orderBy('nazwisko', 'asc')->get();
             $nauczyciele = DB::table('uzytkownik')->where('typ', 'nauczyciel')->get();
             $user = User::get(); //pobierz wszystkich uzytkownikow
             $group = Grupa::get(); //pobierz wszystkie grupy
             $notification = DB::table('powiadomienie')->where('idUzytkownik', Auth::user()->id)->get();
+            
+            //ilosc punktow kazdego studenta
+            foreach($studenci as $student){
+                $iloscPunktow = 0;
+                $punkty = Punkty::where('idStudent', ($student->id))->get();
+                foreach($punkty as $wpis){
+                    $iloscPunktow += $wpis->ilosc;
+                }
+                $student->iloscPunktow = $iloscPunktow;
+            }
 
-            //$grupy = DB::table('grupa')->get();
-            return view('pages.admin.panel',['user' => $user,'group'=>$group, 'studenci'=>$studenci, 'nauczyciele'=>$nauczyciele,'notification'=>$notification])->with($data);
+            return view('pages.admin.panel',['user' => $user,'group'=>$group, 'studenci'=>$studenci, 'nauczyciele'=>$nauczyciele,'notification'=>$notification]);
         }
     }
 
@@ -57,6 +61,12 @@ class AdminFeaturesController extends Controller
     {//sposób na przerzucenie zmiennej:
 
         return view('pages.admin.dodajnauczyciela');
+    }
+    
+    public function zPliku()
+    {//sposób na przerzucenie zmiennej:
+
+        return view('pages.admin.dodajzpliku');
     }
     
     public function EditUser($id){

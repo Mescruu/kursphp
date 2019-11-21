@@ -31,6 +31,8 @@
 
                     <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Twoje dane</a>
 
+                    <a class="nav-link" id="v-pills-changepassword-tab" data-toggle="pill" href="#v-pills-changepassword" role="tab" aria-controls="v-pills-changepassword" aria-selected="false">Zmień hasło</a>
+
                     <a class="nav-link" id="v-pills-group-tab" data-toggle="pill" href="#v-pills-group" role="tab" aria-controls="v-pills-group" aria-selected="false">Grupy</a>
 
                     <a class="nav-link" id="v-pills-student-tab" data-toggle="pill" href="#v-pills-student" role="tab" aria-controls="v-pills-student" aria-selected="false">Studenci</a>
@@ -117,17 +119,67 @@
                                     {{ Auth::user()->created_at}}
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    Hasło
-                                </td>
-                                <td>
-                                    <a href="/password/reset" class="btn btn-info add float-left">Resetuj hasło</a>
-                                </td>
-                            </tr>
                         </table>
 
 
+
+                    </div>
+                    
+                    <div class="tab-pane fade" id="v-pills-changepassword" role="tabpanel" aria-labelledby="v-pills-changepassword-tab">
+                        <h2 class="w-100">
+                            Zmień hasło
+                        </h2>
+
+                        <hr>
+                        <!--Formularz do zmiany hasła - początek-->
+                        <form class="form-signin justify-content-center" method="POST" action="changepassword">
+                            {{ csrf_field() }}
+
+                            <div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
+                                <label for="new-password" class="col-md-4 control-label">Aktualne hasło</label>
+
+                                <div class="col-12">
+                                    <input id="current-password" type="password" class="form-control" name="current-password" required>
+
+                                    @if ($errors->has('current-password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('current-password') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('new-password') ? ' has-error' : '' }}">
+                                <label for="new-password" class="col-md-4 control-label">Nowe hasło</label>
+
+                                <div class="col-12">
+                                    <input id="new-password" type="password" class="form-control" name="new-password" required>
+
+                                    @if ($errors->has('new-password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('new-password') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="new-password-confirm" class="col-md-4 control-label">Potwierdź nowe hasło</label>
+
+                                <div class="col-12">
+                                    <input id="new-password-confirm" type="password" class="form-control" name="new-password_confirmation" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-12 mb-3 mx-auto">
+                                    <button type="submit" class="btn btn-info mx-auto">
+                                        Zmień hasło
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <!--Formularz do zmiany hasła - koniec-->
 
                     </div>
 
@@ -228,6 +280,7 @@
                                 <h5 class=" h-100 my-auto">
                                     Dodaj Studenta
 
+                                    <a href="/panel/dodajzpliku" class="btn btn-info add"> + z pliku</a>
                                     <a href="/panel/dodajstudenta" class="btn btn-info add"> + Student</a>
                                 </h5>
                             </div>
@@ -241,7 +294,7 @@
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 @foreach ($studenci as $i)
-                                        <a class="nav-item nav-link" id="nav-{{$i->id}}-tab" data-toggle="tab" href="#nav-{{$i->id}}" role="tab" aria-controls="nav-{{$i->id}}" aria-selected="false">{{$i->nrAlbumu}}</a>
+                                        <a class="nav-item nav-link" id="nav-{{$i->id}}-tab" data-toggle="tab" href="#nav-{{$i->id}}" role="tab" aria-controls="nav-{{$i->id}}" aria-selected="false">{{$i->nazwisko}} {{$i->imie}}</a>
                                 @endforeach
                             </div>
                         </nav>
@@ -285,12 +338,22 @@
                                                 {{ $i->nrAlbumu}}
                                             </td>
                                         </tr>
+                                        
                                         <tr>
                                             <td>
                                                 Grupa
                                             </td>
                                             <td>
                                                 {{ $grupa->where('id', $i->idGrupa)->value('nazwa') }}
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>
+                                                Ilość punktów
+                                            </td>
+                                            <td>
+                                                {{ $i->iloscPunktow }}
                                             </td>
                                         </tr>
                                     </table>
@@ -321,7 +384,7 @@
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 @foreach ($nauczyciele as $i)
-                                        <a class="nav-item nav-link" id="nav-{{$i->id}}-tab" data-toggle="tab" href="#nav-{{$i->id}}" role="tab" aria-controls="nav-{{$i->id}}" aria-selected="false">{{$i->imie}} {{$i->nazwisko}}</a>
+                                        <a class="nav-item nav-link" id="nav-{{$i->id}}-tab" data-toggle="tab" href="#nav-{{$i->id}}" role="tab" aria-controls="nav-{{$i->id}}" aria-selected="false">{{$i->nazwisko}} {{$i->imie}}</a>
                                 @endforeach
                             </div>
                         </nav>

@@ -17,15 +17,18 @@ class InsertUserController extends Controller
     public function storeStudent()
     {
         $this->validate(request(), [
+            'imie' => 'required',
+            'nazwisko' => 'required',
             'nrAlbumu' => 'required|max:10|unique:uzytkownik',
-            'haslo' => 'required|confirmed|min:6',
         ]);
 
 
         $array = [
+            'imie' => request('imie'),
+            'nazwisko' => request('nazwisko'),
             'nrAlbumu' => request('nrAlbumu'),
             'idGrupa' => DB::table('grupa')->where('nazwa', request('grupa'))->value('id'),
-            'haslo' =>  bcrypt(request('haslo')),
+            'haslo' =>  bcrypt(request('imie').request('nrAlbumu')),
         ];
 
 
@@ -63,8 +66,6 @@ class InsertUserController extends Controller
     public function activate()
     {
         $this->validate(request(), [
-            'imie' => 'required',
-            'nazwisko' => 'required',
             'nrAlbumu' => 'required|max:10|',
             'haslo' => 'required|min:6',
             'email' => 'required|email|unique:uzytkownik'
@@ -79,7 +80,7 @@ class InsertUserController extends Controller
 
             DB::table('uzytkownik')
                 ->where('nrAlbumu', request('nrAlbumu'))
-                ->update(['email' => request('email'), 'imie' => request('imie'), 'nazwisko' => request('nazwisko'), 'typ' => 'student']);
+                ->update(['email' => request('email'), 'typ' => 'student']);
 
 
             $userid = User::where('nrAlbumu', request('nrAlbumu'))->pluck('id')->first();
