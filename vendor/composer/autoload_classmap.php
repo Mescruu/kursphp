@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddNauczycielColumnToGrupa' => $baseDir . '/database/migrations/2019_11_20_232547_add_nauczyciel_column_to_grupa.php',
     'ArithmeticError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
     'AssertionError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/AssertionError.php',
     'CreateGrupaTable' => $baseDir . '/database/migrations/2019_11_11_195043_create_grupa_table.php',

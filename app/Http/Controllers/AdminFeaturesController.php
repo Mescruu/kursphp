@@ -32,9 +32,10 @@ class AdminFeaturesController extends Controller
             $nauczyciele = DB::table('uzytkownik')->where('typ', 'nauczyciel')->get();
             $user = User::get(); //pobierz wszystkich uzytkownikow
             $group = Grupa::get(); //pobierz wszystkie grupy
+            $notification = DB::table('powiadomienie')->where('idUzytkownik', Auth::user()->id)->get();
 
             //$grupy = DB::table('grupa')->get();
-            return view('pages.admin.panel',['user' => $user,'group'=>$group, 'studenci'=>$studenci, 'nauczyciele'=>$nauczyciele])->with($data);
+            return view('pages.admin.panel',['user' => $user,'group'=>$group, 'studenci'=>$studenci, 'nauczyciele'=>$nauczyciele,'notification'=>$notification])->with($data);
         }
     }
 

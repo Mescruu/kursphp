@@ -17,4 +17,5 @@ class Grupa extends Model
     public function listaGrup(){
         return $this->hasMany('App\ListaGrup','idGrupa');
     }
+
 }

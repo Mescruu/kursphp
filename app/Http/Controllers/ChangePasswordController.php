@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ChangePasswordController extends Controller
 {
     public function changePassword(){
+
+
 
         if (!(\Hash::check(request('current-password'), Auth::user()->haslo))) {
             // The passwords matches
@@ -29,6 +32,9 @@ class ChangePasswordController extends Controller
         $user = Auth::user();
         $user->haslo = bcrypt(request('new-password'));
         $user->save();
+
+
+
 
         return redirect()->back()->with("success","Password changed successfully !");
 
