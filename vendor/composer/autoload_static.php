@@ -316,6 +316,7 @@ class ComposerStaticInitfc07a1b53b534d3334ec5cb3f197c51f
     );
 
     public static $classMap = array (
+        'AddNauczycielColumnToGrupa' => __DIR__ . '/../..' . '/database/migrations/2019_11_20_232547_add_nauczyciel_column_to_grupa.php',
         'ArithmeticError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
         'AssertionError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/AssertionError.php',
         'CreateGrupaTable' => __DIR__ . '/../..' . '/database/migrations/2019_11_11_195043_create_grupa_table.php',

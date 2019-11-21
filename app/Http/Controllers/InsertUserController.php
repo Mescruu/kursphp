@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Powiadomienie;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -81,10 +82,12 @@ class InsertUserController extends Controller
                 ->update(['email' => request('email'), 'imie' => request('imie'), 'nazwisko' => request('nazwisko'), 'typ' => 'student']);
 
 
-            $userid = User::where('nrAlbumu', request('nrAlbumu'))->pluck('id');
+            $userid = User::where('nrAlbumu', request('nrAlbumu'))->pluck('id')->first();
+
 
 
             Auth::loginUsingId($userid);
+
 
             return redirect('/profil')->with('success', 'Aktywowales konto! Uzupelnij dane i zacznij korzystać z platformy.');
 

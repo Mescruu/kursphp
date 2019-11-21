@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Powiadomienie;
 use Illuminate\Support\Facades\DB;
 use App\Grupa;
 use App\Punkty;
@@ -57,6 +58,10 @@ class PagesController extends Controller
     public function profil(){
         //sposób na przerzucenie zmiennej:
 
+        $adminId = DB::table('grupa')->where('id', auth()->user()->idGrupa)->first();
+        Powiadomienie::createNotificationToTeacher($adminId->id,"Uzytkownik ". auth()->user()->imie." ". auth()->user()->nazwisko." wszedł w swój profil! (numer indeksu: ". auth()->user()->nrAlbumu.")");
+
+
         if(Auth::user()->typ==Auth::user()->admin)
         {
             return redirect('/panel');
@@ -89,6 +94,9 @@ class PagesController extends Controller
 
 
     public function punkty(){
+
+
+
         $punkty = DB::table('punkty')->where('idStudent', auth()->user()->id)->orderByRaw('created_at DESC')->get();
         $nauczyciele = array();
         $iterations = 0;

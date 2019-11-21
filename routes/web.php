@@ -78,3 +78,7 @@ Route::get('/panel/uzytkownik/{id}', 'AdminFeaturesController@EditUser');
 //aktywowanie
 Route::post('active', 'InsertUserController@activate');
 Route::post('changepassword','ChangePasswordController@changePassword');
+
+
+//powiadomienia:
+Route::get('/powiadomienia/usun/', 'PowiadomieniaController@delete');
