@@ -20,8 +20,9 @@ body{
     font-style: italic;
     height: 75px;
     line-height: 65px;
-    width: 150px;
+    width: auto;
 }
+
 .card-header .short-des{
     font-family: 'Roboto', sans-serif;
     height: 75px;

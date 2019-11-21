@@ -38,6 +38,17 @@ h2
     font-size: 38px;
 }
 
+/* For Firefox */
+input[type='number'] {
+    -moz-appearance:textfield !important;
+}
+/* Webkit browsers like Safari and Chrome */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0;
+}
+
 .alert-info {
     color: #0c5460;
     background-color: rgba(119,123,179,1)!important;

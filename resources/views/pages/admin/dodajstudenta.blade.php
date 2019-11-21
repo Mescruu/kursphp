@@ -69,7 +69,7 @@
                             <label for="nrAlbumu" class="col-md-4 control-label">Numer albumu</label>
 
                             <div class="col-12">
-                                <input id="nrAlbumu" type="number" class="form-control" name="nrAlbumu" value="{{ old('nrAlbumu') }}" required autofocus>
+                                <input id="nrAlbumu" pattern="[0-9]{1-6}" type="text" class="form-control" name="nrAlbumu" value="{{ old('nrAlbumu') }}" required autofocus>
 
                                 @if ($errors->has('nrAlbumu'))
                                 <span class="help-block">

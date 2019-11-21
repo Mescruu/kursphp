@@ -45,31 +45,9 @@
                                                                 <div class="text-center mx-auto mb-4" >
                                                                         <h2 class="mx-auto font-weight-normal">Pierwszy raz na stronie?</br>Aktywuj konto!</h2>
                                                                 </div>
-                                                                
-                                                                <div class="p-0 form-label-group mx-auto mb-3">
-                                                                        <input type="text"  name="imie" id="imie" class="form-control" placeholder="Imię" required autofocus>
-
-                                                                        <?php if($errors->has('imie')): ?>
-                                                                                <span class="help-block">
-                                                                                <strong><?php echo e($errors->first('imie')); ?></strong>
-                                                                                </span>
-                                                                        <?php endif; ?>
-
-                                                                </div>
-                                                                
-                                                                <div class="p-0 form-label-group mx-auto mb-3">
-                                                                        <input type="text"  name="nazwisko" id="nazwisko" class="form-control" placeholder="Nazwisko" required autofocus>
-
-                                                                        <?php if($errors->has('nazwisko')): ?>
-                                                                                <span class="help-block">
-                                                                                <strong><?php echo e($errors->first('nazwisko')); ?></strong>
-                                                                                </span>
-                                                                        <?php endif; ?>
-
-                                                                </div>
 
                                                                 <div class="p-0 form-label-group mx-auto mb-3">
-                                                                        <input type="number"  name="nrAlbumu" id="nrAlbumu" class="form-control" placeholder="Nr indeksu" required autofocus>
+                                                                        <input type="text" pattern="[0-9]{1-6}" name="nrAlbumu" id="nrAlbumu" class="form-control" placeholder="Nr indeksu" required autofocus>
 
                                                                         <?php if($errors->has('nrAlbumu')): ?>
                                                                                 <span class="help-block">

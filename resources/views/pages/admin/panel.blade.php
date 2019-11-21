@@ -212,11 +212,11 @@
 
                             <div class="card">
 
-                                <div class="card-header" id="heading{{$grupa->nazwa}}">
+                                <div class="card-header" id="headingG{{$grupa->id}}">
                                     <h5 class="mb-0">
 
 
-                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{$grupa->nazwa}}" aria-expanded="true" aria-controls="collapse{{$grupa->nazwa}}">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#G{{$grupa->id}}" aria-expanded="true" aria-controls="collapseG{{$grupa->id}}">
 
                                             {{$grupa->nazwa}}
                                         </button>
@@ -228,10 +228,13 @@
                                     </h5>
                                 </div>
 
-                                <div id="{{$grupa->nazwa}}" class="collapse" aria-labelledby="heading{{$grupa->nazwa}}" data-parent="#accordionExample">
+                                <div id="G{{$grupa->id}}" class="collapse" aria-labelledby="headingG{{$grupa->id}}" data-parent="#accordionExample">
                                     <div class="card-body">
                                         <table class="table">
                                             <tr>
+                                                <td>
+                                                    Lp.
+                                                </td>
                                                 <td>
                                                     Imie
                                                 </td>
@@ -241,10 +244,19 @@
                                                 <td>
                                                     Numer Albumu
                                                 </td>
+                                                <td>
+                                                    ocena
+                                                </td>
+                                                <td>
+                                                   punktacja
+                                                </td>
                                             </tr>
                                             @foreach ($user as $i)
                                             @if($i->idGrupa==$grupa->id)
                                             <tr>
+                                                <td>
+                                                    nr
+                                                </td>
 
                                                 <td>
                                                     {{ $i->imie}}
@@ -256,6 +268,14 @@
 
                                                 <td>
                                                     {{ $i->nrAlbumu}}
+                                                </td>
+                                                <td>
+                                                   ocena
+                                                </td>
+                                                <td>
+                                                        <a class="btn btn-info">
+                                                            przycisk
+                                                        </a>
                                                 </td>
                                             </tr>
                                             @endif
@@ -283,15 +303,10 @@
                                     Dodaj Studenta
 
                                     <a href="/panel/dodajzpliku" class="btn btn-info add"> + z pliku</a>
-                                    <a href="/panel/dodajstudenta" class="btn btn-info add"> + Student</a>
+                                    <a href="/panel/dodajstudenta" class="btn btn-info add mr-2"> + Student</a>
                                 </h5>
                             </div>
                         </div>
-
-                        Numer Albumu:
-
-
-
 
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">

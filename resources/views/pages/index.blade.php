@@ -47,7 +47,7 @@
                                                                 </div>
 
                                                                 <div class="p-0 form-label-group mx-auto mb-3">
-                                                                        <input type="number"  name="nrAlbumu" id="nrAlbumu" class="form-control" placeholder="Nr indeksu" required autofocus>
+                                                                        <input type="text" pattern="[0-9]{1-6}" name="nrAlbumu" id="nrAlbumu" class="form-control" placeholder="Nr indeksu" required autofocus>
 
                                                                         @if ($errors->has('nrAlbumu'))
                                                                                 <span class="help-block">

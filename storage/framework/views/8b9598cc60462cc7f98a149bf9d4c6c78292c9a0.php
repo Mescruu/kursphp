@@ -32,10 +32,13 @@
                                     <div class="card-header" id="heading<?php echo e($temat->id); ?>">
                                             <a class="btn btn-info float-left" href="/tematy/<?php echo e($temat->id); ?>"><?php echo e($temat->nazwa); ?></a>
 
-                                        <div class="text-center w-100 short-des">
+                                        <span class="text-center px-4  w-auto short-des">
                                             krótki opis
-                                        </div>
+                                        </span>
 
+                                        <a class="btn btn-info float-right" href="/wyklady/<?php echo e($temat->id); ?>">wyklad id</a>
+
+                                        
 
 
                                     </div>

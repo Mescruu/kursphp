@@ -33,10 +33,13 @@
                                     <div class="card-header" id="heading{{$temat->id}}">
                                             <a class="btn btn-info float-left" href="/tematy/{{$temat->id}}">{{$temat->nazwa}}</a>
 
-                                        <div class="text-center w-100 short-des">
+                                        <span class="text-center px-4  w-auto short-des">
                                             krótki opis
-                                        </div>
-{{--                                            <button style="transform: rotate(90deg); width: 50px; height: 50px;" class="btn btn-info float-right collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">--}}
+                                        </span>
+
+                                        <a class="btn btn-info float-right" href="/wyklady/{{$temat->id}}">wyklad id</a>
+
+                                        {{--                                            <button style="transform: rotate(90deg); width: 50px; height: 50px;" class="btn btn-info float-right collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">--}}
 {{--                                                <span >&#10148;</span>--}}
 {{--                                            </button>--}}
                                     </div>
