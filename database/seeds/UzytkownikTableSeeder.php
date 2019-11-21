@@ -154,7 +154,7 @@ class UzytkownikTableSeeder extends Seeder
         DB::table('uzytkownik')->insert([
             'imie' => 'Beata',
             'nazwisko' => 'Pańczyk',
-            'email' => 'b.panczyk@pollub.com',
+            'email' => 'b.panczyk@pollub.pl',
             'haslo' => bcrypt('123456'),
             'typ' => 'nauczyciel'
         ]);
@@ -162,7 +162,7 @@ class UzytkownikTableSeeder extends Seeder
         DB::table('uzytkownik')->insert([
             'imie' => 'Mariusz',
             'nazwisko' => 'Dzieńkowski',
-            'email' => 'm.dzienkowski@pollub.com',
+            'email' => 'm.dzienkowski@pollub.pl',
             'haslo' => bcrypt('123456'),
             'typ' => 'nauczyciel'
         ]);
@@ -170,7 +170,7 @@ class UzytkownikTableSeeder extends Seeder
         DB::table('uzytkownik')->insert([
             'imie' => 'Tomasz',
             'nazwisko' => 'Szuster',
-            'email' => 't.szuster@pollub.com',
+            'email' => 't.szuster@pollub.pl',
             'haslo' => bcrypt('123456'),
             'typ' => 'nauczyciel'
         ]);
