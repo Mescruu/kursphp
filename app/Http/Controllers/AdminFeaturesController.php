@@ -28,18 +28,29 @@ class AdminFeaturesController extends Controller
             $user = User::get(); //pobierz wszystkich uzytkownikow
             $group = Grupa::get(); //pobierz wszystkie grupy
             $notification = DB::table('powiadomienie')->where('idUzytkownik', Auth::user()->id)->get();
+            $punkty = DB::table('punkty')->orderBy('created_at', 'desc')->get();
+            $punkty_nauczyciele = [];
+            $punkty_studenci = [];
+            
+            //Imie i nazwisko nauczyciela w historii punktów
+            foreach($punkty as $wpis){
+                $nauczyciel = DB::table('uzytkownik')->where('id', $wpis->idNauczyciel)->value('imie') . " " . DB::table('uzytkownik')->where('id', $wpis->idNauczyciel)->value('nazwisko');
+                $punkty_nauczyciele[$wpis->id] = $nauczyciel;
+                $student = DB::table('uzytkownik')->where('id', $wpis->idStudent)->value('imie') . " " . DB::table('uzytkownik')->where('id', $wpis->idStudent)->value('nazwisko');
+                $punkty_studenci[$wpis->id] = $student;
+            }
             
             //ilosc punktow kazdego studenta
             foreach($studenci as $student){
                 $iloscPunktow = 0;
-                $punkty = Punkty::where('idStudent', ($student->id))->get();
-                foreach($punkty as $wpis){
+                $punkty_student = $punkty->where('idStudent', ($student->id));
+                foreach($punkty_student as $wpis){
                     $iloscPunktow += $wpis->ilosc;
                 }
                 $student->iloscPunktow = $iloscPunktow;
             }
 
-            return view('pages.admin.panel',['user' => $user,'group'=>$group, 'studenci'=>$studenci, 'nauczyciele'=>$nauczyciele,'notification'=>$notification]);
+            return view('pages.admin.panel',['user' => $user,'group'=>$group, 'studenci'=>$studenci, 'nauczyciele'=>$nauczyciele,'notification'=>$notification, 'punkty'=>$punkty, 'punkty_nauczyciele'=>$punkty_nauczyciele, 'punkty_studenci'=>$punkty_studenci]);
         }
     }
 

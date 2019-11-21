@@ -2,20 +2,20 @@
 <!--css do poszczegolnej strony-->
 
 @section('assets')
-    <link href="{{ asset('css/underNav.css') }}" rel="stylesheet">
+<link href="{{ asset('css/underNav.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+<link href="{{ asset('css/profile.css') }}" rel="stylesheet">
 
 
 @endsection
 
 @section('undernav')
 
-    <div class="col-md-4 col-sm-5 col-xs-3 float-left">
-        <h2 >
-            Panel administracyjny
-        </h2>
-    </div>
+<div class="col-md-4 col-sm-5 col-xs-3 float-left">
+    <h2 >
+        Panel administracyjny
+    </h2>
+</div>
 @endsection
 
 @section('content')
@@ -36,8 +36,10 @@
                     <a class="nav-link" id="v-pills-group-tab" data-toggle="pill" href="#v-pills-group" role="tab" aria-controls="v-pills-group" aria-selected="false">Grupy</a>
 
                     <a class="nav-link" id="v-pills-student-tab" data-toggle="pill" href="#v-pills-student" role="tab" aria-controls="v-pills-student" aria-selected="false">Studenci</a>
-                    
+
                     <a class="nav-link" id="v-pills-teacher-tab" data-toggle="pill" href="#v-pills-teacher" role="tab" aria-controls="v-pills-teacher" aria-selected="false">Nauczyciele</a>
+
+                    <a class="nav-link" id="v-pills-points-tab" data-toggle="pill" href="#v-pills-points" role="tab" aria-controls="v-pills-points" aria-selected="false">Historia punktów</a>
                 </div>
             </div>
             <div class="col-9">
@@ -50,30 +52,30 @@
                         </h2>
                         <hr>
                         @if(isset($notification))
-                            @if(count($notification)>0)
-                                @foreach($notification as $not)
+                        @if(count($notification)>0)
+                        @foreach($notification as $not)
 
-                                    <div class="alert alert-primary alert-dismissible fade show text-center w-100 mx-auto my-4" role="alert">
+                        <div class="alert alert-primary alert-dismissible fade show text-center w-100 mx-auto my-4" role="alert">
 
-                                        <small class="float-left">
-                                            {{$not->created_at}}
-                                        </small>
-                                        <hr>
+                            <small class="float-left">
+                                {{$not->created_at}}
+                            </small>
+                            <hr>
 
-                                        {{$not->komunikat}}
+                            {{$not->komunikat}}
 
 
-                                        <button type="button" class="close" data-id="{{ $not->id }}" id="{{ $not->id }}" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
+                            <button type="button" class="close" data-id="{{ $not->id }}" id="{{ $not->id }}" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
 
-                                @endforeach
-                            @else
-                                <h4 class="w-100">brak powiadomień</h4>
-                            @endif
+                        @endforeach
+                        @else
+                        <h4 class="w-100">brak powiadomień</h4>
+                        @endif
 
-                         @endif
+                        @endif
 
                     </div>
 
@@ -124,7 +126,7 @@
 
 
                     </div>
-                    
+
                     <div class="tab-pane fade" id="v-pills-changepassword" role="tabpanel" aria-labelledby="v-pills-changepassword-tab">
                         <h2 class="w-100">
                             Zmień hasło
@@ -194,16 +196,16 @@
 
                         <div class="accordion" id="accordionExample">
 
-                        <div class="card">
-                            <div class="card-header" id="headingOne">
-                                <h5 class=" h-100 my-auto">
-                                    Dodaj Grupę
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class=" h-100 my-auto">
+                                        Dodaj Grupę
 
                                         <a href="/panel/dodajgrupe" class="btn btn-info add">+ Grupa</a>
-                                </h5>
+                                    </h5>
 
+                                </div>
                             </div>
-                        </div>
 
 
                             @foreach($group as $grupa)
@@ -214,10 +216,10 @@
                                     <h5 class="mb-0">
 
 
-                                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{$grupa->nazwa}}" aria-expanded="true" aria-controls="collapse{{$grupa->nazwa}}">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{$grupa->nazwa}}" aria-expanded="true" aria-controls="collapse{{$grupa->nazwa}}">
 
-                                                {{$grupa->nazwa}}
-                                            </button>
+                                            {{$grupa->nazwa}}
+                                        </button>
 
 
 
@@ -229,36 +231,36 @@
                                 <div id="{{$grupa->nazwa}}" class="collapse" aria-labelledby="heading{{$grupa->nazwa}}" data-parent="#accordionExample">
                                     <div class="card-body">
                                         <table class="table">
-                                                <tr>
-                                                    <td>
-                                                        Imie
-                                                    </td>
-                                                    <td>
-                                                        Nazwisko
-                                                    </td>
-                                                    <td>
-                                                        Numer Albumu
-                                                    </td>
-                                                </tr>
-                                        @foreach ($user as $i)
+                                            <tr>
+                                                <td>
+                                                    Imie
+                                                </td>
+                                                <td>
+                                                    Nazwisko
+                                                </td>
+                                                <td>
+                                                    Numer Albumu
+                                                </td>
+                                            </tr>
+                                            @foreach ($user as $i)
                                             @if($i->idGrupa==$grupa->id)
-                                                    <tr>
+                                            <tr>
 
-                                                        <td>
-                                                            {{ $i->imie}}
-                                                        </td>
+                                                <td>
+                                                    {{ $i->imie}}
+                                                </td>
 
-                                                        <td>
-                                                            {{ $i->nazwisko}}
-                                                        </td>
+                                                <td>
+                                                    {{ $i->nazwisko}}
+                                                </td>
 
-                                                        <td>
-                                                            {{ $i->nrAlbumu}}
-                                                        </td>
-                                                    </tr>
+                                                <td>
+                                                    {{ $i->nrAlbumu}}
+                                                </td>
+                                            </tr>
                                             @endif
-                                    @endforeach
-                                                </table>
+                                            @endforeach
+                                        </table>
 
                                     </div>
                                 </div>
@@ -294,76 +296,76 @@
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 @foreach ($studenci as $i)
-                                        <a class="nav-item nav-link" id="nav-{{$i->id}}-tab" data-toggle="tab" href="#nav-{{$i->id}}" role="tab" aria-controls="nav-{{$i->id}}" aria-selected="false">{{$i->nazwisko}} {{$i->imie}}</a>
+                                <a class="nav-item nav-link" id="nav-{{$i->id}}-tab" data-toggle="tab" href="#nav-{{$i->id}}" role="tab" aria-controls="nav-{{$i->id}}" aria-selected="false">{{$i->nazwisko}} {{$i->imie}}</a>
                                 @endforeach
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
 
                             @foreach ($studenci as $i)
-                                <div class="tab-pane fade" id="nav-{{$i->id}}" role="tabpanel" aria-labelledby="nav-{{$i->id}}-tab">
+                            <div class="tab-pane fade" id="nav-{{$i->id}}" role="tabpanel" aria-labelledby="nav-{{$i->id}}-tab">
 
-                                    <table class="table">
-                                        <tr>
-                                            <td>
-                                                Imie
-                                            </td>
-                                            <td>
-                                                {{ $i->imie}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Nazwisko
-                                            </td>
-                                            <td>
-                                                {{ $i->nazwisko}}
-                                            </td>
-                                        </tr>
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            Imie
+                                        </td>
+                                        <td>
+                                            {{ $i->imie}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Nazwisko
+                                        </td>
+                                        <td>
+                                            {{ $i->nazwisko}}
+                                        </td>
+                                    </tr>
 
-                                        <tr>
-                                            <td>
-                                                email
-                                            </td>
-                                            <td>
-                                                {{ $i->email}}
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td>
+                                            email
+                                        </td>
+                                        <td>
+                                            {{ $i->email}}
+                                        </td>
+                                    </tr>
 
-                                        <tr>
-                                            <td>
-                                                Numer Albumu
-                                            </td>
-                                            <td>
-                                                {{ $i->nrAlbumu}}
-                                            </td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>
-                                                Grupa
-                                            </td>
-                                            <td>
-                                                {{ $grupa->where('id', $i->idGrupa)->value('nazwa') }}
-                                            </td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>
-                                                Ilość punktów
-                                            </td>
-                                            <td>
-                                                {{ $i->iloscPunktow }}
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <a href="/panel/uzytkownik/{{$i->id}}" class="btn btn-info add">Edytuj</a>
-                                </div>
+                                    <tr>
+                                        <td>
+                                            Numer Albumu
+                                        </td>
+                                        <td>
+                                            {{ $i->nrAlbumu}}
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            Grupa
+                                        </td>
+                                        <td>
+                                            {{ $grupa->where('id', $i->idGrupa)->value('nazwa') }}
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            Ilość punktów
+                                        </td>
+                                        <td>
+                                            {{ $i->iloscPunktow }}
+                                        </td>
+                                    </tr>
+                                </table>
+                                <a href="/panel/uzytkownik/{{$i->id}}" class="btn btn-info add">Edytuj</a>
+                            </div>
                             @endforeach
                         </div>
 
                     </div>
-                    
+
                     <div class="tab-pane fade" id="v-pills-teacher" role="tabpanel" aria-labelledby="v-pills-teacher-tab">
                         <h2>
                             Nauczyciele
@@ -384,44 +386,93 @@
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 @foreach ($nauczyciele as $i)
-                                        <a class="nav-item nav-link" id="nav-{{$i->id}}-tab" data-toggle="tab" href="#nav-{{$i->id}}" role="tab" aria-controls="nav-{{$i->id}}" aria-selected="false">{{$i->nazwisko}} {{$i->imie}}</a>
+                                <a class="nav-item nav-link" id="nav-{{$i->id}}-tab" data-toggle="tab" href="#nav-{{$i->id}}" role="tab" aria-controls="nav-{{$i->id}}" aria-selected="false">{{$i->nazwisko}} {{$i->imie}}</a>
                                 @endforeach
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
 
                             @foreach ($nauczyciele as $i)
-                                <div class="tab-pane fade" id="nav-{{$i->id}}" role="tabpanel" aria-labelledby="nav-{{$i->id}}-tab">
+                            <div class="tab-pane fade" id="nav-{{$i->id}}" role="tabpanel" aria-labelledby="nav-{{$i->id}}-tab">
 
-                                    <table class="table">
-                                        <tr>
-                                            <td>
-                                                Imie
-                                            </td>
-                                            <td>
-                                                {{ $i->imie}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Nazwisko
-                                            </td>
-                                            <td>
-                                                {{ $i->nazwisko}}
-                                            </td>
-                                        </tr>
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            Imie
+                                        </td>
+                                        <td>
+                                            {{ $i->imie}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Nazwisko
+                                        </td>
+                                        <td>
+                                            {{ $i->nazwisko}}
+                                        </td>
+                                    </tr>
 
-                                        <tr>
-                                            <td>
-                                                email
-                                            </td>
-                                            <td>
-                                                {{ $i->email}}
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
+                                    <tr>
+                                        <td>
+                                            email
+                                        </td>
+                                        <td>
+                                            {{ $i->email}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                             @endforeach
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="v-pills-points" role="tabpanel" aria-labelledby="v-pills-points-tab">
+                        <h2>
+                            Historia punktów
+                        </h2>
+                        <hr>
+
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <tr>
+                                    <th>
+                                        Ilość
+                                    </th>
+                                    <th>
+                                        Komentarz
+                                    </th>
+                                    <th>
+                                        Student
+                                    </th>
+                                    <th>
+                                        Nauczyciel
+                                    </th>
+                                    <th>
+                                        Data
+                                    </th>
+                                </tr>
+                                @foreach($punkty as $i)
+                                <tr>
+                                    <td class="align-middle">
+                                        {{$i->ilosc}}
+                                    </td>
+                                    <td class="align-middle">
+                                        {{$i->komentarz}}
+                                    </td>
+                                    <td class="align-middle">
+                                        {{$punkty_studenci[$i->id]}}
+                                    </td>
+                                    <td class="align-middle">
+                                        {{$punkty_nauczyciele[$i->id]}}
+                                    </td>
+                                    <td class="align-middle">
+                                        {{$i->created_at}}
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </table>
                         </div>
 
                     </div>
@@ -435,7 +486,7 @@
 </section>
 @endsection
 @section('scripts')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!-- jQuery CDN -->
-    <script type='text/javascript' src="{{ asset('js/removeNotification.js')}}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!-- jQuery CDN -->
+<script type='text/javascript' src="{{ asset('js/removeNotification.js')}}"></script>
 
 @endsection
