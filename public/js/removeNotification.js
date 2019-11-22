@@ -5,7 +5,6 @@ $(document).ready(function() {
     // Delete record
     $(document).on("click", ".close", function () {
         var delete_id = $(this).data('id');
-        alert(delete_id);
         var el = this;
         $.ajax({
             url: '/powiadomienia/usun/',

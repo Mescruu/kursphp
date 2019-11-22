@@ -316,10 +316,10 @@ class ComposerStaticInitfc07a1b53b534d3334ec5cb3f197c51f
     );
 
     public static $classMap = array (
-        'AddNauczycielColumnToGrupa' => __DIR__ . '/../..' . '/database/migrations/2019_11_20_232547_add_nauczyciel_column_to_grupa.php',
         'ArithmeticError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
         'AssertionError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/AssertionError.php',
         'CreateGrupaTable' => __DIR__ . '/../..' . '/database/migrations/2019_11_11_195043_create_grupa_table.php',
+        'CreateKryteriumTable' => __DIR__ . '/../..' . '/database/migrations/2019_11_22_201412_create_kryterium_table.php',
         'CreateListaGrupTable' => __DIR__ . '/../..' . '/database/migrations/2019_11_12_222506_create_lista_grup_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreatePowiadomienieTable' => __DIR__ . '/../..' . '/database/migrations/2019_11_20_210445_create_powiadomienie_table.php',
@@ -406,6 +406,7 @@ class ComposerStaticInitfc07a1b53b534d3334ec5cb3f197c51f
         'Hamcrest\\Type\\IsString' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Type/IsString.php',
         'Hamcrest\\Util' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
         'Hamcrest\\Xml\\HasXPath' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
+        'KryteriumTableSeeder' => __DIR__ . '/../..' . '/database/seeds/KryteriumTableSeeder.php',
         'ListaGrupTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ListaGrupTableSeeder.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/Assert.php',
         'PHPUnit\\Framework\\AssertionFailedError' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/AssertionFailedError.php',

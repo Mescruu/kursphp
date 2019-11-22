@@ -6,10 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'AddNauczycielColumnToGrupa' => $baseDir . '/database/migrations/2019_11_20_232547_add_nauczyciel_column_to_grupa.php',
     'ArithmeticError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
     'AssertionError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/AssertionError.php',
     'CreateGrupaTable' => $baseDir . '/database/migrations/2019_11_11_195043_create_grupa_table.php',
+    'CreateKryteriumTable' => $baseDir . '/database/migrations/2019_11_22_201412_create_kryterium_table.php',
     'CreateListaGrupTable' => $baseDir . '/database/migrations/2019_11_12_222506_create_lista_grup_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreatePowiadomienieTable' => $baseDir . '/database/migrations/2019_11_20_210445_create_powiadomienie_table.php',
@@ -96,6 +96,7 @@ return array(
     'Hamcrest\\Type\\IsString' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Type/IsString.php',
     'Hamcrest\\Util' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
     'Hamcrest\\Xml\\HasXPath' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
+    'KryteriumTableSeeder' => $baseDir . '/database/seeds/KryteriumTableSeeder.php',
     'ListaGrupTableSeeder' => $baseDir . '/database/seeds/ListaGrupTableSeeder.php',
     'PHPUnit\\Framework\\Assert' => $vendorDir . '/phpunit/phpunit/src/ForwardCompatibility/Assert.php',
     'PHPUnit\\Framework\\AssertionFailedError' => $vendorDir . '/phpunit/phpunit/src/ForwardCompatibility/AssertionFailedError.php',

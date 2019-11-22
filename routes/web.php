@@ -43,7 +43,7 @@ Route::get('/panel/dodajgrupe', 'AdminFeaturesController@Groups');
 Route::get('/panel/dodajstudenta', 'AdminFeaturesController@Student');
 Route::get('/panel/dodajnauczyciela', 'AdminFeaturesController@Nauczyciel');
 Route::get('/panel/dodajzpliku', 'AdminFeaturesController@zPliku');
-
+Route::get('/panel/edytujkryterium', 'AdminFeaturesController@EdytujKryterium');
 
 Route::resource('posts', 'PostsController');
 
@@ -73,6 +73,7 @@ Route::post('reset_password_with_token', 'NewPasswordController@resetPassword');
 //wprowadzanie uzytkownika
 Route::post('registerstudent', 'InsertUserController@storeStudent');
 Route::post('registerteacher', 'InsertUserController@createTeacher');
+Route::post('editcriterion', 'EditCriterionController@EditCriterion');
 
 Route::get('/panel/uzytkownik/{id}', 'AdminFeaturesController@EditUser');
 Route::get('/panel/uzytkownik/{id}/dodajpunkty', 'AdminFeaturesController@AddPoints');

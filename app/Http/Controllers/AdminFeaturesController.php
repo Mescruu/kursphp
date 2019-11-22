@@ -21,20 +21,10 @@ class AdminFeaturesController extends Controller {
         } else {
             $studenci = DB::table('uzytkownik')->where('typ', 'student')->orderBy('nazwisko', 'asc')->get();
             $nauczyciele = DB::table('uzytkownik')->where('typ', 'nauczyciel')->get();
-            $user = User::get(); //pobierz wszystkich uzytkownikow
             $group = Grupa::get(); //pobierz wszystkie grupy
             $notification = DB::table('powiadomienie')->where('idUzytkownik', Auth::user()->id)->get();
             $punkty = DB::table('punkty')->orderBy('created_at', 'desc')->get();
-            $punkty_nauczyciele = [];
-            $punkty_studenci = [];
-
-            //Imie i nazwisko nauczyciela w historii punktów
-            foreach ($punkty as $wpis) {
-                $nauczyciel = DB::table('uzytkownik')->where('id', $wpis->idNauczyciel)->value('imie') . " " . DB::table('uzytkownik')->where('id', $wpis->idNauczyciel)->value('nazwisko');
-                $punkty_nauczyciele[$wpis->id] = $nauczyciel;
-                $student = DB::table('uzytkownik')->where('id', $wpis->idStudent)->value('imie') . " " . DB::table('uzytkownik')->where('id', $wpis->idStudent)->value('nazwisko');
-                $punkty_studenci[$wpis->id] = $student;
-            }
+            $kryterium = DB::table('kryterium')->first();
 
             //ilosc punktow kazdego studenta i przypisanie studenta do grupy
             foreach ($group as $grupa) {
@@ -48,11 +38,11 @@ class AdminFeaturesController extends Controller {
                     $student->iloscPunktow = $iloscPunktow;
 
                     //Ocena za punkty
-                    if ($iloscPunktow < 50) {
+                    if ($iloscPunktow < $kryterium->trzy) {
                         $ocena = '2';
-                    } elseif ($iloscPunktow < 75) {
+                    } elseif ($iloscPunktow < $kryterium->cztery) {
                         $ocena = '3';
-                    } elseif ($iloscPunktow < 100) {
+                    } elseif ($iloscPunktow < $kryterium->piec) {
                         $ocena = '4';
                     } else {
                         $ocena = '5';
@@ -66,7 +56,7 @@ class AdminFeaturesController extends Controller {
                 $grupa->studenci = $grupa_studenci;
             }
 
-            return view('pages.admin.panel', ['user' => $user, 'group' => $group, 'studenci' => $studenci, 'nauczyciele' => $nauczyciele, 'notification' => $notification, 'punkty' => $punkty, 'punkty_nauczyciele' => $punkty_nauczyciele, 'punkty_studenci' => $punkty_studenci]);
+            return view('pages.admin.panel', ['group' => $group, 'studenci' => $studenci, 'nauczyciele' => $nauczyciele, 'notification' => $notification, 'kryterium' => $kryterium]);
         }
     }
 
@@ -159,6 +149,11 @@ class AdminFeaturesController extends Controller {
         );
 
         return view('pages.admin.addpoints')->with($data);
+    }
+    
+    public function EdytujKryterium(){
+        $kryterium = DB::table('kryterium')->first();
+        return view('pages.admin.edytujkryterium', ['kryterium' => $kryterium]);
     }
 
 }

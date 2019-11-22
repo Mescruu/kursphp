@@ -39,7 +39,7 @@
 
                     <a class="nav-link" id="v-pills-teacher-tab" data-toggle="pill" href="#v-pills-teacher" role="tab" aria-controls="v-pills-teacher" aria-selected="false">Nauczyciele</a>
 
-                    <a class="nav-link" id="v-pills-points-tab" data-toggle="pill" href="#v-pills-points" role="tab" aria-controls="v-pills-points" aria-selected="false">Historia punktów</a>
+                    <a class="nav-link" id="v-pills-criterion-tab" data-toggle="pill" href="#v-pills-criterion" role="tab" aria-controls="v-pills-criterion" aria-selected="false">Kryterium oceniania</a>
                 </div>
             </div>
             <div class="col-9">
@@ -248,7 +248,7 @@
                                                     Ocena
                                                 </td>
                                                 <td>
-                                                   punktacja
+                                                   Liczba punktów
                                                 </td>
                                             </tr>
                                             @foreach ($grupa->studenci as $i)
@@ -272,8 +272,8 @@
                                                     {{$i->ocena}}
                                                 </td>
                                                 <td>
-                                                        <a class="btn btn-info">
-                                                            przycisk
+                                                        <a href="/panel/uzytkownik/{{$i->id}}">
+                                                            {{$i->iloscPunktow}}
                                                         </a>
                                                 </td>
                                             </tr>
@@ -441,9 +441,9 @@
 
                     </div>
 
-                    <div class="tab-pane fade" id="v-pills-points" role="tabpanel" aria-labelledby="v-pills-points-tab">
+                    <div class="tab-pane fade" id="v-pills-criterion" role="tabpanel" aria-labelledby="v-pills-criterion-tab">
                         <h2>
-                            Historia punktów
+                            Kryterium oceniania
                         </h2>
                         <hr>
 
@@ -451,42 +451,39 @@
                             <table class="table table-sm">
                                 <tr>
                                     <th>
-                                        Ilość
+                                        Ocena
                                     </th>
                                     <th>
-                                        Komentarz
-                                    </th>
-                                    <th>
-                                        Student
-                                    </th>
-                                    <th>
-                                        Nauczyciel
-                                    </th>
-                                    <th>
-                                        Data
+                                        Próg punktowy
                                     </th>
                                 </tr>
-                                @foreach($punkty as $i)
                                 <tr>
-                                    <td class="align-middle">
-                                        {{$i->ilosc}}
+                                    <td>
+                                        3
                                     </td>
-                                    <td class="align-middle">
-                                        {{$i->komentarz}}
-                                    </td>
-                                    <td class="align-middle">
-                                        {{$punkty_studenci[$i->id]}}
-                                    </td>
-                                    <td class="align-middle">
-                                        {{$punkty_nauczyciele[$i->id]}}
-                                    </td>
-                                    <td class="align-middle">
-                                        {{$i->created_at}}
+                                    <td>
+                                        {{$kryterium->trzy}}
                                     </td>
                                 </tr>
-                                @endforeach
+                                <tr>
+                                    <td>
+                                        4
+                                    </td>
+                                    <td>
+                                        {{$kryterium->cztery}}
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        5
+                                    </td>
+                                    <td>
+                                        {{$kryterium->piec}}
+                                    </td>
+                                </tr>
                             </table>
                         </div>
+                        <a href="/panel/edytujkryterium" class="btn btn-info add">Edytuj</a>
 
                     </div>
 
