@@ -12,12 +12,12 @@ class Powiadomienie extends Model
     protected $table = 'powiadomienie';
     public $primaryKey = 'id';
 
-    public static function createNotificationToTeacher($adminId, $content){
+    public static function createNotification($id, $content){
 
 
 
         DB::table('powiadomienie')->insert(
-            ['komunikat' => $content, 'idUzytkownik'=> $adminId, 'created_at' => Carbon::now()]
+            ['komunikat' => $content, 'idUzytkownik'=> $id, 'created_at' => Carbon::now()]
         );
     }
 

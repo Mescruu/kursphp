@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-3">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" id="v-pills-notifications-tab" data-toggle="pill" href="#v-pills-notifications" role="tab" aria-controls="v-pills-notifications" aria-selected="true">Powiadomienia<span class="float-right badge badge-primary badge-pill"> .. </span></a>
+                    <a class="nav-link active" id="v-pills-notifications-tab" data-toggle="pill" href="#v-pills-notifications" role="tab" aria-controls="v-pills-notifications" aria-selected="true">Powiadomienia<span class="float-right badge badge-primary badge-pill"> {{count($notification)}} </span></a>
 
                     <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Twoje dane</a>
 
@@ -40,6 +40,31 @@
                             Powiadomienia
                         </h2>
                         <hr>
+                        @if(isset($notification))
+                        @if(count($notification)>0)
+                        @foreach($notification as $not)
+
+                        <div class="alert alert-primary alert-dismissible fade show text-center w-100 mx-auto my-4" role="alert">
+
+                            <small class="float-left">
+                                {{$not->created_at}}
+                            </small>
+                            <hr>
+
+                            {{$not->komunikat}}
+
+
+                            <button type="button" class="close" data-id="{{ $not->id }}" id="{{ $not->id }}" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        @endforeach
+                        @else
+                        <h4 class="w-100">brak powiadomień</h4>
+                        @endif
+
+                        @endif
 
                     </div>
 

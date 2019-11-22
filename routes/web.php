@@ -75,6 +75,8 @@ Route::post('registerstudent', 'InsertUserController@storeStudent');
 Route::post('registerteacher', 'InsertUserController@createTeacher');
 
 Route::get('/panel/uzytkownik/{id}', 'AdminFeaturesController@EditUser');
+Route::get('/panel/uzytkownik/{id}/dodajpunkty', 'AdminFeaturesController@AddPoints');
+Route::post('/addpoints/{id}', 'AddPointsController@AddPoints');
 
 //aktywowanie
 Route::post('active', 'InsertUserController@activate');

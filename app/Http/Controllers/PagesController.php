@@ -59,8 +59,7 @@ class PagesController extends Controller
         //sposób na przerzucenie zmiennej:
 
         $adminId = DB::table('grupa')->where('id', auth()->user()->idGrupa)->first();
-        Powiadomienie::createNotificationToTeacher($adminId->id,"Uzytkownik ". auth()->user()->imie." ". auth()->user()->nazwisko." wszedł w swój profil! (numer indeksu: ". auth()->user()->nrAlbumu.")");
-
+        $notification = DB::table('powiadomienie')->where('idUzytkownik', Auth::user()->id)->get();
 
         if(Auth::user()->typ==Auth::user()->admin)
         {
@@ -86,7 +85,8 @@ class PagesController extends Controller
                 'nazwaGrupy' => $nazwaGrupy,
                 'iloscPunktow' => $iloscPunktow,
                 'punkty' => $punkty,
-                'nauczyciele' => $nauczyciele
+                'nauczyciele' => $nauczyciele,
+                'notification' => $notification
             );
             return view('pages.profil')->with($data);
         }

@@ -230,7 +230,7 @@
 
                                 <div id="G{{$grupa->id}}" class="collapse" aria-labelledby="headingG{{$grupa->id}}" data-parent="#accordionExample">
                                     <div class="card-body">
-                                        <table class="table">
+                                        <table class="table table-sm">
                                             <tr>
                                                 <td>
                                                     Lp.
@@ -245,17 +245,16 @@
                                                     Numer Albumu
                                                 </td>
                                                 <td>
-                                                    ocena
+                                                    Ocena
                                                 </td>
                                                 <td>
                                                    punktacja
                                                 </td>
                                             </tr>
-                                            @foreach ($user as $i)
-                                            @if($i->idGrupa==$grupa->id)
+                                            @foreach ($grupa->studenci as $i)
                                             <tr>
                                                 <td>
-                                                    nr
+                                                    {{$loop->iteration}}
                                                 </td>
 
                                                 <td>
@@ -270,7 +269,7 @@
                                                     {{ $i->nrAlbumu}}
                                                 </td>
                                                 <td>
-                                                   ocena
+                                                    {{$i->ocena}}
                                                 </td>
                                                 <td>
                                                         <a class="btn btn-info">
@@ -278,7 +277,6 @@
                                                         </a>
                                                 </td>
                                             </tr>
-                                            @endif
                                             @endforeach
                                         </table>
 

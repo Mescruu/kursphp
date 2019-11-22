@@ -100,7 +100,7 @@
                         
                         <div class="form-group">
                             <div class="col-12 mx-auto">
-                                Hasło zostanie wygenerowane na zasadzie {Imię}{Numer Albumu}
+                                <p class="text-muted">Hasło zostanie wygenerowane na zasadzie {Imię}{Numer Albumu}</p>
                             </div>
                         </div>
 

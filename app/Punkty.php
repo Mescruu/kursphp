@@ -9,6 +9,10 @@ class Punkty extends Model
     protected $table = 'punkty';
     public $primaryKey = 'id';
     
+    protected $fillable = [
+        'idStudent','idNauczyciel','ilosc','komentarz'
+    ];
+    
     public function student(){
         return $this->belongsTo('App\User','idStudent');
     }

@@ -3,6 +3,14 @@ body{
     min-height: 100vh;
 }
 
+a.btn-info{
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+a.btn-info:hover{
+    color:white;
+}
 
 .profile-section{
     background-color: rgba(79,91,147,1);
@@ -36,7 +44,7 @@ background-color: whitesmoke;
 
 
 /*Group*/
-.profile-section a{
+.profile-section .nav a{
     color: rgb(38,43,82);
 }
 
