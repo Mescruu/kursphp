@@ -19,7 +19,7 @@
 
     @if(Auth::user()->typ==Auth::user()->admin)
             <div class="btn-diagonal btn-slanted float-left">
-                <a href="/tematy/edycja/{{$temat->id}}" >Edycja</a>
+                <a href="/tematy/{{$temat->id}}/edycja" >Edycja</a>
             </div>
     @endif
 

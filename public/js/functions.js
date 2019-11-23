@@ -54,7 +54,7 @@ function exitPage() {
 function dodajObrazek(val) {
     var text = "[img]" + val + "[/img]";
     var textarea = document.getElementById('text');
-    insertAtCursor(textarea, text);
+    insertAtCursor(textarea, text, "" , "");
     pokazOpcje('x');
 }
 
@@ -77,7 +77,7 @@ function dodajTabele(rows, cols) {
     }
     text += "[/table]";
     var textarea = document.getElementById('text');
-    insertAtCursor(textarea, text);
+    insertAtCursor(textarea, text, "", "");
     pokazOpcje('x');
 }
 
@@ -227,44 +227,66 @@ function podglad() {
     document.getElementById("formatted").classList.add("show");
 }
 
+function getSelectedText(textarea){
+    var selectedText;
+    if(textarea.selectionStart !== undefined){
+        var startPosition = textarea.selectionStart;
+        var endPosition = textarea.selectionEnd;
+        selectedText = textarea.value.substring(startPosition, endPosition);
+        return selectedText;
+    }
+    return "";
+}
+
 function dodajBBCode(type)
 {
-    var bbcode = "";
+    var bbcode1 = "";
+    var bbcode2 = "";
     switch (type) {
         case "b":
-            bbcode = "[b][/b]";
+            bbcode1 = "[b]";
+            bbcode2 = "[/b]";
             break;
         case "i":
-            bbcode = "[i][/i]";
+            bbcode1 = "[i]";
+            bbcode2 = "[/i]";
             break;
         case "u":
-            bbcode = "[u][/u]";
+            bbcode1 = "[u]";
+            bbcode2 = "[/u]";
             break;
         case "center":
-            bbcode = "[center][/center]";
+            bbcode1 = "[center]";
+            bbcode2 = "[/center]";
             break;
         case "link":
-            bbcode = "[link=][/link]";
+            bbcode1 = "[link=]";
+            bbcode2 = "[/link]";
             break;
         case "title":
-            bbcode = "[title][/title]";
+            bbcode1 = "[title]";
+            bbcode2 = "[/title]";
             break;
         case "stitle":
-            bbcode = "[stitle][/stitle]";
+            bbcode1 = "[stitle]";
+            bbcode2 = "[/stitle]";
             break;
         case "hr":
-            bbcode = "[-]";
+            bbcode1 = "[-]";
             break;
         case "code":
-            bbcode = "[code][/code]";
+            bbcode1 = "[code]";
+            bbcode2 = "[/code]";
             break;
         case "color":
-            bbcode = "[color=COLOR][/color]";
+            bbcode1 = "[color=COLOR]";
+            bbcode2 = "[/color]"
             break;
         case "point":
-            bbcode = "[*]";
+            bbcode1 = "[*]";
             break;
     }
     var textarea = document.getElementById('text');
-    insertAtCursor(textarea, bbcode);
+    var selectedText = getSelectedText(textarea);
+    insertAtCursor(textarea, selectedText, bbcode1, bbcode2);
 }

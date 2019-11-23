@@ -16,12 +16,6 @@
     </div>
     <div class="col-md-4 col-sm-6 col-xs-2">
 
-        @if(Auth::user()->typ==Auth::user()->admin)
-            <div class="btn-diagonal btn-slanted float-left">
-                <a href="/tematy/edycja/{{$temat->id}}" >Edycja</a>
-            </div>
-        @endif
-
         <div class="btn-diagonal btn-slanted float-left">
             <a href="#" >Quiz</a>
         </div>
@@ -45,7 +39,11 @@
                     <div class="row">
 
                         <div class="col-xl-8 col-md-10 col-sm-12 mx-auto editorFrame p-2 pb-0">
-                            <input type="text" name="name" class="title" placeholder="Wprowadź tytuł">
+                            <input type="text" name="name" class="title" placeholder="Tytuł">
+                        </div>
+                        
+                        <div class="col-xl-8 col-md-10 col-sm-12 mx-auto editorFrame p-2 pb-0">
+                            <input type="text" name="name" class="title" placeholder="Krótki opis">
                         </div>
 
                         <div class="d-flex flex-wrap" id="buttons-left">

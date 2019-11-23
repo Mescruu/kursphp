@@ -6,14 +6,8 @@ use App\Powiadomienie;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Post;
-
-
 class PowiadomieniaController extends Controller
 {
-
-
-
     public function delete(Request $request)
     {
         $notification = Powiadomienie::find($request->input('id'));

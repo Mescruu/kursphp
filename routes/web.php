@@ -28,61 +28,58 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', 'PagesController@index');
+/* ---Niepotrzebne
 Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
-
-Route::get('/profil', 'PagesController@profil');
-Route::get('/profil/punkty', 'PagesController@punkty');
-
-
-
-Route::get('/panel', 'AdminFeaturesController@panel');
-
-Route::get('/panel/dodajgrupe', 'AdminFeaturesController@Groups');
-Route::get('/panel/dodajstudenta', 'AdminFeaturesController@Student');
-Route::get('/panel/dodajnauczyciela', 'AdminFeaturesController@Nauczyciel');
-Route::get('/panel/dodajzpliku', 'AdminFeaturesController@zPliku');
-Route::get('/panel/edytujkryterium', 'AdminFeaturesController@EdytujKryterium');
-
 Route::resource('posts', 'PostsController');
+//automatycznie dodane po komendzie artisan make:auth (zmieniamy na DashBoardController z HomeController i usuwamy: "->name('dashboard')"
+Route::get('/dashboard', 'DashBoardController@index');
+Route::get('/home', 'HomeController@index')->name('home');*/
 
-//Kontroler do tematów
-//Route::resource('tematy', 'TematyController');
 
-
-Route::get('tematy', 'TematyController@index');
-Route::get('tematy/{id}', 'TematyController@show');
-Route::get('tematy/edycja/{id}', 'TematyController@edit');
 
 
 //automatycznie dodane po komendzie artisan make:auth
 Auth::routes();
 
-//automatycznie dodane po komendzie artisan make:auth (zmieniamy na DashBoardController z HomeController i usuwamy: "->name('dashboard')"
-Route::get('/dashboard', 'DashBoardController@index');
+//Strona główna
+Route::get('/', 'PagesController@index');
 
-Auth::routes();
+//Profil użytkownika
+Route::get('/profil', 'PagesController@profil');
+Route::get('/profil/punkty', 'PagesController@punkty');
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-
-Route::post('reset_password_without_token', 'NewPasswordController@validatePasswordRequest');
-Route::post('reset_password_with_token', 'NewPasswordController@resetPassword');
-
-//wprowadzanie uzytkownika
+//Panel administracyjny
+Route::get('/panel', 'AdminFeaturesController@panel');
+Route::get('/panel/dodajgrupe', 'AdminFeaturesController@Groups');
+Route::get('/panel/dodajstudenta', 'AdminFeaturesController@Student');
+Route::get('/panel/dodajnauczyciela', 'AdminFeaturesController@Nauczyciel');
+Route::get('/panel/dodajzpliku', 'AdminFeaturesController@zPliku');
+Route::get('/panel/edytujkryterium', 'AdminFeaturesController@EdytujKryterium');
+Route::get('/panel/uzytkownik/{id}', 'AdminFeaturesController@EditUser');
+Route::get('/panel/uzytkownik/{id}/dodajpunkty', 'AdminFeaturesController@AddPoints');
+//Dodanie punktów użytkownikowi
+Route::post('/addpoints/{id}', 'AddPointsController@AddPoints');
+//Wprowadzanie uzytkownika
 Route::post('registerstudent', 'InsertUserController@storeStudent');
 Route::post('registerteacher', 'InsertUserController@createTeacher');
 Route::post('editcriterion', 'EditCriterionController@EditCriterion');
 
-Route::get('/panel/uzytkownik/{id}', 'AdminFeaturesController@EditUser');
-Route::get('/panel/uzytkownik/{id}/dodajpunkty', 'AdminFeaturesController@AddPoints');
-Route::post('/addpoints/{id}', 'AddPointsController@AddPoints');
+//Kontroler do tematów
+//Route::resource('tematy', 'TematyController');
 
-//aktywowanie
+//Tematy
+Route::get('tematy', 'TematyController@index');
+Route::get('tematy/{id}', 'TematyController@show');
+Route::get('tematy/{id}/edycja', 'TematyController@edit');
+
+//Resetowanie hasła
+Route::post('reset_password_without_token', 'NewPasswordController@validatePasswordRequest');
+Route::post('reset_password_with_token', 'NewPasswordController@resetPassword');
+
+//Aktywowanie studenta
 Route::post('active', 'InsertUserController@activate');
 Route::post('changepassword','ChangePasswordController@changePassword');
 
-
-//powiadomienia:
+//Usunięcie powiadomienia
 Route::get('/powiadomienia/usun/', 'PowiadomieniaController@delete');
