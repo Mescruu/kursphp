@@ -22,7 +22,15 @@
         <div class="row">
             <div class="col-3">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" id="v-pills-notifications-tab" data-toggle="pill" href="#v-pills-notifications" role="tab" aria-controls="v-pills-notifications" aria-selected="true">Powiadomienia<span class="float-right badge badge-primary badge-pill"> {{count($notification)}} </span></a>
+                    <a class="nav-link active" id="v-pills-notifications-tab" data-toggle="pill" href="#v-pills-notifications" role="tab" aria-controls="v-pills-notifications" aria-selected="true">Powiadomienia
+                        @if(isset($notification))
+                          @if(count($notification)>0)
+                            <span class="float-right badge badge-primary badge-pill">
+                            {{count($notification)}}
+                            </span>
+                            @endif
+                        @endif
+                    </a>
 
                     <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Twoje dane</a>
 
@@ -244,6 +252,11 @@
             </div>
 
         </div>
+    </div>
 </section>
+@endsection
+@section('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!-- jQuery CDN -->
+    <script type='text/javascript' src="{{ asset('js/removeNotification.js')}}"></script>
 
 @endsection

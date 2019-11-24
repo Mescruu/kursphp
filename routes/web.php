@@ -34,10 +34,9 @@ Route::get('/services', 'PagesController@services');
 Route::resource('posts', 'PostsController');
 //automatycznie dodane po komendzie artisan make:auth (zmieniamy na DashBoardController z HomeController i usuwamy: "->name('dashboard')"
 Route::get('/dashboard', 'DashBoardController@index');
-Route::get('/home', 'HomeController@index')->name('home');*/
+*/
 
-
-
+Route::get('/home', 'HomeController@index')->name('home');
 
 //automatycznie dodane po komendzie artisan make:auth
 Auth::routes();
@@ -53,8 +52,11 @@ Route::get('/profil/punkty', 'PagesController@punkty');
 Route::get('/panel', 'AdminFeaturesController@panel');
 Route::get('/panel/dodajgrupe', 'AdminFeaturesController@Groups');
 Route::get('/panel/dodajstudenta', 'AdminFeaturesController@Student');
+Route::get('/panel/dodajstudentazpliku', 'AdminFeaturesController@StudentFile');
+Route::post('/panel/dodajstudentazpliku/dodaj', 'AdminFeaturesController@addFromFile'); //wstawianie z pliku studentow
+
+
 Route::get('/panel/dodajnauczyciela', 'AdminFeaturesController@Nauczyciel');
-Route::get('/panel/dodajzpliku', 'AdminFeaturesController@zPliku');
 Route::get('/panel/edytujkryterium', 'AdminFeaturesController@EdytujKryterium');
 Route::get('/panel/uzytkownik/{id}', 'AdminFeaturesController@EditUser');
 Route::get('/panel/uzytkownik/{id}/dodajpunkty', 'AdminFeaturesController@AddPoints');

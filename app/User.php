@@ -10,8 +10,8 @@ class User extends Authenticatable
     use Notifiable;
 
     //zmienne odwołujące się do typów w tabeli
-    public $admin = 'nauczyciel';
-    public $user = 'student';
+    public static $admin = 'nauczyciel';
+    public static $user = 'student';
 
     //nazwa tabeli uzytkownik. przez dodanie do zmiennej $table "laravel"(Auth) wie, ze jest to tabela uzytkownika
     protected $table = 'uzytkownik';

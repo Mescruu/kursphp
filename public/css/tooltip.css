@@ -1,0 +1,54 @@
+    /* Tooltip container */
+.nicetooltip {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip text */
+.nicetooltip .tooltiptext {
+    visibility: hidden;
+    width: auto;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 0px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+
+    /*animacja*/
+    opacity: 0;
+    transition: opacity 1s;
+    transition:  0.5s;
+    background-color: rgb(38,43,82);
+
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.nicetooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+
+.nicetooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 100%; /* At the bottom of the tooltip */
+    left: 49%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    /*ogonek sszczalka*/
+    border-color: rgb(38,43,82) transparent transparent transparent;
+
+}
+    .nicetooltip .tooltiptext {
+        width: 120px;
+        bottom: 110%;
+        left: 49%;
+        margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+    }

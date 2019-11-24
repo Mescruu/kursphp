@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Grupa;
 use App\User;
 use App\Punkty;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -74,29 +75,136 @@ class AdminFeaturesController extends Controller {
         return view('pages.admin.dodajnauczyciela');
     }
 
-    public function zPliku()
-    {//sposób na przerzucenie zmiennej:
 
-        return view('pages.admin.dodajzpliku');
+    public function StudentFile()
+    { //dodawanie studentow z pliku csv
+
+        $grupy = DB::table('grupa')->get();
+
+        return view('pages.admin.dodajstudentazpliku')->with('grupy', $grupy);
     }
+
+
 
     public function addFromFile(Request $request)
     {
         //sposób na przerzucenie zmiennej:
         $this->validate($request,[
-            'title' => 'required',
-            'separator' => 'required',   //jest wymagane
-            'cover_image' => 'image|nullable|max:1999' //ustawienie że mają to być obrazki, może być puste, max 2mb
-
+            'grupa' => 'required',
+            'Radio' => 'required',   //jest wymagane
+            'file' => 'required|mimes:csv,txt' //jest wymagane, ustawienie że ma to byc plik, max 2mb
         ]);
 
+        //pobranie grupy z nazwą
+        $group = DB::table('grupa')->where('nazwa',$request->input('grupa'))->get()->first();
 
-        return redirect()->back()->with('status', trans('Link do zresetowania hasła został wysłany na Twój adres e-mail.'));
+        $file = $request->file('file');
 
+        //Sprawdznie, czy plik jest w formacie UTF-8
+        if (mb_check_encoding(file_get_contents($file), 'UTF-8')) {
+
+
+            // File Details
+            $filename = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $tempPath = $file->getRealPath();
+            $fileSize = $file->getSize();
+            $mimeType = $file->getMimeType();
+
+            // Valid File Extensions
+            $valid_extension = array("csv");
+
+            // 2MB in Bytes
+            $maxFileSize = 2097152;
+
+            // Check file extension
+            if(in_array(strtolower($extension),$valid_extension)){
+
+                // Check file size
+                if($fileSize <= $maxFileSize){
+
+                    // File upload location
+                    $location = 'uploads';
+
+                    // Upload file
+                    $file->move($location,$filename);
+
+                    // Import CSV to Database
+                    $filepath = public_path($location."/".$filename);
+
+                    // Reading file
+                    $file = fopen($filepath,"r");
+
+                    $importData_arr = array();
+                    $i = 0;
+
+                    while (($filedata = fgetcsv($file, 1000, $request->input('Radio'))) !== FALSE) {
+                        $num = count($filedata );
+
+                        // Skip first row (Remove below comment if you want to skip the first row)
+
+                        if($i == 0){
+                            $i++;
+                            continue;
+                        }
+
+                        for ($c=0; $c < $num; $c++) {
+                            $importData_arr[$i][] = $filedata [$c];
+                        }
+                        $i++;
+                    }
+                    fclose($file);
+
+                    // Insert to MySQL database
+                    foreach($importData_arr as $importData){
+
+
+                        $user = DB::select('SELECT * FROM uzytkownik WHERE nrAlbumu="'.$importData[2].'"');
+
+
+                        if($user!=null){
+                            return redirect()->back()->with('error', trans('W bazie znajduje się użytkownik o numerze albumu: '.$importData[2]));
+
+                         }else{
+                            DB::table('uzytkownik')->insert(
+                                ['imie' => $importData[0],
+                                    'nazwisko'=> $importData[1],
+                                    "nrAlbumu"=>$importData[2],
+                                    "idGrupa"=>(int)$group->id,
+                                    "typ"=>User::$user,
+                                    "haslo"=> bcrypt($importData[0].$importData[2]),
+                                    'created_at' => Carbon::now()]
+                            );
+                        }
+
+
+                    }
+
+                    return redirect()->back()->with('success', trans('Użytkownicy zostali dodani do grupy: '.$request->input('grupa').'!'));
+                }else{
+                    return redirect()->back()->with('error', trans('Plik jest za duży! Maksymalny rozmiar to 2MB'));
+                }
+
+            }else{
+                return redirect()->back()->with('error', trans('zle rozszerzenie pliku'));
+            }
+
+
+        }else{
+
+            return redirect()->back()->with('error', trans('Plik nie jest w formacie UTF-8 - mogą wystąpić błędy z wprowadzonymi danymi'));
+
+        }
+
+
+
+        // Redirect to index
+        return redirect()->back()->with('error', trans('cos poszlo nie tak'));
     }
 
 
-    function csvToArray($filename = '', $delimiter = ',')
+
+    function csvToArray($filename = '', $delimiter = ';')
     {
         if (!file_exists($filename) || !is_readable($filename))
             return false;
@@ -112,11 +220,12 @@ class AdminFeaturesController extends Controller {
                 else
                     $data[] = array_combine($header, $row);
             }
-    fclose($handle);
+            fclose($handle);
+        }
+
+        return $data;
     }
 
-    return $data;
-    }
 
     public function EditUser($id) {
         $user = DB::table('uzytkownik')->where('id', $id)->first();
