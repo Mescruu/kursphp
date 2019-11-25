@@ -102,28 +102,6 @@ class AdminFeaturesController extends Controller {
     }
 
 
-    public function adddGroup(Request $request)
-    {//sposób na przerzucenie zmiennej:
-
-
-        //sposób na przerzucenie zmiennej:
-        $this->validate($request,[
-            'grupa' => 'required',
-            'Radio' => 'required',   //jest wymagane
-            'file' => 'required|mimes:csv,txt' //jest wymagane, ustawienie że ma to byc plik, max 2mb
-        ]);
-
-        //pobranie grupy z nazwą
-        $group = DB::table('grupa')->where('nazwa',$request->input('grupa'))->get()->first();
-
-
-
-
-
-
-}
-
-
     public function Student() {//sposób na przerzucenie zmiennej:
         $grupy = DB::table('grupa')->get();
 
