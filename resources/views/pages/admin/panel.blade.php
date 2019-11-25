@@ -27,7 +27,14 @@
         <div class="row">
             <div class="col-3">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" id="v-pills-notifications-tab" data-toggle="pill" href="#v-pills-notifications" role="tab" aria-controls="v-pills-notifications" aria-selected="true">Powiadomienia
+                    <a class="nav-link
+
+                           @if ($errors->isEmpty())
+                            active
+                            @endif
+
+
+                            " id="v-pills-notifications-tab" data-toggle="pill" href="#v-pills-notifications" role="tab" aria-controls="v-pills-notifications" aria-selected="true">Powiadomienia
                             @if(isset($notification))
                                 @if(count($notification)>0)
                                     <span class="float-right badge badge-primary badge-pill">
@@ -39,9 +46,18 @@
 
                     <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Twoje dane</a>
 
-                    <a class="nav-link" id="v-pills-changepassword-tab" data-toggle="pill" href="#v-pills-changepassword" role="tab" aria-controls="v-pills-changepassword" aria-selected="false">Zmień hasło</a>
+                    <a class="nav-link
 
-                    <a class="nav-link" id="v-pills-group-tab" data-toggle="pill" href="#v-pills-group" role="tab" aria-controls="v-pills-group" aria-selected="false">Grupy</a>
+                 @if($errors->has('current-password'))
+                            active
+                    @endif
+                    " id="v-pills-changepassword-tab" data-toggle="pill" href="#v-pills-changepassword" role="tab" aria-controls="v-pills-changepassword" aria-selected="false">Zmień hasło</a>
+
+                    <a class="nav-link
+                 @if ($errors->has('nazwa-grupy'))
+                            active
+                 @endif
+                  " id="v-pills-group-tab" data-toggle="pill" href="#v-pills-group" role="tab" aria-controls="v-pills-group" aria-selected="false">Grupy</a>
 
                     <a class="nav-link" id="v-pills-student-tab" data-toggle="pill" href="#v-pills-student" role="tab" aria-controls="v-pills-student" aria-selected="false">Studenci</a>
 
@@ -53,7 +69,13 @@
             <div class="col-9">
                 <div class="tab-content" id="v-pills-tabContent">
 
-                    <div class="tab-pane fade show active" id="v-pills-notifications" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                    <div class="tab-pane fade show
+
+                             @if ($errors->isEmpty())
+                            active
+                            @endif
+
+                    " id="v-pills-notifications" role="tabpanel" aria-labelledby="v-pills-settings-tab">
 
                         <h2>
                             Powiadomienia
@@ -135,7 +157,13 @@
 
                     </div>
 
-                    <div class="tab-pane fade" id="v-pills-changepassword" role="tabpanel" aria-labelledby="v-pills-changepassword-tab">
+                    <div class="tab-pane fade
+
+                    @if($errors->has('current-password'))
+                            active in show
+                    @endif
+
+                    " id="v-pills-changepassword" role="tabpanel" aria-labelledby="v-pills-changepassword-tab">
                         <h2 class="w-100">
                             Zmień hasło
                         </h2>
@@ -193,7 +221,12 @@
 
                     </div>
 
-                    <div class="tab-pane fade" id="v-pills-group" role="tabpanel" aria-labelledby="v-pills-group-tab">
+                    <div class="tab-pane fade
+                            @if ($errors->has('nazwa-grupy'))
+                            active in show
+                            @endif
+
+                    " id="v-pills-group" role="tabpanel" aria-labelledby="v-pills-group-tab">
                         <h2 class="w-100">
                             Grupy
                         </h2>
@@ -209,11 +242,64 @@
                                     <h5 class=" h-100 my-auto">
                                         Dodaj Grupę
 
-                                        <a href="/panel/dodajgrupe" class="btn btn-info add">+ Grupa</a>
-                                    </h5>
+                                        <a href="#createGroup" data-toggle="collapse"  aria-expanded="false" aria-controls="createGroup"  class="btn btn-info add">+ Grupa</a>
 
+                                    </h5>
                                 </div>
                             </div>
+                                <div class="collapse border
+                                 @if ($errors->has('nazwa-grupy'))
+                                        in show
+                                @endif
+                                        "
+                                     id="createGroup">
+                                    <div class="card-body create-group-body">
+
+                                        <form class="form-signin justify-content-center " method="POST" action="/panel/dodajgrupe">
+                                            {{ csrf_field() }}
+
+                                                    <div class="row">
+
+                                                        <div class="col-xs-12 col-sm-6 mb-2">
+                                                            <div class="form-group{{ $errors->has('nazwa-grupy') ? ' has-error' : '' }}">
+
+                                                            <input id="nazwa-grupy" type="text" placeholder="Nazwa grupy" class="form-control" name="nazwa-grupy" value="{{ old('nazwa-grupy') }}" required autofocus>
+
+                                                            @if ($errors->has('nazwa-grupy'))
+                                                                <span class="help-block">
+                                                                   <strong>{{ $errors->first('nazwa-grupy') }}</strong>
+                                                                </span>
+                                                            @endif
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-6 mb-2">
+                                                            <div class="form-group{{ $errors->has('nauczyciel') ? ' has-error' : '' }}">
+
+                                                            <select name="nauczyciel" class="form-control" value="{{ old('nauczyciel') }}" required>
+                                                                @foreach($nauczyciele as $teacher)
+                                                                    <option>{{$teacher->imie}} {{$teacher->nazwisko}}</option>
+                                                                @endforeach
+                                                            </select>
+
+                                                            @if ($errors->has('nauczyciel'))
+                                                                <span class="help-block">
+                                                                    <strong>{{ $errors->first('nauczyciel') }}</strong>
+                                                                </span>
+                                                            @endif
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xs-12 col-sm-6 col-md-4 ml-auto">
+                                                            <button type="submit" class="btn btn-info w-100 mx-auto">
+                                                                Zatwierdź
+                                                            </button>
+                                                        </div>
+
+                                                 </div>
+                                        </form>
+
+                                    </div>
+                                </div>
 
 
                             @foreach($group as $grupa)

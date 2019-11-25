@@ -50,7 +50,9 @@ Route::get('/profil/punkty', 'PagesController@punkty');
 
 //Panel administracyjny
 Route::get('/panel', 'AdminFeaturesController@panel');
-Route::get('/panel/dodajgrupe', 'AdminFeaturesController@Groups');
+
+Route::post('/panel/dodajgrupe', 'AdminFeaturesController@Groups');
+
 Route::get('/panel/dodajstudenta', 'AdminFeaturesController@Student');
 Route::get('/panel/dodajstudentazpliku', 'AdminFeaturesController@StudentFile');
 Route::post('/panel/dodajstudentazpliku/dodaj', 'AdminFeaturesController@addFromFile'); //wstawianie z pliku studentow

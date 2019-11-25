@@ -61,9 +61,68 @@ class AdminFeaturesController extends Controller {
         }
     }
 
-    public function Groups() {//sposób na przerzucenie zmiennej:
-        return view('pages.admin.editgroup');
+    public function Groups(Request $request) {//sposób na przerzucenie zmiennej:
+
+        //sposób na przerzucenie zmiennej:
+        $this->validate($request,[
+            'nazwa-grupy' => 'required|max:3',
+        ]);
+
+        $pieces = explode(" ", $request->input('nauczyciel'));
+
+        echo $pieces[0];
+        echo $pieces[1];
+
+        $group = DB::table('grupa')->where('nazwa',$request->input('nazwa-grupy'))->get()->first();
+
+        if($group!=null){
+
+            return redirect()->back()->with('error',  trans('Wystąpił bład!'));
+        }
+        else{
+
+            $nauczyciel = User::where([
+                'imie' => $pieces[0],
+                'nazwisko' => $pieces[1],
+            ])->first();
+
+        echo $nauczyciel->id;
+
+
+            $array = [
+                'nazwa' => $request->input('nazwa-grupy'),
+                'idNauczyciel' => $nauczyciel->id,
+                'created_at' => Carbon::now()
+            ];
+
+            $created_grupa = Grupa::create($array);
+
+            return redirect()->back()->with('success', trans('została dodana grupa o nazwie: '.$created_grupa->nazwa));
+        }
     }
+
+
+    public function adddGroup(Request $request)
+    {//sposób na przerzucenie zmiennej:
+
+
+        //sposób na przerzucenie zmiennej:
+        $this->validate($request,[
+            'grupa' => 'required',
+            'Radio' => 'required',   //jest wymagane
+            'file' => 'required|mimes:csv,txt' //jest wymagane, ustawienie że ma to byc plik, max 2mb
+        ]);
+
+        //pobranie grupy z nazwą
+        $group = DB::table('grupa')->where('nazwa',$request->input('grupa'))->get()->first();
+
+
+
+
+
+
+}
+
 
     public function Student() {//sposób na przerzucenie zmiennej:
         $grupy = DB::table('grupa')->get();

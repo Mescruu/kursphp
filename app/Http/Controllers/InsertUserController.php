@@ -27,6 +27,7 @@ class InsertUserController extends Controller
             'imie' => request('imie'),
             'nazwisko' => request('nazwisko'),
             'nrAlbumu' => request('nrAlbumu'),
+            'typ' => User::$user,
             'idGrupa' => DB::table('grupa')->where('nazwa', request('grupa'))->value('id'),
             'haslo' =>  bcrypt(request('imie').request('nrAlbumu')),
         ];

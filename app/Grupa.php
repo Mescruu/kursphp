@@ -9,7 +9,9 @@ class Grupa extends Model
     protected $table = 'grupa'; // nazwa tabeli do której się odwołuje model.
 
     public $primaryKey = 'id';
-    
+    protected $fillable = ['nazwa', 'updated_at', 'idNauczyciel'];
+
+
     public function uzytkownik(){
         return $this->hasMany('App\User','idGrupa'); //post ma relacje z userem jeden do wielu
     }
