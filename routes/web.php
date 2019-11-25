@@ -72,6 +72,11 @@ Route::post('editcriterion', 'EditCriterionController@EditCriterion');
 //Kontroler do tematów
 //Route::resource('tematy', 'TematyController');
 
+//Kwizy
+Route::get('quizy', 'QuizController@index');
+Route::get('quizy/{id}', 'QuizController@show');
+Route::get('quizy/{id}/edycja', 'QuizController@edit');
+
 //Tematy
 Route::get('tematy', 'TematyController@index');
 Route::get('tematy/{id}', 'TematyController@show');
