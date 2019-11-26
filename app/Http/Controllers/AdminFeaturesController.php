@@ -15,26 +15,37 @@ class AdminFeaturesController extends Controller {
 
     //ADMIN
 
-    public function panel() {//sposób na przerzucenie zmiennej:
+    public function panel() {
         //jezeli uzytkownik nie ma typu admin, wtedy zostaje przekierowany na adres profile
-        if (Auth::user()->typ == Auth::user()->user) {
+        if (Auth::user()->typ==\App\User::$user) {
             return redirect('/profil');
         } else {
             $studenci = DB::table('uzytkownik')->where('typ', 'student')->orderBy('nazwisko', 'asc')->get();
             $nauczyciele = DB::table('uzytkownik')->where('typ', 'nauczyciel')->get();
-            $group = Grupa::get(); //pobierz wszystkie grupy
+            $group = Grupa::get();
             $notification = DB::table('powiadomienie')->where('idUzytkownik', Auth::user()->id)->get();
             $punkty = DB::table('punkty')->orderBy('created_at', 'desc')->get();
-
             $kryterium = DB::table('kryterium')->first();
-
-
             $quizy = DB::table('quiz')->get();
             $pytania = DB::table('pytanie')->orderBy('id', 'desc')->get();
-
-
-
-
+            $tematy = DB::table('temat')->orderBy('nazwa', 'asc')->get();
+            
+            //Przypisanie nazw grup do każdego tematu, który jest im udostępniony
+            foreach($tematy as $temat){
+                $nazwyGrup = [];
+                $grupy = DB::table('temat')
+                        ->join('listagrup', 'listagrup.idTemat', '=', 'temat.id')
+                        ->join('grupa', 'listagrup.idGrupa', '=', 'grupa.id')
+                        ->where('temat.id', $temat->id)
+                        ->select('grupa.*')
+                        ->get();
+                foreach($grupy as $grupa){
+                    array_push($nazwyGrup, $grupa->nazwa);
+                }
+                $temat->grupy = $nazwyGrup;
+            }
+            
+            //Ilość pytań w każdym z quizów
             $iloscPytan = [];
             $index = 0;
             foreach($quizy as $quiz){
@@ -52,7 +63,7 @@ class AdminFeaturesController extends Controller {
                     $index++;
             }
 
-            //ilosc punktow kazdego studenta i przypisanie studenta do grupy
+            //Ilość punktów każdego studenta i przypisanie studenta do grupy
             foreach ($group as $grupa) {
                 $grupa_studenci = [];
                 foreach ($studenci as $student) {
@@ -82,7 +93,7 @@ class AdminFeaturesController extends Controller {
                 $grupa->studenci = $grupa_studenci;
             }
 
-            return view('pages.admin.panel', ['quizy'=>$quizy, 'group' => $group, 'studenci' => $studenci, 'nauczyciele' => $nauczyciele, 'notification' => $notification, 'kryterium' => $kryterium]);
+            return view('pages.admin.panel', ['quizy'=>$quizy, 'group' => $group, 'studenci' => $studenci, 'nauczyciele' => $nauczyciele, 'notification' => $notification, 'kryterium' => $kryterium, 'tematy' => $tematy]);
         }
     }
 

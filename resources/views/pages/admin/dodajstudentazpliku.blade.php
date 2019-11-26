@@ -87,7 +87,7 @@
                                                         <div  class="nicetooltip">
                                                             imie;
                                                             <span class="tooltiptext">
-                                                             imie wprowadzanego uzytkownika
+                                                             Imię wprowadzanego użytkownika
                                                          </span>
                                                         </div>
 
@@ -95,7 +95,7 @@
 
                                                          nazwisko;
                                                          <span class="tooltiptext">
-                                                             nazwisko wprowadzanego uzytkownika
+                                                             Nazwisko wprowadzanego użytkownika
                                                          </span>
                                                          </div>
 
@@ -103,7 +103,7 @@
 
                                                           nrAlbumu;
                                                           <span class="tooltiptext">
-                                                             numer albumu wprowadzanego uzytkownika
+                                                             Numer albumu wprowadzanego użytkownika
                                                          </span>
                                                           </div>
                                                  <br>
@@ -112,7 +112,7 @@
 
                                                             Jan;
                                                             <span class="tooltiptext">
-                                                             przykład
+                                                             Przykład
                                                          </span>
 
                                                             Kowalski;
@@ -215,7 +215,7 @@
                             <div class="col-12 mx-auto">
                                 <p class="text-muted">Hasło zostanie wygenerowane na zasadzie {Imię}{Numer Albumu}</p>
                                 <a href="#" class="text-muted btn-point" data-toggle="modal" data-target="#exampleModal">
-                                        jak wygląda przykładowy plik?
+                                        Jak wygląda przykładowy plik?
                                 </a>
                             </div>
                         </div>

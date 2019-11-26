@@ -435,7 +435,7 @@
 
                                     <tr>
                                         <td>
-                                            email
+                                            E-mail
                                         </td>
                                         <td>
                                             {{ $i->email}}
@@ -462,7 +462,7 @@
 
                                     <tr>
                                         <td>
-                                            Ilość punktów
+                                            Liczba punktów
                                         </td>
                                         <td>
                                             {{ $i->iloscPunktow }}
@@ -608,17 +608,18 @@
 
                         <hr>
 
-                        <div class="card">
-                            <div class="card-header" id="headingOne">
-                                <h5 class=" h-100 my-auto">
-                                    Dodaj Quiz
-                                    <a href="/panel/dodajstudenta" class="btn btn-info add mr-2"> + quiz</a>
-                                </h5>
-                            </div>
-                        </div>
+                        
 
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-quizy" role="tabpanel" aria-labelledby="pills-quizy-tab">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h5 class=" h-100 my-auto">
+                                            Dodaj Quiz
+                                            <a href="/panel/dodajstudenta" class="btn btn-info add mr-2"> + Quiz</a>
+                                        </h5>
+                                    </div>
+                                </div>
 
                                 <table class="table">
                                     <thead>
@@ -664,7 +665,65 @@
                                 b
                             </div>
                             <div class="tab-pane fade" id="pills-tematy" role="tabpanel" aria-labelledby="pills-tematy-tab">
-                                c
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h5 class=" h-100 my-auto">
+                                            Dodaj Temat
+                                            <a href="/tematy/utworz" class="btn btn-info add mr-2"> + Temat</a>
+                                        </h5>
+                                    </div>
+                                </div>
+                                
+                                <nav>
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                        @foreach ($tematy as $i)
+                                            <a class="nav-item nav-link" id="nav-{{$i->id}}-tab" data-toggle="tab" href="#tematnav-{{$i->id}}" role="tab" aria-controls="nav-{{$i->id}}" aria-selected="false">{{$i->nazwa}}</a>
+                                        @endforeach
+                                    </div>
+                                </nav>
+                                <div class="tab-content" id="nav-tabContent">
+
+                                    @foreach ($tematy as $i)
+                                        <div class="tab-pane fade" id="tematnav-{{$i->id}}" role="tabpanel" aria-labelledby="nav-{{$i->id}}-tab">
+
+                                        <table class="table">
+                                            <tr>
+                                                <td>
+                                                    Nazwa
+                                                </td>
+                                                <td>
+                                                    {{ $i->nazwa}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Udostępniony grupom:
+                                                </td>
+                                                <td>
+                                                    @foreach($i->grupy as $grupa)
+                                                        {{ $grupa }}
+                                                        @if(!$loop->last)
+                                                            <br>
+                                                        @endif
+                                                    @endforeach
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    Opis
+                                                </td>
+                                                <td>
+                                                    {{ $i->opis}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                            <a href="/tematy/{{$i->id}}" class="btn btn-info add">Zobacz</a>
+                                            <a href="/tematy/{{$i->id}}/edycja" class="btn btn-info add mr-2">Edytuj</a>
+                                            <a href="/tematy/{{$i->id}}/grupy" class="btn btn-info add mr-2">Przypisz Grupy</a>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="pills-wyklady" role="tabpanel" aria-labelledby="pills-wyklady-tab">
                                 dd

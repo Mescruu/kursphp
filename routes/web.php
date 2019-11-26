@@ -89,6 +89,7 @@ Route::get('tematy', 'TematyController@index');
 Route::get('tematy/utworz', 'TematyController@create');
 Route::get('tematy/{id}', 'TematyController@show');
 Route::get('tematy/{id}/edycja', 'TematyController@edit');
+Route::get('/tematy/{id}/grupy', 'TematyController@groups');
 Route::post('/zapisztemat/{id}', 'TematyController@update');
 
 //Resetowanie hasła
