@@ -15,6 +15,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        //Dynamiczne udostępnianie tematów do paska nawigacji
+        view()->composer(
+            'inc.navbar',
+            function ($view) {
+                $view->with('listaTematow', \App\Temat::all());
+            }
+        );
     }
 
     /**

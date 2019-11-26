@@ -42,13 +42,12 @@
                                     <div class="dropdown-divider"></div>
 
 
-                                    @if(session()->has('listaTematow'))
-                                        @if(count( session('listaTematow') )>=1)
-                                            @foreach(session('listaTematow') as $temat)
+                                        @if(count($listaTematow)>=1)
+                                            @foreach($listaTematow as $temat)
                                                 <a class="dropdown-item" href="/tematy/{{$temat->id}}">{{$temat->nazwa}}</a>
                                             @endforeach
                                         @endif
-                                    @endif
+                                    
 
                                 </div>
                             </li>
