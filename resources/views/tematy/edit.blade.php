@@ -3,6 +3,7 @@
 @section('assets')
     <link href="{{ asset('css/underNav.css') }}" rel="stylesheet">
     <link href="{{ asset('css/temat.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/checkbox.css') }}" rel="stylesheet">
 
 @endsection
 

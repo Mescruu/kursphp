@@ -11,6 +11,8 @@ class Temat extends Model
 
     //Primary Key
     public $primaryKey = 'id';
+    
+    protected $fillable = ['nazwa'];
 
     public function listaGrup(){
         return $this->hasMany('App\ListaGrup','idTemat');

@@ -8,7 +8,7 @@ body{
 
 .card{
     border-radius: 0px;
-    /*background-color: whitesmoke;*/
+    background-color: whitesmoke;
 }
 .card .form-control{
     display: block;

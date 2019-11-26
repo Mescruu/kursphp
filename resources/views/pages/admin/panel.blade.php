@@ -635,7 +635,7 @@
                                     <tbody>
                                     @foreach($quizy as $quiz)
                                         <tr>
-                                            <th scope="row" class="text-center">{{$quiz->id}}</th>
+                                            <th scope="row" class="text-center">{{$loop->iteration}}</th>
                                             <td class="text-center">
                                                 {{$quiz->typ}}
                                             </td>
@@ -718,7 +718,8 @@
                                                 </td>
                                             </tr>
                                         </table>
-                                            <a href="/tematy/{{$i->id}}" class="btn btn-info add">Zobacz</a>
+                                            <button class="btn btn-danger add" onclick="removeSubject({{$i->id}},'{{$i->nazwa}}');">Usuń</button>
+                                            <a href="/tematy/{{$i->id}}" class="btn btn-info add mr-2">Zobacz</a>
                                             <a href="/tematy/{{$i->id}}/edycja" class="btn btn-info add mr-2">Edytuj</a>
                                             <a href="/tematy/{{$i->id}}/grupy" class="btn btn-info add mr-2">Przypisz Grupy</a>
                                         </div>
@@ -745,5 +746,6 @@
 @section('scripts')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!-- jQuery CDN -->
 <script type='text/javascript' src="{{ asset('js/removeNotification.js')}}"></script>
+<script type='text/javascript' src="{{ asset('js/removeSubject.js')}}"></script>
 
 @endsection
