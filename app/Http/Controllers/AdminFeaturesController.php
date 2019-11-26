@@ -25,7 +25,32 @@ class AdminFeaturesController extends Controller {
             $group = Grupa::get(); //pobierz wszystkie grupy
             $notification = DB::table('powiadomienie')->where('idUzytkownik', Auth::user()->id)->get();
             $punkty = DB::table('punkty')->orderBy('created_at', 'desc')->get();
+
             $kryterium = DB::table('kryterium')->first();
+
+
+            $quizy = DB::table('quiz')->get();
+            $pytania = DB::table('pytanie')->orderBy('id', 'desc')->get();
+
+
+
+
+            $iloscPytan = [];
+            $index = 0;
+            foreach($quizy as $quiz){
+
+                $iloscPytan[$index]=0;
+
+                $pytania_w_quizie = $pytania->where('idQuiz', ($quiz->id));
+                foreach ($pytania_w_quizie as $pytanie_w_quizie) {
+
+                    $iloscPytan[$index]++;
+
+                }
+                $quiz->iloscPytan =  $iloscPytan[$index];
+
+                    $index++;
+            }
 
             //ilosc punktow kazdego studenta i przypisanie studenta do grupy
             foreach ($group as $grupa) {
@@ -57,7 +82,7 @@ class AdminFeaturesController extends Controller {
                 $grupa->studenci = $grupa_studenci;
             }
 
-            return view('pages.admin.panel', ['group' => $group, 'studenci' => $studenci, 'nauczyciele' => $nauczyciele, 'notification' => $notification, 'kryterium' => $kryterium]);
+            return view('pages.admin.panel', ['quizy'=>$quizy, 'group' => $group, 'studenci' => $studenci, 'nauczyciele' => $nauczyciele, 'notification' => $notification, 'kryterium' => $kryterium]);
         }
     }
 

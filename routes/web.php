@@ -76,6 +76,13 @@ Route::post('editcriterion', 'EditCriterionController@EditCriterion');
 Route::get('quizy', 'QuizController@index');
 Route::get('quizy/{id}', 'QuizController@show');
 Route::get('quizy/{id}/edycja', 'QuizController@edit');
+Route::get('quizy/{id}/edycja/zatwierdz', 'QuizController@confirm');
+
+Route::post('/zatwierdzquiz', 'QuizController@confirm');
+
+
+Route::get('quizy/{id}/usun', 'QuizController@remove');
+
 
 //Tematy
 Route::get('tematy', 'TematyController@index');

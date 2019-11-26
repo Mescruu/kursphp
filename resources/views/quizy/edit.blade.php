@@ -34,33 +34,53 @@
 
                 <label>ilosc pytań</label>
                 <input type="range" class="form-control-range"  id="rangeInput" min="1" max="20" step="1"
-                       value="1" oninput="setValOnInput(this.value)" onchange="setValOnInput(this.value)">
+                       value="{{$ilosc}}" onclick="warning()" oninput="setValOnInput(this.value)" onchange="setValOnInput(this.value)">
 
-                <input type="number" min="1" max="20" step="1" id="numberInput" class="form-control"  placeholder="1"
-                       oninput="setValOnRange(this.value)" onchange="setValOnRange(this.value)">
+                <form class="form-signin justify-content-center " method="POST" action="/zatwierdzquiz">
 
-                <form >
+                    {!! csrf_field() !!}
+                <div class="row">
+                    <input type="number" min="1" max="20" step="1" id="numberInput" class="form-control col-6"  placeholder="{{$ilosc}}"
+                           oninput="setValOnRange(this.value)"  onclick="warning()" onchange="setValOnRange(this.value)">
+
+                    <select name="grupa" class="form-control col-6" value="{{$typ}}" required>
+                        <option>quiz</option>
+                        <option>kolokwium</option>
+                    </select>
+
+
+
                     <div id="pytania">
 
-                    <div class="form-group" id="pytanie1">
-                        <div class="row">
-                            <input type="text" class="form-control" placeholder="Pytanie">
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Odpowiedź poprawna">
+                        <input class="form-control d-none" id="startValue" type="number"  value="{{$ilosc}}" >
+
+                        @foreach($pytania as $pytanie)
+
+
+
+                            <div class="form-group" id="pytanie{{$pytanie->nr}}">
+                                <div class="row">
+                                    <input type="text" class="form-control" name="tresc{{$pytanie->nr}}" value="{{$pytanie->tresc}}">
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="odpPoprawna{{$pytanie->nr}}" value="{{$pytanie->odpPoprawna}}">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="odpA{{$pytanie->nr}}" value="{{$pytanie->odpA}}">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="odpB{{$pytanie->nr}}" value="{{$pytanie->odpB}}">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="odpC{{$pytanie->nr}}" value="{{$pytanie->odpC}}">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Odpowiedź A">
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Odpowiedź B">
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Odpowiedź C">
-                            </div>
-                        </div>
-                    </div>
+
+
+                        @endforeach
+
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -71,36 +91,29 @@
 
 <script>
 
-    let input = 1;
+    let input = document.getElementById("startValue").value;
+    let clickCount = 0;
+    // alert(input);
 
+    function warning() {
+        clickCount++;
+        if(clickCount%2!=0){
+            window.confirm('Po zmniejszeniu zostaną usunięte pytania!');
+        }
+    }
     function setValOnInput(newVal){
-        if(newVal< document.getElementById("numberInput").value)
-        {
-            if (window.confirm('Po zmniejszeniu zostaną usunięte pytania!'))
-            {
+
+
                 document.getElementById("numberInput").value =newVal;
                 setInputs(newVal);
-            }
-        }
-        else {
-            document.getElementById("numberInput").value =newVal;
-            setInputs(newVal);
-        }
+
     }
     function setValOnRange(newVal){
 
-        if(newVal< document.getElementById("rangeInput").value)
-        {
-            if (window.confirm('Po zmniejszeniu zostaną usunięte pytania!'))
-            {
+
                 document.getElementById("rangeInput").value =newVal;
                 setInputs(newVal);
-            }
-        }
-        else {
-            document.getElementById("rangeInput").value =newVal;
-            setInputs(newVal);
-        }
+
     }
 
     function setInputs(value) {
@@ -137,20 +150,20 @@
 
         document.getElementById('pytania').innerHTML += '                    <div class="form-group" id="pytanie'+id+'">\n' +
             '                        <div class="row">\n' +
-            '                            <input type="text" class="form-control" placeholder="Pytanie">' +
+            '                            <input type="text" class="form-control" name="trescc'+id+'" placeholder="Pytanie">' +
             '                        </div>\n' +
             '                        <div class="row">\n' +
             '                            <div class="col">\n' +
-            '                                <input type="text" class="form-control" placeholder="Odpowiedź poprawna">\n' +
+            '                                <input type="text" class="form-control" name="odpPoprawna'+id+'" placeholder="Odpowiedź poprawna">\n' +
             '                            </div>\n' +
             '                            <div class="col">\n' +
-            '                                <input type="text" class="form-control" placeholder="Odpowiedź A">\n' +
+            '                                <input type="text" class="form-control" name="odpA'+id+'" placeholder="Odpowiedź A">\n' +
             '                            </div>\n' +
             '                            <div class="col">\n' +
-            '                                <input type="text" class="form-control" placeholder="Odpowiedź B">\n' +
+            '                                <input type="text" class="form-control" name="odpB'+id+'" placeholder="Odpowiedź B">\n' +
             '                            </div>\n' +
             '                            <div class="col">\n' +
-            '                                <input type="text" class="form-control" placeholder="Odpowiedź C">\n' +
+            '                                <input type="text" class="form-control" name="odpC'+id+'" placeholder="Odpowiedź C">\n' +
             '                            </div>\n' +
             '                        </div>\n' +
             '                    </div>';

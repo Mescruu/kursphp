@@ -64,6 +64,9 @@
                     <a class="nav-link" id="v-pills-teacher-tab" data-toggle="pill" href="#v-pills-teacher" role="tab" aria-controls="v-pills-teacher" aria-selected="false">Nauczyciele</a>
 
                     <a class="nav-link" id="v-pills-criterion-tab" data-toggle="pill" href="#v-pills-criterion" role="tab" aria-controls="v-pills-criterion" aria-selected="false">Kryterium oceniania</a>
+
+                    <a class="nav-link" id="v-pills-cms-tab" data-toggle="pill" href="#v-pills-cms" role="tab" aria-controls="v-pills-cms" aria-selected="false">Zarządzanie treścią</a>
+
                 </div>
             </div>
             <div class="col-9">
@@ -567,7 +570,7 @@
                                         {{$kryterium->cztery}}
                                     </td>
                                 </tr>
-<tr>
+                                <tr>
                                     <td>
                                         5
                                     </td>
@@ -580,6 +583,97 @@
                         <a href="/panel/edytujkryterium" class="btn btn-info add">Edytuj</a>
 
                     </div>
+
+                    <div class="tab-pane fade show" id="v-pills-cms" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+
+                        <h2>
+                            Zarządzanie treścią
+                        </h2>
+                        <hr>
+
+                        <ul class="nav nav-pills justify-content-center mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item w-25">
+                                <a class="nav-link  w-100 text-center active" id="pills-home-tab" data-toggle="pill" href="#pills-quizy" role="tab" aria-controls="pills-home" aria-selected="true">Quizy</a>
+                            </li>
+                            <li class="nav-item w-25">
+                                <a class="nav-link w-100 text-center" id="pills-profile-tab" data-toggle="pill" href="#pills-zadania" role="tab" aria-controls="pills-profile" aria-selected="false">Zadania</a>
+                            </li>
+                            <li class="nav-item w-25">
+                                <a class="nav-link  w-100 text-center" id="pills-contact-tab" data-toggle="pill" href="#pills-tematy" role="tab" aria-controls="pills-contact" aria-selected="false">Tematy</a>
+                            </li>
+                            <li class="nav-item w-25">
+                                <a class="nav-link  w-100 text-center" id="pills-contact-tab" data-toggle="pill" href="#pills-wyklady" role="tab" aria-controls="pills-contact" aria-selected="false">Wykłady</a>
+                            </li>
+                        </ul>
+
+                        <hr>
+
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h5 class=" h-100 my-auto">
+                                    Dodaj Quiz
+                                    <a href="/panel/dodajstudenta" class="btn btn-info add mr-2"> + quiz</a>
+                                </h5>
+                            </div>
+                        </div>
+
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-quizy" role="tabpanel" aria-labelledby="pills-quizy-tab">
+
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">#</th>
+                                        <th scope="col" class="text-center">typ</th>
+                                        <th scope="col" class="text-center">ilosc pytań</th>
+                                        <th scope="col" class="text-center">link</th>
+                                        <th scope="col" class="text-center">edycja</th>
+                                        <th scope="col" class="text-center">usun</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($quizy as $quiz)
+                                        <tr>
+                                            <th scope="row" class="text-center">{{$quiz->id}}</th>
+                                            <td class="text-center">
+                                                {{$quiz->typ}}
+                                            </td>
+                                            <td class="text-center">
+                                                {{$quiz->iloscPytan}}
+
+                                            </td>
+                                            <td>
+                                                <a href="quizy/{{$quiz->id}}" class="btn btn-info w-100 mr-2"> przejdź</a>
+                                            </td>
+                                            <td>
+                                                <a href="quizy/{{$quiz->id}}/edycja" class="btn btn-info w-100 mr-2"> edytuj</a>
+                                            </td>
+                                            <td>
+                                                <a href="quizy/{{$quiz->id}}/usun" class="btn btn-info w-100 mr-2"> usun</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                    </tbody>
+                                </table>
+
+
+
+                            </div>
+                            <div class="tab-pane fade" id="pills-zadania" role="tabpanel" aria-labelledby="pills-zadania-tab">
+                                b
+                            </div>
+                            <div class="tab-pane fade" id="pills-tematy" role="tabpanel" aria-labelledby="pills-tematy-tab">
+                                c
+                            </div>
+                            <div class="tab-pane fade" id="pills-wyklady" role="tabpanel" aria-labelledby="pills-wyklady-tab">
+                                dd
+                            </div>
+                        </div>
+
+
+                    </div>
+
 
                 </div>
             </div>

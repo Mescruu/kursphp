@@ -33,7 +33,8 @@
                                             <a class="btn btn-info float-left" href="/tematy/<?php echo e($temat->id); ?>"><?php echo e($temat->nazwa); ?></a>
 
                                         <span class="text-center px-4  w-auto short-des">
-                                            krótki opis
+                                            <?php echo e($temat->opis); ?>
+
                                         </span>
 
                                         <a class="btn btn-info float-right" href="/wyklady/<?php echo e($temat->id); ?>">wyklad id</a>
