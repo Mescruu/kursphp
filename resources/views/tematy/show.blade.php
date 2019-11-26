@@ -12,7 +12,7 @@
 
     <div class="col-md-4 col-sm-5 col-xs-3 float-left">
         <h2 >
-            Temat {{$temat->id}}
+            Temat
         </h2>
     </div>
     <div class="col-md-5 col-sm-6 col-xs-2">
@@ -45,9 +45,9 @@
                 <div class="row">
 
                     <div class="col-12">
-                        <h1>Temat {{$temat->id}}</h1>
+                        <h1>{{$temat->nazwa}}</h1>
                         <hr class="w-50">
-                        <small class="text-center mx-auto">Written on {{$temat->created_at}}</small>
+                        <small class="text-center mx-auto">Ostatnio edytowany {{$temat->updated_at}}</small>
                     </div>
 
                 </div>

@@ -9,6 +9,10 @@ class ListaGrup extends Model
     protected $table = 'listaGrup';
     public $primaryKey = 'id';
     
+    protected $fillable = [
+        'idGrupa','idTemat'
+    ];
+    
     public function grupa(){
         return $this->belongsTo('App\Grupa','idGrupa');
     }

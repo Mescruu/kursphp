@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TematTableSeeder::class);
         $this->call(WynikTableSeeder::class);
         $this->call(ZadanieTableSeeder::class);
+        $this->call(KryteriumTableSeeder::class);
     }
 }

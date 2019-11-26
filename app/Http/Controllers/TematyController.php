@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Temat;
+use App\ListaGrup;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -28,7 +29,7 @@ class TematyController extends Controller
     
     public function create(){
         if(Auth::user()->typ==\App\User::$admin){
-            $temat = Temat::create();
+            $temat = Temat::create(['nazwa' => 'Nowy Temat']);
             $trescAktualnaPath = $temat->id.'/ahtml.txt';
             $trescAktualnaBBCodePath = $temat->id.'/abb.txt';
             $trescPoprzedniaBBCodePath = $temat->id.'/pbb.txt';
@@ -54,18 +55,100 @@ class TematyController extends Controller
         
     }
     
+    public function groups($id){
+        if(Auth::user()->typ==\App\User::$admin){
+            $temat = DB::table('temat')->where('id', $id)->first();
+            $grupy = DB::table('grupa')->get();
+            $grupyWybrane = DB::table('temat')
+                        ->join('listagrup', 'listagrup.idTemat', '=', 'temat.id')
+                        ->join('grupa', 'listagrup.idGrupa', '=', 'grupa.id')
+                        ->where('temat.id', $id)
+                        ->select('grupa.*')
+                        ->get();
+            $grupyWybraneID = [];
+            foreach($grupyWybrane as $grupaWybrana){
+                array_push($grupyWybraneID, $grupaWybrana->id);
+            }
+            
+            foreach($grupy as $grupa){
+                if (in_array($grupa->id, $grupyWybraneID)) {
+                    $grupa->checked = 'checked';
+                }else{
+                    $grupa->checked = '';
+                }
+            }
+            
+            return view('tematy.groups', ['temat' => $temat, 'grupy' => $grupy]);
+        }else{
+            return redirect('/tematy/'.$id);
+        }
+        
+        
+        
+    }
+    
     public function update($id){
-        $array = [
+        if(Auth::user()->typ==\App\User::$admin){
+            $array = [
             'nazwa' => request('nazwa'),
             'opis' => request('opis'),
-        ];
-        DB::table('temat')->where('id', $id)->update($array);
+            ];
+            DB::table('temat')->where('id', $id)->update($array);
         
-        $trescAktualna = Storage::disk('tematy')->get($id.'/abb.txt');
-        Storage::disk('tematy')->put($id.'/pbb.txt', $trescAktualna);
-        Storage::disk('tematy')->put($id.'/abb.txt', request('text'));
-        Storage::disk('tematy')->put($id.'/ahtml.txt', request('texthtml'));
-        return redirect()->back()->with('success', 'Udało się zaktualizować temat!');
+            $trescAktualna = Storage::disk('tematy')->get($id.'/abb.txt');
+            Storage::disk('tematy')->put($id.'/pbb.txt', $trescAktualna);
+            Storage::disk('tematy')->put($id.'/abb.txt', request('text'));
+            Storage::disk('tematy')->put($id.'/ahtml.txt', request('texthtml'));
+            return redirect()->back()->with('success', 'Udało się zaktualizować temat!');
+        }else{
+            return redirect('/tematy/'.$id);
+        }
+        
+    }
+    
+    public function updateGroups($id){
+        $grupy = DB::table('grupa')->get();
+        $grupyWybrane = DB::table('temat')
+                        ->join('listagrup', 'listagrup.idTemat', '=', 'temat.id')
+                        ->join('grupa', 'listagrup.idGrupa', '=', 'grupa.id')
+                        ->where('temat.id', $id)
+                        ->select('grupa.*')
+                        ->get();
+        $grupyWybraneID = [];
+        foreach($grupyWybrane as $grupaWybrana){
+            array_push($grupyWybraneID, $grupaWybrana->id);
+        }
+        foreach($grupy as $grupa){
+            if(request(strval($grupa->id))){
+                if(!in_array($grupa->id, $grupyWybraneID)) {
+                    ListaGrup::create(['idGrupa' => $grupa->id, 'idTemat' => $id]);
+                }
+            }else{
+                if(in_array($grupa->id, $grupyWybraneID)) {
+                    $listaGrup = DB::table('listagrup')->where('idGrupa', $grupa->id)->where('idTemat', $id);
+                    $listaGrup->delete();
+                }
+            }
+        }
+        return redirect()->back()->with('success', 'Zaktualizowano udostępnienie tematu');
+    }
+    
+    public function delete($id){
+        if(Auth::user()->typ==\App\User::$admin){
+            $temat = Temat::find($id);
+            if(!is_null($temat)){
+                $nazwa = $temat->nazwa;
+                $listyGrup = ListaGrup::where('idTemat', $id);
+                $listyGrup->delete();
+                $temat->delete();
+                Storage::disk('tematy')->deleteDirectory($id);
+                return redirect()->back()->with('success', 'Usunięto temat '.$nazwa.'.');
+            }else{
+                return redirect()->back()->with('error', 'Taki temat nie istnieje');
+            }
+        }else{
+            return redirect('/tematy/'.$id);
+        }
     }
 
     /**
