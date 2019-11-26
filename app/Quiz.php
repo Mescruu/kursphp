@@ -8,7 +8,10 @@ class Quiz extends Model
 {
     protected $table = 'quiz';
     public $primaryKey = 'id';
-    
+
+
+    protected $fillable = ['typ', 'idTemat', 'created_at', 'updated_at'];
+
     public function temat(){
         return $this->belongsTo('App\Zadanie','idTemat');
     }

@@ -1,0 +1,42 @@
+body{
+    background: rgba(79,91,147,1);
+}
+
+.quiz-section{
+    margin-top: 20px;
+}
+
+.quiz-section .title{
+    background-color: rgb(38,43,82);
+}
+
+
+.quiz-section .title h1{
+    color: whitesmoke
+}
+
+.quiz-section .card{
+    border-radius: 0px;
+}
+.quiz-section .questionsContainer{
+   height: 70vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+
+}
+.quiz-section .form-navbar{
+background-color: whitesmoke;
+}
+
+.quiz-section .questionsContainer .card-header{
+
+    background-color: rgb(38,43,82);
+}
+.quiz-section .questionsContainer .card-header h3{
+
+    color: whitesmoke;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}

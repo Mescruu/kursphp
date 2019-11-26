@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pytanie extends Model
 {
+    protected $fillable = ['idQuiz', 'tresc', 'odpPoprawna', 'odpA', 'odpB', 'odpC', 'created_at', 'updated_at'];
+
     protected $table = 'pytanie';
     public $primaryKey = 'id';
     

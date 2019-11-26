@@ -2,6 +2,7 @@
 
 @section('assets')
     <link href="{{ asset('css/underNav.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/quiz.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -10,7 +11,7 @@
 
     <div class="col-md-4 col-sm-5 col-xs-3 float-left">
         <h2 >
-            Temat
+            Quiz
         </h2>
     </div>
     <div class="col-md-4 col-sm-6 col-xs-2">
@@ -29,60 +30,122 @@
 @section('content')
 
 
-        <section class="topic-section">
+        <section class="quiz-section">
             <div class="container"> <!--kontener/pojemnik calej siatki-->
 
-                <label>ilosc pytań</label>
-                <input type="range" class="form-control-range"  id="rangeInput" min="1" max="20" step="1"
-                       value="{{$ilosc}}" onclick="warning()" oninput="setValOnInput(this.value)" onchange="setValOnInput(this.value)">
+{{--                <label>ilosc pytań</label>--}}
+{{--                <input type="range" class="form-control-range d-none"  id="rangeInput" min="1" max="20" step="1"--}}
+{{--                       value="{{$ilosc}}" onclick="warning()" oninput="setValOnInput(this.value)" onchange="setValOnInput(this.value)">--}}
 
                 <form class="form-signin justify-content-center " method="POST" action="/zatwierdzquiz">
 
                     {!! csrf_field() !!}
-                <div class="row">
-                    <input type="number" min="1" max="20" step="1" id="numberInput" class="form-control col-6"  placeholder="{{$ilosc}}"
-                           oninput="setValOnRange(this.value)"  onclick="warning()" onchange="setValOnRange(this.value)">
+                    <div class="title">
+                        <h1 class="m-0 p-2">
+                            Edycja Quizu
+                        </h1 >
+                    </div>
+                <div class="card-header form-navbar">
+                    <div class="row">
+                        <div class="col-4 mb-4">
+                            <label for="numberInput" class="control-label">ilość pytań</label>
 
-                    <select name="grupa" class="form-control col-6" value="{{$typ}}" required>
-                        <option>quiz</option>
-                        <option>kolokwium</option>
-                    </select>
+                            <input type="number" min="1" max="20" step="1" id="numberInput" class="form-control "  placeholder="{{$ilosc}}"
+                                   oninput="setValOnRange(this.value)"  onclick="warning()" onchange="setValOnRange(this.value)">
+                        </div>
+                        <div class="col-4 mb-4">
+                            <label for="grupa" class="control-label">typ testu</label>
+
+                            <select name="grupa" class="form-control " value="{{$typ}}" required>
+                                <option>quiz</option>
+                                <option>kolokwium</option>
+                            </select>
+                        </div>
+                        <div class="col-4 mb-4">
+                            <label for="grupa" class="control-label">Zakończ tworzenie</label>
+                            <button type="submit" class="btn btn-info w-100">Zatwierdź</button>
+                        </div>
+                    </div>
 
 
 
-                    <div id="pytania">
 
-                        <input class="form-control d-none" id="startValue" type="number"  value="{{$ilosc}}" >
 
+                    <input class="form-control d-none" id="startValue" name="oldCount" type="number"  value="{{$ilosc}}" >
+                    <input class="form-control d-none" id="startValue" name="id" type="number"  value="{{$id}}" >
+
+                    <div  id="pytania" class="questionsContainer" >
                         @foreach($pytania as $pytanie)
 
+                            <div class="form-group " id="pytanie{{$pytanie->nr}}">
 
-
-                            <div class="form-group" id="pytanie{{$pytanie->nr}}">
                                 <div class="row">
-                                    <input type="text" class="form-control" name="tresc{{$pytanie->nr}}" value="{{$pytanie->tresc}}">
+                                    <div class="col-12">
+                                        <div class="card text-dark bg-light mb-3 row-eq-height w-100">
+                                            <div class="card-header"><h3>Pytanie {{$pytanie->nr}}.</h3></div>
+                                            <div class="card-body">
+
+                                                <textarea type="text" class="form-control" name="tresc{{$pytanie->nr}}" >{{$pytanie->tresc}}</textarea>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <input type="text" class="form-control" name="odpPoprawna{{$pytanie->nr}}" value="{{$pytanie->odpPoprawna}}">
+                                <div class="row"> <!-- <div class="row no-gutters"> opakowanie dla kolumn/ no-gutters wylacza odstepy/paddingi pionowe pomiedzy kolumnami-->
+                                    <div class="col-12 col-sm-6 col-md-3 ">
+                                        <div class="card text-dark bg-light mb-3 row-eq-height w-100">
+                                            <div class="card-header"><h3>A</h3></div>
+                                            <div class="card-body">
+                                                <p class="card-text">Odpowiedź a.</p>
+
+                                                <textarea type="text" class="form-control" name="odpPoprawna{{$pytanie->nr}}">{{$pytanie->odpPoprawna}}</textarea>
+
+
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <input type="text" class="form-control" name="odpA{{$pytanie->nr}}" value="{{$pytanie->odpA}}">
+                                    <div class="col-12 col-sm-6 col-md-3 ">
+                                        <div class="card text-dark bg-light mb-3 row-eq-height w-100">
+                                            <div class="card-header"><h3>B</h3></div>
+                                            <div class="card-body">
+                                                <p class="card-text">Odpowiedź b.</p>
+
+                                                <textarea type="text" class="form-control" name="odpA{{$pytanie->nr}}" >{{$pytanie->odpA}}</textarea>
+
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <input type="text" class="form-control" name="odpB{{$pytanie->nr}}" value="{{$pytanie->odpB}}">
+                                    <div class="col-12 col-sm-6 col-md-3 ">
+                                        <div class="card text-dark bg-light mb-3 row-eq-height w-100">
+                                            <div class="card-header "><h3>C</h3></div>
+                                            <div class="card-body">
+                                                <p class="card-text">Odpowiedź c.</p>
+
+                                                <textarea type="text" class="form-control" name="odpB{{$pytanie->nr}}" >{{$pytanie->odpB}}</textarea>
+
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <input type="text" class="form-control" name="odpC{{$pytanie->nr}}" value="{{$pytanie->odpC}}">
+                                    <div class="col-12 col-sm-6 col-md-3 ">
+                                        <div class="card text-dark bg-light mb-3 row-eq-height w-100">
+                                            <div class="card-header"><h3>D</h3></div>
+                                            <div class="card-body">
+                                                <p class="card-text">Odpowiedź d.</p>
+
+                                                <textarea type="text" class="form-control" name="odpC{{$pytanie->nr}}">{{$pytanie->odpC}}</textarea>
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-
                         @endforeach
 
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+
+
+                    </div>
                 </form>
 
 
@@ -96,9 +159,9 @@
     // alert(input);
 
     function warning() {
-        clickCount++;
-        if(clickCount%2!=0){
+        if(clickCount==0){
             window.confirm('Po zmniejszeniu zostaną usunięte pytania!');
+            clickCount++;
         }
     }
     function setValOnInput(newVal){
@@ -148,25 +211,69 @@
     }
     function create(id) {
 
-        document.getElementById('pytania').innerHTML += '                    <div class="form-group" id="pytanie'+id+'">\n' +
-            '                        <div class="row">\n' +
-            '                            <input type="text" class="form-control" name="trescc'+id+'" placeholder="Pytanie">' +
-            '                        </div>\n' +
-            '                        <div class="row">\n' +
-            '                            <div class="col">\n' +
-            '                                <input type="text" class="form-control" name="odpPoprawna'+id+'" placeholder="Odpowiedź poprawna">\n' +
-            '                            </div>\n' +
-            '                            <div class="col">\n' +
-            '                                <input type="text" class="form-control" name="odpA'+id+'" placeholder="Odpowiedź A">\n' +
-            '                            </div>\n' +
-            '                            <div class="col">\n' +
-            '                                <input type="text" class="form-control" name="odpB'+id+'" placeholder="Odpowiedź B">\n' +
-            '                            </div>\n' +
-            '                            <div class="col">\n' +
-            '                                <input type="text" class="form-control" name="odpC'+id+'" placeholder="Odpowiedź C">\n' +
-            '                            </div>\n' +
-            '                        </div>\n' +
-            '                    </div>';
+        document.getElementById('pytania').innerHTML += '' +
+            '  <div class="form-group " id="pytanie'+id+'">\n' +
+            '\n' +
+            '                                <div class="row">\n' +
+            '                                    <div class="col-12">\n' +
+            '                                        <div class="card text-dark bg-light mb-3 row-eq-height w-100">\n' +
+            '                                            <div class="card-header"><h3>Pytanie '+id+'.</h3></div>\n' +
+            '                                            <div class="card-body">\n' +
+            '\n' +
+            '                                                <textarea type="text" class="form-control" name="tresc'+id+'" ></textarea>\n' +
+            '\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                </div>\n' +
+            '                                <div class="row"> <!-- <div class="row no-gutters"> opakowanie dla kolumn/ no-gutters wylacza odstepy/paddingi pionowe pomiedzy kolumnami-->\n' +
+            '                                    <div class="col-12 col-sm-6 col-md-3 ">\n' +
+            '                                        <div class="card text-dark bg-light mb-3 row-eq-height w-100">\n' +
+            '                                            <div class="card-header"><h3>A</h3></div>\n' +
+            '                                            <div class="card-body">\n' +
+            '                                                <p class="card-text">Odpowiedź a.</p>\n' +
+            '\n' +
+            '                                                <textarea type="text" class="form-control" name="odpPoprawna'+id+'"></textarea>\n' +
+            '\n' +
+            '\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                    <div class="col-12 col-sm-6 col-md-3 ">\n' +
+            '                                        <div class="card text-dark bg-light mb-3 row-eq-height w-100">\n' +
+            '                                            <div class="card-header"><h3>B</h3></div>\n' +
+            '                                            <div class="card-body">\n' +
+            '                                                <p class="card-text">Odpowiedź b.</p>\n' +
+            '\n' +
+            '                                                <textarea type="text" class="form-control" name="odpA'+id+'" > </textarea>\n' +
+            '\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                    <div class="col-12 col-sm-6 col-md-3 ">\n' +
+            '                                        <div class="card text-dark bg-light mb-3 row-eq-height w-100">\n' +
+            '                                            <div class="card-header "><h3>C</h3></div>\n' +
+            '                                            <div class="card-body">\n' +
+            '                                                <p class="card-text">Odpowiedź c.</p>\n' +
+            '\n' +
+            '                                                <textarea type="text" class="form-control" name="odpB'+id+'" > </textarea>\n' +
+            '\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                    <div class="col-12 col-sm-6 col-md-3 ">\n' +
+            '                                        <div class="card text-dark bg-light mb-3 row-eq-height w-100">\n' +
+            '                                            <div class="card-header"><h3>D</h3></div>\n' +
+            '                                            <div class="card-body">\n' +
+            '                                                <p class="card-text">Odpowiedź d.</p>\n' +
+            '\n' +
+            '                                                <textarea type="text" class="form-control" name="odpC'+id+'"> </textarea>\n' +
+            '\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                </div>\n' +
+            '                            </div>';
         return false;
     }
 

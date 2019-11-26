@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Grupa;
 use App\Pytanie;
 use App\Quiz;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class QuizController extends Controller
 {
@@ -44,39 +48,74 @@ class QuizController extends Controller
     }
 
     public function confirm(Request $request)
-    {//sposób na przerzucenie zmiennej:
+    {   //sposób na przerzucenie zmiennej:
 
         //sposób na przerzucenie zmiennej:
 
-        $index=1;
-        foreach ($request as $item){
+        $error=false;
 
-            //na razie tylko wyswietlanie
-            if($index==1){
-                echo $request->input('tresc'.$index)." - ";
-                echo $request->input('odpPoprawna'.$index)." - ";
-                echo $request->input('odpA'.$index)." - ";
-                echo $request->input('odpB'.$index)." - ";
-                echo $request->input('odpC'.$index)." </br> ";
+        foreach (Input::except('credit_card') as $req)
+        {
+            if(empty($req))
+            {
+             $error=true;
             }
-
-            $index++;
         }
 
-//        return redirect()->back()->withErrors(['email' => trans('Coś poszło nie tak. Spróbuj ponownie za chwilę.')]);
+        if ($error){
+            return redirect()->back()->with('error', trans('Cos poszlo nie tak! Czy na pewno wszystkie pola są uzupełnione? '));
+        }
+        else{
+
+            $limit = (sizeof($request->all())-4)/5;
+
+            $pytanie= DB::table('pytanie')->where('idQuiz',$request->input('id'));
+            $pytanie->delete();
+
+            for ($index=1;$index<=$limit;$index++){
+
+//            echo $index."<br>";
+////            if($index==1){
+//
+//                echo $request->input('tresc'.$index)." - ";
+//                echo $request->input('odpPoprawna'.$index)." - ";
+//                echo $request->input('odpA'.$index)." - ";
+//                echo $request->input('odpB'.$index)." - ";
+//                echo $request->input('odpC'.$index)." </br> ";
+////            }
+
+                $array = [
+                    'idQuiz' => $request->input('id'),
+                    'tresc' => $request->input('tresc'.$index),
+                    'odpPoprawna' => $request->input('odpPoprawna'.$index),
+                    'odpA' => $request->input('odpA'.$index),
+                    'odpB' => $request->input('odpB'.$index),
+                    'odpC' => $request->input('odpC'.$index),
+                    'created_at' => Carbon::now()
+                ];
+
+                Pytanie::create($array);
+            }
+
+            return redirect('quizy/'.$request->input('id'))->with('success', trans('Quiz został poprawnie załadowany'));
+
+        }
+
     }
 
 
     public function remove($id)
     {
+        $pytanie= DB::table('pytanie')->where('idQuiz',$id);
+        $pytanie->delete();
+
         //wyswitla rzeczy zwiazane z konkretnym tematem o id $id
        if(Quiz::find($id)->delete())
        {
-           return view ('pages.admin.panel')->with('success', trans('Usnięty został Quiz'));
+           return redirect('/panel')->with('success', trans('Usnięty został Quiz'));
 
        }else{
-           return view ('pages.admin.panel')->with('error', 'Coś poszło źle');
-
+           return redirect('/panel')->with('error', trans('Coś poszło źle'));
        }
 
     }
