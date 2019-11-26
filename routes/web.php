@@ -24,9 +24,9 @@
 //Route::get('/users/{id}', function ($id) {
 //    return 'this is user '.$id;
 //});
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 /* ---Niepotrzebne
 Route::get('/about', 'PagesController@about');
@@ -35,14 +35,12 @@ Route::resource('posts', 'PostsController');
 //automatycznie dodane po komendzie artisan make:auth (zmieniamy na DashBoardController z HomeController i usuwamy: "->name('dashboard')"
 Route::get('/dashboard', 'DashBoardController@index');
 */
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 //automatycznie dodane po komendzie artisan make:auth
 Auth::routes();
 
 //Strona główna
 Route::get('/', 'PagesController@index');
+Route::get('/home', 'PagesController@home');
 
 //Profil użytkownika
 Route::get('/profil', 'PagesController@profil');
@@ -57,9 +55,10 @@ Route::get('/panel/dodajstudenta', 'AdminFeaturesController@Student');
 Route::get('/panel/dodajstudentazpliku', 'AdminFeaturesController@StudentFile');
 Route::post('/panel/dodajstudentazpliku/dodaj', 'AdminFeaturesController@addFromFile'); //wstawianie z pliku studentow
 
-
 Route::get('/panel/dodajnauczyciela', 'AdminFeaturesController@Nauczyciel');
+
 Route::get('/panel/edytujkryterium', 'AdminFeaturesController@EdytujKryterium');
+
 Route::get('/panel/uzytkownik/{id}', 'AdminFeaturesController@EditUser');
 Route::get('/panel/uzytkownik/{id}/dodajpunkty', 'AdminFeaturesController@AddPoints');
 //Dodanie punktów użytkownikowi
@@ -79,7 +78,6 @@ Route::get('quizy/{id}/edycja', 'QuizController@edit');
 Route::get('quizy/{id}/edycja/zatwierdz', 'QuizController@confirm');
 
 Route::post('/zatwierdzquiz', 'QuizController@confirm');
-
 
 Route::get('quizy/{id}/usun', 'QuizController@remove');
 
