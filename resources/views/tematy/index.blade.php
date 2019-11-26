@@ -34,7 +34,7 @@
                                             <a class="btn btn-info float-left" href="/tematy/{{$temat->id}}">{{$temat->nazwa}}</a>
 
                                         <span class="text-center px-4  w-auto short-des">
-                                            krótki opis
+                                            {{$temat->opis}}
                                         </span>
 
                                         <a class="btn btn-info float-right" href="/wyklady/{{$temat->id}}">wyklad id</a>

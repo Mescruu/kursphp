@@ -16,6 +16,7 @@ class CreateGrupaTable extends Migration
         Schema::create('Grupa', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nazwa');
+            $table->integer('idNauczyciel');
             $table->timestamps();
         });
     }

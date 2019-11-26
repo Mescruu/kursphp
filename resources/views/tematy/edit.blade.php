@@ -29,21 +29,20 @@
 
 @section('content')
 
-    @if(Auth::user()->typ==Auth::user()->admin)
-
         <section class="topic-section">
             <div class="container"> <!--kontener/pojemnik calej siatki-->
 
-                <form action="index.php" method="post">
+                <form action="/zapisztemat/{{$temat->id}}" method="POST" id="editform">
+                    {{ csrf_field() }}
 
                     <div class="row">
 
                         <div class="col-xl-8 col-md-10 col-sm-12 mx-auto editorFrame p-2 pb-0">
-                            <input type="text" name="name" class="title" placeholder="Tytuł">
+                            <input type="text" name="nazwa" class="title" placeholder="Tytuł" value="{{$temat->nazwa}}">
                         </div>
                         
                         <div class="col-xl-8 col-md-10 col-sm-12 mx-auto editorFrame p-2 pb-0">
-                            <input type="text" name="name" class="title" placeholder="Krótki opis">
+                            <input type="text" name="opis" class="title" placeholder="Krótki opis" value="{{$temat->opis}}">
                         </div>
 
                         <div class="d-flex flex-wrap" id="buttons-left">
@@ -92,14 +91,15 @@
 
 
                         <div id="buttons-right">
-                            <input class="btn-info" type="submit" value="Submit">
+                            <input class="btn-info" type="submit" value="Zapisz">
                             <input class="btn-info" type="button" value="Podgląd" onclick="podglad()"><br>
                         </div>
 
                         <div class="col-xl-8 col-md-10 col-sm-12 mx-auto editorFrame p-2" >
 
 
-                            <textarea name="text" id="text" rows="20"onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"></textarea><br>
+                            <textarea name="text" id="text" rows="20"onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">{{$trescAktualna}}</textarea>
+                            <input type="hidden" name="texthtml" id="texthtml"><br>
 
 
 
@@ -138,8 +138,6 @@
 
         </section>
 
-
-    @endif
 @endsection
 @section('scripts')
     <script type="text/javascript" src="{{ asset('js/expandingTextArea.js')}}"></script>

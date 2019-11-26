@@ -54,7 +54,7 @@
                 <div class="row">
                     <div class="col-12 py-3">
                         <div>
-                            {!! $temat->trescAktualna !!}
+                            {!! $trescAktualna !!}
                         </div>
                     </div>
                 </div>

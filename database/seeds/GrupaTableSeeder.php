@@ -13,7 +13,7 @@ class GrupaTableSeeder extends Seeder
         
         DB::table('grupa')->insert([
             'nazwa' => 'IIST5.2',
-             'idNauczyciel'=> 2
+            'idNauczyciel'=> 2
         ]);
         
         DB::table('grupa')->insert([

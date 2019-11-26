@@ -14,6 +14,16 @@ function refreshImages(){ //Odczyt obrazków po wciśnięciu przycisku włączaj
             }
           });
     }
+    
+$('#editform').submit(function() {
+    var text = document.getElementById("text").value;
+    text = escapeHtml(text);
+    text = text.replace(/\[\-\]/g, '<hr>');
+    text = text.replace(/\[\*\]/g, '&#9679'+'\u00a0');
+    text = bbcodeParser.bbcodeToHtml(text);
+    document.getElementById("texthtml").value = text;
+    return true; // return false to cancel form action
+});
 
 $(document).on('change', ".imageUpload", function() { //Wrzucenie nowego obrazka
     var file_data = $('#image').prop('files')[0];
