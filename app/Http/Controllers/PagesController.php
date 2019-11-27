@@ -33,6 +33,10 @@ class PagesController extends Controller
 //        return view('pages.index')->with('title', $title);   //drugi sposób
 
     }
+    
+    public function home(){
+        return view('pages.home');
+    }
 
 
     public function about(){

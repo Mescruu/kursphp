@@ -165,7 +165,7 @@ class AdminFeaturesController extends Controller {
         $this->validate($request,[
             'grupa' => 'required',
             'Radio' => 'required',   //jest wymagane
-            'file' => 'required|mimes:csv,txt' //jest wymagane, ustawienie że ma to byc plik, max 2mb
+            'file' => 'required|mimes:csv' //jest wymagane, ustawienie że ma to byc plik, max 2mb
         ]);
 
         //pobranie grupy z nazwą

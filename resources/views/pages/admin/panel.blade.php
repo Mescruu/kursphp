@@ -347,6 +347,9 @@
                                                 <td>
                                                    Liczba punktów
                                                 </td>
+                                                <td>
+                                                    
+                                                </td>
                                             </tr>
                                             @foreach ($grupa->studenci as $i)
                                             <tr>
@@ -369,9 +372,12 @@
                                                     {{$i->ocena}}
                                                 </td>
                                                 <td>
-                                                        <a href="/panel/uzytkownik/{{$i->id}}">
-                                                            {{$i->iloscPunktow}}
-                                                        </a>
+                                                    {{$i->iloscPunktow}}
+                                                </td>
+                                                <td>
+                                                    <a href="/panel/uzytkownik/{{$i->id}}" class="btn btn-info add">
+                                                        Edytuj
+                                                    </a>
                                                 </td>
                                             </tr>
                                             @endforeach
