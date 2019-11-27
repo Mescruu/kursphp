@@ -7,6 +7,7 @@ class PytanieTableSeeder extends Seeder
     public function run()
     {
         DB::table('pytanie')->insert([
+            'id' => 1,
             'idQuiz' => 1,
             'tresc' => 'Q1Tresc1',
             'odpPoprawna' => '1odpPoprawna',
@@ -16,6 +17,7 @@ class PytanieTableSeeder extends Seeder
         ]);
         
         DB::table('pytanie')->insert([
+            'id' => 2,
             'idQuiz' => 1,
             'tresc' => 'Q1Tresc2',
             'odpPoprawna' => '1odpPoprawna2',
@@ -25,6 +27,7 @@ class PytanieTableSeeder extends Seeder
         ]);
         
         DB::table('pytanie')->insert([
+            'id' => 3,
             'idQuiz' => 1,
             'tresc' => 'Q1Tresc3',
             'odpPoprawna' => '1odpPoprawna3',
@@ -34,6 +37,7 @@ class PytanieTableSeeder extends Seeder
         ]);
         
         DB::table('pytanie')->insert([
+            'id' => 4,
             'idQuiz' => 1,
             'tresc' => 'Q1Tresc4',
             'odpPoprawna' => '1odpPoprawna4',
@@ -43,6 +47,7 @@ class PytanieTableSeeder extends Seeder
         ]);
         
         DB::table('pytanie')->insert([
+            'id' => 5,
             'idQuiz' => 2,
             'tresc' => 'Q2Tresc1',
             'odpPoprawna' => '2odpPoprawna1',
@@ -52,6 +57,7 @@ class PytanieTableSeeder extends Seeder
         ]);
         
         DB::table('pytanie')->insert([
+            'id' => 6,
             'idQuiz' => 2,
             'tresc' => 'Q2Tresc2',
             'odpPoprawna' => '2odpPoprawna2',
@@ -61,6 +67,7 @@ class PytanieTableSeeder extends Seeder
         ]);
         
         DB::table('pytanie')->insert([
+            'id' => 7,
             'idQuiz' => 2,
             'tresc' => 'Q2Tresc3',
             'odpPoprawna' => '2odpPoprawna3',
@@ -70,6 +77,7 @@ class PytanieTableSeeder extends Seeder
         ]);
         
         DB::table('pytanie')->insert([
+            'id' => 8,
             'idQuiz' => 2,
             'tresc' => 'Q2Tresc4',
             'odpPoprawna' => '2odpPoprawna4',
@@ -79,6 +87,7 @@ class PytanieTableSeeder extends Seeder
         ]);
         
         DB::table('pytanie')->insert([
+            'id' => 9,
             'idQuiz' => 2,
             'tresc' => 'Q2Tresc5',
             'odpPoprawna' => '2odpPoprawna5',
@@ -88,6 +97,7 @@ class PytanieTableSeeder extends Seeder
         ]);
         
         DB::table('pytanie')->insert([
+            'id' => 10,
             'idQuiz' => 3,
             'tresc' => 'Q3Tresc1',
             'odpPoprawna' => '3odpPoprawna1',
@@ -97,6 +107,7 @@ class PytanieTableSeeder extends Seeder
         ]);
         
         DB::table('pytanie')->insert([
+            'id' => 11,
             'idQuiz' => 3,
             'tresc' => 'Q3Tresc2',
             'odpPoprawna' => '3odpPoprawna2',
@@ -106,6 +117,7 @@ class PytanieTableSeeder extends Seeder
         ]);
         
         DB::table('pytanie')->insert([
+            'id' => 12,
             'idQuiz' => 3,
             'tresc' => 'Q3Tresc3',
             'odpPoprawna' => '3odpPoprawna3',
@@ -115,6 +127,7 @@ class PytanieTableSeeder extends Seeder
         ]);
         
         DB::table('pytanie')->insert([
+            'id' => 13,
             'idQuiz' => 4,
             'tresc' => 'Q4Tresc1',
             'odpPoprawna' => '4odpPoprawna1',
@@ -124,6 +137,7 @@ class PytanieTableSeeder extends Seeder
         ]);
         
         DB::table('pytanie')->insert([
+            'id' => 14,
             'idQuiz' => 4,
             'tresc' => 'Q4Tresc2',
             'odpPoprawna' => '4odpPoprawna2',
@@ -133,6 +147,7 @@ class PytanieTableSeeder extends Seeder
         ]);
         
         DB::table('pytanie')->insert([
+            'id' => 15,
             'idQuiz' => 4,
             'tresc' => 'Q4Tresc3',
             'odpPoprawna' => '4odpPoprawna3',
@@ -142,6 +157,7 @@ class PytanieTableSeeder extends Seeder
         ]);
         
         DB::table('pytanie')->insert([
+            'id' => 16,
             'idQuiz' => 4,
             'tresc' => 'Q4Tresc4',
             'odpPoprawna' => '4odpPoprawna4',

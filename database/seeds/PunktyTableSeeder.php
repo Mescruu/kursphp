@@ -7,6 +7,7 @@ class PunktyTableSeeder extends Seeder
     public function run()
     {
         DB::table('punkty')->insert([
+            'id' => 1,
             'idStudent' => 1,
             'idNauczyciel' => 15,
             'ilosc' => 5,
@@ -14,6 +15,7 @@ class PunktyTableSeeder extends Seeder
         ]);
         
         DB::table('punkty')->insert([
+            'id' => 2,
             'idStudent' => 1,
             'idNauczyciel' => 15,
             'ilosc' => -5,
@@ -21,6 +23,7 @@ class PunktyTableSeeder extends Seeder
         ]);
         
         DB::table('punkty')->insert([
+            'id' => 3,
             'idStudent' => 1,
             'idNauczyciel' => 16,
             'ilosc' => 1,
@@ -28,6 +31,7 @@ class PunktyTableSeeder extends Seeder
         ]);
         
         DB::table('punkty')->insert([
+            'id' => 4,
             'idStudent' => 2,
             'idNauczyciel' => 15,
             'ilosc' => 3,
@@ -35,6 +39,7 @@ class PunktyTableSeeder extends Seeder
         ]);
         
         DB::table('punkty')->insert([
+            'id' => 5,
             'idStudent' => 2,
             'idNauczyciel' => 16,
             'ilosc' => 5,
@@ -42,6 +47,7 @@ class PunktyTableSeeder extends Seeder
         ]);
         
         DB::table('punkty')->insert([
+            'id' => 6,
             'idStudent' => 1,
             'idNauczyciel' => 15,
             'ilosc' => 40,

@@ -8,6 +8,7 @@ class TematTableSeeder extends Seeder
     public function run()
     {
         DB::table('temat')->insert([
+            'id' => 1,
             'nazwa' => 'Laboratorium 1',
             'opis' => 'Wstęp do programowania w języku PHP',
         ]);
@@ -17,6 +18,7 @@ class TematTableSeeder extends Seeder
         
         
         DB::table('temat')->insert([
+            'id' => 2,
             'nazwa' => 'Laboratorium 2',
             'opis' => 'Pierwsza strona',
         ]);
@@ -25,6 +27,7 @@ class TematTableSeeder extends Seeder
         Storage::disk('tematy')->put('2/pbb.txt', '');
         
         DB::table('temat')->insert([
+            'id' => 3,
             'nazwa' => 'Laboratorium 3',
             'opis' => 'Pasek nawigacji',
         ]);

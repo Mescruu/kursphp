@@ -7,6 +7,7 @@ class RozwiazanieTableSeeder extends Seeder
     public function run()
     {
         DB::table('rozwiazanie')->insert([
+            'id' => 1,
             'idZadanie' => 1,
             'idUzytkownik' => 1,
             'sciezka' => 'r1',
@@ -14,6 +15,7 @@ class RozwiazanieTableSeeder extends Seeder
         ]);
         
         DB::table('rozwiazanie')->insert([
+            'id' => 2,
             'idZadanie' => 2,
             'idUzytkownik' => 1,
             'sciezka' => 'r2',
@@ -21,6 +23,7 @@ class RozwiazanieTableSeeder extends Seeder
         ]);
         
         DB::table('rozwiazanie')->insert([
+            'id' => 3,
             'idZadanie' => 1,
             'idUzytkownik' => 2,
             'sciezka' => 'r3',
@@ -28,6 +31,7 @@ class RozwiazanieTableSeeder extends Seeder
         ]);
         
         DB::table('rozwiazanie')->insert([
+            'id' => 4,
             'idZadanie' => 2,
             'idUzytkownik' => 2,
             'sciezka' => 'r4',
@@ -35,6 +39,7 @@ class RozwiazanieTableSeeder extends Seeder
         ]);
         
         DB::table('rozwiazanie')->insert([
+            'id' => 5,
             'idZadanie' => 3,
             'idUzytkownik' => 2,
             'sciezka' => 'r4',
