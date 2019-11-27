@@ -96,7 +96,7 @@
                                         <div class="card text-dark bg-light mb-3 row-eq-height w-100">
                                             <div class="card-header"><h3>A</h3></div>
                                             <div class="card-body">
-                                                <p class="card-text">Odpowiedź a.</p>
+                                                <p class="card-text">Odpowiedź poprawna.</p>
 
                                                 <textarea type="text" class="form-control" name="odpPoprawna{{$pytanie->nr}}">{{$pytanie->odpPoprawna}}</textarea>
 
@@ -108,7 +108,7 @@
                                         <div class="card text-dark bg-light mb-3 row-eq-height w-100">
                                             <div class="card-header"><h3>B</h3></div>
                                             <div class="card-body">
-                                                <p class="card-text">Odpowiedź b.</p>
+                                                <p class="card-text">Odpowiedź a.</p>
 
                                                 <textarea type="text" class="form-control" name="odpA{{$pytanie->nr}}" >{{$pytanie->odpA}}</textarea>
 
@@ -119,7 +119,7 @@
                                         <div class="card text-dark bg-light mb-3 row-eq-height w-100">
                                             <div class="card-header "><h3>C</h3></div>
                                             <div class="card-body">
-                                                <p class="card-text">Odpowiedź c.</p>
+                                                <p class="card-text">Odpowiedź b.</p>
 
                                                 <textarea type="text" class="form-control" name="odpB{{$pytanie->nr}}" >{{$pytanie->odpB}}</textarea>
 
@@ -130,7 +130,7 @@
                                         <div class="card text-dark bg-light mb-3 row-eq-height w-100">
                                             <div class="card-header"><h3>D</h3></div>
                                             <div class="card-body">
-                                                <p class="card-text">Odpowiedź d.</p>
+                                                <p class="card-text">Odpowiedź c.</p>
 
                                                 <textarea type="text" class="form-control" name="odpC{{$pytanie->nr}}">{{$pytanie->odpC}}</textarea>
 
