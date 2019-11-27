@@ -118,3 +118,15 @@ padding-bottom: 50px;
     text-align: center;
     line-height: 50px;
 }
+
+.quiz-section .bg-success{
+    background-color: rgb(132,183,142)!important;
+}
+.quiz-section .bg-danger{
+    background-color: rgb(244,123,130)!important;
+
+}
+.quiz-section .bg-warning{
+    background-color: rgb(230,228,112)!important;
+
+}
