@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Grupa;
+use App\Powiadomienie;
 use App\Pytanie;
 use App\Quiz;
 use Carbon\Carbon;
@@ -37,6 +38,20 @@ class QuizController extends Controller
         return view ('quizy.show', ['pytania'=>$pytania,'ilosc'=>$iloscPytan, 'id'=>$id,'typ' => $quiz->typ]);
 
     }
+
+    public function checkAnswers(Request $request,$id)
+    {
+
+        $pytania = Pytanie::get()->where('idQuiz', $id);
+
+
+        return redirect()->back()->with('error', trans('Cos poszlo nie tak! Czy na pewno wszystkie pola są uzupełnione? '));
+
+
+//        return view ('quizy.odpowiedzi', ['pytania'=>$pytania,'ilosc'=>$iloscPytan, 'id'=>$id,'typ' => $quiz->typ]);
+    }
+
+
 
     public function edit($id)
     {

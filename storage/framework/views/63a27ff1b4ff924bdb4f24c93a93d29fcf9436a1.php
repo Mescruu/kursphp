@@ -42,13 +42,12 @@
                                     <div class="dropdown-divider"></div>
 
 
-                                    <?php if(session()->has('listaTematow')): ?>
-                                        <?php if(count( session('listaTematow') )>=1): ?>
-                                            <?php $__currentLoopData = session('listaTematow'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $temat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if(count($listaTematow)>=1): ?>
+                                            <?php $__currentLoopData = $listaTematow; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $temat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <a class="dropdown-item" href="/tematy/<?php echo e($temat->id); ?>"><?php echo e($temat->nazwa); ?></a>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         <?php endif; ?>
-                                    <?php endif; ?>
+                                    
 
                                 </div>
                             </li>

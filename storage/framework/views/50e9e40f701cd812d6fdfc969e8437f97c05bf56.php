@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title><?php echo e(config('app.name', 'Kurs PHP')); ?></title>
+    <title>Kurs PHP</title>
 
 
     <!-- Bootstrap css -->

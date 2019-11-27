@@ -71,24 +71,37 @@ padding-bottom: 50px;
     left: 0;
     height: 50px;
     width: 100%;
-    background-color: whitesmoke;
     border: solid 2px rgba(129,133,189,1);
     margin-left: 0px;
+    border-radius: 0px;
+
+    line-height: 50px;
+    text-align: center;
+
+    background-color:rgba(129,133,189,1);
+    color: whitesmoke;
+    transition: 0.5s;
+    font-size: 1.25rem;
+    font-family: 'Roboto', sans-serif;
 }
+
 
 /* On mouse-over, add a grey background color */
 .quiz-section .container:hover input ~ .checkmark {
-    background-color: whitesmoke;
+    background-color:rgba(139,143,199,1);
+    color: whitesmoke;
+    transition: 0.5s;
 }
 
 /* When the checkbox is checked, add a blue background */
 .quiz-section .container input:checked ~ .checkmark {
-    background-color:whitesmoke;
+    background-color: rgb(38,43,82);
+    pointer-events: none;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .quiz-section .checkmark:after {
-    content: 'WYBIERZ';
+    content: ' ';
     position: absolute;
 }
 
@@ -101,8 +114,7 @@ padding-bottom: 50px;
 .quiz-section .container .checkmark:after {
     width: 100%;
     height:  100%;
-    content: 'Wybierz';
+    content: ' ';
     text-align: center;
     line-height: 50px;
-    color: rgba(129,133,189,1);
 }

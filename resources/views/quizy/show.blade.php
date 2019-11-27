@@ -3,7 +3,6 @@
 @section('assets')
     <link href="{{ asset('css/underNav.css') }}" rel="stylesheet">
     <link href="{{ asset('css/quiz.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/checkbox.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -34,8 +33,39 @@
 
         <div class="container">
 
+            <div id="hello">
 
-                <div class="questions">
+                <div class="row ">
+                    <div class="col-12">
+                        <div class="card text-dark bg-light mb-3 row-eq-height w-100">
+                            <div class="card-header"><h3>Powodzenia!</h3></div>
+                            <div class="card-body">
+                                <p class="text-center">informacje o quizie</p>
+                                <h4 class="text-center">Jesteś Gotów?!</h4>
+                                    <hr>
+                                <a href="
+                                 @if(Auth::user()->typ==\App\User::$admin)
+                                      /panel
+                                @endif
+                                @if(Auth::user()->typ==\App\User::$user)
+                                    /profil
+                                @endif
+
+                                " class="btn btn-info col-3 offset-3">Nie</a>
+                                <button class="btn btn-info col-3" onClick="start()">Tak!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+    <form class="form-signin justify-content-center " method="POST" action="/quizy/sprawdz/{{$id}}">
+        {{ csrf_field() }}
+
+
+
+            <div class="questions">
                     @foreach($pytania as $pytanie)
                         <div class="question" style="display: none" id="pytanie{{$pytanie->nr}}">
 
@@ -59,9 +89,10 @@
 
 
                                             <label class="container">
-                                                <input type="checkbox" name="" value="1" ><span class="checkmark"
-                                                                                                onClick="hide('pytanie{{$pytanie->nr}}')"
-                                                ></span>
+                                                <input type="checkbox" name="" value="1" >
+                                                <div class="checkmark" onClick="hide('pytanie{{$pytanie->nr}}')">
+                                                    Wybierz
+                                                </div>
                                             </label>
 
                                         </div>
@@ -70,14 +101,15 @@
                                 <div class="col-12 col-sm-6 col-md-3 ">
                                     <div class="card text-dark bg-light mb-3 row-eq-height w-100">
                                         <div class="card-header"><h3>B</h3></div>
-                                        <div class="card-body">
+                                        <div class="card-body answer">
                                             <p class="card-text">{{$pytanie->odpA}}</p>
 
-                                            <button class="btn mx-auto  btn-lg btn-info w-100 mb-3" type="submit"
-                                                    onClick="hide('pytanie{{$pytanie->nr}}')"
-                                            >
-                                                Wybierz
-                                            </button>
+                                            <label class="container">
+                                                <input type="checkbox" name="" value="1" >
+                                                <div class="checkmark" onClick="hide('pytanie{{$pytanie->nr}}')">
+                                                    Wybierz
+                                                </div>
+                                            </label>
 
                                         </div>
                                     </div>
@@ -85,14 +117,15 @@
                                 <div class="col-12 col-sm-6 col-md-3 ">
                                     <div class="card text-dark bg-light mb-3 row-eq-height w-100">
                                         <div class="card-header "><h3>C</h3></div>
-                                        <div class="card-body">
+                                        <div class="card-body answer">
                                             <p class="card-text">{{$pytanie->odpB}}</p>
 
-                                            <button class="btn mx-auto  btn-lg btn-info w-100 mb-3" type="submit"
-                                                    onClick="hide('pytanie{{$pytanie->nr}}')"
-                                            >
-                                                Wybierz
-                                            </button>
+                                            <label class="container">
+                                                <input type="checkbox" name="" value="1" >
+                                                <div class="checkmark" onClick="hide('pytanie{{$pytanie->nr}}')">
+                                                    Wybierz
+                                                </div>
+                                            </label>
 
                                         </div>
                                     </div>
@@ -100,14 +133,15 @@
                                 <div class="col-12 col-sm-6 col-md-3 ">
                                     <div class="card text-dark bg-light mb-3 row-eq-height w-100">
                                         <div class="card-header"><h3>D</h3></div>
-                                        <div class="card-body">
+                                        <div class="card-body answer">
                                             <p class="card-text">{{$pytanie->odpC}}</p>
 
-                                                <button class="btn mx-auto  btn-lg btn-info w-100 mb-3" type="submit"
-                                                        onClick="hide('pytanie{{$pytanie->nr}}')"
-                                                >
+                                            <label class="container">
+                                                <input type="checkbox" name="" value="1" >
+                                                <div class="checkmark" onClick="hide('pytanie{{$pytanie->nr}}')">
                                                     Wybierz
-                                                </button>
+                                                </div>
+                                            </label>
 
                                         </div>
                                     </div>
@@ -120,14 +154,31 @@
                 </div>
 
 
+            <div id="results" style="display: none">
+
+                <div class="row w-25 mx-auto">
+                    <div class="col-12">
+                        <div class="card text-dark bg-light mb-3 row-eq-height w-100">
+                            <div class="card-header"><h3 class="text-center">Wyniki!</h3></div>
+                            <div class="card-body">
+
+                                <button type="submit" class="btn btn-info col-12"  id="checkOdp">Sprawdź Odpowiedzi</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </form>
+
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
 
-        $( document ).ready(function() {
-            show("pytanie1");
-        });
+
+    let last=0
 
     function hide(obj) {
         $("#"+obj).hide(500);
@@ -140,24 +191,30 @@
             show("pytanie"+newValue);
         }
         else{
-            // showResults();
+
+                        show('results');
+                        last=newValue;
         }
 
+    }
+    function start(){
+        $("#hello").hide(500);
+        show('pytanie1');
     }
 
     function show(obj){
         $("#"+obj).show(500);
     }
+    function showall() {
+        for(let i=1;i<=last;i++){
+            show('pytanie'+i);
+        }
 
-    $(document).ready(function(){
+        hide('checkOdp');
+        hide('back');
+        show('bigBack')
+    }
 
-        $(".btn1").click(function(){
-            $("p").hide(1000);
-        });
-        $(".btn2").click(function(){
-            $("p").show(1000);
-        });
-    });
 </script>
 
 @endsection

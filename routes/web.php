@@ -77,6 +77,9 @@ Route::get('quizy/{id}', 'QuizController@show');
 Route::get('quizy/{id}/edycja', 'QuizController@edit');
 Route::get('quizy/{id}/edycja/zatwierdz', 'QuizController@confirm');
 
+Route::post('/quizy/sprawdz/{id}', 'QuizController@checkAnswers');
+Route::post('/quizy/wyniki', 'QuizController@showAnswers');
+
 Route::post('/zatwierdzquiz', 'QuizController@confirm');
 
 Route::get('quizy/{id}/usun', 'QuizController@remove');
