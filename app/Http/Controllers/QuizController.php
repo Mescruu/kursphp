@@ -23,9 +23,19 @@ class QuizController extends Controller
 
     public function show($id)
     {
-        //wyswitla rzeczy zwiazane z konkretnym tematem o id $id
         $quiz = Quiz::find($id);
-        return view ('quizy.show')->with('quiz', $quiz);
+        $pytania = Pytanie::get()->where('idQuiz', $id);
+
+        $index=0;
+        foreach ($pytania as $pytanie){
+            $index++;
+            $pytanie->nr = $index;
+        }
+
+        $iloscPytan=count($pytania);
+
+        return view ('quizy.show', ['pytania'=>$pytania,'ilosc'=>$iloscPytan, 'id'=>$id,'typ' => $quiz->typ]);
+
     }
 
     public function edit($id)

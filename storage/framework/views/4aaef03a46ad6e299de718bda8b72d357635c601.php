@@ -10,8 +10,7 @@
 
     <div class="col-md-4 col-sm-5 col-xs-3 float-left">
         <h2 >
-            Temat <?php echo e($temat->id); ?>
-
+            Temat
         </h2>
     </div>
     <div class="col-md-5 col-sm-6 col-xs-2">
@@ -44,16 +43,16 @@
                 <div class="row">
 
                     <div class="col-12">
-                        <h1>Temat <?php echo e($temat->id); ?></h1>
+                        <h1><?php echo e($temat->nazwa); ?></h1>
                         <hr class="w-50">
-                        <small class="text-center mx-auto">Written on <?php echo e($temat->created_at); ?></small>
+                        <small class="text-center mx-auto">Ostatnio edytowany <?php echo e($temat->updated_at); ?></small>
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="col-12 py-3">
                         <div>
-                            <?php echo $temat->trescAktualna; ?>
+                            <?php echo $trescAktualna; ?>
 
                         </div>
                     </div>
