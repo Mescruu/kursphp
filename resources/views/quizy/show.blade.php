@@ -63,9 +63,10 @@
     <form class="form-signin justify-content-center " method="POST" action="/quizy/sprawdz/{{$id}}">
         {{ csrf_field() }}
 
+        <input type="hidden" value="{{$seed}}" name="seed">
 
 
-            <div class="questions">
+        <div class="questions">
                     @foreach($pytania as $pytanie)
                         <div class="question" style="display: none" id="pytanie{{$pytanie->nr}}">
 
@@ -84,12 +85,12 @@
                                     <div class="card text-dark bg-light mb-3 row-eq-height w-100">
                                         <div class="card-header"><h3>A</h3></div>
                                         <div class="card-body answer">
-                                            <p class="card-text">{{$pytanie->odpPoprawna}}</p>
+                                            <p class="card-text">{{$pytanie->a}}</p>
 
 
 
                                             <label class="container">
-                                                <input type="checkbox" name="" value="1" >
+                                                <input type="radio" name="odpowiedz{{$pytanie->nr}}" value="{{$pytanie->a}}" >
                                                 <div class="checkmark" onClick="hide('pytanie{{$pytanie->nr}}')">
                                                     Wybierz
                                                 </div>
@@ -102,10 +103,10 @@
                                     <div class="card text-dark bg-light mb-3 row-eq-height w-100">
                                         <div class="card-header"><h3>B</h3></div>
                                         <div class="card-body answer">
-                                            <p class="card-text">{{$pytanie->odpA}}</p>
+                                            <p class="card-text">{{$pytanie->b}}</p>
 
                                             <label class="container">
-                                                <input type="checkbox" name="" value="1" >
+                                                <input type="radio" name="odpowiedz{{$pytanie->nr}}" value="{{$pytanie->b}}" >
                                                 <div class="checkmark" onClick="hide('pytanie{{$pytanie->nr}}')">
                                                     Wybierz
                                                 </div>
@@ -118,10 +119,10 @@
                                     <div class="card text-dark bg-light mb-3 row-eq-height w-100">
                                         <div class="card-header "><h3>C</h3></div>
                                         <div class="card-body answer">
-                                            <p class="card-text">{{$pytanie->odpB}}</p>
+                                            <p class="card-text">{{$pytanie->c}}</p>
 
                                             <label class="container">
-                                                <input type="checkbox" name="" value="1" >
+                                                <input type="radio" name="odpowiedz{{$pytanie->nr}}" value="{{$pytanie->c}}" >
                                                 <div class="checkmark" onClick="hide('pytanie{{$pytanie->nr}}')">
                                                     Wybierz
                                                 </div>
@@ -134,10 +135,10 @@
                                     <div class="card text-dark bg-light mb-3 row-eq-height w-100">
                                         <div class="card-header"><h3>D</h3></div>
                                         <div class="card-body answer">
-                                            <p class="card-text">{{$pytanie->odpC}}</p>
+                                            <p class="card-text">{{$pytanie->d}}</p>
 
                                             <label class="container">
-                                                <input type="checkbox" name="" value="1" >
+                                                <input type="radio" name="odpowiedz{{$pytanie->nr}}" value="{{$pytanie->d}}" >
                                                 <div class="checkmark" onClick="hide('pytanie{{$pytanie->nr}}')">
                                                     Wybierz
                                                 </div>
@@ -178,47 +179,13 @@
     <script>
 
 
-    let last=0
 
-    function hide(obj) {
-        $("#"+obj).hide(500);
-
-        var newValue = parseInt(obj.replace('pytanie', ''));
-        newValue++;
-
-
-        if ($('#pytanie'+newValue).length > 0) {
-            show("pytanie"+newValue);
-        }
-        else{
-
-                        show('results');
-                        last=newValue;
-        }
-
-    }
-    function start(){
-        $("#hello").hide(500);
-        show('pytanie1');
-    }
-
-    function show(obj){
-        $("#"+obj).show(500);
-    }
-    function showall() {
-        for(let i=1;i<=last;i++){
-            show('pytanie'+i);
-        }
-
-        hide('checkOdp');
-        hide('back');
-        show('bigBack')
-    }
 
 </script>
 
 @endsection
 @section('scripts')
+    <script type="text/javascript" src="{{ asset('js/quiz.js')}}"></script>
 
 @endsection
 

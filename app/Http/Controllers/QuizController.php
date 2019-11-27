@@ -28,28 +28,110 @@ class QuizController extends Controller
         $pytania = Pytanie::get()->where('idQuiz', $id);
 
         $index=0;
+
+        $seed = rand(100,10000);
+
         foreach ($pytania as $pytanie){
             $index++;
             $pytanie->nr = $index;
+
+            $array=[
+                'odpPoprawna'=>$pytanie->odpPoprawna,
+                'odpA'=>$pytanie->odpA,
+                'odpB'=>$pytanie->odpB,
+                'odpC'=>$pytanie->odpC
+            ];
+
+
+
+
+            $table = array_values($array);
+
+           $this->seedShuffle($table,$seed+$index);
+
+
+            $pytanie->a=$table[0];
+            $pytanie->b=$table[1];
+            $pytanie->c=$table[2];
+            $pytanie->d=$table[3];
         }
+
 
         $iloscPytan=count($pytania);
 
-        return view ('quizy.show', ['pytania'=>$pytania,'ilosc'=>$iloscPytan, 'id'=>$id,'typ' => $quiz->typ]);
+        return view ('quizy.show', ['pytania'=>$pytania,'ilosc'=>$iloscPytan, 'id'=>$id,'typ' => $quiz->typ, 'seed'=>$seed]);
 
     }
+
 
     public function checkAnswers(Request $request,$id)
     {
 
+
         $pytania = Pytanie::get()->where('idQuiz', $id);
 
+        $iloscPytan = count($pytania);
 
-        return redirect()->back()->with('error', trans('Cos poszlo nie tak! Czy na pewno wszystkie pola są uzupełnione? '));
+        $index=0;
+
+        $allPoints=0;
 
 
-//        return view ('quizy.odpowiedzi', ['pytania'=>$pytania,'ilosc'=>$iloscPytan, 'id'=>$id,'typ' => $quiz->typ]);
+        $seed=(int)$request->input('seed')-count($pytania)+4;
+
+
+        foreach ($pytania as $pytanie){
+            $index++;
+            $pytanie->nr = $index;
+
+
+            if ($request->input('odpowiedz'.$index)!=nullOrEmptyString()){
+
+                $pytanie->twojaOdp = $request->input('odpowiedz'.$index);
+
+                if($pytanie->odpPoprawna==($request->input('odpowiedz'.$index))){
+
+                    $allPoints++;
+
+
+                }
+            }
+
+            //szuflowanie pytań
+
+            $array=[
+                'odpPoprawna'=>$pytanie->odpPoprawna,
+                'odpA'=>$pytanie->odpA,
+                'odpB'=>$pytanie->odpB,
+                'odpC'=>$pytanie->odpC
+            ];
+
+
+            $table = array_values($array);
+
+            $this->seedShuffle($table,$seed+$index);
+
+            $pytanie->a=$table[0];
+            $pytanie->b=$table[1];
+            $pytanie->c=$table[2];
+            $pytanie->d=$table[3];
+
+        }
+
+        return view ('quizy.odpowiedzi', ['pytania'=>$pytania,'wszystkiePunkty'=>$iloscPytan, 'id'=>$id,'zdobytePunkty' => $allPoints]);
     }
+
+
+    function seedShuffle(array &$array, $seed) {
+
+        mt_srand($seed);
+        $size = count($array);
+        for ($i = 0; $i < $size; ++$i) {
+            list($chunk) = array_splice($array, mt_rand(0, $size-1), 1);
+            array_push($array, $chunk);
+        }
+    }
+
 
 
 
@@ -73,9 +155,8 @@ class QuizController extends Controller
     }
 
     public function confirm(Request $request)
-    {   //sposób na przerzucenie zmiennej:
+    {
 
-        //sposób na przerzucenie zmiennej:
 
         $error=false;
 
@@ -98,16 +179,6 @@ class QuizController extends Controller
             $pytanie->delete();
 
             for ($index=1;$index<=$limit;$index++){
-
-//            echo $index."<br>";
-////            if($index==1){
-//
-//                echo $request->input('tresc'.$index)." - ";
-//                echo $request->input('odpPoprawna'.$index)." - ";
-//                echo $request->input('odpA'.$index)." - ";
-//                echo $request->input('odpB'.$index)." - ";
-//                echo $request->input('odpC'.$index)." </br> ";
-////            }
 
                 $array = [
                     'idQuiz' => $request->input('id'),
