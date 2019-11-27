@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class EditCriterionController extends Controller
 {
@@ -15,12 +16,10 @@ class EditCriterionController extends Controller
             'piec' => 'required|max:3'
         ]);
         
-        $kryterium = DB::table('kryterium')->first();
-        if(!is_null($kryterium)){
-            DB::table('kryterium')->update(['trzy' => request('trzy'), 'cztery' => request('cztery'), 'piec' => request('piec')]);
-            return redirect('/panel')->with('success', 'Zmieniłeś kryterium oceniania.');
-        }else{
-            return redirect('/panel')->withErrors('error', 'Coś poszło nie tak.');
-        }
+        Storage::disk('kryterium')->put('3.txt', request('trzy'));
+        Storage::disk('kryterium')->put('4.txt', request('cztery'));
+        Storage::disk('kryterium')->put('5.txt', request('piec'));
+        
+        return redirect('/panel')->with('success', 'Zmieniłeś kryterium oceniania.');
     }
 }

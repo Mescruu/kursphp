@@ -565,7 +565,7 @@
                                         3
                                     </td>
                                     <td>
-                                        {{$kryterium->trzy}}
+                                        {{$kryterium['trzy']}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -573,7 +573,7 @@
                                         4
                                     </td>
                                     <td>
-                                        {{$kryterium->cztery}}
+                                        {{$kryterium['cztery']}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -581,7 +581,7 @@
                                         5
                                     </td>
                                     <td>
-                                        {{$kryterium->piec}}
+                                        {{$kryterium['piec']}}
                                     </td>
                                 </tr>
                             </table>
@@ -599,14 +599,17 @@
 
                         <ul class="nav nav-pills justify-content-center mb-3" id="pills-tab" role="tablist">
                             <li class="nav-item w-25">
-                                <a class="nav-link  w-100 text-center active" id="pills-home-tab" data-toggle="pill" href="#pills-quizy" role="tab" aria-controls="pills-home" aria-selected="true">Quizy</a>
+                                <a class="nav-link  w-100 text-center active" id="pills-contact-tab" data-toggle="pill" href="#pills-tematy" role="tab" aria-controls="pills-contact" aria-selected="false">Tematy</a>
                             </li>
+                            
+                            <li class="nav-item w-25">
+                                <a class="nav-link  w-100 text-center" id="pills-home-tab" data-toggle="pill" href="#pills-quizy" role="tab" aria-controls="pills-home" aria-selected="true">Quizy</a>
+                            </li>
+                            
                             <li class="nav-item w-25">
                                 <a class="nav-link w-100 text-center" id="pills-profile-tab" data-toggle="pill" href="#pills-zadania" role="tab" aria-controls="pills-profile" aria-selected="false">Zadania</a>
                             </li>
-                            <li class="nav-item w-25">
-                                <a class="nav-link  w-100 text-center" id="pills-contact-tab" data-toggle="pill" href="#pills-tematy" role="tab" aria-controls="pills-contact" aria-selected="false">Tematy</a>
-                            </li>
+                            
                             <li class="nav-item w-25">
                                 <a class="nav-link  w-100 text-center" id="pills-contact-tab" data-toggle="pill" href="#pills-wyklady" role="tab" aria-controls="pills-contact" aria-selected="false">Wykłady</a>
                             </li>
@@ -617,60 +620,9 @@
                         
 
                         <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="pills-quizy" role="tabpanel" aria-labelledby="pills-quizy-tab">
-                                <div class="card">
-                                    <div class="card-header" id="headingOne">
-                                        <h5 class=" h-100 my-auto">
-                                            Dodaj Quiz
-                                            <a href="/panel/dodajstudenta" class="btn btn-info add mr-2"> + Quiz</a>
-                                        </h5>
-                                    </div>
-                                </div>
-
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col" class="text-center">#</th>
-                                        <th scope="col" class="text-center">typ</th>
-                                        <th scope="col" class="text-center">ilosc pytań</th>
-                                        <th scope="col" class="text-center">link</th>
-                                        <th scope="col" class="text-center">edycja</th>
-                                        <th scope="col" class="text-center">usun</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($quizy as $quiz)
-                                        <tr>
-                                            <th scope="row" class="text-center">{{$loop->iteration}}</th>
-                                            <td class="text-center">
-                                                {{$quiz->typ}}
-                                            </td>
-                                            <td class="text-center">
-                                                {{$quiz->iloscPytan}}
-
-                                            </td>
-                                            <td>
-                                                <a href="quizy/{{$quiz->id}}" class="btn btn-info w-100 mr-2"> przejdź</a>
-                                            </td>
-                                            <td>
-                                                <a href="quizy/{{$quiz->id}}/edycja" class="btn btn-info w-100 mr-2"> edytuj</a>
-                                            </td>
-                                            <td>
-                                                <a href="quizy/{{$quiz->id}}/usun" class="btn btn-info w-100 mr-2"> usun</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-
-                                    </tbody>
-                                </table>
-
-
-
-                            </div>
-                            <div class="tab-pane fade" id="pills-zadania" role="tabpanel" aria-labelledby="pills-zadania-tab">
-                                b
-                            </div>
-                            <div class="tab-pane fade" id="pills-tematy" role="tabpanel" aria-labelledby="pills-tematy-tab">
+                            
+                            <!-- Treść zakładki TEMATY -->
+                            <div class="tab-pane fade show active" id="pills-tematy" role="tabpanel" aria-labelledby="pills-tematy-tab">
                                 <div class="card">
                                     <div class="card-header" id="headingOne">
                                         <h5 class=" h-100 my-auto">
@@ -725,13 +677,70 @@
                                             </tr>
                                         </table>
                                             <button class="btn btn-danger add" onclick="removeSubject({{$i->id}},'{{$i->nazwa}}');">Usuń</button>
-                                            <a href="/tematy/{{$i->id}}" class="btn btn-info add mr-2">Zobacz</a>
+                                            <button class="btn btn-warning add mr-2" onclick="restoreSubject({{$i->id}},'{{$i->nazwa}}');">Przywróć</button>
                                             <a href="/tematy/{{$i->id}}/edycja" class="btn btn-info add mr-2">Edytuj</a>
                                             <a href="/tematy/{{$i->id}}/grupy" class="btn btn-info add mr-2">Przypisz Grupy</a>
+                                            <a href="/tematy/{{$i->id}}" class="btn btn-info add mr-2">Zobacz</a>
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
+                            
+                            <!-- Treść zakładki QUIZY -->
+                            <div class="tab-pane fade" id="pills-quizy" role="tabpanel" aria-labelledby="pills-quizy-tab">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h5 class=" h-100 my-auto">
+                                            Dodaj Quiz
+                                            <a href="/panel/dodajstudenta" class="btn btn-info add mr-2"> + Quiz</a>
+                                        </h5>
+                                    </div>
+                                </div>
+
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">#</th>
+                                        <th scope="col" class="text-center">typ</th>
+                                        <th scope="col" class="text-center">ilosc pytań</th>
+                                        <th scope="col" class="text-center">link</th>
+                                        <th scope="col" class="text-center">edycja</th>
+                                        <th scope="col" class="text-center">usun</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($quizy as $quiz)
+                                        <tr>
+                                            <th scope="row" class="text-center">{{$loop->iteration}}</th>
+                                            <td class="text-center">
+                                                {{$quiz->typ}}
+                                            </td>
+                                            <td class="text-center">
+                                                {{$quiz->iloscPytan}}
+
+                                            </td>
+                                            <td>
+                                                <a href="quizy/{{$quiz->id}}" class="btn btn-info w-100 mr-2"> przejdź</a>
+                                            </td>
+                                            <td>
+                                                <a href="quizy/{{$quiz->id}}/edycja" class="btn btn-info w-100 mr-2"> edytuj</a>
+                                            </td>
+                                            <td>
+                                                <a href="quizy/{{$quiz->id}}/usun" class="btn btn-info w-100 mr-2"> usun</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <!-- Treść zakładki ZADANIA -->
+                            <div class="tab-pane fade" id="pills-zadania" role="tabpanel" aria-labelledby="pills-zadania-tab">
+                                b
+                            </div>
+                            
+                            <!-- Treść zakładki WYKŁADY-->
                             <div class="tab-pane fade" id="pills-wyklady" role="tabpanel" aria-labelledby="pills-wyklady-tab">
                                 dd
                             </div>
@@ -752,6 +761,6 @@
 @section('scripts')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!-- jQuery CDN -->
 <script type='text/javascript' src="{{ asset('js/removeNotification.js')}}"></script>
-<script type='text/javascript' src="{{ asset('js/removeSubject.js')}}"></script>
+<script type='text/javascript' src="{{ asset('js/modifySubject.js')}}"></script>
 
 @endsection

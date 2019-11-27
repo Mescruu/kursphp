@@ -94,6 +94,7 @@ Route::get('/tematy/{id}/grupy', 'TematyController@groups');
 Route::post('/zapisztemat/{id}', 'TematyController@update');
 Route::post('/przypiszgrupy/{id}', 'TematyController@updateGroups');
 Route::get('/usuntemat/{id}', 'TematyController@delete');
+Route::get('/przywroctemat/{id}', 'TematyController@restore');
 
 //Resetowanie hasła
 Route::post('reset_password_without_token', 'NewPasswordController@validatePasswordRequest');

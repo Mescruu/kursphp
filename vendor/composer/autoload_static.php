@@ -406,7 +406,7 @@ class ComposerStaticInitfc07a1b53b534d3334ec5cb3f197c51f
         'Hamcrest\\Type\\IsString' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Type/IsString.php',
         'Hamcrest\\Util' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
         'Hamcrest\\Xml\\HasXPath' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
-        'KryteriumTableSeeder' => __DIR__ . '/../..' . '/database/seeds/KryteriumTableSeeder.php',
+        'KryteriumFileSeeder' => __DIR__ . '/../..' . '/database/seeds/KryteriumFileSeeder.php',
         'ListaGrupTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ListaGrupTableSeeder.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/Assert.php',
         'PHPUnit\\Framework\\AssertionFailedError' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/AssertionFailedError.php',

@@ -41,7 +41,7 @@
                             <label for="trzy" class="col-md-4 control-label">Liczba punktów na ocenę 3.0</label>
 
                             <div class="col-12">
-                                <input id="trzy" type="text" pattern="[0-9]{1,3}" title="liczba 0-999" class="form-control" name="trzy" value="{{ $kryterium->trzy }}" required autofocus>
+                                <input id="trzy" type="text" pattern="[0-9]{1,3}" title="liczba 0-999" class="form-control" name="trzy" value="{{ $kryterium['trzy'] }}" required autofocus>
 
                                 @if ($errors->has('trzy'))
                                 <span class="help-block">
@@ -55,7 +55,7 @@
                             <label for="cztery" class="col-md-4 control-label">Liczba punktów na ocenę 4.0</label>
 
                             <div class="col-12">
-                                <input id="cztery" type="text" pattern="[0-9]{1,3}" title="liczba 0-999" class="form-control" name="cztery" value="{{ $kryterium->cztery }}" required autofocus>
+                                <input id="cztery" type="text" pattern="[0-9]{1,3}" title="liczba 0-999" class="form-control" name="cztery" value="{{ $kryterium['cztery'] }}" required autofocus>
 
                                 @if ($errors->has('cztery'))
                                 <span class="help-block">
@@ -69,7 +69,7 @@
                             <label for="piec" class="col-md-4 control-label">Liczba punktów na ocenę 5.0</label>
 
                             <div class="col-12">
-                                <input id="piec" type="text" pattern="[0-9]{1,3}" title="liczba 0-999" class="form-control" name="piec" value="{{ $kryterium->piec }}" required autofocus>
+                                <input id="piec" type="text" pattern="[0-9]{1,3}" title="liczba 0-999" class="form-control" name="piec" value="{{ $kryterium['piec'] }}" required autofocus>
 
                                 @if ($errors->has('piec'))
                                 <span class="help-block">

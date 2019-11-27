@@ -30,11 +30,13 @@ class TematyController extends Controller
     public function create(){
         if(Auth::user()->typ==\App\User::$admin){
             $temat = Temat::create(['nazwa' => 'Nowy Temat']);
-            $trescAktualnaPath = $temat->id.'/ahtml.txt';
+            $trescAktualnaHTMLPath = $temat->id.'/ahtml.txt';
             $trescAktualnaBBCodePath = $temat->id.'/abb.txt';
+            $trescPoprzedniaHTMLPath = $temat->id.'/phtml.txt';
             $trescPoprzedniaBBCodePath = $temat->id.'/pbb.txt';
-            Storage::disk('tematy')->put($trescAktualnaPath, '');
+            Storage::disk('tematy')->put($trescAktualnaHTMLPath, '');
             Storage::disk('tematy')->put($trescAktualnaBBCodePath, '');
+            Storage::disk('tematy')->put($trescPoprzedniaHTMLPath, '');
             Storage::disk('tematy')->put($trescPoprzedniaBBCodePath, '');
             return redirect('/tematy/'.$temat->id.'/edycja');
         }else{
@@ -95,8 +97,10 @@ class TematyController extends Controller
             ];
             DB::table('temat')->where('id', $id)->update($array);
         
-            $trescAktualna = Storage::disk('tematy')->get($id.'/abb.txt');
-            Storage::disk('tematy')->put($id.'/pbb.txt', $trescAktualna);
+            $trescAktualnaBBCode = Storage::disk('tematy')->get($id.'/abb.txt');
+            $trescAktualnaHTML = Storage::disk('tematy')->get($id.'/ahtml.txt');
+            Storage::disk('tematy')->put($id.'/pbb.txt', $trescAktualnaBBCode);
+            Storage::disk('tematy')->put($id.'/phtml.txt', $trescAktualnaHTML);
             Storage::disk('tematy')->put($id.'/abb.txt', request('text'));
             Storage::disk('tematy')->put($id.'/ahtml.txt', request('texthtml'));
             return redirect()->back()->with('success', 'Udało się zaktualizować temat!');
@@ -144,7 +148,32 @@ class TematyController extends Controller
                 Storage::disk('tematy')->deleteDirectory($id);
                 return redirect()->back()->with('success', 'Usunięto temat '.$nazwa.'.');
             }else{
-                return redirect()->back()->with('error', 'Taki temat nie istnieje');
+                return redirect()->back()->with('error', 'Taki temat nie istnieje.');
+            }
+        }else{
+            return redirect('/tematy/'.$id);
+        }
+    }
+    
+    public function restore($id){
+        if(Auth::user()->typ==\App\User::$admin){
+            $temat = Temat::find($id);
+            if(!is_null($temat)){
+                $nazwa = $temat->nazwa;
+                
+                $trescAktualnaBBCode = Storage::disk('tematy')->get($id.'/abb.txt');
+                $trescAktualnaHTML = Storage::disk('tematy')->get($id.'/ahtml.txt');
+                $trescPoprzedniaBBCode = Storage::disk('tematy')->get($id.'/pbb.txt');
+                $trescPoprzedniaHTML = Storage::disk('tematy')->get($id.'/phtml.txt');
+                
+                Storage::disk('tematy')->put($id.'/abb.txt', $trescPoprzedniaBBCode);
+                Storage::disk('tematy')->put($id.'/ahtml.txt', $trescPoprzedniaHTML);
+                Storage::disk('tematy')->put($id.'/pbb.txt', $trescAktualnaBBCode);
+                Storage::disk('tematy')->put($id.'/phtml.txt', $trescAktualnaHTML);
+                
+                return redirect()->back()->with('success', 'Przywrócono treść tematu '.$nazwa.'.');
+            }else{
+                return redirect()->back()->with('error', 'Taki temat nie istnieje.');
             }
         }else{
             return redirect('/tematy/'.$id);

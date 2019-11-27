@@ -14,6 +14,7 @@ class TematTableSeeder extends Seeder
         ]);
         Storage::disk('tematy')->put('1/ahtml.txt', '<strong>Lorem ipsum</strong>');
         Storage::disk('tematy')->put('1/abb.txt', '[b]Lorem ipsum[/b]');
+        Storage::disk('tematy')->put('1/phtml.txt', '<strong>Lorem ipus</strong>');
         Storage::disk('tematy')->put('1/pbb.txt', '[b]Lorem ipus[/b]');
         
         
@@ -24,6 +25,7 @@ class TematTableSeeder extends Seeder
         ]);
         Storage::disk('tematy')->put('2/ahtml.txt', '<em>Lorem ipsum</em>');
         Storage::disk('tematy')->put('2/abb.txt', '[i]Lorem ipsum[/i]');
+        Storage::disk('tematy')->put('2/phtml.txt', '');
         Storage::disk('tematy')->put('2/pbb.txt', '');
         
         DB::table('temat')->insert([
@@ -33,6 +35,7 @@ class TematTableSeeder extends Seeder
         ]);
         Storage::disk('tematy')->put('3/ahtml.txt', 'Paski nawigacji są bardzo <strong>przydatne</strong>');
         Storage::disk('tematy')->put('3/abb.txt', 'Paski nawigacji są bardzo [b]przydatne[/b]');
+        Storage::disk('tematy')->put('3/phtml.txt', '');
         Storage::disk('tematy')->put('3/pbb.txt', '');
     }
 }

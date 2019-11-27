@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AdminFeaturesController extends Controller {
 
@@ -25,7 +26,11 @@ class AdminFeaturesController extends Controller {
             $group = Grupa::get();
             $notification = DB::table('powiadomienie')->where('idUzytkownik', Auth::user()->id)->get();
             $punkty = DB::table('punkty')->orderBy('created_at', 'desc')->get();
-            $kryterium = DB::table('kryterium')->first();
+            $kryterium = [
+                'trzy' => Storage::disk('kryterium')->get('3.txt'),
+                'cztery' => Storage::disk('kryterium')->get('4.txt'),
+                'piec' => Storage::disk('kryterium')->get('5.txt'),
+            ];
             $quizy = DB::table('quiz')->get();
             $pytania = DB::table('pytanie')->orderBy('id', 'desc')->get();
             $tematy = DB::table('temat')->orderBy('nazwa', 'asc')->get();
@@ -75,11 +80,11 @@ class AdminFeaturesController extends Controller {
                     $student->iloscPunktow = $iloscPunktow;
 
                     //Ocena za punkty
-                    if ($iloscPunktow < $kryterium->trzy) {
+                    if ($iloscPunktow < (int)$kryterium['trzy']) {
                         $ocena = '2';
-                    } elseif ($iloscPunktow < $kryterium->cztery) {
+                    } elseif ($iloscPunktow < (int)$kryterium['cztery']) {
                         $ocena = '3';
-                    } elseif ($iloscPunktow < $kryterium->piec) {
+                    } elseif ($iloscPunktow < (int)$kryterium['piec']) {
                         $ocena = '4';
                     } else {
                         $ocena = '5';
@@ -334,7 +339,11 @@ class AdminFeaturesController extends Controller {
     }
     
     public function EdytujKryterium(){
-        $kryterium = DB::table('kryterium')->first();
+        $kryterium = [
+                'trzy' => Storage::disk('kryterium')->get('3.txt'),
+                'cztery' => Storage::disk('kryterium')->get('4.txt'),
+                'piec' => Storage::disk('kryterium')->get('5.txt'),
+            ];
         return view('pages.admin.edytujkryterium', ['kryterium' => $kryterium]);
     }
 

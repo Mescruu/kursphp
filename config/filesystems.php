@@ -66,6 +66,11 @@ return [
         'tematy' => [
             'driver' => 'local',
             'root' => storage_path().'/tematy',
+        ],
+        
+        'kryterium' => [
+            'driver' => 'local',
+            'root' => storage_path().'/kryterium',
         ]
 
     ],
