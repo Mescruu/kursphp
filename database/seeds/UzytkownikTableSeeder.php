@@ -12,6 +12,7 @@ class UzytkownikTableSeeder extends Seeder
     public function run()
     {
         DB::table('uzytkownik')->insert([
+            'id' => 1,
             'imie' => 'Bartosz',
             'nazwisko' => 'Wijatkowski',
             'nrAlbumu' => 86441,
@@ -22,6 +23,7 @@ class UzytkownikTableSeeder extends Seeder
         ]);
         
         DB::table('uzytkownik')->insert([
+            'id' => 2,
             'imie' => 'Albert',
             'nazwisko' => 'Woś',
             'nrAlbumu' => 86444,
@@ -32,6 +34,7 @@ class UzytkownikTableSeeder extends Seeder
         ]);
         
         DB::table('uzytkownik')->insert([
+            'id' => 3,
             'imie' => 'Kasia',
             'nazwisko' => 'Mitrus',
             'nrAlbumu' => 86370,
@@ -42,6 +45,7 @@ class UzytkownikTableSeeder extends Seeder
         ]);
         
         DB::table('uzytkownik')->insert([
+            'id' => 4,
             'imie' => 'Mirosław',
             'nazwisko' => 'Kadziejkowski',
             'nrAlbumu' => 86669,
@@ -52,6 +56,7 @@ class UzytkownikTableSeeder extends Seeder
         ]);
         
         DB::table('uzytkownik')->insert([
+            'id' => 5,
             'imie' => 'Dawid',
             'nazwisko' => 'Pasieka',
             'nrAlbumu' => 86449,
@@ -62,6 +67,7 @@ class UzytkownikTableSeeder extends Seeder
         ]);
         
         DB::table('uzytkownik')->insert([
+            'id' => 6,
             'imie' => 'Paweł',
             'nazwisko' => 'Chleb',
             'nrAlbumu' => 86471,
@@ -72,6 +78,7 @@ class UzytkownikTableSeeder extends Seeder
         ]);
         
         DB::table('uzytkownik')->insert([
+            'id' => 7,
             'imie' => 'Rafał',
             'nazwisko' => 'Faja',
             'nrAlbumu' => 86401,
@@ -82,6 +89,7 @@ class UzytkownikTableSeeder extends Seeder
         ]);
         
         DB::table('uzytkownik')->insert([
+            'id' => 8,
             'imie' => 'Agnieszka',
             'nazwisko' => 'Kula',
             'nrAlbumu' => 86402,
@@ -92,6 +100,7 @@ class UzytkownikTableSeeder extends Seeder
         ]);
         
         DB::table('uzytkownik')->insert([
+            'id' => 9,
             'imie' => 'Mikołaj',
             'nazwisko' => 'Szaleniec',
             'nrAlbumu' => 86123,
@@ -102,6 +111,7 @@ class UzytkownikTableSeeder extends Seeder
         ]);
         
         DB::table('uzytkownik')->insert([
+            'id' => 10,
             'imie' => 'Iwona',
             'nazwisko' => 'Ulewa',
             'nrAlbumu' => 86442,
@@ -112,6 +122,7 @@ class UzytkownikTableSeeder extends Seeder
         ]);
         
         DB::table('uzytkownik')->insert([
+            'id' => 11,
             'imie' => 'Paulina',
             'nazwisko' => 'Ptak',
             'nrAlbumu' => 86456,
@@ -122,6 +133,7 @@ class UzytkownikTableSeeder extends Seeder
         ]);
         
         DB::table('uzytkownik')->insert([
+            'id' => 12,
             'imie' => 'Maciej',
             'nazwisko' => 'Denny',
             'nrAlbumu' => 86789,
@@ -132,6 +144,7 @@ class UzytkownikTableSeeder extends Seeder
         ]);
         
         DB::table('uzytkownik')->insert([
+            'id' => 13,
             'imie' => 'Dawid',
             'nazwisko' => 'Podsiadło',
             'nrAlbumu' => 86192,
@@ -142,6 +155,7 @@ class UzytkownikTableSeeder extends Seeder
         ]);
         
         DB::table('uzytkownik')->insert([
+            'id' => 14,
             'imie' => 'Beata',
             'nazwisko' => 'Nóż',
             'nrAlbumu' => 86764,
@@ -152,6 +166,7 @@ class UzytkownikTableSeeder extends Seeder
         ]);
         
         DB::table('uzytkownik')->insert([
+            'id' => 15,
             'imie' => 'Beata',
             'nazwisko' => 'Pańczyk',
             'email' => 'b.panczyk@pollub.pl',
@@ -160,6 +175,7 @@ class UzytkownikTableSeeder extends Seeder
         ]);
         
         DB::table('uzytkownik')->insert([
+            'id' => 16,
             'imie' => 'Mariusz',
             'nazwisko' => 'Dzieńkowski',
             'email' => 'm.dzienkowski@pollub.pl',
@@ -168,6 +184,7 @@ class UzytkownikTableSeeder extends Seeder
         ]);
         
         DB::table('uzytkownik')->insert([
+            'id' => 17,
             'imie' => 'Tomasz',
             'nazwisko' => 'Szuster',
             'email' => 't.szuster@pollub.pl',
