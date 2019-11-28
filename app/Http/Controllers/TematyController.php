@@ -38,7 +38,7 @@ class TematyController extends Controller
             Storage::disk('tematy')->put($trescAktualnaBBCodePath, '');
             Storage::disk('tematy')->put($trescPoprzedniaHTMLPath, '');
             Storage::disk('tematy')->put($trescPoprzedniaBBCodePath, '');
-            return redirect('/tematy/'.$temat->id.'/edycja');
+            return redirect('/tematy/'.$temat->id.'/edycja')->with('success', 'Utworzono temat '.$temat->nazwa.'.');
         }else{
             return redirect('/tematy');
         }
