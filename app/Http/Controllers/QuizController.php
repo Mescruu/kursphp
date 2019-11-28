@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Grupa;
 use App\Powiadomienie;
+use App\Punkty;
 use App\Pytanie;
 use App\Quiz;
+use App\User;
+use App\Wynik;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
@@ -26,9 +30,14 @@ class QuizController extends Controller
     {
         $quiz = Quiz::find($id);
         $pytania = Pytanie::get()->where('idQuiz', $id);
+        $wynik = Wynik::get()->where('idQuiz', $id);
+
+        if($quiz->typ==="kolokwium"&&$wynik!==null&&Auth::user()->typ!='nauczyciel'){
+
+            return redirect('/profil')->with('error', trans('Już brałeś udział w tym kolokwium!'));
+        }
 
         $index=0;
-
         $seed = rand(100,10000);
 
         foreach ($pytania as $pytanie){
@@ -59,6 +68,7 @@ class QuizController extends Controller
 
         $iloscPytan=count($pytania);
 
+
         return view ('quizy.show', ['pytania'=>$pytania,'ilosc'=>$iloscPytan, 'id'=>$id,'typ' => $quiz->typ, 'seed'=>$seed]);
 
     }
@@ -67,6 +77,7 @@ class QuizController extends Controller
     public function checkAnswers(Request $request,$id)
     {
 
+        $quiz = Quiz::get()->where('id', $id)->first();
 
         $pytania = Pytanie::get()->where('idQuiz', $id);
 
@@ -117,6 +128,44 @@ class QuizController extends Controller
             $pytanie->d=$table[3];
 
         }
+
+        $results=[
+            'idQuiz'=>$id,
+            'idUzytkownik'=>Auth::user()->id,
+            'wynik'=>$allPoints.'/'.$index,
+            'created_at'=>Carbon::now()
+        ];
+
+
+
+        if($quiz->typ=="kolokwium"){
+
+            $user =  Auth::user();
+
+            if(Auth::user()->typ!='nauczyciel'){
+
+                $grupa = DB::table('grupa')->where('id',$user->idGrupa)->get()->first();
+
+                Powiadomienie::createImportantNotification($grupa->idNauczyciel,"Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." uzyskał ".$allPoints.'/'.$index." punktów z kolokwium");
+
+
+                $array2 = [
+                    'idStudent' => (int)$user->id,
+                    'idNauczyciel' => $grupa->idNauczyciel,
+                    'ilosc' => $allPoints,
+                    'komentarz' => 'Kolokwium z '.Carbon::now()
+                ];
+
+
+                $nauczyciel = DB::table('uzytkownik')->where('id',$grupa->idNauczyciel)->get()->first();
+                Punkty::create($array2);
+                Powiadomienie::createNotification($user->id,"Uzytkownik ". $nauczyciel->imie." ". $nauczyciel->nazwisko." przyznał Ci punkty!:".$allPoints."pkt za kolokwium!");
+            }
+
+
+        }
+
+        Wynik::create($results);
 
         return view ('quizy.odpowiedzi', ['pytania'=>$pytania,'wszystkiePunkty'=>$iloscPytan, 'id'=>$id,'zdobytePunkty' => $allPoints]);
     }

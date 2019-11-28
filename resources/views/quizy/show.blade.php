@@ -40,7 +40,15 @@
                         <div class="card text-dark bg-light mb-3 row-eq-height w-100">
                             <div class="card-header"><h3>Powodzenia!</h3></div>
                             <div class="card-body">
-                                <p class="text-center">informacje o quizie</p>
+                                <p class="text-center">
+
+                                    @if($typ=="kolokwium")
+                                    To jest kolokwium! Nie będzie można powtórzyć tego testu!
+                                    @else
+                                    informacje o quizie
+                                    @endif
+
+                                </p>
                                 <h4 class="text-center">Jesteś Gotów?!</h4>
                                     <hr>
                                 <a href="

@@ -52,20 +52,20 @@
                         @if(count($notification)>0)
                         @foreach($notification as $not)
 
-                        <div class="alert alert-primary alert-dismissible fade show text-center w-100 mx-auto my-4" role="alert">
+                                    <div class="alert alert-primary alert-dismissible fade show text-center w-100 mx-auto my-4" id="not{{ $not->id }}" role="alert">
 
-                            <small class="float-left">
-                                {{$not->created_at}}
-                            </small>
-                            <hr>
+                                        <small class="float-left">
+                                            {{$not->created_at}}
+                                        </small>
+                                        <hr>
 
-                            {{$not->komunikat}}
+                                        {{$not->komunikat}}
 
 
-                            <button type="button" class="close" data-id="{{ $not->id }}" id="{{ $not->id }}" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+                                        <button type="button" class="close closePrimary" data-id="{{ $not->id }}" id="{{ $not->id }}">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
 
                         @endforeach
                         @else

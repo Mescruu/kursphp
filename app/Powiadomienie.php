@@ -17,9 +17,18 @@ class Powiadomienie extends Model
 
 
         DB::table('powiadomienie')->insert(
-            ['komunikat' => $content, 'idUzytkownik'=> $id, 'created_at' => Carbon::now()]
+            ['komunikat' => $content, 'idUzytkownik'=> $id,'waga'=>'zwykle', 'created_at' => Carbon::now()]
         );
     }
+    public static function createImportantNotification($id, $content){
+
+
+
+        DB::table('powiadomienie')->insert(
+            ['komunikat' => $content, 'idUzytkownik'=> $id,'waga'=>'kolokwium', 'created_at' => Carbon::now()]
+        );
+    }
+
 
     public function uzytkownik(){
         return $this->belongsTo('App\User','idUzytkownik');
