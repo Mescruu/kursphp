@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Temat;
+use App\User;
 use App\ListaGrup;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -23,8 +24,28 @@ class TematyController extends Controller
     {
         //wyswitla rzeczy zwiazane z konkretnym tematem o id $id
         $temat = Temat::find($id);
-        $trescAktualna = Storage::disk('tematy')->get($id.'/ahtml.txt');
+        if(Auth::user()->typ !== 'nauczyciel'){
+            $user_idGrupa = Auth::user()->idGrupa;
+            $grupa_user = DB::table('temat')
+                        ->join('listagrup', 'listagrup.idTemat', '=', 'temat.id')
+                        ->join('grupa', 'listagrup.idGrupa', '=', 'grupa.id')
+                        ->where('temat.id', $id)
+                        ->where('grupa.id', $user_idGrupa)
+                        ->select('grupa.*')
+                        ->get();
+            
+            if($grupa_user!=null){
+                $trescAktualna = Storage::disk('tematy')->get($id.'/ahtml.txt');
+                return view ('tematy.show', ['temat' => $temat, 'trescAktualna' => $trescAktualna]);
+            }else{
+                return redirect()->back()->with('error', 'Brak dostępu do tematu!');
+            }
+            
+        }else{
+            echo 'ccc';
+            $trescAktualna = Storage::disk('tematy')->get($id.'/ahtml.txt');
         return view ('tematy.show', ['temat' => $temat, 'trescAktualna' => $trescAktualna]);
+        }
     }
     
     public function create(){
