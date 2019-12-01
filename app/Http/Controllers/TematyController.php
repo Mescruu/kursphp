@@ -25,16 +25,22 @@ class TematyController extends Controller
         //wyswitla rzeczy zwiazane z konkretnym tematem o id $id
         $temat = Temat::find($id);
         if(Auth::user()->typ !== 'nauczyciel'){
+
             $user_idGrupa = Auth::user()->idGrupa;
-            $grupa_user = DB::table('temat')
-                        ->join('listagrup', 'listagrup.idTemat', '=', 'temat.id')
-                        ->join('grupa', 'listagrup.idGrupa', '=', 'grupa.id')
-                        ->where('temat.id', $id)
-                        ->where('grupa.id', $user_idGrupa)
-                        ->select('grupa.*')
-                        ->get();
-            
-            if($grupa_user!=null){
+
+
+
+//            $grupa_user = DB::table('temat')
+//                        ->join('listagrup', 'listagrup.idTemat', '=', 'temat.id')
+//                        ->join('grupa', 'listagrup.idGrupa', '=', 'grupa.id')
+//                        ->where('temat.id', $id)
+//                        ->where('grupa.id', $user_idGrupa)
+//                        ->select('grupa.*')
+//                        ->get();
+
+            $lista = DB::table('listagrup')->where('idGrupa',$user_idGrupa)->where('idTemat',$id)->get();
+
+            if(count($lista)>0){
                 $trescAktualna = Storage::disk('tematy')->get($id.'/ahtml.txt');
                 return view ('tematy.show', ['temat' => $temat, 'trescAktualna' => $trescAktualna]);
             }else{
@@ -42,7 +48,6 @@ class TematyController extends Controller
             }
             
         }else{
-            echo 'ccc';
             $trescAktualna = Storage::disk('tematy')->get($id.'/ahtml.txt');
         return view ('tematy.show', ['temat' => $temat, 'trescAktualna' => $trescAktualna]);
         }

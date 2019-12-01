@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
@@ -19,7 +20,12 @@ class AppServiceProvider extends ServiceProvider
         view()->composer(
             'inc.navbar',
             function ($view) {
-                $view->with('listaTematow', \App\Temat::all());
+                if(Auth::user()->typ !== 'nauczyciel') {
+
+                    $view->with('listaTematow', \App\Temat::all());
+                }else{
+                    $view->with('listaTematow', \App\Temat::all());
+                }
             }
         );
     }

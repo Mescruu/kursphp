@@ -744,7 +744,7 @@
                                                 <a href="quizy/{{$quiz->id}}/edycja" class="btn btn-info w-100 mr-2"> edytuj</a>
                                             </td>
                                             <td>
-                                                <a href="quizy/{{$quiz->id}}/usun" class="btn btn-info w-100 mr-2"> usun</a>
+                                                <a href="quizy/{{$quiz->id}}/usun"  onclick="return confirm('Tej operacji nie da się cofnąć!')" class="btn btn-info w-100 mr-2"> usun</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -760,7 +760,40 @@
                             
                             <!-- Treść zakładki WYKŁADY-->
                             <div class="tab-pane fade" id="pills-wyklady" role="tabpanel" aria-labelledby="pills-wyklady-tab">
-                                dd
+
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">#</th>
+                                        <th scope="col" class="text-center">Temat</th>
+                                        <th scope="col" class="text-center">link</th>
+                                        <th scope="col" class="text-center">edycja</th>
+                                        <th scope="col" class="text-center">usun</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($quizy as $quiz)
+                                        <tr>
+                                            <th scope="row" class="text-center">{{$loop->iteration}}</th>
+
+                                            <td class="text-center">
+                                                Temat...
+                                            </td>
+                                            <td>
+                                                <a href="wyklady/#" class="btn btn-info w-100 mr-2"> przejdź</a>
+                                            </td>
+                                            <td>
+                                                <a href="wyklady/#//edycja" class="btn btn-info w-100 mr-2"> edytuj</a>
+                                            </td>
+                                            <td>
+                                                <a href="wyklady/#/usun"  onclick="return confirm('Tej operacji nie da się cofnąć!')" class="btn btn-info w-100 mr-2"> usun</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                    </tbody>
+                                </table>
+
                             </div>
                         </div>
 

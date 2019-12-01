@@ -3,14 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0f7a7229-3c61-4762-beac-3e936d815d6d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/QuizController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/QuizController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Powiadomienie.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Powiadomienie.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Wynik.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Wynik.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_11_20_210445_create_powiadomienie_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_11_20_210445_create_powiadomienie_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/removeNotification.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/removeNotification.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TematyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TematyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/checkbox.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/checkbox.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/admin/panel.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/admin/panel.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/profil.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/profil.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/quizy/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/quizy/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/tematy/groups.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/tematy/groups.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,11 +23,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/QuizController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="46" column="20" lean-forward="true" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
+            <state relative-caret-position="153">
+              <caret line="63" column="34" lean-forward="true" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
+              <folding>
+                <element signature="e#40#54#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/pages/admin/panel.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="277">
+              <caret line="787" column="48" lean-forward="true" selection-start-line="787" selection-start-column="48" selection-end-line="787" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/WykladyController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="121">
+              <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
               <folding>
                 <element signature="e#40#54#0#PHP" expanded="true" />
               </folding>
@@ -39,12 +57,39 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/web.php">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TematyController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-378">
-              <caret line="64" column="51" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="51" />
+            <state relative-caret-position="51">
+              <caret line="183" column="4" selection-start-line="183" selection-start-column="4" selection-end-line="206" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/css/checkbox.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/tematy/groups.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="25" column="22" lean-forward="true" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
               <folding>
-                <element signature="e#7#606#0#PHP" expanded="true" />
+                <element signature="e#33#69#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -53,7 +98,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/quizy/show.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
+            <state relative-caret-position="731">
               <caret line="43" selection-start-line="43" selection-end-line="43" />
             </state>
           </provider>
@@ -71,8 +116,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>succes</find>
-      <find>su</find>
       <find>user</find>
       <find>suc</find>
       <find>tip</find>
@@ -101,6 +144,8 @@
       <find>notification</find>
       <find>AddPoints</find>
       <find>addpoints</find>
+      <find>checkm</find>
+      <find>usuń</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -109,9 +154,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../inzynierka/KursPHP/Projekt/index.php" />
-        <option value="$PROJECT_DIR$/public/css/underNav.css" />
-        <option value="$PROJECT_DIR$/resources/views/tematy/edit.blade.php" />
         <option value="$PROJECT_DIR$/public/js/functions.js" />
         <option value="$PROJECT_DIR$/public/css/temat.css" />
         <option value="$PROJECT_DIR$/resources/views/tematy/show.blade.php" />
@@ -138,12 +180,10 @@
         <option value="$PROJECT_DIR$/public/css/profile.css" />
         <option value="$PROJECT_DIR$/app/Grupa.php" />
         <option value="$PROJECT_DIR$/public/css/powitalna.css" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/TematyController.php" />
         <option value="$PROJECT_DIR$/resources/views/kwizy/edit.blade.php" />
         <option value="$PROJECT_DIR$/app/Quiz.php" />
         <option value="$PROJECT_DIR$/app/Pytanie.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" />
-        <option value="$PROJECT_DIR$/public/css/checkbox.css" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/AdminFeaturesController.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/public/js/checkAnswers.js" />
@@ -157,9 +197,14 @@
         <option value="$PROJECT_DIR$/app/Powiadomienie.php" />
         <option value="$PROJECT_DIR$/public/js/removeNotification.js" />
         <option value="$PROJECT_DIR$/resources/views/pages/profil.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/pages/admin/panel.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/quizy/show.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/QuizController.php" />
+        <option value="$PROJECT_DIR$/public/css/checkbox.css" />
+        <option value="$PROJECT_DIR$/resources/views/tematy/groups.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/TematyController.php" />
+        <option value="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/WykladyController.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/admin/panel.blade.php" />
       </list>
     </option>
   </component>
@@ -246,6 +291,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -274,18 +320,21 @@
             <path>
               <item name="phpkurs" type="b2602c69:ProjectViewProjectNode" />
               <item name="phpkurs" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="Auth" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="phpkurs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="phpkurs" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Providers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="phpkurs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="phpkurs" type="462c0819:PsiDirectoryNode" />
               <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="phpkurs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="phpkurs" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="phpkurs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="phpkurs" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-              <item name="migrations" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="phpkurs" type="b2602c69:ProjectViewProjectNode" />
@@ -303,6 +352,12 @@
               <item name="phpkurs" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="phpkurs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="phpkurs" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="storage" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="phpkurs" type="b2602c69:ProjectViewProjectNode" />
@@ -367,17 +422,10 @@
               <item name="storage" type="462c0819:PsiDirectoryNode" />
               <item name="kryterium" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="phpkurs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="phpkurs" type="462c0819:PsiDirectoryNode" />
-              <item name="storage" type="462c0819:PsiDirectoryNode" />
-              <item name="tematy" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -476,12 +524,13 @@
       <workItem from="1574793537572" duration="22610000" />
       <workItem from="1574851855576" duration="9583000" />
       <workItem from="1574861781673" duration="601000" />
-      <workItem from="1574971628384" duration="6942000" />
+      <workItem from="1574971628384" duration="7047000" />
+      <workItem from="1575231033241" duration="5087000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="256914000" />
+    <option name="totallyTimeSpent" value="262106000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -494,9 +543,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4978355" visible="true" weight="0.34266263" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4978355" visible="true" weight="0.34795764" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5021645" side_tool="true" weight="0.29198185" />
       <window_info id="npm" order="3" side_tool="true" />
@@ -555,38 +603,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PostsController.php" />
-    <entry file="file://$PROJECT_DIR$/app/Grupa.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="63" selection-start-line="11" selection-start-column="63" selection-end-line="11" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/admin/editgroup.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="84" column="31" selection-start-line="84" selection-start-column="27" selection-end-line="97" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/profile.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="70" column="21" selection-start-line="70" selection-start-column="21" selection-end-line="70" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="44" selection-start-line="44" selection-end-line="44" />
-          <folding>
-            <element signature="e#23#63#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/powitalna.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -688,20 +704,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TematyController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="69" selection-start-line="69" selection-end-line="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/tematy/groups.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="44" column="25" selection-start-line="44" selection-start-column="25" selection-end-line="47" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../phpkurs - Kopia (8)/public/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3400">
@@ -720,13 +722,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="394">
           <caret line="31" column="31" lean-forward="true" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/checkbox.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="559">
-          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
         </state>
       </provider>
     </entry>
@@ -883,16 +878,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/admin/panel.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="101" column="90" selection-start-line="101" selection-start-column="90" selection-end-line="101" selection-end-column="90" />
-          <folding>
-            <element signature="e#4957#4964#1#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/pages/admin/addpoints.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-119">
@@ -900,9 +885,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/quizy/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/admin/editgroup.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1479">
+          <caret line="87" column="48" selection-start-line="87" selection-start-column="48" selection-end-line="87" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-378">
+        <state relative-caret-position="-369">
           <caret line="64" column="51" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="51" />
           <folding>
             <element signature="e#7#606#0#PHP" expanded="true" />
@@ -910,20 +909,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/quizy/show.blade.php">
+    <entry file="file://$PROJECT_DIR$/routes/api.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
+        <state relative-caret-position="289">
+          <caret line="17" column="3" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/services.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-270" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/checkbox.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/tematy/groups.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="25" column="22" lean-forward="true" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+          <folding>
+            <element signature="e#33#69#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TematyController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="183" column="4" selection-start-line="183" selection-start-column="4" selection-end-line="206" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/WykladyController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+          <folding>
+            <element signature="e#40#54#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/QuizController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="46" column="20" lean-forward="true" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
+        <state relative-caret-position="153">
+          <caret line="63" column="34" lean-forward="true" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
           <folding>
             <element signature="e#40#54#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/admin/panel.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="787" column="48" lean-forward="true" selection-start-line="787" selection-start-column="48" selection-end-line="787" selection-end-column="48" />
         </state>
       </provider>
     </entry>
