@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\DB;
 
 class InsertUserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
 
 

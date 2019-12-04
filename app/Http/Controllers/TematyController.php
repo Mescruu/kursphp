@@ -17,7 +17,7 @@ class TematyController extends Controller
     {
         //blokowanie jeżeli użytkownik nie przejdzie autoryzacji wtedy wysyla go do strony z logowaniem
         //wyjątkami są strony index, gdzie wysiwetlane są tematy
-        $this->middleware('auth', ['except'=>['index']]);
+        $this->middleware('auth');
     }
 
     public function show($id)
@@ -38,9 +38,9 @@ class TematyController extends Controller
 //                        ->select('grupa.*')
 //                        ->get();
 
-            $lista = DB::table('listagrup')->where('idGrupa',$user_idGrupa)->where('idTemat',$id)->get();
+            $lista = DB::table('listagrup')->where('idGrupa',$user_idGrupa)->where('idTemat',$id)->count();
 
-            if(count($lista)>0){
+            if($lista > 0){
                 $trescAktualna = Storage::disk('tematy')->get($id.'/ahtml.txt');
                 return view ('tematy.show', ['temat' => $temat, 'trescAktualna' => $trescAktualna]);
             }else{
@@ -49,7 +49,7 @@ class TematyController extends Controller
             
         }else{
             $trescAktualna = Storage::disk('tematy')->get($id.'/ahtml.txt');
-        return view ('tematy.show', ['temat' => $temat, 'trescAktualna' => $trescAktualna]);
+            return view ('tematy.show', ['temat' => $temat, 'trescAktualna' => $trescAktualna]);
         }
     }
     
@@ -213,14 +213,7 @@ class TematyController extends Controller
      */
     public function index()
     {
-        //dostarcza wszystkich danych do Kontrolera
-
-        $tematy = Temat::orderBy('nazwa')->get(); //pobiera z bazy posortowane po id malejąco
-
-
-        //wyswietlenie kontentu strony /posts ktory znajduje sie w resources/posts/index
-        //razem ze zmienną $posts, w której znajdują się wszystkie rzeczy z modelu Post(tabela posts)
-        return view('tematy.index')->with('tematy', $tematy);
+        return view('tematy.index');
     }
 
 

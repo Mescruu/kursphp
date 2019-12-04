@@ -15,7 +15,10 @@ use Illuminate\Support\Facades\Storage;
 class AdminFeaturesController extends Controller {
 
     //ADMIN
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function panel() {
         //jezeli uzytkownik nie ma typu admin, wtedy zostaje przekierowany na adres profile
         if (Auth::user()->typ==\App\User::$user) {

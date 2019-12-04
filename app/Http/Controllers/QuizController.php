@@ -21,9 +21,7 @@ class QuizController extends Controller
     //
     public function __construct()
     {
-        //blokowanie jeżeli użytkownik nie przejdzie autoryzacji wtedy wysyla go do strony z logowaniem
-        //wyjątkami są strony index, gdzie wysiwetlane są tematy
-        $this->middleware('auth', ['except'=>['index']]);
+        $this->middleware('auth');
     }
 
     public function show($id)

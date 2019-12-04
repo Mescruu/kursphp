@@ -25,8 +25,8 @@
             <div class="row"> <!-- <div class="row no-gutters"> opakowanie dla kolumn/ no-gutters wylacza odstepy/paddingi pionowe pomiedzy kolumnami-->
                 <div class="col-12">
 
-                    @if(count($tematy)>=1)
-                        @foreach($tematy as $temat)
+                    @if(count($listaTematow)>=1)
+                        @foreach($listaTematow as $temat)
 
                             <div class="accordion" id="accordionExample">
                                 <div class="card">
@@ -53,7 +53,7 @@
 
                         @endforeach
                     @else
-                        <p>no posts found</p>
+                        <p>Brak udostępnionych tematów.</p>
                     @endif
 
                 </div>

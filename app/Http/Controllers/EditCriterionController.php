@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Storage;
 
 class EditCriterionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function EditCriterion(){
         $this->validate(request(), [
             'trzy' => 'required|max:3|',
