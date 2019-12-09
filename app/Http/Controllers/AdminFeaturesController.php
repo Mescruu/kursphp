@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Grupa;
+use App\Temat;
 use App\User;
 use App\Punkty;
 use Carbon\Carbon;
@@ -37,7 +38,16 @@ class AdminFeaturesController extends Controller {
             $quizy = DB::table('quiz')->get();
             $pytania = DB::table('pytanie')->orderBy('id', 'desc')->get();
             $tematy = DB::table('temat')->orderBy('nazwa', 'asc')->get();
-            
+            $wyklady= DB::table('wyklad')->get();
+            foreach ($wyklady as $wyklad){
+
+                $lab  = Temat::where([
+                    'id' => $wyklad->idTemat
+                ])->first();
+
+                $wyklad->lab = $lab->nazwa;
+            }
+
             //Przypisanie nazw grup do każdego tematu, który jest im udostępniony
             foreach($tematy as $temat){
                 $nazwyGrup = [];
@@ -101,7 +111,7 @@ class AdminFeaturesController extends Controller {
                 $grupa->studenci = $grupa_studenci;
             }
 
-            return view('pages.admin.panel', ['quizy'=>$quizy, 'group' => $group, 'studenci' => $studenci, 'nauczyciele' => $nauczyciele, 'notification' => $notification, 'kryterium' => $kryterium, 'tematy' => $tematy]);
+            return view('pages.admin.panel', ['quizy'=>$quizy, 'group' => $group, 'studenci' => $studenci, 'nauczyciele' => $nauczyciele, 'notification' => $notification, 'kryterium' => $kryterium, 'tematy' => $tematy, 'wyklady'=>$wyklady]);
         }
     }
 

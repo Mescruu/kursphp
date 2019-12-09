@@ -761,10 +761,89 @@
                             <!-- Treść zakładki WYKŁADY-->
                             <div class="tab-pane fade" id="pills-wyklady" role="tabpanel" aria-labelledby="pills-wyklady-tab">
 
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h5 class=" h-100 my-auto">
+                                            Dodaj Grupę
+
+                                            <a href="#createGroup" data-toggle="collapse"  aria-expanded="false" aria-controls="createGroup"  class="btn btn-info add">+ Wyklad</a>
+
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="collapse border
+                                 @if ($errors->has('nazwa-grupy'))
+                                        in show
+                                @endif
+                                        "
+                                     id="createGroup">
+                                    <div class="card-body create-group-body">
+
+                                        <form class="form-signin justify-content-center "  enctype="multipart/form-data"  method="POST" action="wyklady/dodaj">
+                                            {{ csrf_field() }}
+
+                                            <div class="row">
+
+                                                <div class="col-xs-12 col-sm-6 mb-2">
+                                                    <div class="form-group{{ $errors->has('tytul-wykladu') ? ' has-error' : '' }}">
+
+                                                        <input id="tytul-wykladu" type="text" placeholder="Tytuł wykładu" class="form-control" name="tytul-wykladu" value="{{ old('tytul-wykladu') }}" required autofocus>
+
+                                                        @if ($errors->has('tytul-wykladu'))
+                                                            <span class="help-block">
+                                                                   <strong>{{ $errors->first('tytul-wykladu') }}</strong>
+                                                                </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 mb-2">
+                                                    <div class="form-group{{ $errors->has('nazwa-tematu') ? ' has-error' : '' }}">
+
+                                                        <select name="nazwa-tematu" class="form-control" value="{{ old('nazwa-tematu') }}" required>
+                                                            @foreach($tematy as $temat)
+                                                                <option>{{$temat->nazwa}}</option>
+                                                            @endforeach
+                                                        </select>
+
+                                                        @if ($errors->has('nazwa-tematu'))
+                                                            <span class="help-block">
+                                                                    <strong>{{ $errors->first('nazwa-tematu') }}</strong>
+                                                                </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 mb-2">
+                                                    <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
+                                                    <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
+
+                                                    @if ($errors->has('file'))
+                                                        <span class="help-block">
+                                                              <strong>{{ $errors->first('file') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                   </div>
+
+                                                </div>
+
+                                                <div class="col-xs-12 col-sm-6 col-md-4 ml-auto">
+                                                    <button type="submit" class="btn btn-info w-100 mx-auto">
+                                                        Zatwierdź
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+
+
+
                                 <table class="table">
                                     <thead>
                                     <tr>
                                         <th scope="col" class="text-center">#</th>
+                                        <th scope="col" class="text-center">Wykład</th>
                                         <th scope="col" class="text-center">Temat</th>
                                         <th scope="col" class="text-center">link</th>
                                         <th scope="col" class="text-center">edycja</th>
@@ -772,23 +851,96 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($quizy as $quiz)
+                                    @foreach($wyklady as $wyklad)
                                         <tr>
                                             <th scope="row" class="text-center">{{$loop->iteration}}</th>
 
                                             <td class="text-center">
-                                                Temat...
+                                                {{$wyklad->tytul}}
+                                            </td>
+                                            <td class="text-center">
+                                                {{$wyklad->lab}}
                                             </td>
                                             <td>
-                                                <a href="wyklady/#" class="btn btn-info w-100 mr-2"> przejdź</a>
+                                                <a href="wyklady/{{$wyklad->id}}" class="btn btn-info w-100 mr-2"> przejdź</a>
                                             </td>
                                             <td>
-                                                <a href="wyklady/#//edycja" class="btn btn-info w-100 mr-2"> edytuj</a>
+                                                <a href="#edytuj{{$wyklad->id}}" data-toggle="collapse"  aria-expanded="false" aria-controls="edytuj{{$wyklad->id}}"  class="btn btn-info w-100 mr-2">Edytuj</a>
                                             </td>
                                             <td>
-                                                <a href="wyklady/#/usun"  onclick="return confirm('Tej operacji nie da się cofnąć!')" class="btn btn-info w-100 mr-2"> usun</a>
+                                                <a href="wyklady/{{$wyklad->id}}/usun"  onclick="return confirm('Tej operacji nie da się cofnąć!')" class="btn btn-info w-100 mr-2"> usun</a>
                                             </td>
                                         </tr>
+                                        <tr>
+                                           <td colspan="6">
+                                               <div class="collapse border"
+                                                    id="edytuj{{$wyklad->id}}">
+                                                   <div class="card-body create-group-body">
+
+                                                       <form class="form-signin justify-content-center "  enctype="multipart/form-data"  method="POST" action="wyklady/{{$wyklad->id}}/edytuj">
+                                                           {{ csrf_field() }}
+
+                                                           <div class="row">
+
+                                                               <div class="col-xs-12 col-sm-6 mb-2">
+                                                                   <div class="form-group{{ $errors->has('tytul-wykladu') ? ' has-error' : '' }}">
+
+                                                                       <input id="tytul-wykladu" type="text" placeholder="Tytuł wykładu" class="form-control" name="tytul-wykladu" value="{{$wyklad->tytul}}" required autofocus>
+
+                                                                       @if ($errors->has('tytul-wykladu'))
+                                                                           <span class="help-block">
+                                                                   <strong>{{ $errors->first('tytul-wykladu') }}</strong>
+                                                                </span>
+                                                                       @endif
+                                                                   </div>
+                                                               </div>
+                                                               <div class="col-xs-12 col-sm-6 mb-2">
+                                                                   <div class="form-group{{ $errors->has('nazwa-tematu') ? ' has-error' : '' }}">
+
+                                                                       <select name="nazwa-tematu" class="form-control" value="{{$wyklad->lab}}" required>
+                                                                           <option>{{$wyklad->lab}}</option>
+                                                                       @foreach($tematy as $temat)
+                                                                               @if($temat->nazwa!=$wyklad->lab)
+                                                                                   <option>{{$temat->nazwa}}</option>
+                                                                               @endif
+                                                                           @endforeach
+                                                                       </select>
+
+                                                                       @if ($errors->has('nazwa-tematu'))
+                                                                           <span class="help-block">
+                                                                    <strong>{{ $errors->first('nazwa-tematu') }}</strong>
+                                                                </span>
+                                                                       @endif
+                                                                   </div>
+                                                               </div>
+                                                               <div class="col-xs-12 col-sm-6 mb-2">
+                                                                   <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
+                                                                       <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
+
+                                                                       @if ($errors->has('file'))
+                                                                           <span class="help-block">
+                                                              <strong>{{ $errors->first('file') }}</strong>
+                                                        </span>
+                                                                       @endif
+                                                                   </div>
+
+                                                               </div>
+
+                                                               <div class="col-xs-12 col-sm-6 col-md-4 ml-auto">
+                                                                   <button type="submit" class="btn btn-info w-100 mx-auto">
+                                                                       Zatwierdź
+                                                                   </button>
+                                                               </div>
+
+                                                           </div>
+                                                       </form>
+
+                                                   </div>
+                                               </div>
+                                           </td>
+                                        </tr>
+
+
                                     @endforeach
 
                                     </tbody>

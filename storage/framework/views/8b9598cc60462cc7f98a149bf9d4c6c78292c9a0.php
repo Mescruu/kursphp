@@ -36,8 +36,9 @@
                                             <?php echo e($temat->opis); ?>
 
                                         </span>
-
-                                        <a class="btn btn-info float-right" href="/wyklady/<?php echo e($temat->id); ?>">wyklad id</a>
+                                        <?php if(isset($temat->wykladID)): ?>
+                                            <a class="btn btn-info float-right" href="/wyklady/<?php echo e($temat->wykladID); ?>"><?php echo e($temat->wyklad); ?></a>
+                                        <?php endif; ?>
 
                                         
 
@@ -53,7 +54,7 @@
 
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <?php else: ?>
-                        <p>no posts found</p>
+                        <p>Brak udostępnionych tematów.</p>
                     <?php endif; ?>
 
                 </div>

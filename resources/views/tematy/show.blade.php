@@ -23,12 +23,31 @@
             </div>
     @endif
 
-    <div class="btn-diagonal btn-slanted float-left">
-        <a href="#" >Quiz</a>
-    </div>
-    <div class="btn-diagonal btn-slanted float-left">
-         <a href="#" >Zadanie</a>
-    </div>
+
+
+        @if(isset($temat->wyklad))
+            @if($temat->wyklad!="empty")
+                <div class="btn-diagonal btn-slanted float-left">
+                    <a href="/wyklady/{{$temat->wyklad}}" >Wyklad</a>
+                </div>
+            @endif
+        @endif
+
+        @if(isset($temat->quiz))
+            @if($temat->quiz!="empty")
+                <div class="btn-diagonal btn-slanted float-left">
+                    <a href="/quizy/{{$temat->quiz}}" >Quiz</a>
+                </div>
+            @endif
+        @endif
+
+        @if(isset($temat->zadanie))
+            @if($temat->zadanie!="empty")
+                <div class="btn-diagonal btn-slanted float-left">
+                    <a href="/zadania/{{$temat->zadanie}}" >Zadanie</a>
+                </div>
+            @endif
+        @endif
 
     </div>
 

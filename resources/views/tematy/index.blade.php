@@ -25,8 +25,8 @@
             <div class="row"> <!-- <div class="row no-gutters"> opakowanie dla kolumn/ no-gutters wylacza odstepy/paddingi pionowe pomiedzy kolumnami-->
                 <div class="col-12">
 
-                    @if(count($listaTematow)>=1)
-                        @foreach($listaTematow as $temat)
+                    @if(count($tematy)>=1)
+                        @foreach($tematy as $temat)
 
                             <div class="accordion" id="accordionExample">
                                 <div class="card">
@@ -36,8 +36,9 @@
                                         <span class="text-center px-4  w-auto short-des">
                                             {{$temat->opis}}
                                         </span>
-
-                                        <a class="btn btn-info float-right" href="/wyklady/{{$temat->id}}">wyklad id</a>
+                                        @if(isset($temat->wykladID))
+                                            <a class="btn btn-info float-right" href="/wyklady/{{$temat->wykladID}}">{{$temat->wyklad}}</a>
+                                        @endif
 
                                         {{--                                            <button style="transform: rotate(90deg); width: 50px; height: 50px;" class="btn btn-info float-right collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">--}}
 {{--                                                <span >&#10148;</span>--}}

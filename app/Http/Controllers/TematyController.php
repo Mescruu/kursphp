@@ -24,9 +24,38 @@ class TematyController extends Controller
     {
         //wyswitla rzeczy zwiazane z konkretnym tematem o id $id
         $temat = Temat::find($id);
+
+        $wyklad = DB::table('wyklad')->where('idTemat',$id)->get()->first();
+        if($wyklad!=null)
+        {
+            $temat->wyklad=$wyklad->id;
+        }
+        else{
+            $temat->wyklad="empty";
+        }
+        $quiz = DB::table('quiz')->where('idTemat',$id)->get()->first();
+        if($quiz!=null)
+        {
+            $temat->quiz=$quiz->id;
+            echo $quiz->id;
+        }
+        else{
+            $temat->quiz="empty";
+        }
+        $zadanie = DB::table('zadanie')->where('idTemat',$id)->get()->first();
+        if($zadanie!=null)
+        {
+            $temat->zadanie=$zadanie->id;
+        }
+        else{
+            $temat->zadanie="empty";
+        }
+
         if(Auth::user()->typ !== 'nauczyciel'){
 
             $user_idGrupa = Auth::user()->idGrupa;
+
+
 
 
 
@@ -213,7 +242,24 @@ class TematyController extends Controller
      */
     public function index()
     {
-        return view('tematy.index');
+
+        $tematy = DB::table('temat')->orderBy('nazwa', 'asc')->get();
+        $wyklady = DB::table('wyklad')->get();
+
+        foreach ($tematy as $temat){
+
+            foreach ($wyklady as $wyklad){
+
+
+                if($wyklad->idTemat===$temat->id){
+                    $temat->wykladID=$wyklad->id;
+                    $temat->wyklad=$wyklad->tytul;
+                    break;
+                }
+            }
+        }
+
+        return view('tematy.index')->with('tematy',$tematy);
     }
 
 

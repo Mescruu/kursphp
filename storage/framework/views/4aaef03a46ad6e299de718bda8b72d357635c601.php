@@ -21,12 +21,31 @@
             </div>
     <?php endif; ?>
 
-    <div class="btn-diagonal btn-slanted float-left">
-        <a href="#" >Quiz</a>
-    </div>
-    <div class="btn-diagonal btn-slanted float-left">
-         <a href="#" >Zadanie</a>
-    </div>
+
+
+        <?php if(isset($temat->wyklad)): ?>
+            <?php if($temat->wyklad!="empty"): ?>
+                <div class="btn-diagonal btn-slanted float-left">
+                    <a href="/wyklady/<?php echo e($temat->wyklad); ?>" >Wyklad</a>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
+
+        <?php if(isset($temat->quiz)): ?>
+            <?php if($temat->quiz!="empty"): ?>
+                <div class="btn-diagonal btn-slanted float-left">
+                    <a href="/quizy/<?php echo e($temat->quiz); ?>" >Quiz</a>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
+
+        <?php if(isset($temat->zadanie)): ?>
+            <?php if($temat->zadanie!="empty"): ?>
+                <div class="btn-diagonal btn-slanted float-left">
+                    <a href="/zadania/<?php echo e($temat->zadanie); ?>" >Zadanie</a>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
 
     </div>
 

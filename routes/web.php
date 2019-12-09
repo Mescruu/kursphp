@@ -96,6 +96,13 @@ Route::post('/przypiszgrupy/{id}', 'TematyController@updateGroups');
 Route::get('/usuntemat/{id}', 'TematyController@delete');
 Route::get('/przywroctemat/{id}', 'TematyController@restore');
 
+
+Route::get('wyklady/{id}', 'WykladyController@show');
+Route::post('wyklady/dodaj', 'WykladyController@create');
+Route::get('wyklady/{id}/usun', 'WykladyController@remove');
+Route::post('wyklady/{id}/edytuj', 'WykladyController@edit');
+
+
 //Resetowanie hasła
 Route::post('reset_password_without_token', 'NewPasswordController@validatePasswordRequest');
 Route::post('reset_password_with_token', 'NewPasswordController@resetPassword');

@@ -67,7 +67,10 @@ return [
             'driver' => 'local',
             'root' => storage_path().'/tematy',
         ],
-        
+        'wyklady' => [
+            'driver' => 'local',
+            'root' => storage_path().'/wyklady',
+        ],
         'kryterium' => [
             'driver' => 'local',
             'root' => storage_path().'/kryterium',
