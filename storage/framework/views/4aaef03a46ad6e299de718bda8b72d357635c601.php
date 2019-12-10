@@ -64,7 +64,9 @@
                     <div class="col-12">
                         <h1><?php echo e($temat->nazwa); ?></h1>
                         <hr class="w-50">
-                        <small class="text-center mx-auto">Ostatnio edytowany <?php echo e($temat->updated_at); ?></small>
+                        <?php if(isset($temat->updated_at)): ?>
+                            <small class="text-center mx-auto">Ostatnio edytowany <?php echo e($temat->updated_at); ?></small>
+                        <?php endif; ?>
                     </div>
 
                 </div>

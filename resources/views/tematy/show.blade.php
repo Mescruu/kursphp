@@ -66,7 +66,9 @@
                     <div class="col-12">
                         <h1>{{$temat->nazwa}}</h1>
                         <hr class="w-50">
-                        <small class="text-center mx-auto">Ostatnio edytowany {{$temat->updated_at}}</small>
+                        @if(isset($temat->updated_at))
+                            <small class="text-center mx-auto">Ostatnio edytowany {{$temat->updated_at}}</small>
+                        @endif
                     </div>
 
                 </div>

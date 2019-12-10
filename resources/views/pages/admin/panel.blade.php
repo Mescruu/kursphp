@@ -63,7 +63,11 @@
 
                     <a class="nav-link" id="v-pills-teacher-tab" data-toggle="pill" href="#v-pills-teacher" role="tab" aria-controls="v-pills-teacher" aria-selected="false">Nauczyciele</a>
 
-                    <a class="nav-link" id="v-pills-criterion-tab" data-toggle="pill" href="#v-pills-criterion" role="tab" aria-controls="v-pills-criterion" aria-selected="false">Kryterium oceniania</a>
+                    <a class="nav-link"
+                       @if($errors->has('nazwa-zadania')||$errors->has('tresc-zadania')||$errors->has('tytul-wyklad')||$errors->has('file'))
+                       active
+                       @endif
+                       id="v-pills-criterion-tab" data-toggle="pill" href="#v-pills-criterion" role="tab" aria-controls="v-pills-criterion" aria-selected="false">Kryterium oceniania</a>
 
                     <a class="nav-link" id="v-pills-cms-tab" data-toggle="pill" href="#v-pills-cms" role="tab" aria-controls="v-pills-cms" aria-selected="false">Zarządzanie treścią</a>
 
@@ -755,9 +759,226 @@
                             
                             <!-- Treść zakładki ZADANIA -->
                             <div class="tab-pane fade" id="pills-zadania" role="tabpanel" aria-labelledby="pills-zadania-tab">
-                                b
+
+
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h5 class=" h-100 my-auto">
+                                            Dodaj Zadanie
+
+                                            <a href="#createGroup" data-toggle="collapse"  aria-expanded="false" aria-controls="createGroup"  class="btn btn-info add">+ Zadanie</a>
+
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="collapse border
+                                 @if ($errors->has('nazwa-grupy'))
+                                        in show
+                                @endif
+                                        "
+                                     id="createGroup">
+                                    <div class="card-body create-group-body">
+
+                                        <form class="form-signin justify-content-center "  enctype="multipart/form-data"  method="POST" action="zadania/dodaj">
+                                            {{ csrf_field() }}
+
+                                            <div class="row">
+
+                                                <div class="col-xs-12 col-sm-6 mb-2">
+                                                    <div class="form-group{{ $errors->has('nazwa-zadania') ? ' has-error' : '' }}">
+
+                                                        <input id="nazwa-zadania" type="text" placeholder="Nazwa zadania" class="form-control" name="nazwa-zadania" required autofocus>
+
+                                                        @if ($errors->has('nazwa-zadania'))
+                                                            <span class="help-block">
+                                                                   <strong>{{ $errors->first('nazwa-zadania') }}</strong>
+                                                                </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xs-12 col-sm-6 mb-2">
+                                                    <div class="form-group{{ $errors->has('nazwa-tematu') ? ' has-error' : '' }}">
+
+                                                        <select name="nazwa-tematu" class="form-control" value="{{ old('nazwa-tematu') }}" required>
+                                                            @foreach($tematy as $temat)
+                                                                    <option>{{$temat->nazwa}}</option>
+                                                            @endforeach
+                                                        </select>
+
+                                                        @if ($errors->has('nazwa-tematu'))
+                                                            <span class="help-block">
+                                                                    <strong>{{ $errors->first('nazwa-tematu') }}</strong>
+                                                                </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 mb-2">
+                                                    <div class="form-group{{ $errors->has('tresc-zadania') ? ' has-error' : '' }}">
+
+                                                                        <textarea  id="tresc-zadania" type="textarea" placeholder="Tytuł wykładu" class="form-control" name="tresc-zadania" equired autofocus>
+                                                                        </textarea>
+
+                                                        @if ($errors->has('tresc-zadania'))
+                                                            <span class="help-block">
+                                                                    <strong>{{ $errors->first('tresc-zadania') }}</strong>
+                                                                </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-xs-12 col-sm-6 col-md-4 ml-auto">
+                                                    <button type="submit" class="btn btn-info w-100 mx-auto">
+                                                        Zatwierdź
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+
+
+
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">#</th>
+                                        <th scope="col" class="text-center">Zadanie</th>
+                                        <th scope="col" class="text-center">Temat</th>
+                                        <th scope="col" class="text-center">Treść</th>
+                                        <th scope="col" class="text-center">Edycja</th>
+                                        <th scope="col" class="text-center">Usun</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($zadania as $zadanie)
+                                        <tr>
+                                            <th scope="row" class="text-center">{{$loop->iteration}}</th>
+
+                                            <td class="text-center">
+                                                {{$zadanie->nazwa}}
+                                            </td>
+                                            <td class="text-center">
+                                                {{$zadanie->lab}}
+                                            </td>
+                                            <td>
+                                                <a href="#pokaz{{$zadanie->id}}" data-toggle="collapse"  aria-expanded="false" aria-controls="pokaz{{$zadanie->id}}"  class="btn btn-info w-100 mr-2">Pokaż</a>
+                                            </td>
+                                            <td>
+                                                <a href="#edytuj{{$zadanie->id}}" data-toggle="collapse"  aria-expanded="false" aria-controls="edytuj{{$zadanie->id}}"  class="btn btn-info w-100 mr-2">Edytuj</a>
+                                            </td>
+                                            <td>
+                                                <a href="wyklady/{{$zadanie->id}}/usun"  onclick="return confirm('Tej operacji nie da się cofnąć!')" class="btn btn-info w-100 mr-2"> usun</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6">
+
+                                                <div class="collapse border"
+                                                     id="pokaz{{$zadanie->id}}">
+                                                    <div class="card-body create-group-body">
+                                                            <div class="row">
+                                                                <div class="col-12 mb-2">
+                                                                    <h5 class="text-center">
+                                                                        {{$zadanie->nazwa}}
+                                                                    </h5>
+                                                                    <small>
+                                                                        {{$zadanie->lab}}
+                                                                    </small>
+                                                                </div>
+                                                                <hr>
+                                                                <div class="col-12">
+                                                                    {{$zadanie->tresc}}
+                                                                </div>
+                                                            </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="collapse border"
+                                                     id="edytuj{{$zadanie->id}}">
+                                                    <div class="card-body create-group-body">
+
+                                                        <form class="form-signin justify-content-center "  enctype="multipart/form-data"  method="POST" action="zadania/{{$zadanie->id}}/edytuj">
+                                                            {{ csrf_field() }}
+
+                                                            <div class="row">
+
+                                                                <div class="col-xs-12 col-sm-6 mb-2">
+                                                                    <div class="form-group{{ $errors->has('nazwa-zadania') ? ' has-error' : '' }}">
+
+                                                                        <input id="nazwa-zadania" type="text" placeholder="Nazwa zadania" class="form-control" name="nazwa-zadania" value="{{$zadanie->nazwa}}" required autofocus>
+
+                                                                        @if ($errors->has('nazwa-zadania'))
+                                                                            <span class="help-block">
+                                                                   <strong>{{ $errors->first('nazwa-zadania') }}</strong>
+                                                                </span>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-xs-12 col-sm-6 mb-2">
+                                                                    <div class="form-group{{ $errors->has('nazwa-tematu') ? ' has-error' : '' }}">
+
+                                                                        <select name="nazwa-tematu" class="form-control" value="{{ old('nazwa-tematu') }}" required>
+                                                                            <option>{{$zadanie->lab}} </option>
+                                                                        @foreach($tematy as $temat)
+                                                                            @if($temat->nazwa!==$zadanie->lab)
+                                                                                <option>{{$temat->nazwa}}</option>
+                                                                                @endif
+                                                                            @endforeach
+                                                                        </select>
+
+                                                                        @if ($errors->has('nazwa-tematu'))
+                                                                            <span class="help-block">
+                                                                    <strong>{{ $errors->first('nazwa-tematu') }}</strong>
+                                                                </span>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="col-12 mb-2">
+                                                                    <div class="form-group{{ $errors->has('tresc-zadania') ? ' has-error' : '' }}">
+
+                                                                        <textarea  id="tresc-zadania" type="textarea" placeholder="Tytuł wykładu" class="form-control" name="tresc-zadania" equired autofocus>
+{{$zadanie->tresc}}
+                                                                        </textarea>
+
+                                                                        @if ($errors->has('tresc-zadania'))
+                                                                            <span class="help-block">
+                                                                    <strong>{{ $errors->first('tresc-zadania') }}</strong>
+                                                                </span>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-xs-12 col-sm-6 col-md-4 ml-auto">
+                                                                    <button type="submit" class="btn btn-info w-100 mx-auto">
+                                                                        Zatwierdź
+                                                                    </button>
+                                                                </div>
+
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+
+                                    @endforeach
+
+                                    </tbody>
+                                </table>
+
                             </div>
-                            
+
+
                             <!-- Treść zakładki WYKŁADY-->
                             <div class="tab-pane fade" id="pills-wyklady" role="tabpanel" aria-labelledby="pills-wyklady-tab">
 

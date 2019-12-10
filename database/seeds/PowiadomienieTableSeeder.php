@@ -15,25 +15,29 @@ class PowiadomienieTableSeeder extends Seeder
         DB::table('powiadomienie')->insert([
             'id' => 2,
             'idUzytkownik' => 15,
-            'komunikat' => 'Utworzono temat Laboratorium 2'
+            'komunikat' => 'Utworzono temat Laboratorium 2',
+            'zwykle'
         ]);
         
         DB::table('powiadomienie')->insert([
             'id' => 3,
             'idUzytkownik' => 15,
-            'komunikat' => 'Utworzono temat Laboratorium 3'
+            'komunikat' => 'Utworzono temat Laboratorium 3',
+            'zwykle'
         ]);
         
         DB::table('powiadomienie')->insert([
             'id' => 4,
             'idUzytkownik' => 15,
-            'komunikat' => 'Zedytowano temat Laboratorium 1'
+            'komunikat' => 'Zedytowano temat Laboratorium 1',
+            'zwykle'
         ]);
         
         DB::table('powiadomienie')->insert([
             'id' => 5,
             'idUzytkownik' => 14,
-            'komunikat' => 'Zmieniono hasło!'
+            'komunikat' => 'Zmieniono hasło!',
+            'zwykle'
         ]);
     }
 }

@@ -8,7 +8,8 @@ class Rozwiazanie extends Model
 {
     protected $table = 'rozwiazanie';
     public $primaryKey = 'id';
-    
+    protected $fillable = ['idZadanie','idUzytkownik','Informacje','created_at', 'updated_at'];
+
     public function zadanie(){
         return $this->belongsTo('App\Zadanie','idZadanie');
     }

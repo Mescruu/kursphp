@@ -39,6 +39,17 @@ class AdminFeaturesController extends Controller {
             $pytania = DB::table('pytanie')->orderBy('id', 'desc')->get();
             $tematy = DB::table('temat')->orderBy('nazwa', 'asc')->get();
             $wyklady= DB::table('wyklad')->get();
+            $zadania= DB::table('zadanie')->get();
+
+            foreach ($zadania as $zadanie){
+
+                $lab  = Temat::where([
+                    'id' => $zadanie->idTemat
+                ])->first();
+
+                $zadanie->lab = $lab->nazwa;
+            }
+
             foreach ($wyklady as $wyklad){
 
                 $lab  = Temat::where([
@@ -111,7 +122,7 @@ class AdminFeaturesController extends Controller {
                 $grupa->studenci = $grupa_studenci;
             }
 
-            return view('pages.admin.panel', ['quizy'=>$quizy, 'group' => $group, 'studenci' => $studenci, 'nauczyciele' => $nauczyciele, 'notification' => $notification, 'kryterium' => $kryterium, 'tematy' => $tematy, 'wyklady'=>$wyklady]);
+            return view('pages.admin.panel', ['quizy'=>$quizy, 'group' => $group, 'studenci' => $studenci, 'nauczyciele' => $nauczyciele, 'notification' => $notification, 'kryterium' => $kryterium, 'tematy' => $tematy, 'wyklady'=>$wyklady, 'zadania'=>$zadania]);
         }
     }
 

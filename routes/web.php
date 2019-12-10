@@ -102,6 +102,15 @@ Route::post('wyklady/dodaj', 'WykladyController@create');
 Route::get('wyklady/{id}/usun', 'WykladyController@remove');
 Route::post('wyklady/{id}/edytuj', 'WykladyController@edit');
 
+Route::get('zadania/{id}', 'ZadaniaController@show');
+Route::post('zadania/dodaj', 'ZadaniaController@create');
+Route::post('zadania/{id}/odpowiedz', 'ZadaniaController@answer');
+Route::post('zadania/{id}/link', 'ZadaniaController@link');
+
+Route::get('zadania/{id}/usun', 'ZadaniaController@remove');
+Route::post('zadania/{id}/edytuj', 'ZadaniaController@edit');
+
+
 
 //Resetowanie hasła
 Route::post('reset_password_without_token', 'NewPasswordController@validatePasswordRequest');

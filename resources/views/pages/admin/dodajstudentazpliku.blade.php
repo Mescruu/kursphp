@@ -137,6 +137,15 @@
 
                                 <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
 
+                                <div id="showfile">
+                                    <span id="name">
+
+                                    </span>
+                                    <span id="size">
+
+                                    </span>
+                                </div>
+
                                     @if ($errors->has('file'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('file') }}</strong>
@@ -244,4 +253,8 @@
 </div>
 
 @endsection
+@section('scripts')
+    <script type="text/javascript" src="{{ asset('js/customInputFile.js')}}"></script>
+@endsection
+
 
