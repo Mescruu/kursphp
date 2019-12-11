@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Temat;
 use App\User;
 use App\ListaGrup;
+use App\Wyklad;
+use App\Zadanie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -196,11 +198,47 @@ class TematyController extends Controller
         if(Auth::user()->typ==\App\User::$admin){
             $temat = Temat::find($id);
             if(!is_null($temat)){
+
+                $zadanie=Zadanie::find($id);
+                if(!is_null($zadanie)){
+
+                    $rozwiazania = DB::table('rozwiazanie')->where('idZadanie', $zadanie->id);
+
+                    if(!is_null($rozwiazania)){
+                        $rozwiazania->delete();
+                    }
+
+                    $zadanie->delete();
+                    Storage::disk('rozwiazania')->deleteDirectory($id);
+                }
+
+
+
+
+                $quiz = DB::table('quiz')->where('idTemat', $id);
+//                $pytanie = DB::table('pytanie')->where('idQuiz', $quiz->id);
+
+                if(!is_null($quiz)) {
+//                    if(!is_null($pytanie)) {
+//                        $pytanie = DB::table('pytanie')->where('idQuiz', $quiz->id);
+//                        $pytanie->delete();
+//                    }
+                        $quiz->delete();
+                }
+
+                $wyklad = DB::table('wyklad')->where('idTemat', $id);
+
+                if(!is_null($wyklad)) {
+                    $wyklad->delete();
+                    Storage::disk('wyklady')->delete($id."pdf");
+                }
+
                 $nazwa = $temat->nazwa;
                 $listyGrup = ListaGrup::where('idTemat', $id);
                 $listyGrup->delete();
                 $temat->delete();
                 Storage::disk('tematy')->deleteDirectory($id);
+
                 return redirect()->back()->with('success', 'Usunięto temat '.$nazwa.'.');
             }else{
                 return redirect()->back()->with('error', 'Taki temat nie istnieje.');

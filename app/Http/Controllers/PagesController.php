@@ -63,7 +63,7 @@ class PagesController extends Controller
         //sposób na przerzucenie zmiennej:
 
         $adminId = DB::table('grupa')->where('id', auth()->user()->idGrupa)->first();
-        $notification = DB::table('powiadomienie')->where('idUzytkownik', Auth::user()->id)->get();
+        $notification = DB::table('powiadomienie')->where('idUzytkownik', Auth::user()->id)->orderBy('created_at','desc')->get();
 
         if(Auth::user()->typ==Auth::user()->admin)
         {

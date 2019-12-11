@@ -851,6 +851,7 @@
                                         <th scope="col" class="text-center">Temat</th>
                                         <th scope="col" class="text-center">Treść</th>
                                         <th scope="col" class="text-center">Edycja</th>
+                                        <th scope="col" class="text-center">Odpowiedzi</th>
                                         <th scope="col" class="text-center">Usun</th>
                                     </tr>
                                     </thead>
@@ -865,6 +866,7 @@
                                             <td class="text-center">
                                                 {{$zadanie->lab}}
                                             </td>
+
                                             <td>
                                                 <a href="#pokaz{{$zadanie->id}}" data-toggle="collapse"  aria-expanded="false" aria-controls="pokaz{{$zadanie->id}}"  class="btn btn-info w-100 mr-2">Pokaż</a>
                                             </td>
@@ -872,11 +874,16 @@
                                                 <a href="#edytuj{{$zadanie->id}}" data-toggle="collapse"  aria-expanded="false" aria-controls="edytuj{{$zadanie->id}}"  class="btn btn-info w-100 mr-2">Edytuj</a>
                                             </td>
                                             <td>
-                                                <a href="wyklady/{{$zadanie->id}}/usun"  onclick="return confirm('Tej operacji nie da się cofnąć!')" class="btn btn-info w-100 mr-2"> usun</a>
+                                                <a href="#rozwiazanie{{$zadanie->id}}" data-toggle="collapse"  aria-expanded="false" aria-controls="rozwiazanie{{$zadanie->id}}"  class="btn btn-info w-100 mr-2">Rozwiązania</a>
+                                            </td>
+                                            <td>
+                                                <a href="zadania/{{$zadanie->id}}/usun"  onclick="return confirm('Tej operacji nie da się cofnąć!')" class="btn btn-info w-100 mr-2"> usun</a>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6">
+                                            <td colspan="7">
+
+
 
                                                 <div class="collapse border"
                                                      id="pokaz{{$zadanie->id}}">
@@ -967,6 +974,56 @@
 
                                                     </div>
                                                 </div>
+
+                                                <div class="collapse border"
+                                                     id="rozwiazanie{{$zadanie->id}}">
+                                                    <div class="card-body create-group-body">
+
+
+                                                        <table class="table">
+                                                            <thead>
+                                                            <tr>
+                                                                <th scope="col">#</th>
+                                                                <th scope="col">Imie studenta</th>
+                                                                <th scope="col">Nazwisko student</th>
+                                                                <th scope="col">Data wstawienia</th>
+                                                                <th scope="col">Data aktualizacji</th>
+                                                                <th scope="col">Status</th>
+                                                                <th scope="col">link</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            @foreach($zadanie->rozwiazania as $rozwiazanie)
+                                                                <tr
+                                                                @if($rozwiazanie->oceniono=="nie")
+                                                                    class="alert-warning"
+                                                                @endif
+                                                                >
+                                                                    <th scope="row">{{$loop->iteration}}</th>
+                                                                    <td>{{$rozwiazanie->uzytkownik->imie}}</td>
+                                                                    <td>{{$rozwiazanie->uzytkownik->nazwisko}}</td>
+                                                                    <td>{{$rozwiazanie->created_at}}</td>
+                                                                    <td>{{$rozwiazanie->updated_at}}</td>
+                                                                    <td>
+                                                                        @if($rozwiazanie->oceniono=="nie")
+
+                                                                                <a class="btn btn-info  w-100" href="/panel/uzytkownik/{{$rozwiazanie->uzytkownik->id}}/dodajpunkty/{{$rozwiazanie->id}}">Do oceny</a>
+                                                                        @else
+                                                                            Oceniono
+                                                                        @endif
+                                                                    </td>
+                                                                    <td>
+                                                                        <a class="btn btn-info" style="height: 100%;" href="zadania/{{$zadanie->id}}/{{$rozwiazanie->uzytkownik->id}}/link">&#8681;</a>
+                                                                    </td>
+
+                                                                </tr>
+                                                         @endforeach
+
+                                                                </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
                                             </td>
                                         </tr>
 

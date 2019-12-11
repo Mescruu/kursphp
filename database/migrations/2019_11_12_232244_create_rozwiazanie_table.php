@@ -17,7 +17,7 @@ class CreateRozwiazanieTable extends Migration
             $table->increments('id');
             $table->integer('idZadanie');
             $table->integer('idUzytkownik');
-            $table->string('sciezka');
+            $table->string('oceniono');
             $table->string('informacje');
             $table->timestamps();
         });

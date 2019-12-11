@@ -62,7 +62,14 @@ return [
             'region' => env('AWS_REGION'),
             'bucket' => env('AWS_BUCKET'),
         ],
-        
+
+        'rozwiazania-publiczne' => [
+            'driver'     => 'local',
+            'root'       => public_path()."rozwiazania",
+            'visibility' => 'public',
+        ],
+
+
         'tematy' => [
             'driver' => 'local',
             'root' => storage_path().'/tematy',

@@ -34,7 +34,12 @@
 
                 <div class="signin">
 
-                    <form class="form-signin justify-content-center " method="POST" action="/addpoints/{{$user->id}}">
+                        @if($rozwiazanie=="empty")
+                        <form class="form-signin justify-content-center " method="POST" action="/addpoints/{{$user->id}}">
+                        @else
+                        <form class="form-signin justify-content-center " method="POST" action="/rateAnAnswer/{{$user->id}}/{{$rozwiazanie}}">
+                       @endif
+
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('ilosc') ? ' has-error' : '' }}">

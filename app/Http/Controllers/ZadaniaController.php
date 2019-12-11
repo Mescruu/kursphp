@@ -13,19 +13,52 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class ZadaniaController extends Controller
 {
 
 
+    public  function  link($id, $user){
+
+        if (Auth::user()->typ == \App\User::$admin) {
+            $zadanie = Zadanie::find($id);
+            $file = $user."-".$zadanie->id.'.zip';
+        }
+        else{
+            $zadanie = Zadanie::find($id);
+            $file =Auth::user()->id."-".$zadanie->id.'.zip';
+        }
+
+        if($file==null){
+            return redirect()->back()->with('error', trans('Nie ma takiego pliku'));
+
+        }else{
+            return response()->download(
+                storage_path()."/rozwiazania/".$id."/".$file,
+                $file,
+                [],
+                'inline'
+            );
+        }
+    }
+
 
     public function show($id)
     {
         $zadanie = Zadanie::find($id);
 
-
         $temat= DB::table('temat')->where('id',$zadanie->idTemat)->first();
+
+        $rozwiazanie = DB::table('rozwiazanie')->where('idZadanie',$id)->Where('idUzytkownik',Auth::user()->id)->first();
+
+        if($rozwiazanie!=null){
+            $zadanie->oceniono = $rozwiazanie->oceniono;
+        }else
+        {
+            $zadanie->oceniono = "nie";
+        }
 
         if($temat!=null)
         {
@@ -34,6 +67,7 @@ class ZadaniaController extends Controller
         else{
             $zadanie->temat="empty";
         }
+
 
         $wyklad = DB::table('wyklad')->where('idTemat',$temat->id)->get()->first();
         if($wyklad!=null)
@@ -47,23 +81,32 @@ class ZadaniaController extends Controller
         if($quiz!=null)
         {
             $zadanie->quiz=$quiz->id;
-            echo $quiz->id;
         }
         else{
             $zadanie->quiz="empty";
         }
 
+        $file =Auth::user()->id."-".$zadanie->id.'.zip';
+
+
+
+        if (file_exists(storage_path()."/rozwiazania/".$id."/".$file)){
+
+//            $privateFile = Storage::files(storage_path()."rozwiazania/".$file);
+
+            $zadanie->url="link";
+
+        }else{
+            $zadanie->url="empty";
+        }
 
 
         return view('zadania.show')->with('zadanie', $zadanie);
-
     }
 
     public function edit(Request $request, $id)
     {
 
-        echo $request->input('nazwa-tematu');
-        echo $request->input('nazwa-zadania');
 
         if (Auth::user()->typ == \App\User::$admin) {
 
@@ -103,11 +146,9 @@ class ZadaniaController extends Controller
                 'tresc-zadania' => 'max:255',
             ]);
 
-            echo $request->input('nazwa-tematu');
 
             $temat = DB::table('temat')->where('nazwa', $request->input('nazwa-tematu'))->first();
 
-            echo $temat->id;
 
 
             Zadanie::create(
@@ -125,6 +166,28 @@ class ZadaniaController extends Controller
             return redirect('/panel/')->with('errors', 'Nie udało się dodać wykładu');
         }
     }
+
+    public function remove($id)
+    {
+
+        if (Auth::user()->typ == \App\User::$admin) {
+
+
+            $rozwiazania = DB::table('rozwiazanie')->where('idZadanie', $id);
+            $rozwiazania->delete();
+
+            $zadanie=Zadanie::find($id);
+            $zadanie->delete();
+
+            Storage::disk('rozwiazania')->deleteDirectory($id);
+
+            return redirect('/panel/')->with('success', 'Uudało się usunąć rozwiązania');
+
+        } else {
+            return redirect('/panel/')->with('errors', 'Nie udało się dodać wykładu');
+        }
+    }
+
     public function answer(Request $request, $id)
     {
         $zadanie = Zadanie::find($id);
@@ -139,19 +202,38 @@ class ZadaniaController extends Controller
 
             if ($request->file('file')->isValid()) {
 
-                 Rozwiazanie::create(
-                    ['idZadanie' => $id,
-                        'idUzytkownik' =>Auth::user()->id,
-                        'Informacje' =>"Zadanie: ".$zadanie->nazwa." Treść zadania".$zadanie->tresc,
-                        'created_at' => Carbon::now()
-                    ]
-                );
+
 
 
                 $file =Auth::user()->id."-".$zadanie->id.'.zip';
 
+                if (file_exists(storage_path()."/rozwiazania/".$id."/".$file)){
 
-                if ($request->file('file')->move(storage_path().'/rozwiazania/',$file)) {
+                    $msg=" zaktualizował";
+
+                    DB::table('rozwiazanie')
+                        ->where('idZadanie', $id)->where('idUzytkownik', Auth::user()->id)
+                        ->update(['updated_at' => Carbon::now()]);
+
+                }else{
+                    $msg=" przesłał";
+
+                    Rozwiazanie::create(
+                        ['idZadanie' => $id,
+                            'idUzytkownik' =>Auth::user()->id,
+                            'oceniono' =>"nie",
+                            'Informacje' =>"Zadanie: ".$zadanie->nazwa." Treść zadania".$zadanie->tresc,
+                            'created_at' => Carbon::now()
+                        ]
+                    );
+
+                }
+
+                File::makeDirectory(storage_path()."/rozwiazania/".$id, $mode = 0777, true, true);
+
+                if ($request->file('file')->move(storage_path().'/rozwiazania/'.$id,$file)) {
+
+
 
                     if(Auth::user()->typ!='nauczyciel') {
 
@@ -159,7 +241,7 @@ class ZadaniaController extends Controller
 
                         $grupa = DB::table('grupa')->where('id', $user->idGrupa)->get()->first();
 
-                        Powiadomienie::createImportantNotification($grupa->idNauczyciel, "Uzytkownik " . Auth::user()->imie . " " . Auth::user()->nazwisko. " Przesłał rozwiązanie do zadania \"".$zadanie->nazwa."\" Grupa: ".$grupa->nazwa);
+                        Powiadomienie::createImportantNotification($grupa->idNauczyciel, "Uzytkownik " . Auth::user()->imie . " " . Auth::user()->nazwisko. $msg." rozwiązanie do zadania \"".$zadanie->nazwa."\" Grupa: ".$grupa->nazwa);
                     }
 
                     return redirect()->back()->with('success', 'Dodano rozwiązanie.');

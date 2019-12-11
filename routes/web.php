@@ -61,8 +61,15 @@ Route::get('/panel/edytujkryterium', 'AdminFeaturesController@EdytujKryterium');
 
 Route::get('/panel/uzytkownik/{id}', 'AdminFeaturesController@EditUser');
 Route::get('/panel/uzytkownik/{id}/dodajpunkty', 'AdminFeaturesController@AddPoints');
+Route::get('/panel/uzytkownik/{id}/dodajpunkty/{answerID}', 'AdminFeaturesController@rateAnAnswer');
+
 //Dodanie punktów użytkownikowi
+
 Route::post('/addpoints/{id}', 'AddPointsController@AddPoints');
+
+Route::post('/rateAnAnswer/{id}/{answerID}', 'AddPointsController@rateAnAnswer');
+
+
 //Wprowadzanie uzytkownika
 Route::post('registerstudent', 'InsertUserController@storeStudent');
 Route::post('registerteacher', 'InsertUserController@createTeacher');
@@ -105,7 +112,7 @@ Route::post('wyklady/{id}/edytuj', 'WykladyController@edit');
 Route::get('zadania/{id}', 'ZadaniaController@show');
 Route::post('zadania/dodaj', 'ZadaniaController@create');
 Route::post('zadania/{id}/odpowiedz', 'ZadaniaController@answer');
-Route::post('zadania/{id}/link', 'ZadaniaController@link');
+Route::get('zadania/{id}/{user}/link', 'ZadaniaController@link');
 
 Route::get('zadania/{id}/usun', 'ZadaniaController@remove');
 Route::post('zadania/{id}/edytuj', 'ZadaniaController@edit');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Grupa;
+use App\Rozwiazanie;
 use App\Temat;
 use App\User;
 use App\Punkty;
@@ -28,7 +29,7 @@ class AdminFeaturesController extends Controller {
             $studenci = DB::table('uzytkownik')->where('typ', 'student')->orderBy('nazwisko', 'asc')->get();
             $nauczyciele = DB::table('uzytkownik')->where('typ', 'nauczyciel')->get();
             $group = Grupa::get();
-            $notification = DB::table('powiadomienie')->where('idUzytkownik', Auth::user()->id)->get();
+            $notification = DB::table('powiadomienie')->where('idUzytkownik', Auth::user()->id)->orderBy('created_at','desc')->get();
             $punkty = DB::table('punkty')->orderBy('created_at', 'desc')->get();
             $kryterium = [
                 'trzy' => Storage::disk('kryterium')->get('3.txt'),
@@ -48,6 +49,19 @@ class AdminFeaturesController extends Controller {
                 ])->first();
 
                 $zadanie->lab = $lab->nazwa;
+
+                $rozwiazania  = Rozwiazanie::where([
+                    'idZadanie' => $zadanie->id
+                ])->orderBy('oceniono', 'desc')->get();
+
+                foreach ($rozwiazania as $rozwiazanie){
+                    $user= User::find($rozwiazanie->idUzytkownik);
+
+                    $rozwiazanie->uzytkownik=$user;
+
+                }
+
+                $zadanie->rozwiazania=$rozwiazania;
             }
 
             foreach ($wyklady as $wyklad){
@@ -356,11 +370,24 @@ class AdminFeaturesController extends Controller {
         $user = User::find($id);
 
         $data = array(
-            'user' => $user
+            'user' => $user,
+            'rozwiazanie' => "empty"
         );
 
         return view('pages.admin.addpoints')->with($data);
     }
+
+    public function rateAnAnswer($id, $answerID) {
+        $user = User::find($id);
+
+        $data = array(
+            'user' => $user,
+            'rozwiazanie' => $answerID
+        );
+
+        return view('pages.admin.addpoints')->with($data);
+    }
+
     
     public function EdytujKryterium(){
         $kryterium = [

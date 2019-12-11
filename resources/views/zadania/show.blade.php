@@ -74,47 +74,67 @@
                 </div>
                 <div class="row">
 
+                    @if($zadanie->oceniono=="tak")
+                        Twoje zadanie zostało ocenione:
+                        @if($zadanie->url!="empty")
+                            <div class="col-12">
+                                <a href="{{$zadanie->id}}/{{Auth::user()->id}}/link">Twoj plik</a>
+                            </div>
+                        @endif
+                    @endif
+                    @if($zadanie->oceniono=="nie")
 
-                    <form class="form-signin justify-content-center "  enctype="multipart/form-data" method="POST" action="/zadania/{{$zadanie->id}}/odpowiedz">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
-                            <div class="col-12 mb-3 upload-file">
-
-                                <button class="btn btn-info w-100">Wstaw plik</button>
+                        @if($zadanie->url!="empty")
+                            <div class="col-12">
+                                <a href="{{$zadanie->id}}/{{Auth::user()->id}}/link">Twoj plik</a>
+                            </div>
+                        @endif
 
 
+                        <form class="form-signin justify-content-center "  enctype="multipart/form-data" method="POST" action="/zadania/{{$zadanie->id}}/odpowiedz">
+                            {{ csrf_field() }}
 
-                                <div id="showfile">
+                            <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
+                                <div class="col-12 mb-3 upload-file">
+
+                                    <button class="btn btn-info w-100">Wstaw plik</button>
+
+
+
+                                    <div id="showfile">
                                     <span id="name">
 
                                     </span>
-                                    <span id="size">
+                                        <span id="size">
 
                                     </span>
-                                </div>
-
-                                <input type="file" id="fileInput" name="file" class="form-control-file" multiple onchange="showname()"/>
-                                @if ($errors->has('file'))
-                                    <span class="help-block">
-                                            <strong>{{ $errors->first('file') }}</strong>
-                                        </span>
-                                @endif
-
-                                <div class="form-group">
-
-
-                                    <div class="col-12 mb-3">
-                                        <button type="submit" class="btn btn-info w-100">
-                                            Zatwierdź
-                                        </button>
                                     </div>
 
+                                    <input type="file" id="fileInput" name="file" class="form-control-file" multiple onchange="showname()"/>
+                                    @if ($errors->has('file'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('file') }}</strong>
+                                        </span>
+                                    @endif
 
+                                    <div class="form-group">
+
+
+                                        <div class="col-12 mb-3">
+                                            <button type="submit" class="btn btn-info w-100">
+                                                Zatwierdź
+                                            </button>
+                                        </div>
+
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+
+                    @endif
+
+
                 </div>
             </div>
         </div>

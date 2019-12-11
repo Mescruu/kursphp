@@ -26,8 +26,8 @@ class WykladyController extends Controller
         $pdf = "/wyklady/" . $name;
         echo $pdf;
         return response()->file(storage_path($pdf));
-
     }
+
     public function remove($id)
     {
         //wyswitla rzeczy zwiazane z konkretnym tematem o id $id
