@@ -17,6 +17,12 @@
     </div>
     <div class="col-md-5 col-sm-6 col-xs-2">
 
+        @if(Auth::user()->typ==\App\User::$admin)
+            <div class="btn-diagonal btn-slanted float-left">
+                <a href="/zadania/{{$zadanie->id}}/edycja" >Edycja</a>
+            </div>
+        @endif
+
         @if(isset($zadanie->temat))
             @if($zadanie->zadanie!="empty")
                 <div class="btn-diagonal btn-slanted float-left">

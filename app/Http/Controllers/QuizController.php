@@ -30,6 +30,35 @@ class QuizController extends Controller
         $pytania = Pytanie::get()->where('idQuiz', $id);
         $wynik = Wynik::get()->where('idQuiz', $id);
 
+
+        $wyklad = DB::table('wyklad')->where('idTemat',$quiz->idTemat)->get()->first();
+        if($wyklad!=null)
+        {
+            $quiz->wyklad=$wyklad->id;
+        }
+        else{
+            $quiz->wyklad="empty";
+        }
+        $temat = DB::table('temat')->where('id',$quiz->idTemat)->get()->first();
+        if($temat!=null)
+        {
+            $quiz->temat=$temat->id;
+        }
+        else{
+            $quiz->temat="empty";
+        }
+        $zadanie = DB::table('zadanie')->where('idTemat',$quiz->idTemat)->get()->first();
+        if($zadanie!=null)
+        {
+            $quiz->zadanie=$zadanie->id;
+        }
+        else{
+            $quiz->zadanie="empty";
+        }
+
+
+
+
         if($quiz->typ==="kolokwium"&&$wynik!==null&&Auth::user()->typ!='nauczyciel'){
 
             return redirect('/profil')->with('error', trans('Już brałeś udział w tym kolokwium!'));
@@ -67,7 +96,7 @@ class QuizController extends Controller
         $iloscPytan=count($pytania);
 
 
-        return view ('quizy.show', ['pytania'=>$pytania,'ilosc'=>$iloscPytan, 'id'=>$id,'typ' => $quiz->typ, 'seed'=>$seed]);
+        return view ('quizy.show', ['pytania'=>$pytania,'ilosc'=>$iloscPytan, 'id'=>$id,'typ' => $quiz->typ,'quiz'=> $quiz, 'seed'=>$seed]);
 
     }
 
@@ -76,6 +105,33 @@ class QuizController extends Controller
     {
 
         $quiz = Quiz::get()->where('id', $id)->first();
+
+        $wyklad = DB::table('wyklad')->where('idTemat',$quiz->idTemat)->get()->first();
+        if($wyklad!=null)
+        {
+            $quiz->wyklad=$wyklad->id;
+        }
+        else{
+            $quiz->wyklad="empty";
+        }
+        $temat = DB::table('temat')->where('id',$quiz->idTemat)->get()->first();
+        if($temat!=null)
+        {
+            $quiz->temat=$temat->id;
+        }
+        else{
+            $quiz->temat="empty";
+        }
+        $zadanie = DB::table('zadanie')->where('idTemat',$quiz->idTemat)->get()->first();
+        if($zadanie!=null)
+        {
+            $quiz->zadanie=$zadanie->id;
+        }
+        else{
+            $quiz->zadanie="empty";
+        }
+
+
 
         $pytania = Pytanie::get()->where('idQuiz', $id);
 
@@ -165,7 +221,7 @@ class QuizController extends Controller
 
         Wynik::create($results);
 
-        return view ('quizy.odpowiedzi', ['pytania'=>$pytania,'wszystkiePunkty'=>$iloscPytan, 'id'=>$id,'zdobytePunkty' => $allPoints]);
+        return view ('quizy.odpowiedzi', ['pytania'=>$pytania,'wszystkiePunkty'=>$iloscPytan, 'quiz'=>$quiz, 'id'=>$id,'zdobytePunkty' => $allPoints]);
     }
 
 
@@ -190,6 +246,33 @@ class QuizController extends Controller
         $quiz = Quiz::find($id);
         $pytania = Pytanie::get()->where('idQuiz', $id);
 
+        $wyklad = DB::table('wyklad')->where('idTemat',$quiz->idTemat)->get()->first();
+        if($wyklad!=null)
+        {
+            $quiz->wyklad=$wyklad->id;
+        }
+        else{
+            $quiz->wyklad="empty";
+        }
+        $temat = DB::table('temat')->where('id',$quiz->idTemat)->get()->first();
+        if($temat!=null)
+        {
+            $quiz->temat=$temat->id;
+        }
+        else{
+            $quiz->temat="empty";
+        }
+        $zadanie = DB::table('zadanie')->where('idTemat',$quiz->idTemat)->get()->first();
+        if($zadanie!=null)
+        {
+            $quiz->zadanie=$zadanie->id;
+        }
+        else{
+            $quiz->zadanie="empty";
+        }
+
+
+
         $index=0;
         foreach ($pytania as $pytanie){
            $index++;
@@ -198,7 +281,7 @@ class QuizController extends Controller
 
         $iloscPytan=count($pytania);
 
-        return view ('quizy.edit', ['pytania'=>$pytania,'ilosc'=>$iloscPytan, 'id'=>$id,'typ' => $quiz->typ]);
+        return view ('quizy.edit', ['pytania'=>$pytania,'ilosc'=>$iloscPytan, 'quiz'=>$quiz, 'id'=>$id,'typ' => $quiz->typ]);
     }
 
     public function confirm(Request $request)

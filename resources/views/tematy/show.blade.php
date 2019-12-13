@@ -12,16 +12,16 @@
 
     <div class="col-md-4 col-sm-5 col-xs-3 float-left">
         <h2 >
-            Temat
+            <a href="/tematy/{{$temat->id}}" >Temat</a>
         </h2>
     </div>
     <div class="col-md-5 col-sm-6 col-xs-2">
 
-    @if(Auth::user()->typ==Auth::user()->admin)
+        @if(Auth::user()->typ==\App\User::$admin)
             <div class="btn-diagonal btn-slanted float-left">
                 <a href="/tematy/{{$temat->id}}/edycja" >Edycja</a>
             </div>
-    @endif
+        @endif
 
 
 

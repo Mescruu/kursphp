@@ -8,6 +8,7 @@ use App\Temat;
 use App\User;
 use App\Punkty;
 use Carbon\Carbon;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -135,8 +136,11 @@ class AdminFeaturesController extends Controller {
                 }
                 $grupa->studenci = $grupa_studenci;
             }
-
-            return view('pages.admin.panel', ['quizy'=>$quizy, 'group' => $group, 'studenci' => $studenci, 'nauczyciele' => $nauczyciele, 'notification' => $notification, 'kryterium' => $kryterium, 'tematy' => $tematy, 'wyklady'=>$wyklady, 'zadania'=>$zadania]);
+            $editTask= session('editTask');
+            session()->forget('editTask');
+            return view('pages.admin.panel', ['quizy'=>$quizy, 'group' => $group, 'studenci' => $studenci, 'nauczyciele' => $nauczyciele,
+                'editTask'=>$editTask,
+                'notification' => $notification, 'kryterium' => $kryterium, 'tematy' => $tematy, 'wyklady'=>$wyklady, 'zadania'=>$zadania]);
         }
     }
 

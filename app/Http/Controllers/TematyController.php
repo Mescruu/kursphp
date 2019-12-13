@@ -104,6 +104,32 @@ class TematyController extends Controller
     public function edit($id)
     {
         $temat = Temat::find($id);
+
+        $wyklad = DB::table('wyklad')->where('idTemat',$id)->get()->first();
+        if($wyklad!=null)
+        {
+            $temat->wyklad=$wyklad->id;
+        }
+        else{
+            $temat->wyklad="empty";
+        }
+        $quiz = DB::table('quiz')->where('idTemat',$id)->get()->first();
+        if($quiz!=null)
+        {
+            $temat->quiz=$quiz->id;
+        }
+        else{
+            $temat->quiz="empty";
+        }
+        $zadanie = DB::table('zadanie')->where('idTemat',$id)->get()->first();
+        if($zadanie!=null)
+        {
+            $temat->zadanie=$zadanie->id;
+        }
+        else{
+            $temat->zadanie="empty";
+        }
+
         $trescAktualna = Storage::disk('tematy')->get($id.'/abb.txt');
         if(Auth::user()->typ==\App\User::$admin){
             return view ('tematy.edit', ['temat' => $temat, 'trescAktualna' => $trescAktualna]);

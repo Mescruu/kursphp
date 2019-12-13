@@ -116,6 +116,7 @@ Route::get('zadania/{id}/{user}/link', 'ZadaniaController@link');
 
 Route::get('zadania/{id}/usun', 'ZadaniaController@remove');
 Route::post('zadania/{id}/edytuj', 'ZadaniaController@edit');
+Route::get('zadania/{id}/edycja', 'ZadaniaController@redirectToEdit');
 
 
 

@@ -29,7 +29,8 @@
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link
 
-                           @if ($errors->isEmpty())
+
+                           @if ($errors->isEmpty() && !isset($editTask))
                             active
                             @endif
 
@@ -38,8 +39,8 @@
                             @if(isset($notification))
                                 @if(count($notification)>0)
                                     <span class="float-right badge badge-primary badge-pill">
-                            {{count($notification)}}
-                            </span>
+                                    {{count($notification)}}
+                                    </span>
                                 @endif
                             @endif
                         </a>
@@ -47,7 +48,6 @@
                     <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Twoje dane</a>
 
                     <a class="nav-link
-
                  @if($errors->has('current-password'))
                             active
                     @endif
@@ -63,13 +63,17 @@
 
                     <a class="nav-link" id="v-pills-teacher-tab" data-toggle="pill" href="#v-pills-teacher" role="tab" aria-controls="v-pills-teacher" aria-selected="false">Nauczyciele</a>
 
-                    <a class="nav-link"
+                    <a class="nav-link
                        @if($errors->has('nazwa-zadania')||$errors->has('tresc-zadania')||$errors->has('tytul-wyklad')||$errors->has('file'))
                        active
-                       @endif
+                       @endif"
                        id="v-pills-criterion-tab" data-toggle="pill" href="#v-pills-criterion" role="tab" aria-controls="v-pills-criterion" aria-selected="false">Kryterium oceniania</a>
 
-                    <a class="nav-link" id="v-pills-cms-tab" data-toggle="pill" href="#v-pills-cms" role="tab" aria-controls="v-pills-cms" aria-selected="false">Zarządzanie treścią</a>
+                    <a class="nav-link
+                         @if(isset($editTask))
+                            active
+                        @endif
+" id="v-pills-cms-tab" data-toggle="pill" href="#v-pills-cms" role="tab" aria-controls="v-pills-cms" aria-selected="false">Zarządzanie treścią</a>
 
                 </div>
             </div>
@@ -612,7 +616,11 @@
 
                     </div>
 
-                    <div class="tab-pane fade show" id="v-pills-cms" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                    <div class="tab-pane fade show
+@if(isset($editTask))
+                            active in
+                            @endif
+" id="v-pills-cms" role="tabpanel" aria-labelledby="v-pills-settings-tab">
 
                         <h2>
                             Zarządzanie treścią
@@ -621,7 +629,11 @@
 
                         <ul class="nav nav-pills justify-content-center mb-3" id="pills-tab" role="tablist">
                             <li class="nav-item w-25">
-                                <a class="nav-link  w-100 text-center active" id="pills-contact-tab" data-toggle="pill" href="#pills-tematy" role="tab" aria-controls="pills-contact" aria-selected="false">Tematy</a>
+                                <a class="nav-link  w-100 text-center
+                                           @if(!isset($editTask))
+                                        active
+                                            @endif
+                                " id="pills-contact-tab" data-toggle="pill" href="#pills-tematy" role="tab" aria-controls="pills-contact" aria-selected="false">Tematy</a>
                             </li>
                             
                             <li class="nav-item w-25">
@@ -629,7 +641,11 @@
                             </li>
                             
                             <li class="nav-item w-25">
-                                <a class="nav-link w-100 text-center" id="pills-profile-tab" data-toggle="pill" href="#pills-zadania" role="tab" aria-controls="pills-profile" aria-selected="false">Zadania</a>
+                                <a class="nav-link w-100 text-center
+                                    @if(isset($editTask))
+                                        active
+                                      @endif
+                                " id="pills-profile-tab" data-toggle="pill" href="#pills-zadania" role="tab" aria-controls="pills-profile" aria-selected="false">Zadania</a>
                             </li>
                             
                             <li class="nav-item w-25">
@@ -644,7 +660,10 @@
                         <div class="tab-content" id="pills-tabContent">
                             
                             <!-- Treść zakładki TEMATY -->
-                            <div class="tab-pane fade show active" id="pills-tematy" role="tabpanel" aria-labelledby="pills-tematy-tab">
+                            <div class="tab-pane fade show
+                                   @if(!isset($editTask))
+                                    active
+                                    @endif" id="pills-tematy" role="tabpanel" aria-labelledby="pills-tematy-tab">
                                 <div class="card">
                                     <div class="card-header" id="headingOne">
                                         <h5 class=" h-100 my-auto">
@@ -758,7 +777,10 @@
                             </div>
                             
                             <!-- Treść zakładki ZADANIA -->
-                            <div class="tab-pane fade" id="pills-zadania" role="tabpanel" aria-labelledby="pills-zadania-tab">
+                            <div class="tab-pane fade
+                                   @if(isset($editTask))
+                                    active in show
+                                    @endif" id="pills-zadania" role="tabpanel" aria-labelledby="pills-zadania-tab">
 
 
                                 <div class="card">
@@ -871,7 +893,13 @@
                                                 <a href="#pokaz{{$zadanie->id}}" data-toggle="collapse"  aria-expanded="false" aria-controls="pokaz{{$zadanie->id}}"  class="btn btn-info w-100 mr-2">Pokaż</a>
                                             </td>
                                             <td>
-                                                <a href="#edytuj{{$zadanie->id}}" data-toggle="collapse"  aria-expanded="false" aria-controls="edytuj{{$zadanie->id}}"  class="btn btn-info w-100 mr-2">Edytuj</a>
+                                                <a href="#edytuj{{$zadanie->id}}" data-toggle="collapse"  aria-expanded="
+                                                @if(isset($editTask))
+                                                        true
+                                                @else
+                                                        false
+                                                @endif
+                                                " aria-controls="edytuj{{$zadanie->id}}"  class="btn btn-info w-100 mr-2">Edytuj</a>
                                             </td>
                                             <td>
                                                 <a href="#rozwiazanie{{$zadanie->id}}" data-toggle="collapse"  aria-expanded="false" aria-controls="rozwiazanie{{$zadanie->id}}"  class="btn btn-info w-100 mr-2">Rozwiązania</a>
@@ -905,7 +933,13 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="collapse border"
+                                                <div class="collapse border
+                                                 @if(isset($editTask))
+                                                @if($editTask==$zadanie->id)
+                                                        in show
+                                                        @endif
+                                                @endif
+                                                        "
                                                      id="edytuj{{$zadanie->id}}">
                                                     <div class="card-body create-group-body">
 

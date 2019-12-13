@@ -22,8 +22,6 @@ class Powiadomienie extends Model
     }
     public static function createImportantNotification($id, $content){
 
-
-
         DB::table('powiadomienie')->insert(
             ['komunikat' => $content, 'idUzytkownik'=> $id,'waga'=>'kolokwium', 'created_at' => Carbon::now()]
         );

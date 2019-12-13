@@ -9,6 +9,7 @@ use App\User;
 use App\Wyklad;
 use App\Zadanie;
 use Carbon\Carbon;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -102,6 +103,11 @@ class ZadaniaController extends Controller
 
 
         return view('zadania.show')->with('zadanie', $zadanie);
+    }
+    public function redirectToEdit($id)
+    {
+        session(['editTask'=>$id]);
+        return redirect('/panel/');
     }
 
     public function edit(Request $request, $id)

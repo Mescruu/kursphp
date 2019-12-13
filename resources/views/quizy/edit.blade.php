@@ -11,17 +11,34 @@
 
     <div class="col-md-4 col-sm-5 col-xs-3 float-left">
         <h2 >
-            Quiz
+            <a href="/quizy/{{$quiz->id}}" >Quiz</a>
         </h2>
     </div>
     <div class="col-md-4 col-sm-6 col-xs-2">
+        @if(isset($quiz->temat))
+            @if($quiz->temat!="empty")
+                <div class="btn-diagonal btn-slanted float-left">
+                    <a href="/quizy/{{$quiz->temat}}" >Temat</a>
+                </div>
+            @endif
+        @endif
 
-        <div class="btn-diagonal btn-slanted float-left">
-            <a href="#" >Temat</a>
-        </div>
-        <div class="btn-diagonal btn-slanted float-left">
-            <a href="#" >Zadanie</a>
-        </div>
+        @if(isset($quiz->wyklad))
+            @if($quiz->wyklad!="empty")
+                <div class="btn-diagonal btn-slanted float-left">
+                    <a href="/wyklady/{{$quiz->wyklad}}" >Wyklad</a>
+                </div>
+            @endif
+        @endif
+
+
+        @if(isset($temat->zadanie))
+            @if($temat->zadanie!="empty")
+                <div class="btn-diagonal btn-slanted float-left">
+                    <a href="/zadania/{{$quiz->zadanie}}" >Zadanie</a>
+                </div>
+            @endif
+        @endif
 
     </div>
 
