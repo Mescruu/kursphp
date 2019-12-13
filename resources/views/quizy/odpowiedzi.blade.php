@@ -17,7 +17,14 @@
     </div>
     <div class="col-md-4 col-sm-6 col-xs-2">
 
-        @if(isset($quiz->temat))
+        @if(Auth::user()->typ==\App\User::$admin)
+            <div class="btn-diagonal btn-slanted float-left">
+                <a href="/quizy/{{$quiz->id}}/edycja" >Edycja</a>
+            </div>
+        @endif
+
+
+    @if(isset($quiz->temat))
             @if($quiz->temat!="empty")
                 <div class="btn-diagonal btn-slanted float-left">
                     <a href="/quizy/{{$quiz->temat}}" >Temat</a>
@@ -34,8 +41,8 @@
         @endif
 
 
-        @if(isset($temat->zadanie))
-            @if($temat->zadanie!="empty")
+        @if(isset($quiz->zadanie))
+            @if($quiz->zadanie!="empty")
                 <div class="btn-diagonal btn-slanted float-left">
                     <a href="/zadania/{{$quiz->zadanie}}" >Zadanie</a>
                 </div>

@@ -32,8 +32,8 @@
         @endif
 
 
-        @if(isset($temat->zadanie))
-            @if($temat->zadanie!="empty")
+        @if(isset($quiz->zadanie))
+            @if($quiz->zadanie!="empty")
                 <div class="btn-diagonal btn-slanted float-left">
                     <a href="/zadania/{{$quiz->zadanie}}" >Zadanie</a>
                 </div>
