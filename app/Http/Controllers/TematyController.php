@@ -39,7 +39,6 @@ class TematyController extends Controller
         if($quiz!=null)
         {
             $temat->quiz=$quiz->id;
-            echo $quiz->id;
         }
         else{
             $temat->quiz="empty";

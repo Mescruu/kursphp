@@ -10,6 +10,7 @@ body{
 .card{
     background-color: whitesmoke;
     padding: 20px;
+    margin-bottom: 10px;
 }
 
 .topic-section{
