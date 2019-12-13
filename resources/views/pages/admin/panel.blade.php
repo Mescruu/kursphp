@@ -82,7 +82,7 @@
 
                     <div class="tab-pane fade show
 
-                             @if ($errors->isEmpty())
+                             @if ($errors->isEmpty() && !isset($editTask))
                             active
                             @endif
 
@@ -335,20 +335,71 @@
 
                             <div class="card">
 
-                                <div class="card-header" id="headingG{{$grupa->id}}">
-                                    <h5 class="mb-0">
-
-
-                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#G{{$grupa->id}}" aria-expanded="true" aria-controls="collapseG{{$grupa->id}}">
+                                <div class="card-header d-flex" id="headingG{{$grupa->id}}">
+                                    <h5 class="mb-0 flex-fill">
+                                        <button class="btn btn-link ml-auto" type="button" data-toggle="collapse" data-target="#G{{$grupa->id}}" aria-expanded="true" aria-controls="collapseG{{$grupa->id}}">
 
                                             {{$grupa->nazwa}}
                                         </button>
-
-
-
-
-
                                     </h5>
+                                    <div class="flex-fill text-right">
+                                        <a href="#edytuj{{$grupa->id}}" data-toggle="collapse"  aria-expanded="false" aria-controls="edytuj{{$grupa->id}}"  class="btn btn-info mr-auto">Edytuj</a>
+                                        <a href="panel/usungrupe/{{$grupa->id}}/usun"  onclick="return confirm('Tej operacji nie da się cofnąć!')" class="btn btn-info"> usun</a>
+                                    </div>
+                                </div>
+
+                                <div class="collapse border"
+                                     id="edytuj{{$grupa->id}}">
+                                    <div class="card-body create-group-body">
+
+                                        <form class="form-signin justify-content-center " method="POST" action="/panel/edytujgrupe/{{$grupa->id}}">
+                                            {{ csrf_field() }}
+
+                                            <div class="row">
+
+                                                <div class="col-xs-12 col-sm-6 mb-2">
+                                                    <div class="form-group{{ $errors->has('nazwa-grupy') ? ' has-error' : '' }}">
+
+                                                        <input id="nazwa-grupy" type="text" placeholder="Nazwa grupy" class="form-control" name="nazwa-grupy" value="{{$grupa->nazwa}}" required autofocus>
+
+                                                        @if ($errors->has('nazwa-grupy'))
+                                                            <span class="help-block">
+                                                                   <strong>{{ $errors->first('nazwa-grupy') }}</strong>
+                                                                </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 mb-2">
+                                                    <div class="form-group{{ $errors->has('nauczyciel') ? ' has-error' : '' }}">
+
+                                                        <select name="nauczyciel" class="form-control" value="{{ old('nauczyciel') }}" required>
+                                                            <option>{{$grupa->nauczyciel->imie}} {{$grupa->nauczyciel->nazwisko}}</option>
+
+                                                        @foreach($nauczyciele as $teacher)
+                                                            @if($teacher->imie !== $grupa->nauczyciel->imie && $teacher->nazwisko !== $grupa->nauczyciel->nazwisko)
+                                                                <option>{{$teacher->imie}} {{$teacher->nazwisko}}</option>
+                                                                @endif
+                                                            @endforeach
+                                                        </select>
+
+                                                        @if ($errors->has('nauczyciel'))
+                                                            <span class="help-block">
+                                                                    <strong>{{ $errors->first('nauczyciel') }}</strong>
+                                                                </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xs-12 col-sm-6 col-md-4 ml-auto">
+                                                    <button type="submit" class="btn btn-info w-100 mx-auto">
+                                                        Zatwierdź
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        </form>
+
+                                    </div>
                                 </div>
 
                                 <div id="G{{$grupa->id}}" class="collapse" aria-labelledby="headingG{{$grupa->id}}" data-parent="#accordionExample">

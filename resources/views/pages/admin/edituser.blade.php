@@ -79,13 +79,61 @@
                                 <td>
                                     Grupa
                                 </td>
-                                <td>
-                                    {{$nazwaGrupy}}
+                                <td class="d-flex">
+                                    <div class="flex-fill">
+                                        {{$nazwaGrupy}}
+                                    </div>
+                                    <div class="flex-fill text-right">
+                                        <a href="#edytuj{{$user->id}}" data-toggle="collapse"  aria-expanded="false" aria-controls="edytuj{{$user->id}}"  class="btn btn-info mr-auto">Edytuj</a>
+                                    </div>
                                 </td>
                             </tr>
                         </table>
+                            <div class="collapse border
+                                 @if ($errors->has('nazwa-grupy'))
+                                    in show
+@endif
+                                    "
+                                 id="edytuj{{$user->id}}">
+                                <div class="card-body create-group-body">
 
+                                    <form class="form-signin justify-content-center " method="POST" action="/panel/zmiengrupe/{{$user->id}}">
+                                        {{ csrf_field() }}
 
+                                        <div class="row">
+
+                                            <div class="col-xs-12 col-sm-6">
+                                                <div class="form-group{{ $errors->has('grupa') ? ' has-error' : '' }}">
+
+                                                    <select name="grupa" class="form-control" value="{{ old('grupa') }}" required>
+                                                        <option>{{$nazwaGrupy}}</option>
+
+                                                        @foreach($grupy as $grupa)
+                                                            @if($grupa->nazwa !== $nazwaGrupy)
+                                                                <option>{{$grupa->nazwa}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+
+                                                    @if ($errors->has('grupa'))
+                                                        <span class="help-block">
+                                                                    <strong>{{ $errors->first('grupa') }}</strong>
+                                                                </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-12 col-sm-6 col-md-4 ml-auto">
+                                                <button type="submit" class="btn btn-info w-100 mx-auto">
+                                                    Zatwierdź
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
 
                     </div>
 

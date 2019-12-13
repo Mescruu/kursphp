@@ -50,6 +50,8 @@ Route::get('/profil/punkty', 'PagesController@punkty');
 Route::get('/panel', 'AdminFeaturesController@panel');
 
 Route::post('/panel/dodajgrupe', 'AdminFeaturesController@Groups');
+Route::post('/panel/edytujgrupe/{id}', 'AdminFeaturesController@EditGroups');
+Route::post('/panel/usungrupe/{id}', 'AdminFeaturesController@removeGroups');
 
 Route::get('/panel/dodajstudenta', 'AdminFeaturesController@Student');
 Route::get('/panel/dodajstudentazpliku', 'AdminFeaturesController@StudentFile');
@@ -60,6 +62,8 @@ Route::get('/panel/dodajnauczyciela', 'AdminFeaturesController@Nauczyciel');
 Route::get('/panel/edytujkryterium', 'AdminFeaturesController@EdytujKryterium');
 
 Route::get('/panel/uzytkownik/{id}', 'AdminFeaturesController@EditUser');
+Route::post('/panel/zmiengrupe/{id}', 'AdminFeaturesController@editUserGroup');
+
 Route::get('/panel/uzytkownik/{id}/dodajpunkty', 'AdminFeaturesController@AddPoints');
 Route::get('/panel/uzytkownik/{id}/dodajpunkty/{answerID}', 'AdminFeaturesController@rateAnAnswer');
 

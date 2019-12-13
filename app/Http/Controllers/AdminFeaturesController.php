@@ -88,7 +88,7 @@ class AdminFeaturesController extends Controller {
                 }
                 $temat->grupy = $nazwyGrup;
             }
-            
+
             //Ilość pytań w każdym z quizów
             $iloscPytan = [];
             $index = 0;
@@ -135,6 +135,8 @@ class AdminFeaturesController extends Controller {
                     }
                 }
                 $grupa->studenci = $grupa_studenci;
+
+                $grupa->nauczyciel = DB::table('uzytkownik')->where('id',$grupa->idNauczyciel)->first();
             }
             $editTask= session('editTask');
             session()->forget('editTask');
@@ -144,11 +146,56 @@ class AdminFeaturesController extends Controller {
         }
     }
 
+    public function removeGroups($id)
+    {
+        if (Auth::user()->typ == \App\User::$admin) {
+
+
+            $listagrup = DB::table('listagrup')->where('idGrupa', $id);
+            $listagrup->delete();
+
+            $grupa=Grupa::find($id);
+            $grupa->delete();
+
+            return redirect('/panel/')->with('success', 'Uudało się usunąć grupę');
+
+        } else {
+            return redirect('/panel/')->with('errors', 'Nie udało się dodać wykładu');
+        }
+    }
+
+    public function EditGroups(Request $request, $id)
+    {
+        $this->validate($request,[
+            'nazwa-grupy' => 'required|max:12',
+        ]);
+
+        $pieces = explode(" ", $request->input('nauczyciel'));
+
+        echo $pieces[0];
+        echo $pieces[1];
+
+
+        $nauczyciel = User::where([
+            'imie' => $pieces[0],
+            'nazwisko' => $pieces[1],
+        ])->first();
+
+        DB::table('grupa')
+            ->where('id', $id)
+            ->update(['nazwa' => $request->input('nazwa-grupy'),
+                'idNauczyciel' =>$nauczyciel->id,
+                'updated_at' => Carbon::now()
+            ]);
+
+        return redirect()->back()->with('success', trans('Udało się edytować grupę'));
+
+    }
     public function Groups(Request $request) {//sposób na przerzucenie zmiennej:
 
         //sposób na przerzucenie zmiennej:
         $this->validate($request,[
-            'nazwa-grupy' => 'required|max:3',
+            'nazwa-grupy' => 'required|max:12',
         ]);
 
         $pieces = explode(" ", $request->input('nauczyciel'));
@@ -168,8 +215,6 @@ class AdminFeaturesController extends Controller {
                 'imie' => $pieces[0],
                 'nazwisko' => $pieces[1],
             ])->first();
-
-        echo $nauczyciel->id;
 
 
             $array = [
@@ -346,9 +391,21 @@ class AdminFeaturesController extends Controller {
         return $data;
     }
 
+    public  function  editUserGroup(Request $request, $id){
+        $grupa = DB::table('grupa')->where('nazwa', $request->input('grupa'))->first();
+        DB::table('uzytkownik')
+            ->where('id', $id)
+            ->update(['idGrupa' => $grupa->id,
+                'updated_at' => Carbon::now()
+            ]);
+
+        return redirect()->back()->with('success', trans('Udało się zminić grupę'));
+    }
 
     public function EditUser($id) {
         $user = DB::table('uzytkownik')->where('id', $id)->first();
+        $grupy = DB::table('grupa')->get();
+
         $nazwaGrupy = DB::table('grupa')->where('id', $user->idGrupa)->value('nazwa');
         $punkty = Punkty::where('idStudent', $id)->orderBy('created_at', 'desc')->get();
         $iloscPunktow = 0;
@@ -364,7 +421,8 @@ class AdminFeaturesController extends Controller {
             'user' => $user,
             'nazwaGrupy' => $nazwaGrupy,
             'iloscPunktow' => $iloscPunktow,
-            'punkty' => $punkty
+            'punkty' => $punkty,
+            'grupy' => $grupy
         );
 
         return view('pages.admin.edituser')->with($data);
