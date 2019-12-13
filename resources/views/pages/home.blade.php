@@ -26,14 +26,14 @@
 
                     <div class="col-12">
                         <h1>Witaj!</h1>
-                        <hr class="w-50">
+                        <hr class="w-80">
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="col-12 py-3">
                         <div>
-                            aaaa
+                            Wejdź w swój <a href="/profil">Profil</a>, aby sprawdzić swoje dane, powiadomienia oraz posiadane punkty. Możesz tam również zmienić swoje hasło.
                         </div>
                     </div>
                 </div>

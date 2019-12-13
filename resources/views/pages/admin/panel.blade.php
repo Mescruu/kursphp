@@ -92,7 +92,7 @@
                         @if(count($notification)>0)
                         @foreach($notification as $not)
 
-                            @if(isset($not->waga))
+                            @if($not->waga === "kolokwium")
                                         <div class="alert alert-warning alert-dismissible fade show text-center w-100 mx-auto my-4" id="not{{ $not->id }}" role="alert">
 
                                             <small class="float-left">
