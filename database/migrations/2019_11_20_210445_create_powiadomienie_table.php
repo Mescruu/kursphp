@@ -17,7 +17,7 @@ class CreatePowiadomienieTable extends Migration
             $table->increments('id');
             $table->integer('idUzytkownik');
             $table->string('komunikat');
-            $table->string('waga');
+            $table->string('waga')->nullable();
             $table->timestamps();
         });
     }

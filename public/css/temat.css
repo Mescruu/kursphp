@@ -7,6 +7,10 @@ body{
     padding: 20px 0;
 }
 
+.pokaz-temat-section .card{
+    padding: 20px;
+}
+
 .topic-section{
     width: 100%;
     padding: 20px 0;

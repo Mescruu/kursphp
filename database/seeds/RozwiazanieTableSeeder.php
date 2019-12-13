@@ -10,7 +10,7 @@ class RozwiazanieTableSeeder extends Seeder
             'id' => 1,
             'idZadanie' => 1,
             'idUzytkownik' => 1,
-            'sciezka' => 'r1',
+            'oceniono' => 'nie',
             'informacje' => 'Zadanie: Utwórz podstawową stronę'
         ]);
         
@@ -18,7 +18,7 @@ class RozwiazanieTableSeeder extends Seeder
             'id' => 2,
             'idZadanie' => 2,
             'idUzytkownik' => 1,
-            'sciezka' => 'r2',
+            'oceniono' => 'nie',
             'informacje' => 'Zadanie: Galeria'
         ]);
         
@@ -26,7 +26,7 @@ class RozwiazanieTableSeeder extends Seeder
             'id' => 3,
             'idZadanie' => 1,
             'idUzytkownik' => 2,
-            'sciezka' => 'r3',
+            'oceniono' => 'nie',
             'informacje' => 'Zadanie: Utwórz podstawową stronę'
         ]);
         
@@ -34,7 +34,7 @@ class RozwiazanieTableSeeder extends Seeder
             'id' => 4,
             'idZadanie' => 2,
             'idUzytkownik' => 2,
-            'sciezka' => 'r4',
+            'oceniono' => 'nie',
             'informacje' => 'Zadanie: Galeria'
         ]);
         
@@ -42,7 +42,7 @@ class RozwiazanieTableSeeder extends Seeder
             'id' => 5,
             'idZadanie' => 3,
             'idUzytkownik' => 2,
-            'sciezka' => 'r4',
+            'oceniono' => 'nie',
             'informacje' => 'Zadanie: Utwórz kilka stron php, które połączysz hiperłączami...'
         ]);
     }
