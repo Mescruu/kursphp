@@ -92,8 +92,8 @@
                             <div class="btn-editor btn-color">
                                 <input class="btn-info btn-color" type="button" value="Kolor" title="Kolor" onclick="dodajBBCode('color')">
                             </div>
-                            <div class="btn-editor">
-                                <input class="btn-info" type="button" value="Zakreślenie" title="Zakreślenie" onclick="dodajBBCode('highlight')">
+                            <div class="btn-editor btn-highlight">
+                                <input class="btn-info btn-highlight" type="button" value="Zakreślenie" title="Zakreślenie" onclick="dodajBBCode('highlight')">
                             </div>
                             <div class="btn-editor btn-hr">
                                 <input class="btn-info btn-hr" type="button" value="Przerwa" title="Przerwa" onclick="dodajBBCode('hr')"><br>
@@ -107,11 +107,11 @@
                             <div class="btn-editor btn-stitle">
                                 <input class="btn-info btn-stitle" type="button" value="Podtytuł" title="Podtytuł" onclick="dodajBBCode('stitle')">
                             </div>
-                            <div class="btn-editor">
-                                <input class="btn-info" type="button" value="Nazwa" title="Nazwa własna (XAMPP, PHP...)" onclick="dodajBBCode('name')">
+                            <div class="btn-editor btn-name">
+                                <input class="btn-info btn-name" type="button" value="Nazwa" title="Nazwa własna (XAMPP, PHP...)" onclick="dodajBBCode('name')">
                             </div>
-                            <div class="btn-editor">
-                                <input class="btn-info" type="button" value="Ścieżka" title="Ścieżka (index.php, /localhost...)" onclick="dodajBBCode('path')">
+                            <div class="btn-editor btn-path">
+                                <input class="btn-info btn-path" type="button" value="Ścieżka" title="Ścieżka (index.php, /localhost...)" onclick="dodajBBCode('path')">
                             </div>
 
                             

@@ -147,6 +147,18 @@ body{
     background: url("/storage/icons/Icons_editor/icon_listpoint_white.svg");
 
 }
+.topic-section form #buttons-left .btn-highlight{
+    background: url("/storage/icons/Icons_editor/icon_highlight_white.svg");
+
+}
+.topic-section form #buttons-left .btn-name{
+    background: url("/storage/icons/Icons_editor/icon_name_white.svg");
+
+}
+.topic-section form #buttons-left .btn-path{
+    background: url("/storage/icons/Icons_editor/icon_path_white.svg");
+
+}
 
 .topic-section form #buttons-left .btn-img,
 .topic-section form #buttons-left .btn-table,
@@ -161,7 +173,10 @@ body{
 .topic-section form #buttons-left .btn-stitle,
 .topic-section form #buttons-left .btn-link,
 .topic-section form #buttons-left .btn-color,
-.topic-section form #buttons-left .btn-point{
+.topic-section form #buttons-left .btn-point,
+.topic-section form #buttons-left .btn-highlight,
+.topic-section form #buttons-left .btn-name,
+.topic-section form #buttons-left .btn-path{
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
