@@ -117,7 +117,7 @@ class WykladyController extends Controller
 
             $this->validate($request, [
                 'tytul-wykladu' => 'required|max:255',
-                'file' => 'mimes:pdf'
+                'file' => 'required|mimes:pdf'
             ]);
 
             echo $request->input('nazwa-tematu');

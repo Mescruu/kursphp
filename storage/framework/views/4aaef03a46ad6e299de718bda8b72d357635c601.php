@@ -1,19 +1,19 @@
 <?php $__env->startSection('assets'); ?>
-    <link href="<?php echo e(asset('css/temat.css')); ?>" rel="stylesheet">
 
     <link href="<?php echo e(asset('css/underNav.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/temat.css')); ?>" rel="stylesheet">
 
 <?php $__env->stopSection(); ?>
 
 
 <?php $__env->startSection('undernav'); ?>
 
-    <div class="col-md-4 col-sm-5 col-xs-3 float-left">
+    <div class="col-md-4 col-sm-4 col-xs-3 float-left">
         <h2 >
             <a href="/tematy/<?php echo e($temat->id); ?>" >Temat</a>
         </h2>
     </div>
-    <div class="col-md-5 col-sm-6 col-xs-2">
+    <div class="col-md-6 col-sm-8 col-xs-2">
 
         <?php if(Auth::user()->typ==\App\User::$admin): ?>
             <div class="btn-diagonal btn-slanted float-left">

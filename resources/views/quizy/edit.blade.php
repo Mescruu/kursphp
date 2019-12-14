@@ -18,7 +18,7 @@
         @if(isset($quiz->temat))
             @if($quiz->temat!="empty")
                 <div class="btn-diagonal btn-slanted float-left">
-                    <a href="/quizy/{{$quiz->temat}}" >Temat</a>
+                    <a href="/tematy/{{$quiz->idTemat}}" >Temat</a>
                 </div>
             @endif
         @endif

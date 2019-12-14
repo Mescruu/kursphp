@@ -11,7 +11,7 @@
 
 @section('undernav')
 
-<div class="col-md-4 col-sm-5 col-xs-3 float-left">
+<div class="col-md-6 col-sm-8 col-xs-8 float-left">
     <h2 >
         Panel administracyjny
     </h2>
@@ -25,7 +25,7 @@
     <div class="container py-2">
 
         <div class="row">
-            <div class="col-3">
+            <div class="col-sm-12 col-md-3">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link
 
@@ -77,7 +77,7 @@
 
                 </div>
             </div>
-            <div class="col-9">
+            <div class="col-sm-12 col-md-9 pt-md-0 pt-sm-4">
                 <div class="tab-content" id="v-pills-tabContent">
 
                     <div class="tab-pane fade show
@@ -708,7 +708,7 @@
 
                         
 
-                        <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-content overflow-auto" id="pills-tabContent">
                             
                             <!-- Treść zakładki TEMATY -->
                             <div class="tab-pane fade show
@@ -779,7 +779,7 @@
                             </div>
                             
                             <!-- Treść zakładki QUIZY -->
-                            <div class="tab-pane fade" id="pills-quizy" role="tabpanel" aria-labelledby="pills-quizy-tab">
+                            <div class="tab-pane fade  overflow-auto" id="pills-quizy" role="tabpanel" aria-labelledby="pills-quizy-tab">
                                 <div class="card">
                                     <div class="card-header" id="headingOne">
                                         <h5 class=" h-100 my-auto">
@@ -828,7 +828,7 @@
                             </div>
                             
                             <!-- Treść zakładki ZADANIA -->
-                            <div class="tab-pane fade
+                            <div class="tab-pane fade overflow-auto
                                    @if(isset($editTask))
                                     active in show
                                     @endif" id="pills-zadania" role="tabpanel" aria-labelledby="pills-zadania-tab">
@@ -1127,9 +1127,9 @@
                                 <div class="card">
                                     <div class="card-header" id="headingOne">
                                         <h5 class=" h-100 my-auto">
-                                            Dodaj Grupę
+                                            Dodaj Wykład
 
-                                            <a href="#createGroup" data-toggle="collapse"  aria-expanded="false" aria-controls="createGroup"  class="btn btn-info add">+ Wyklad</a>
+                                            <a href="#createGroup" data-toggle="collapse"  aria-expanded="false" aria-controls="createGroup"  class="btn btn-info add">+ Wykład</a>
 
                                         </h5>
                                     </div>

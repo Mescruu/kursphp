@@ -1,0 +1,53 @@
+body{
+    background-color: rgba(79,91,147,1);
+    min-height: 100vh;
+}
+
+.pokaz-zadanie-section{
+    margin-top: 20px;
+}
+
+
+.card{
+    background-color: whitesmoke;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.pokaz-zadanie-section .btn-info {
+    display: inline-block;
+    width: 200px;
+    height: 40px;
+    border-radius: 0px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
+    margin-left: 20px;
+    color:
+            whitesmoke;
+    line-height: 28px;
+}
+.pokaz-zadanie-section .zip{
+    background: url("/storage/icons/zip.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+@media (max-width: 767.98px) {
+    .pokaz-zadanie-section .btn-info {
+        width: 80%;
+        margin-left: 10%;
+    }
+    .pokaz-zadanie-section .upload-file {
+        width: 100%;
+    }
+}
+@media (max-width: 575.98px) {
+    .pokaz-zadanie-section .btn-info {
+        width: 100%;
+        margin-left:0%;
+
+    }
+}
+

@@ -200,7 +200,6 @@ class ZadaniaController extends Controller
         $temat= DB::table('temat')->where('id',$zadanie->idTemat)->first();
 
 
-        if (Auth::user()->typ == \App\User::$user) {
 
             $this->validate($request, [
                 'file' => 'required|mimes:zip'
@@ -262,10 +261,6 @@ class ZadaniaController extends Controller
                 return redirect()->back()->with('errors', 'Nie udało się dodać pliku!');
             }
 
-
-        } else {
-            return redirect()->back()->with('errors', 'Zly plik');
-        }
     }
 
 }

@@ -70,19 +70,15 @@
                                 </div>
                             </div>
 
-                        <div class="form-group">
+                        <div class="form-group d-flex col-12">
 
-
-                            <div class="col-12 mb-3 mx-auto">
-                                <button type="submit" class="btn btn-info w-100 mx-auto">
-                                    Zatwierdź
-                                </button>
-                            </div>
-
-                            <div class="col-12 mx-auto">
-                                <button type="link" class="btn btn-info w-100 mx-auto">
+                                <button type="link" class="btn btn-info w-50  mr-2">
                                     <a href="/panel/uzytkownik/{{$user->id}}">Powrót</a>
                                 </button>
+
+                            <button type="submit" class="btn btn-info w-50 ml-2">
+                                Zatwierdź
+                            </button>
                             </div>
                         </div>
                     </form>

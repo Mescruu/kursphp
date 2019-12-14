@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('assets')
-    <link href="{{ asset('css/temat.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/zadanie.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/underNav.css') }}" rel="stylesheet">
 
@@ -10,12 +10,12 @@
 
 @section('undernav')
 
-    <div class="col-md-4 col-sm-5 col-xs-3 float-left">
+    <div class="col-md-4 col-sm-4 col-xs-3 float-left">
         <h2 >
-            Temat
+            Zadanie
         </h2>
     </div>
-    <div class="col-md-5 col-sm-6 col-xs-2">
+    <div class="col-md-6 col-sm-8 col-xs-2">
 
         @if(Auth::user()->typ==\App\User::$admin)
             <div class="btn-diagonal btn-slanted float-left">
@@ -56,7 +56,7 @@
 
     @if (!Auth::guest()) <!--jeżeli użytkownik nie jest gościem-->
 
-    <div class="pokaz-temat-section">
+    <div class="pokaz-zadanie-section">
 
         <div class="container">
             <div class="card">
@@ -66,7 +66,7 @@
                         <h1>{{$zadanie->nazwa}}</h1>
                         <hr class="w-50">
                         @if(isset($zadanie->updated_at))
-                        <small class="text-center mx-auto">Ostatnio edytowany {{$zadanie->updated_at}}</small>
+                            <small class="text-center mx-auto">Ostatnio edytowany {{$zadanie->updated_at}}</small>
                         @endif
                     </div>
 
@@ -78,65 +78,79 @@
                         </div>
                     </div>
                 </div>
+                <hr class="mx-auto w-50">
                 <div class="row">
 
                     @if($zadanie->oceniono=="tak")
-                        Twoje zadanie zostało ocenione:
                         @if($zadanie->url!="empty")
-                            <div class="col-12">
-                                <a href="{{$zadanie->id}}/{{Auth::user()->id}}/link">Twoj plik</a>
+
+                            <h5 class="text-center w-100">
+                                Twoj plik
+                            </h5>
+                            <div class="text-center  w-100 m-5">
+                                <a class="mx-auto p-5 zip" href="{{$zadanie->id}}/{{Auth::user()->id}}/link"></a>
                             </div>
                         @endif
+                            <hr class="w-50">
+
+                            <h5 class="text-center w-100">
+                                Twoje zadanie zostało ocenione.
+                            </h5>
+
                     @endif
                     @if($zadanie->oceniono=="nie")
 
                         @if($zadanie->url!="empty")
-                            <div class="col-12">
-                                <a href="{{$zadanie->id}}/{{Auth::user()->id}}/link">Twoj plik</a>
+                            <h5 class="text-center w-100">
+                                Twoj plik
+                            </h5>
+                            <div class="text-center  w-100 m-5">
+                                <a class="mx-auto p-5 zip" href="{{$zadanie->id}}/{{Auth::user()->id}}/link"></a>
                             </div>
-                        @endif
+                                <hr class="w-50">
 
 
-                        <form class="form-signin justify-content-center "  enctype="multipart/form-data" method="POST" action="/zadania/{{$zadanie->id}}/odpowiedz">
-                            {{ csrf_field() }}
+                            @endif
+                        <div class="col-12">
 
-                            <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
-                                <div class="col-12 mb-3 upload-file">
+                            @if($zadanie->url!="empty")
+                                <h5 class="text-center w-100 pb-2">
+                                    Edytuj rozwiązanie
+                                </h5>
+                                @else
+                                <h5 class="text-center w-100 pb-2">
+                                    Prześlij rozwiązanie
+                                </h5>
+                            @endif
 
-                                    <button class="btn btn-info w-100">Wstaw plik</button>
+                            <form class="form-signin row"  enctype="multipart/form-data" method="POST" action="/zadania/{{$zadanie->id}}/odpowiedz">
+                                {{ csrf_field() }}
 
+                                @if ($errors->has('file'))
+                                    <div class="help-block w-100 text-center mb-2">
+                                                         <strong>{{ $errors->first('file') }}</strong>
+                                                 </div>
+                                @endif
+                                <div class="col-12 d-flex justify-content-center form-group{{ $errors->has('file') ? ' has-error' : '' }}">
 
+                                    <div class="upload-file mr-xs-0">
 
-                                    <div id="showfile">
-                                    <span id="name">
+                                        <button class="btn btn-info mr-sm-2 mb-2">Wstaw plik</button>
+                                        <input type="file" id="fileInput" name="file" class="form-control-file" multiple onchange="showname()"/>
 
-                                    </span>
-                                        <span id="size">
-
-                                    </span>
+                                        <button type="submit" class="btn btn-info mb-2">
+                                            Zatwierdź
+                                        </button>
                                     </div>
 
-                                    <input type="file" id="fileInput" name="file" class="form-control-file" multiple onchange="showname()"/>
-                                    @if ($errors->has('file'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('file') }}</strong>
-                                        </span>
-                                    @endif
-
-                                    <div class="form-group">
-
-
-                                        <div class="col-12 mb-3">
-                                            <button type="submit" class="btn btn-info w-100">
-                                                Zatwierdź
-                                            </button>
-                                        </div>
-
-
-                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                                <div id="showfile" class="col-12 d-flex justify-content-center">
+                                    <div id="name">brak pliku</div>
+                                    <div id="size"></div>
+                                </div>
+                            </form>
+
+                        </div>
 
                     @endif
 

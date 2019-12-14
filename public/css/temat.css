@@ -420,19 +420,19 @@ body{
     height: 50px;
 }
 
-/* The container */
-.container {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    /*cursor: pointer;*/
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    color: rgb(38,43,82);
-}
+/*!* The container *!*/
+/*.container {*/
+/*    display: block;*/
+/*    position: relative;*/
+/*    padding-left: 35px;*/
+/*    margin-bottom: 12px;*/
+/*    !*cursor: pointer;*!*/
+/*    -webkit-user-select: none;*/
+/*    -moz-user-select: none;*/
+/*    -ms-user-select: none;*/
+/*    user-select: none;*/
+/*    color: rgb(38,43,82);*/
+/*}*/
 
 .col-form-label{
     width: 150px;
