@@ -1,3 +1,4 @@
+
 .title-section{
     display: block;
 
@@ -6,11 +7,10 @@
     line-height: 50px;
     color: white;
 
-
-
     background:
             -webkit-linear-gradient(-20deg,  rgb(38,43,82) 45%,rgba(129,133,189,0.5) 40.1%, rgba(79,91,147,1) 0%);
 }
+
 .title-section h2,
 .title-section h2 a
 {

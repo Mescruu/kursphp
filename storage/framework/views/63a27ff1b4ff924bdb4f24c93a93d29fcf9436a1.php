@@ -2,7 +2,12 @@
 
     <div class="container">
 
-        <a class="navbar-brand" href="<?php echo e(url('/')); ?>"><img src="/storage/logo.png" width="30" height="30" class="d-inline-block mr-1 align-bottom ml-0" alt="<?php echo e(config('app.name', 'kurs php')); ?>"> kurs PHP</a>
+        <a class="navbar-brand
+        <?php if(Request::path() === '/'): ?>
+                pb-4
+        <?php endif; ?>
+
+        h-100" href="<?php echo e(url('/')); ?>"><img src="/storage/logo.png" width="30" height="30" class="d-inline-block mr-1 align-bottom ml-0" alt="<?php echo e(config('app.name', 'kurs php')); ?>"> kurs PHP</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainmenu"
                 aria-controls="mainmenu" aria-expanded="false" aria-label="Przełącznik nawigacji">
@@ -71,6 +76,8 @@
                     </button>
                 </form>
 
+
+
                 <?php endif; ?>
                 <?php else: ?>
 
@@ -90,6 +97,11 @@
 
                 <?php endif; ?>
 
+                        <?php if(Request::path() === '/'): ?>
+                            <a class="forgetLink w-100 text-right mt-2" href="<?php echo e(route('password.request')); ?>">
+                                Zapomniałeś hasła?
+                            </a>
+                        <?php endif; ?>
             </div>
 
         </div>
@@ -103,5 +115,9 @@
 
         </div>
         <?php endif; ?>
+
+
     </div>
+
+
 </nav>

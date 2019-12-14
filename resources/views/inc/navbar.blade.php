@@ -2,7 +2,12 @@
 
     <div class="container">
 
-        <a class="navbar-brand" href="{{ url('/') }}"><img src="/storage/logo.png" width="30" height="30" class="d-inline-block mr-1 align-bottom ml-0" alt="{{ config('app.name', 'kurs php') }}"> kurs PHP</a>
+        <a class="navbar-brand
+        @if(Request::path() === '/')
+                pb-4
+        @endif
+
+        h-100" href="{{ url('/') }}"><img src="/storage/logo.png" width="30" height="30" class="d-inline-block mr-1 align-bottom ml-0" alt="{{ config('app.name', 'kurs php') }}"> kurs PHP</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainmenu"
                 aria-controls="mainmenu" aria-expanded="false" aria-label="Przełącznik nawigacji">
@@ -70,6 +75,8 @@
                     </button>
                 </form>
 
+
+
                 @endif
                 @else
 
@@ -88,6 +95,11 @@
 
                 @endif
 
+                        @if(Request::path() === '/')
+                            <a class="forgetLink w-100 text-right mt-2" href="{{ route('password.request') }}">
+                                Zapomniałeś hasła?
+                            </a>
+                        @endif
             </div>
 
         </div>
@@ -100,5 +112,9 @@
             Zalogowany:  {{ Auth::user()->imie }} {{ Auth::user()->nazwisko}}
         </div>
         @endif
+
+
     </div>
+
+
 </nav>

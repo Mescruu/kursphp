@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider {
     public function boot(ViewFactory $view) {
         Schema::defaultStringLength(191);
         //Dynamiczne udostępnianie tematów do paska nawigacji
-        $view->composer(['inc.navbar', 'tematy.index'], 'App\Http\ViewComposers\ListaTematowComposer');
+        $view->composer(['inc.navbar', 'tematy.index', 'inc.footer'], 'App\Http\ViewComposers\ListaTematowComposer');
     }
 
     /**

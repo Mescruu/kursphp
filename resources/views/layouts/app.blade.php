@@ -18,6 +18,7 @@
 {{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
 
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/stopka.css') }}" rel="stylesheet">
 
     @yield('assets')
 
@@ -43,15 +44,12 @@
             @yield('content')
         </main>
 
+        @include('inc.footer')
+
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-
-    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('article-ckeditor');
-    </script>
 
     <!-- jquery -->
     <script type="text/javascript" src="{{ URL::asset('js/jquery-3-4-1-min.js') }}"></script>

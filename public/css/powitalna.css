@@ -1,3 +1,7 @@
+body{
+    background-color: rgb(38,43,82);
+}
+
 .messages{
     position: absolute;
     width: 100%;
@@ -11,6 +15,7 @@
 .col-left{
     background-color: rgba(79,91,147,1);
     padding-right: 50px;
+
 }
 
 .diagonal{

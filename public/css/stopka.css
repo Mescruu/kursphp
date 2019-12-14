@@ -1,0 +1,45 @@
+body{
+    padding-bottom: 200px;
+}
+footer{
+    background-color:  rgb(38,43,82);
+
+}
+html{
+    background-color:  rgb(38,43,82);
+}
+footer img{
+    width: 80%;
+    height: auto;
+}
+
+footer h5{
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color: whitesmoke;
+}
+footer .footer-copyright{
+    font-family: 'Roboto', sans-serif;
+    color: whitesmoke;
+}
+footer ul li a{
+    position: relative;
+    padding-left: 10px;
+}
+footer ul li a::before{
+    position: absolute;
+    height: 5px;
+    width: 5px;
+    margin-left: -10px;
+    margin-top: 6px;
+    background-color: whitesmoke;
+    content: ' ';
+}
+
+footer a{
+    font-family: 'Roboto', sans-serif;
+    color: whitesmoke;
+}
+footer a:hover{
+    color: white;
+}

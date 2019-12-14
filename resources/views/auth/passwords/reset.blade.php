@@ -13,7 +13,7 @@
 
         <div class="container-fluid"> <!--kontener/pojemnik calej siatki-->
             <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-2 float-left">
+                <div class="col-md-6 col-sm-6 col-xs-4 float-left">
                     <h2 >
                         Resetowanie hasła
                     </h2>

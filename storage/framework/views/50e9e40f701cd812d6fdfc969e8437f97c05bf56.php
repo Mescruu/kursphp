@@ -18,6 +18,7 @@
 
 
     <link href="<?php echo e(asset('css/main.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/stopka.css')); ?>" rel="stylesheet">
 
     <?php echo $__env->yieldContent('assets'); ?>
 
@@ -43,15 +44,12 @@
             <?php echo $__env->yieldContent('content'); ?>
         </main>
 
+        <?php echo $__env->make('inc.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
     </div>
 
     <!-- Scripts -->
     <script src="<?php echo e(asset('js/app.js')); ?>"></script>
-
-    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('article-ckeditor');
-    </script>
 
     <!-- jquery -->
     <script type="text/javascript" src="<?php echo e(URL::asset('js/jquery-3-4-1-min.js')); ?>"></script>
