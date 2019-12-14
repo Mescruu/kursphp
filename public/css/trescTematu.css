@@ -1,0 +1,72 @@
+.bb-b {
+    font-weight: bold;
+}
+
+.bb-i {
+    font-style: italic;
+}
+
+.bb-u {
+    text-decoration:underline;
+}
+
+.bb-image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.bb-imageDes{
+    width: 100%;
+    font-style: italic;
+    text-align: center;
+    font-size: 90%;
+}
+
+.bb-center{
+    text-align: center
+}
+
+.bb-title{
+    font-size: 200%;
+    font-weight: bold;
+}
+
+.bb-stitle{
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.bb-code{
+    background-color: #eee;
+    border: 1px solid black;
+    border-radius: 3px;
+    font-family: courier, monospace;
+    padding: 0 3px;
+    margin: 10px;
+    width: auto;
+}
+
+.bb-table{
+    border-collapse: collapse;
+}
+
+.bb-table th, td {
+  border: 1px solid black;
+}
+
+.bb-table td{
+    padding: 10px;
+}
+
+.bb-name{
+    font-weight: bold;
+    font-style: italic;
+    color: rgb(38,43,82);
+}
+
+.bb-path{
+    font-style: italic;
+    color: rgb(79, 91, 147);
+}

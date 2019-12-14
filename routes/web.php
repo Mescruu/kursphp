@@ -106,6 +106,8 @@ Route::post('/zapisztemat/{id}', 'TematyController@update');
 Route::post('/przypiszgrupy/{id}', 'TematyController@updateGroups');
 Route::get('/usuntemat/{id}', 'TematyController@delete');
 Route::get('/przywroctemat/{id}', 'TematyController@restore');
+Route::post('/uploadImage', 'TematyController@uploadImage')->name('uploadImage');
+Route::get('/refreshImages', 'TematyController@refreshImages')->name('refreshImages');
 
 
 Route::get('wyklady/{id}', 'WykladyController@show');

@@ -9,8 +9,13 @@ body{
 
 .card{
     background-color: whitesmoke;
-    padding: 20px;
+    padding: 50px;
     margin-bottom: 10px;
+}
+
+.tresc{
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .topic-section{
@@ -499,11 +504,11 @@ body{
     margin-bottom: 50px;
 }
 
-#page img{
+/*#page img{
     max-width: 100%;
     height: auto;
     width: auto;
-}
+}*/
 
 /* Large devices (desktops, less than 1200px) */
 @media (max-width: 1199.98px) {

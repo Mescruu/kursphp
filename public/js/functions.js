@@ -2,10 +2,16 @@ var x = "x";
 var currentOption = "";
 var a;
 
+$.ajaxSetup({
+   headers: {
+       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+   }
+});
+
 function refreshImages(){ //Odczyt obrazków po wciśnięciu przycisku włączającego listę
         $.ajax({
             type: "get",
-            url: "./phpfiles/getImages.php",
+            url: "/refreshImages",
             cache: false,
             dataType: "JSON",
             success: function(paths){
@@ -25,26 +31,25 @@ $('#editform').submit(function() {
     return true; // return false to cancel form action
 });
 
+
 $(document).on('change', ".imageUpload", function() { //Wrzucenie nowego obrazka
-    var file_data = $('#image').prop('files')[0];
+    var file_data = $('#imageUpload').prop('files')[0];
+//    var form_data_tmp = new FormData();
+//    var form_data = formDataToJSON(form_data_tmp);
     var form_data = new FormData();
-    form_data.append('image', file_data);
+    form_data.append('imageUpload', file_data);
     $.ajax({
-        url: './phpfiles/uploadImage.php', // point to server-side PHP script
-        dataType: 'text',  // what to expect back from the PHP script, if anything
+        url: "/uploadImage",
+        dataType: 'JSON',  // what to expect back from the PHP script, if anything
         cache: false,
         contentType: false,
         processData: false,
         data: form_data,
         type: 'POST',
         success: function(data){
-            if(data.includes(" Błąd: ")){
-                alert(data);
-            } else{
-                var path = "media/" + data;
-                path = encodeURI(path);
-                dodajObrazek(path);
-            }
+            var path = "/images/" + data;
+            path = encodeURI(path);
+            dodajObrazek(path);
 
         }
     });
@@ -62,7 +67,7 @@ function exitPage() {
 }
 
 function dodajObrazek(val) {
-    var text = "[img]" + val + "[/img]";
+    var text = "[img]" + val + "[/img][des][/des]";
     var textarea = document.getElementById('text');
     insertAtCursor(textarea, text, "" , "");
     pokazOpcje('x');
@@ -117,13 +122,13 @@ function pokazOpcje(option) {
                 case 'obraz':
                     currentOption = "obraz";
                     var obrazSrvr = "'obrazSrvr'"
-                    document.getElementById("frame").innerHTML += '<h2>Wstaw obrazek</h2>';
-                    document.getElementById("frame").innerHTML += '<div class="btn btn-left float-left">' +
+                    document.getElementById("frame").innerHTML += '<div><h2>Wstaw obrazek</h2>' +
+                        '<div class="btn btn-left float-left">' +
                         '<span>Wstaw obraz z urządzenia</span>' +
-                        '<label for="image" class="imageUpload" >\n' +
+                        '<label for="imageUpload" class="imageUpload" >\n' +
                         '    <i class="fa fa-cloud-upload"></i> Custom Upload\n' +
                         '</label>\n' +
-                        '<input id="image" class="imageUpload"  type="file"/>'+
+                        '<input id="imageUpload" name="imageUpload" class="imageUpload" type="file"/>'+
                         '</div>' +
                         '<div class="btn float-right btn-right">' +
                         '<span>Wstaw ostatnio dodany</span>' +
@@ -134,10 +139,10 @@ function pokazOpcje(option) {
                 case 'obrazSrvr':
                     currentOption = "obrazSrvr";
                     var obraz = "'obraz'"
-                    document.getElementById("frame").innerHTML += '<h2>Wstaw obrazek</h2><input type="button"  class="btn btn-info btn-back" value="&#8629;" onclick="pokazOpcje(' + obraz + ');"></input>';
+                    document.getElementById("frame").innerHTML += '<h2>Wstaw obrazek</h2>' +
+                            '<input type="button"  class="btn btn-info btn-back" value="&#8629;" onclick="pokazOpcje(' + obraz + ');"></input>';
 
                     var path = "";
-
 
                     var imgText = '<div class="imgContainer">';
                     for (i = 0; i < a.length; i++) {
@@ -215,7 +220,7 @@ function escapeHtml(text) {
             .replace(/>/g, "&gt")
             .replace(/"/g, "&quot")
             .replace(/'/g, "&#039")
-            .replace(/ /g, '\u00a0')
+            //.replace(/ /g, '\u00a0')
             .replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
             .replace(/\n/g, '<br>');
 }
@@ -286,7 +291,7 @@ function dodajBBCode(type)
             break;
         case "code":
             bbcode1 = "[code]";
-            bbcode2 = "[/code]";
+            bbcode2 = "[/code][des][/des]";
             break;
         case "color":
             bbcode1 = "[color=COLOR]";
@@ -294,6 +299,18 @@ function dodajBBCode(type)
             break;
         case "point":
             bbcode1 = "[*]";
+            break;
+        case "highlight":
+            bbcode1 = "[highlight=COLOR]";
+            bbcode2 = "[/highlight]";
+            break;
+        case "name":
+            bbcode1 = "[name]";
+            bbcode2 = "[/name]";
+            break;
+        case "path":
+            bbcode1 = "[path]";
+            bbcode2 = "[/path]";
             break;
     }
     var textarea = document.getElementById('text');

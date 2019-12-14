@@ -4,6 +4,7 @@
     <link href="{{ asset('css/underNav.css') }}" rel="stylesheet">
     <link href="{{ asset('css/temat.css') }}" rel="stylesheet">
     <link href="{{ asset('css/checkbox.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/trescTematu.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -65,46 +66,55 @@
 
                         <div class="d-flex flex-wrap" id="buttons-left">
                             <div class="btn-editor btn-img">
-                                <input class="btn-info btn-img" type="button" value="Wstaw obrazek" onclick="pokazOpcje('obraz')">
+                                <input class="btn-info btn-img" type="button" value="Wstaw obrazek" title="Wstaw obrazek z opisem" onclick="pokazOpcje('obraz')">
                             </div>
                             <div class="btn-editor btn-table">
-                                <input class="btn-info btn-table" type="button" value="Wstaw tabelę" onclick="pokazOpcje('tabela')"><br>
-                            </div>
-                            <div class="btn-editor btn-b">
-                                <input class="btn-info btn-b" type="button" value="" onclick="dodajBBCode('b')">
-                            </div>
-                            <div class="btn-editor btn-i">
-                                <input class="btn-info btn-i" type="button" value="i" onclick="dodajBBCode('i')">
-                            </div>
-                            <div class="btn-editor btn-u">
-                                <input class="btn-info btn-u" type="button" value="u" onclick="dodajBBCode('u')">
+                                <input class="btn-info btn-table" type="button" value="Wstaw tabelę" title="Wstaw tabelę" onclick="pokazOpcje('tabela')"><br>
                             </div>
                             <div class="btn-editor btn-code">
-                                <input class="btn-info btn-code" type="button" value="Code" onclick="dodajBBCode('code')">
+                                <input class="btn-info btn-code" type="button" value="Code" title="Listing z opisem" onclick="dodajBBCode('code')">
                             </div>
-                            <div class="btn-editor btn-hr">
-                                <input class="btn-info btn-hr" type="button" value="Przerwa" onclick="dodajBBCode('hr')"><br>
+                            <div class="btn-editor btn-link">
+                                <input class="btn-info btn-link" type="button" value="Link" title="Link URL" onclick="dodajBBCode('link')">
+                            </div>
+                            <div class="btn-editor btn-b">
+                                <input class="btn-info btn-b" type="button" value="b" title="Pogrubienie" onclick="dodajBBCode('b')">
+                            </div>
+                            <div class="btn-editor btn-i">
+                                <input class="btn-info btn-i" type="button" value="i" title="Kursywa" onclick="dodajBBCode('i')">
+                            </div>
+                            <div class="btn-editor btn-u">
+                                <input class="btn-info btn-u" type="button" value="u" title="Podkreślenie" onclick="dodajBBCode('u')">
                             </div>
                             <div class="btn-editor btn-center">
-                                <input class="btn-info btn-center" type="button" value="Wyśrodkuj" onclick="dodajBBCode('center')">
-                            </div>
-                            <div class="btn-editor btn-title">
-                                <input class="btn-info btn-title" type="button" value="Tytuł" onclick="dodajBBCode('title')">
-                            </div>
-
-                            <!--                    <div class="btn-editor btn-stitle">-->
-                            <!--                        <input class="btn-info btn-stitle" type="button" value="Podtytuł" onclick="dodajBBCode('stitle')">-->
-                            <!--                    </div>-->
-
-                            <div class="btn-editor btn-link">
-                                <input class="btn-info btn-link" type="button" value="Link" onclick="dodajBBCode('link')">
+                                <input class="btn-info btn-center" type="button" value="Wyśrodkuj" title="Wyśrodkowanie" onclick="dodajBBCode('center')">
                             </div>
                             <div class="btn-editor btn-color">
-                                <input class="btn-info btn-color" type="button" value="Kolor" onclick="dodajBBCode('color')">
+                                <input class="btn-info btn-color" type="button" value="Kolor" title="Kolor" onclick="dodajBBCode('color')">
+                            </div>
+                            <div class="btn-editor">
+                                <input class="btn-info" type="button" value="Zakreślenie" title="Zakreślenie" onclick="dodajBBCode('highlight')">
+                            </div>
+                            <div class="btn-editor btn-hr">
+                                <input class="btn-info btn-hr" type="button" value="Przerwa" title="Przerwa" onclick="dodajBBCode('hr')"><br>
                             </div>
                             <div class="btn-editor btn-point">
-                                <input class="btn-info btn-point" type="button" value="Punkt" onclick="dodajBBCode('point')">
+                                <input class="btn-info btn-point" type="button" value="Punkt" title="Punkt" onclick="dodajBBCode('point')">
                             </div>
+                            <div class="btn-editor btn-title">
+                                <input class="btn-info btn-title" type="button" value="Tytuł" title="Tytuł" onclick="dodajBBCode('title')">
+                            </div>
+                            <div class="btn-editor btn-stitle">
+                                <input class="btn-info btn-stitle" type="button" value="Podtytuł" title="Podtytuł" onclick="dodajBBCode('stitle')">
+                            </div>
+                            <div class="btn-editor">
+                                <input class="btn-info" type="button" value="Nazwa" title="Nazwa własna (XAMPP, PHP...)" onclick="dodajBBCode('name')">
+                            </div>
+                            <div class="btn-editor">
+                                <input class="btn-info" type="button" value="Ścieżka" title="Ścieżka (index.php, /localhost...)" onclick="dodajBBCode('path')">
+                            </div>
+
+                            
                         </div>
 
 

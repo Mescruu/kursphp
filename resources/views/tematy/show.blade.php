@@ -4,6 +4,7 @@
 
     <link href="{{ asset('css/underNav.css') }}" rel="stylesheet">
     <link href="{{ asset('css/temat.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/trescTematu.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -65,7 +66,7 @@
 
                     <div class="col-12">
                         <h1>{{$temat->nazwa}}</h1>
-                        <hr class="w-50">
+                        <hr class="w-80">
                         @if(isset($temat->updated_at))
                             <small class="text-center mx-auto">Ostatnio edytowany {{$temat->updated_at}}</small>
                         @endif
@@ -74,7 +75,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 py-3">
-                        <div>
+                        <div class="tresc">
                             {!! $trescAktualna !!}
                         </div>
                     </div>

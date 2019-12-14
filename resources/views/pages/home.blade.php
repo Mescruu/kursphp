@@ -67,7 +67,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 text-center">
-                        Do każdego tematu mogą być przypisane zadanie oraz quiz. Rozwiązaniem zadania jest plik w postaci paczki kodu źródłowego aplikacji opisanej<br>w treści zadania, a quizy możesz rozwiązywać wielokrotnie bezpośrednio w aplikacji kursu.
+                        Do każdego tematu mogą być przypisane zadanie oraz quiz. Rozwiązaniem zadania jest plik w postaci paczki kodu źródłowego aplikacji opisanej w treści zadania, a quizy możesz rozwiązywać wielokrotnie bezpośrednio w aplikacji kursu.
                     </div>
                 </div>
             </div>

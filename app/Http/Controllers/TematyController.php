@@ -12,47 +12,39 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
-class TematyController extends Controller
-{
+class TematyController extends Controller {
+
     //
-    public function __construct()
-    {
+    public function __construct() {
         //blokowanie jeżeli użytkownik nie przejdzie autoryzacji wtedy wysyla go do strony z logowaniem
         //wyjątkami są strony index, gdzie wysiwetlane są tematy
         $this->middleware('auth');
     }
 
-    public function show($id)
-    {
+    public function show($id) {
         //wyswitla rzeczy zwiazane z konkretnym tematem o id $id
         $temat = Temat::find($id);
 
-        $wyklad = DB::table('wyklad')->where('idTemat',$id)->get()->first();
-        if($wyklad!=null)
-        {
-            $temat->wyklad=$wyklad->id;
+        $wyklad = DB::table('wyklad')->where('idTemat', $id)->get()->first();
+        if ($wyklad != null) {
+            $temat->wyklad = $wyklad->id;
+        } else {
+            $temat->wyklad = "empty";
         }
-        else{
-            $temat->wyklad="empty";
+        $quiz = DB::table('quiz')->where('idTemat', $id)->get()->first();
+        if ($quiz != null) {
+            $temat->quiz = $quiz->id;
+        } else {
+            $temat->quiz = "empty";
         }
-        $quiz = DB::table('quiz')->where('idTemat',$id)->get()->first();
-        if($quiz!=null)
-        {
-            $temat->quiz=$quiz->id;
-        }
-        else{
-            $temat->quiz="empty";
-        }
-        $zadanie = DB::table('zadanie')->where('idTemat',$id)->get()->first();
-        if($zadanie!=null)
-        {
-            $temat->zadanie=$zadanie->id;
-        }
-        else{
-            $temat->zadanie="empty";
+        $zadanie = DB::table('zadanie')->where('idTemat', $id)->get()->first();
+        if ($zadanie != null) {
+            $temat->zadanie = $zadanie->id;
+        } else {
+            $temat->zadanie = "empty";
         }
 
-        if(Auth::user()->typ !== 'nauczyciel'){
+        if (Auth::user()->typ !== 'nauczyciel') {
 
             $user_idGrupa = Auth::user()->idGrupa;
 
@@ -68,149 +60,135 @@ class TematyController extends Controller
 //                        ->select('grupa.*')
 //                        ->get();
 
-            $lista = DB::table('listagrup')->where('idGrupa',$user_idGrupa)->where('idTemat',$id)->count();
+            $lista = DB::table('listagrup')->where('idGrupa', $user_idGrupa)->where('idTemat', $id)->count();
 
-            if($lista > 0){
-                $trescAktualna = Storage::disk('tematy')->get($id.'/ahtml.txt');
-                return view ('tematy.show', ['temat' => $temat, 'trescAktualna' => $trescAktualna]);
-            }else{
+            if ($lista > 0) {
+                $trescAktualna = Storage::disk('tematy')->get($id . '/ahtml.txt');
+                return view('tematy.show', ['temat' => $temat, 'trescAktualna' => $trescAktualna]);
+            } else {
                 return redirect()->back()->with('error', 'Brak dostępu do tematu!');
             }
-            
-        }else{
-            $trescAktualna = Storage::disk('tematy')->get($id.'/ahtml.txt');
-            return view ('tematy.show', ['temat' => $temat, 'trescAktualna' => $trescAktualna]);
+        } else {
+            $trescAktualna = Storage::disk('tematy')->get($id . '/ahtml.txt');
+            return view('tematy.show', ['temat' => $temat, 'trescAktualna' => $trescAktualna]);
         }
     }
-    
-    public function create(){
-        if(Auth::user()->typ==\App\User::$admin){
+
+    public function create() {
+        if (Auth::user()->typ == \App\User::$admin) {
             $temat = Temat::create(['nazwa' => 'Nowy Temat']);
-            $trescAktualnaHTMLPath = $temat->id.'/ahtml.txt';
-            $trescAktualnaBBCodePath = $temat->id.'/abb.txt';
-            $trescPoprzedniaHTMLPath = $temat->id.'/phtml.txt';
-            $trescPoprzedniaBBCodePath = $temat->id.'/pbb.txt';
+            $trescAktualnaHTMLPath = $temat->id . '/ahtml.txt';
+            $trescAktualnaBBCodePath = $temat->id . '/abb.txt';
+            $trescPoprzedniaHTMLPath = $temat->id . '/phtml.txt';
+            $trescPoprzedniaBBCodePath = $temat->id . '/pbb.txt';
             Storage::disk('tematy')->put($trescAktualnaHTMLPath, '');
             Storage::disk('tematy')->put($trescAktualnaBBCodePath, '');
             Storage::disk('tematy')->put($trescPoprzedniaHTMLPath, '');
             Storage::disk('tematy')->put($trescPoprzedniaBBCodePath, '');
-            return redirect('/tematy/'.$temat->id.'/edycja')->with('success', 'Utworzono temat '.$temat->nazwa.'.');
-        }else{
+            return redirect('/tematy/' . $temat->id . '/edycja')->with('success', 'Utworzono temat ' . $temat->nazwa . '.');
+        } else {
             return redirect('/tematy');
         }
-        
     }
 
-    public function edit($id)
-    {
+    public function edit($id) {
         $temat = Temat::find($id);
 
-        $wyklad = DB::table('wyklad')->where('idTemat',$id)->get()->first();
-        if($wyklad!=null)
-        {
-            $temat->wyklad=$wyklad->id;
+        $wyklad = DB::table('wyklad')->where('idTemat', $id)->get()->first();
+        if ($wyklad != null) {
+            $temat->wyklad = $wyklad->id;
+        } else {
+            $temat->wyklad = "empty";
         }
-        else{
-            $temat->wyklad="empty";
+        $quiz = DB::table('quiz')->where('idTemat', $id)->get()->first();
+        if ($quiz != null) {
+            $temat->quiz = $quiz->id;
+        } else {
+            $temat->quiz = "empty";
         }
-        $quiz = DB::table('quiz')->where('idTemat',$id)->get()->first();
-        if($quiz!=null)
-        {
-            $temat->quiz=$quiz->id;
-        }
-        else{
-            $temat->quiz="empty";
-        }
-        $zadanie = DB::table('zadanie')->where('idTemat',$id)->get()->first();
-        if($zadanie!=null)
-        {
-            $temat->zadanie=$zadanie->id;
-        }
-        else{
-            $temat->zadanie="empty";
+        $zadanie = DB::table('zadanie')->where('idTemat', $id)->get()->first();
+        if ($zadanie != null) {
+            $temat->zadanie = $zadanie->id;
+        } else {
+            $temat->zadanie = "empty";
         }
 
-        $trescAktualna = Storage::disk('tematy')->get($id.'/abb.txt');
-        if(Auth::user()->typ==\App\User::$admin){
-            return view ('tematy.edit', ['temat' => $temat, 'trescAktualna' => $trescAktualna]);
-        }else{
-            return redirect('/tematy/'.$id);
+        $trescAktualna = Storage::disk('tematy')->get($id . '/abb.txt');
+        if (Auth::user()->typ == \App\User::$admin) {
+            return view('tematy.edit', ['temat' => $temat, 'trescAktualna' => $trescAktualna]);
+        } else {
+            return redirect('/tematy/' . $id);
         }
-        
     }
-    
-    public function groups($id){
-        if(Auth::user()->typ==\App\User::$admin){
+
+    public function groups($id) {
+        if (Auth::user()->typ == \App\User::$admin) {
             $temat = DB::table('temat')->where('id', $id)->first();
             $grupy = DB::table('grupa')->get();
             $grupyWybrane = DB::table('temat')
-                        ->join('listagrup', 'listagrup.idTemat', '=', 'temat.id')
-                        ->join('grupa', 'listagrup.idGrupa', '=', 'grupa.id')
-                        ->where('temat.id', $id)
-                        ->select('grupa.*')
-                        ->get();
+                    ->join('listagrup', 'listagrup.idTemat', '=', 'temat.id')
+                    ->join('grupa', 'listagrup.idGrupa', '=', 'grupa.id')
+                    ->where('temat.id', $id)
+                    ->select('grupa.*')
+                    ->get();
             $grupyWybraneID = [];
-            foreach($grupyWybrane as $grupaWybrana){
+            foreach ($grupyWybrane as $grupaWybrana) {
                 array_push($grupyWybraneID, $grupaWybrana->id);
             }
-            
-            foreach($grupy as $grupa){
+
+            foreach ($grupy as $grupa) {
                 if (in_array($grupa->id, $grupyWybraneID)) {
                     $grupa->checked = 'checked';
-                }else{
+                } else {
                     $grupa->checked = '';
                 }
             }
-            
+
             return view('tematy.groups', ['temat' => $temat, 'grupy' => $grupy]);
-        }else{
-            return redirect('/tematy/'.$id);
+        } else {
+            return redirect('/tematy/' . $id);
         }
-        
-        
-        
     }
-    
-    public function update($id){
-        if(Auth::user()->typ==\App\User::$admin){
+
+    public function update($id) {
+        if (Auth::user()->typ == \App\User::$admin) {
             $array = [
-            'nazwa' => request('nazwa'),
-            'opis' => request('opis'),
+                'nazwa' => request('nazwa'),
+                'opis' => request('opis'),
             ];
             DB::table('temat')->where('id', $id)->update($array);
-        
-            $trescAktualnaBBCode = Storage::disk('tematy')->get($id.'/abb.txt');
-            $trescAktualnaHTML = Storage::disk('tematy')->get($id.'/ahtml.txt');
-            Storage::disk('tematy')->put($id.'/pbb.txt', $trescAktualnaBBCode);
-            Storage::disk('tematy')->put($id.'/phtml.txt', $trescAktualnaHTML);
-            Storage::disk('tematy')->put($id.'/abb.txt', request('text'));
-            Storage::disk('tematy')->put($id.'/ahtml.txt', request('texthtml'));
+
+            $trescAktualnaBBCode = Storage::disk('tematy')->get($id . '/abb.txt');
+            $trescAktualnaHTML = Storage::disk('tematy')->get($id . '/ahtml.txt');
+            Storage::disk('tematy')->put($id . '/pbb.txt', $trescAktualnaBBCode);
+            Storage::disk('tematy')->put($id . '/phtml.txt', $trescAktualnaHTML);
+            Storage::disk('tematy')->put($id . '/abb.txt', request('text'));
+            Storage::disk('tematy')->put($id . '/ahtml.txt', request('texthtml'));
             return redirect()->back()->with('success', 'Udało się zaktualizować temat!');
-        }else{
-            return redirect('/tematy/'.$id);
+        } else {
+            return redirect('/tematy/' . $id);
         }
-        
     }
-    
-    public function updateGroups($id){
+
+    public function updateGroups($id) {
         $grupy = DB::table('grupa')->get();
         $grupyWybrane = DB::table('temat')
-                        ->join('listagrup', 'listagrup.idTemat', '=', 'temat.id')
-                        ->join('grupa', 'listagrup.idGrupa', '=', 'grupa.id')
-                        ->where('temat.id', $id)
-                        ->select('grupa.*')
-                        ->get();
+                ->join('listagrup', 'listagrup.idTemat', '=', 'temat.id')
+                ->join('grupa', 'listagrup.idGrupa', '=', 'grupa.id')
+                ->where('temat.id', $id)
+                ->select('grupa.*')
+                ->get();
         $grupyWybraneID = [];
-        foreach($grupyWybrane as $grupaWybrana){
+        foreach ($grupyWybrane as $grupaWybrana) {
             array_push($grupyWybraneID, $grupaWybrana->id);
         }
-        foreach($grupy as $grupa){
-            if(request(strval($grupa->id))){
-                if(!in_array($grupa->id, $grupyWybraneID)) {
+        foreach ($grupy as $grupa) {
+            if (request(strval($grupa->id))) {
+                if (!in_array($grupa->id, $grupyWybraneID)) {
                     ListaGrup::create(['idGrupa' => $grupa->id, 'idTemat' => $id]);
                 }
-            }else{
-                if(in_array($grupa->id, $grupyWybraneID)) {
+            } else {
+                if (in_array($grupa->id, $grupyWybraneID)) {
                     $listaGrup = DB::table('listagrup')->where('idGrupa', $grupa->id)->where('idTemat', $id);
                     $listaGrup->delete();
                 }
@@ -218,18 +196,18 @@ class TematyController extends Controller
         }
         return redirect()->back()->with('success', 'Zaktualizowano udostępnienie tematu');
     }
-    
-    public function delete($id){
-        if(Auth::user()->typ==\App\User::$admin){
-            $temat = Temat::find($id);
-            if(!is_null($temat)){
 
-                $zadanie=Zadanie::find($id);
-                if(!is_null($zadanie)){
+    public function delete($id) {
+        if (Auth::user()->typ == \App\User::$admin) {
+            $temat = Temat::find($id);
+            if (!is_null($temat)) {
+
+                $zadanie = Zadanie::find($id);
+                if (!is_null($zadanie)) {
 
                     $rozwiazania = DB::table('rozwiazanie')->where('idZadanie', $zadanie->id);
 
-                    if(!is_null($rozwiazania)){
+                    if (!is_null($rozwiazania)) {
                         $rozwiazania->delete();
                     }
 
@@ -243,19 +221,19 @@ class TematyController extends Controller
                 $quiz = DB::table('quiz')->where('idTemat', $id);
 //                $pytanie = DB::table('pytanie')->where('idQuiz', $quiz->id);
 
-                if(!is_null($quiz)) {
+                if (!is_null($quiz)) {
 //                    if(!is_null($pytanie)) {
 //                        $pytanie = DB::table('pytanie')->where('idQuiz', $quiz->id);
 //                        $pytanie->delete();
 //                    }
-                        $quiz->delete();
+                    $quiz->delete();
                 }
 
                 $wyklad = DB::table('wyklad')->where('idTemat', $id);
 
-                if(!is_null($wyklad)) {
+                if (!is_null($wyklad)) {
                     $wyklad->delete();
-                    Storage::disk('wyklady')->delete($id."pdf");
+                    Storage::disk('wyklady')->delete($id . "pdf");
                 }
 
                 $nazwa = $temat->nazwa;
@@ -264,37 +242,37 @@ class TematyController extends Controller
                 $temat->delete();
                 Storage::disk('tematy')->deleteDirectory($id);
 
-                return redirect()->back()->with('success', 'Usunięto temat '.$nazwa.'.');
-            }else{
+                return redirect()->back()->with('success', 'Usunięto temat ' . $nazwa . '.');
+            } else {
                 return redirect()->back()->with('error', 'Taki temat nie istnieje.');
             }
-        }else{
-            return redirect('/tematy/'.$id);
+        } else {
+            return redirect('/tematy/' . $id);
         }
     }
-    
-    public function restore($id){
-        if(Auth::user()->typ==\App\User::$admin){
+
+    public function restore($id) {
+        if (Auth::user()->typ == \App\User::$admin) {
             $temat = Temat::find($id);
-            if(!is_null($temat)){
+            if (!is_null($temat)) {
                 $nazwa = $temat->nazwa;
-                
-                $trescAktualnaBBCode = Storage::disk('tematy')->get($id.'/abb.txt');
-                $trescAktualnaHTML = Storage::disk('tematy')->get($id.'/ahtml.txt');
-                $trescPoprzedniaBBCode = Storage::disk('tematy')->get($id.'/pbb.txt');
-                $trescPoprzedniaHTML = Storage::disk('tematy')->get($id.'/phtml.txt');
-                
-                Storage::disk('tematy')->put($id.'/abb.txt', $trescPoprzedniaBBCode);
-                Storage::disk('tematy')->put($id.'/ahtml.txt', $trescPoprzedniaHTML);
-                Storage::disk('tematy')->put($id.'/pbb.txt', $trescAktualnaBBCode);
-                Storage::disk('tematy')->put($id.'/phtml.txt', $trescAktualnaHTML);
-                
-                return redirect()->back()->with('success', 'Przywrócono treść tematu '.$nazwa.'.');
-            }else{
+
+                $trescAktualnaBBCode = Storage::disk('tematy')->get($id . '/abb.txt');
+                $trescAktualnaHTML = Storage::disk('tematy')->get($id . '/ahtml.txt');
+                $trescPoprzedniaBBCode = Storage::disk('tematy')->get($id . '/pbb.txt');
+                $trescPoprzedniaHTML = Storage::disk('tematy')->get($id . '/phtml.txt');
+
+                Storage::disk('tematy')->put($id . '/abb.txt', $trescPoprzedniaBBCode);
+                Storage::disk('tematy')->put($id . '/ahtml.txt', $trescPoprzedniaHTML);
+                Storage::disk('tematy')->put($id . '/pbb.txt', $trescAktualnaBBCode);
+                Storage::disk('tematy')->put($id . '/phtml.txt', $trescAktualnaHTML);
+
+                return redirect()->back()->with('success', 'Przywrócono treść tematu ' . $nazwa . '.');
+            } else {
                 return redirect()->back()->with('error', 'Taki temat nie istnieje.');
             }
-        }else{
-            return redirect('/tematy/'.$id);
+        } else {
+            return redirect('/tematy/' . $id);
         }
     }
 
@@ -303,27 +281,50 @@ class TematyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
 
         $tematy = DB::table('temat')->orderBy('nazwa', 'asc')->get();
         $wyklady = DB::table('wyklad')->get();
 
-        foreach ($tematy as $temat){
+        foreach ($tematy as $temat) {
 
-            foreach ($wyklady as $wyklad){
+            foreach ($wyklady as $wyklad) {
 
 
-                if($wyklad->idTemat===$temat->id){
-                    $temat->wykladID=$wyklad->id;
-                    $temat->wyklad=$wyklad->tytul;
+                if ($wyklad->idTemat === $temat->id) {
+                    $temat->wykladID = $wyklad->id;
+                    $temat->wyklad = $wyklad->tytul;
                     break;
                 }
             }
         }
 
-        return view('tematy.index')->with('tematy',$tematy);
+        return view('tematy.index')->with('tematy', $tematy);
     }
 
+    public function uploadImage(Request $request) {
+        $this->validate($request, [
+            'imageUpload' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $input = $request->imageUpload;
+        $input = time() . '.' . $request->imageUpload->extension();
+        $request->imageUpload->move(public_path('images'), $input);
+
+        return response()->json($input);
+    }
+
+    public function refreshImages() {
+        $dirname = public_path()."/images/";
+        $images = glob($dirname . "*.{jpg,png,jpeg}", GLOB_BRACE);
+        $images_ready = [];
+        foreach ($images as $image) {
+            $image = str_replace($dirname, "/images/", $image);
+            array_push($images_ready, $image);
+        }
+        $js_array = json_encode($images_ready);
+        //$js_array = json_encode($images);
+        echo $js_array;
+    }
 
 }

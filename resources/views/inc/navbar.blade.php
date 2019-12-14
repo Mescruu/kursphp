@@ -96,9 +96,11 @@
                 @endif
 
                         @if(Request::path() === '/')
-                            <a class="forgetLink w-100 text-right mt-2" href="{{ route('password.request') }}">
+                        <div class="forgetLink w-100 text-right mt-2">
+                            <a href="{{ route('password.request') }}">
                                 Zapomniałeś hasła?
                             </a>
+                        </div>
                         @endif
             </div>
 
