@@ -9,19 +9,19 @@ class GrupaTableSeeder extends Seeder
         DB::table('grupa')->insert([
             'id' => 1,
             'nazwa' => 'IIST5.1',
-            'idNauczyciel'=> 1
+            'idNauczyciel'=> 15
         ]);
         
         DB::table('grupa')->insert([
             'id' => 2,
             'nazwa' => 'IIST5.2',
-            'idNauczyciel'=> 2
+            'idNauczyciel'=> 16
         ]);
         
         DB::table('grupa')->insert([
             'id' => 3,
             'nazwa' => 'IIST5.3',
-            'idNauczyciel'=> 3
+            'idNauczyciel'=> 17
         ]);
     }
 }
