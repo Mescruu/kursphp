@@ -67,20 +67,20 @@
         Witaj {{$imie}}!
     </h2>
     <p>
-        Wydaje się, że ktoś próbuję zresetować hasło do Twojego konta.
+        Wydaje się, że ktoś próbuje zresetować hasło do Twojego konta.
     </p>
     <p>
-        Jeżeli to nie Ty zignoruj wiadomość.
+        Jeżeli to nie Ty zignoruj tę wiadomość.
     </p>
 
     <p style="margin-bottom: 30px">
-        Jeżeli Ty to zrobiłeś kilknij przycisk poniżej.
+        W przeciwnym wypadku, kliknij w przycisk poniżej.
     </p>
 
     <a class="btn-info"  href="{{$link}}">Zresetuj hasło!</a>
 
     <p style="margin-top: 30px">
-        Jeżeli nie możesz klikną w przycisk, skopiuj tekst poniżej i wklej go w przeglądarkę.
+        Jeżeli nie możesz kliknąć w przycisk, wejdź w podany poniżej link.
     </p>
 
     <p>

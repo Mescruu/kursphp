@@ -12,6 +12,7 @@ class Quiz extends Model
 
     protected $fillable = ['typ', 'idTemat','mnoznik', 'created_at', 'updated_at'];
 
+
     public function temat(){
         return $this->belongsTo('App\Zadanie','idTemat');
     }
