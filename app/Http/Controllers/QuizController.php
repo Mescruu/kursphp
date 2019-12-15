@@ -7,6 +7,7 @@ use App\Powiadomienie;
 use App\Punkty;
 use App\Pytanie;
 use App\Quiz;
+use App\Temat;
 use App\User;
 use App\Wynik;
 use Carbon\Carbon;
@@ -206,7 +207,7 @@ class QuizController extends Controller
                 $array2 = [
                     'idStudent' => (int)$user->id,
                     'idNauczyciel' => $grupa->idNauczyciel,
-                    'ilosc' => $allPoints,
+                    'ilosc' => $allPoints*$quiz->mnoznik,
                     'komentarz' => 'Kolokwium z '.Carbon::now()
                 ];
 
@@ -215,7 +216,6 @@ class QuizController extends Controller
                 Punkty::create($array2);
                 Powiadomienie::createNotification($user->id,"Uzytkownik ". $nauczyciel->imie." ". $nauczyciel->nazwisko." przyznał Ci punkty!:".$allPoints."pkt za kolokwium!");
             }
-
 
         }
         
@@ -241,7 +241,14 @@ class QuizController extends Controller
     }
 
 
+    public function create()
+    {
+        //wyswitla rzeczy zwiazane z konkretnym tematem o id $id
 
+        $tematy=Temat::get();
+
+        return view ('quizy.create')->with('tematy', $tematy);
+    }
 
     public function edit($id)
     {
@@ -286,11 +293,17 @@ class QuizController extends Controller
 
         $iloscPytan=count($pytania);
 
-        return view ('quizy.edit', ['pytania'=>$pytania,'ilosc'=>$iloscPytan, 'quiz'=>$quiz, 'id'=>$id,'typ' => $quiz->typ]);
+        $tematy=Temat::get();
+        $nazwaTematu = DB::table('temat')->where('id',$id)->value('nazwa');
+
+
+        return view ('quizy.edit', ['nazwaTematu'=>$nazwaTematu,'tematy'=>$tematy, 'pytania'=>$pytania,'ilosc'=>$iloscPytan, 'quiz'=>$quiz, 'id'=>$id,'typ' => $quiz->typ]);
     }
 
     public function confirm(Request $request)
     {
+
+        $request->input('mnoznik');
 
 
         $error=false;
@@ -299,8 +312,11 @@ class QuizController extends Controller
         {
             if(empty($req))
             {
-             $error=true;
+                var_dump($req);
+
+                $error=true;
             }
+
         }
 
         if ($error){
@@ -308,27 +324,75 @@ class QuizController extends Controller
         }
         else{
 
-            $limit = (sizeof($request->all())-4)/5;
+            $limit = (sizeof($request->all())-6)/5;
 
-            $pytanie= DB::table('pytanie')->where('idQuiz',$request->input('id'));
-            $pytanie->delete();
 
-            for ($index=1;$index<=$limit;$index++){
+            if($request->input('id')=='new')
+            {
+
+                $temat = DB::table('temat')->where('nazwa', $request->input('nazwa-tematu'))->first();
 
                 $array = [
-                    'idQuiz' => $request->input('id'),
-                    'tresc' => $request->input('tresc'.$index),
-                    'odpPoprawna' => $request->input('odpPoprawna'.$index),
-                    'odpA' => $request->input('odpA'.$index),
-                    'odpB' => $request->input('odpB'.$index),
-                    'odpC' => $request->input('odpC'.$index),
+                    'idTemat' => $temat->id,
+                    'typ' => $request->input('typ'),
+                    'mnoznik' => $request->input('mnoznik'),
                     'created_at' => Carbon::now()
                 ];
 
-                Pytanie::create($array);
-            }
+                $quiz = Quiz::create($array);
 
-            return redirect('quizy/'.$request->input('id'))->with('success', trans('Quiz został poprawnie załadowany'));
+                for ($index=1;$index<=$limit;$index++){
+
+                    $array = [
+                        'idQuiz' =>$quiz->id,
+                        'tresc' => $request->input('tresc'.$index),
+                        'odpPoprawna' => $request->input('odpPoprawna'.$index),
+                        'odpA' => $request->input('odpA'.$index),
+                        'odpB' => $request->input('odpB'.$index),
+                        'odpC' => $request->input('odpC'.$index),
+                        'created_at' => Carbon::now()
+                    ];
+
+                    Pytanie::create($array);
+                }
+
+            }else{
+                $pytanie= DB::table('pytanie')->where('idQuiz',$request->input('id'));
+                $pytanie->delete();
+
+                $temat = DB::table('temat')->where('nazwa', $request->input('nazwa-tematu'))->first();
+
+                DB::table('quiz')
+                    ->where('id',$request->input('id'))
+                    ->update([
+                        'typ' => $request->input('typ'),
+                        'idTemat' =>$temat->id,
+                        'mnoznik' => $request->input('mnoznik'),
+                        'updated_at' => Carbon::now()
+                    ]);
+
+                for ($index=1;$index<=$limit;$index++){
+
+                    $array = [
+                        'idQuiz' => $request->input('id'),
+                        'tresc' => $request->input('tresc'.$index),
+                        'odpPoprawna' => $request->input('odpPoprawna'.$index),
+                        'odpA' => $request->input('odpA'.$index),
+                        'odpB' => $request->input('odpB'.$index),
+                        'odpC' => $request->input('odpC'.$index),
+                        'created_at' => Carbon::now()
+                    ];
+
+                    Pytanie::create($array);
+                }
+            }
+            if($request->input('id')=='new')
+            {
+                return redirect('quizy/'.$quiz->id)->with('success', trans('Quiz został poprawnie załadowany'));
+            }
+            else{
+                return redirect('quizy/'.$request->input('id'))->with('success', trans('Quiz został poprawnie załadowany'));
+            }
 
         }
 

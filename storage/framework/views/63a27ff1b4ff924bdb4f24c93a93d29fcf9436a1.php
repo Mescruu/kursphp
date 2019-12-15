@@ -98,9 +98,11 @@
                 <?php endif; ?>
 
                         <?php if(Request::path() === '/'): ?>
-                            <a class="forgetLink w-100 text-right mt-2" href="<?php echo e(route('password.request')); ?>">
+                        <div class="forgetLink w-100 text-right mt-2">
+                            <a href="<?php echo e(route('password.request')); ?>">
                                 Zapomniałeś hasła?
                             </a>
+                        </div>
                         <?php endif; ?>
             </div>
 

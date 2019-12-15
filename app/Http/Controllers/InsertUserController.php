@@ -11,10 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class InsertUserController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+
 
 
 
@@ -75,36 +72,20 @@ class InsertUserController extends Controller
             'haslo' => 'required|min:6',
             'email' => 'required|email|unique:uzytkownik'
         ]);
-
-
             $password =  bcrypt(request('haslo'));
-            $user = DB::select('SELECT * FROM uzytkownik WHERE haslo="'.$password.'" and nrAlbumu="'.request('nrAlbumu').'" '); //dodatkowo należy dodać klasę bazy //use DB;
-
+            $user = DB::select('SELECT * FROM uzytkownik 
+            WHERE haslo="'.$password.'" and nrAlbumu="'.request('nrAlbumu').'" ');
 
         if(!is_null($user)){
-
             DB::table('uzytkownik')
                 ->where('nrAlbumu', request('nrAlbumu'))
                 ->update(['email' => request('email'), 'typ' => 'student']);
-
-
             $userid = User::where('nrAlbumu', request('nrAlbumu'))->pluck('id')->first();
-
-
-
             Auth::loginUsingId($userid);
-
-
             return redirect('/profil')->with('success', 'Aktywowales konto! Uzupelnij dane i zacznij korzystać z platformy.');
-
-
         }else{
             return redirect('/')->withErrors('error', 'Dane są błędne!');
         }
-
-
-
         //return redirect('/')->with('success', 'Aktywowales konto! Uzupelnij dane i zacznij korzystać z platformy'.\request('nrAlbumu'));
-
     }
 }

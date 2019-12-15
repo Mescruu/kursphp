@@ -205,7 +205,9 @@
                                 <div class="d-flex justify-content-center">
 
                                     <a href="/tematy/{{$quiz->temat}}" class="btn btn-info col-3 mx-1">Powrót</a>
-                                    <a href="/quizy/{{$id}}"   class="btn btn-info col-3 mx-1">Powtórz test!</a>
+                                    @if($quiz->typ=="quiz")
+                                        <a href="/quizy/{{$id}}"   class="btn btn-info col-3 mx-1">Powtórz test!</a>
+                                    @endif
                                     <button onclick="showall()" id="showQuestions" class="btn btn-info col-3 mx-1">Pokaz swoje odpowiedzi</button>
 
 

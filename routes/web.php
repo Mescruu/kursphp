@@ -84,7 +84,10 @@ Route::post('editcriterion', 'EditCriterionController@EditCriterion');
 
 //Kwizy
 //Route::get('quizy', 'QuizController@index');
+Route::get('quizy/utworz', 'QuizController@create');
+
 Route::get('quizy/{id}', 'QuizController@show');
+
 Route::get('quizy/{id}/edycja', 'QuizController@edit');
 Route::get('quizy/{id}/edycja/zatwierdz', 'QuizController@confirm');
 

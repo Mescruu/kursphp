@@ -1,48 +1,10 @@
 @extends('layouts.app')
 
 @section('assets')
-    <link href="{{ asset('css/underNav.css') }}" rel="stylesheet">
     <link href="{{ asset('css/quiz.css') }}" rel="stylesheet">
 
 @endsection
 
-
-@section('undernav')
-
-    <div class="col-md-4 col-sm-5 col-xs-3 float-left">
-        <h2 >
-            <a href="/quizy/{{$quiz->id}}" >Quiz</a>
-        </h2>
-    </div>
-    <div class="col-md-4 col-sm-6 col-xs-2">
-        @if(isset($quiz->temat))
-            @if($quiz->temat!="empty")
-                <div class="btn-diagonal btn-slanted float-left">
-                    <a href="/tematy/{{$quiz->idTemat}}" >Temat</a>
-                </div>
-            @endif
-        @endif
-
-        @if(isset($quiz->wyklad))
-            @if($quiz->wyklad!="empty")
-                <div class="btn-diagonal btn-slanted float-left">
-                    <a href="/wyklady/{{$quiz->wyklad}}" >Wykład</a>
-                </div>
-            @endif
-        @endif
-
-
-        @if(isset($quiz->zadanie))
-            @if($quiz->zadanie!="empty")
-                <div class="btn-diagonal btn-slanted float-left">
-                    <a href="/zadania/{{$quiz->zadanie}}" >Zadanie</a>
-                </div>
-            @endif
-        @endif
-
-    </div>
-
-@endsection
 
 @section('content')
 
@@ -59,7 +21,7 @@
                     {!! csrf_field() !!}
                     <div class="title">
                         <h1 class="m-0 p-2">
-                            Edycja Quizu
+                            Tworzenie Quizu
                         </h1 >
                     </div>
                 <div class="card-header form-navbar">
@@ -67,20 +29,15 @@
                         <div class="col-3 mb-4">
                             <label for="numberInput" class="control-label">ilość pytań</label>
 
-                            <input type="number" min="1" max="20" step="1" id="numberInput" class="form-control "  placeholder="{{$ilosc}}"
+                            <input type="number" min="1" max="20" step="1" id="numberInput" class="form-control "  placeholder="1"
                                    oninput="setValOnRange(this.value)"  onclick="warning()" onchange="setValOnRange(this.value)">
                         </div>
                         <div class="col-3 mb-4">
                             <label for="typ" class="control-label">typ testu</label>
 
-                            <select name="typ" class="form-control " id="typ" value="{{$typ}}" required>
-                                @if($typ==="quiz")
-                                    <option>quiz</option>
-                                    <option>kolokwium</option>
-                                @else
-                                    <option>kolokwium</option>
-                                    <option>quiz</option>
-                                @endif
+                            <select name="typ" class="form-control"   onchange="checkWeight(this.value)" required>
+                                <option>quiz</option>
+                                <option>kolokwium</option>
                             </select>
                         </div>
 
@@ -88,50 +45,39 @@
                             <label for="nazwa-tematu" class="control-label">Nazwa tematu</label>
 
                             <select name="nazwa-tematu" class="form-control " required>
-                                <option>{{$nazwaTematu}}</option>
-
-
                                 @foreach($tematy as $temat)
-                                    @if($nazwaTematu!==$temat->nazwa)
-                                        <option>{{$temat->nazwa}}</option>
-                                    @endif
+                                    <option>{{$temat->nazwa}}</option>
                                 @endforeach
-
                             </select>
                         </div>
 
                         <div class="col-1 mb-4 d-none" id="weight">
                             <label for="mnoznik" class="control-label">Mnoznik</label>
-                            <input type="number" min="1" name="mnoznik" class="form-control "  value="1">
+                            <input type="number" min="1" name="mnoznik" class="form-control"  value="1">
                         </div>
 
                         <div class="col-3 mb-4" id="confirm">
                             <label for="grupa" class="control-label">Zakończ tworzenie</label>
                             <button type="submit" class="btn btn-info w-100">Zatwierdź</button>
                         </div>
-
-
                     </div>
 
 
-
-
-
-                    <input class="form-control d-none" id="startValue" name="oldCount" type="number"  value="{{$ilosc}}" >
-                    <input class="form-control d-none" id="startValue" name="id" type="number"  value="{{$id}}" >
+                    <input class="form-control d-none" id="startValue" name="oldCount" type="number"  value="1" >
+                    <input class="form-control d-none" id="startValue" name="id" type="text"  value="new">
 
                     <div  id="pytania" class="questionsContainer" >
-                        @foreach($pytania as $pytanie)
 
-                            <div class="form-group " id="pytanie{{$pytanie->nr}}">
+
+                            <div class="form-group " id="pytanie1">
 
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card text-dark bg-light mb-3 row-eq-height w-100">
-                                            <div class="card-header"><h3>Pytanie {{$pytanie->nr}}.</h3></div>
+                                            <div class="card-header"><h3>Pytanie 1.</h3></div>
                                             <div class="card-body">
 
-                                                <textarea type="text" class="form-control" name="tresc{{$pytanie->nr}}" >{{$pytanie->tresc}}</textarea>
+                                                <textarea type="text" class="form-control" name="tresc1" ></textarea>
 
                                             </div>
                                         </div>
@@ -144,7 +90,7 @@
                                             <div class="card-body">
                                                 <p class="card-text">Odpowiedź poprawna.</p>
 
-                                                <textarea type="text" class="form-control" name="odpPoprawna{{$pytanie->nr}}">{{$pytanie->odpPoprawna}}</textarea>
+                                                <textarea type="text" class="form-control" name="odpPoprawna1"></textarea>
 
 
                                             </div>
@@ -156,7 +102,7 @@
                                             <div class="card-body">
                                                 <p class="card-text">Odpowiedź a.</p>
 
-                                                <textarea type="text" class="form-control" name="odpA{{$pytanie->nr}}" >{{$pytanie->odpA}}</textarea>
+                                                <textarea type="text" class="form-control" name="odpA1" ></textarea>
 
                                             </div>
                                         </div>
@@ -167,7 +113,7 @@
                                             <div class="card-body">
                                                 <p class="card-text">Odpowiedź b.</p>
 
-                                                <textarea type="text" class="form-control" name="odpB{{$pytanie->nr}}" >{{$pytanie->odpB}}</textarea>
+                                                <textarea type="text" class="form-control" name="odpB1" ></textarea>
 
                                             </div>
                                         </div>
@@ -178,15 +124,13 @@
                                             <div class="card-body">
                                                 <p class="card-text">Odpowiedź c.</p>
 
-                                                <textarea type="text" class="form-control" name="odpC{{$pytanie->nr}}">{{$pytanie->odpC}}</textarea>
+                                                <textarea type="text" class="form-control" name="odpC1"></textarea>
 
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                        @endforeach
 
                     </div>
 
@@ -200,10 +144,18 @@
 
 <script>
 
-    let input = document.getElementById("startValue").value;
+    let input = 1;
+
     let clickCount = 0;
     // alert(input);
-    checkWeight(document.getElementById("typ").value);
+
+
+    function warning() {
+        if(clickCount==0){
+            window.confirm('Po zmniejszeniu zostaną usunięte pytania!');
+            clickCount++;
+        }
+    }
 
     function checkWeight(newVal) {
 
@@ -218,14 +170,10 @@
             document.getElementById("confirm").classList.remove("col-2");
             document.getElementById("confirm").classList.add("col-3");
         }
+
+
     }
 
-    function warning() {
-        if(clickCount==0){
-            window.confirm('Po zmniejszeniu zostaną usunięte pytania!');
-            clickCount++;
-        }
-    }
     function setValOnInput(newVal){
 
 
@@ -235,9 +183,7 @@
     }
     function setValOnRange(newVal){
 
-
-                document.getElementById("rangeInput").value =newVal;
-                setInputs(newVal);
+        setInputs(newVal);
 
     }
 

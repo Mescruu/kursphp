@@ -2,6 +2,7 @@
 
     <link href="<?php echo e(asset('css/underNav.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('css/temat.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/trescTematu.css')); ?>" rel="stylesheet">
 
 <?php $__env->stopSection(); ?>
 
@@ -26,7 +27,7 @@
         <?php if(isset($temat->wyklad)): ?>
             <?php if($temat->wyklad!="empty"): ?>
                 <div class="btn-diagonal btn-slanted float-left">
-                    <a href="/wyklady/<?php echo e($temat->wyklad); ?>" >Wyklad</a>
+                    <a href="/wyklady/<?php echo e($temat->wyklad); ?>" >Wykład</a>
                 </div>
             <?php endif; ?>
         <?php endif; ?>
@@ -63,16 +64,20 @@
 
                     <div class="col-12">
                         <h1><?php echo e($temat->nazwa); ?></h1>
-                        <hr class="w-50">
+                        <hr class="w-80">
+                        <h2><?php echo e($temat->opis); ?></h2>
+                        <hr class="w-80">
                         <?php if(isset($temat->updated_at)): ?>
                             <small class="text-center mx-auto">Ostatnio edytowany <?php echo e($temat->updated_at); ?></small>
+                        <?php else: ?>
+                            <small class="text-center mx-auto">Ostatnio edytowany <?php echo e($temat->created_at); ?></small>
                         <?php endif; ?>
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="col-12 py-3">
-                        <div>
+                        <div class="tresc">
                             <?php echo $trescAktualna; ?>
 
                         </div>

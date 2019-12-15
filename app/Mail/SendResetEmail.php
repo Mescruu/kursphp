@@ -26,7 +26,6 @@ class SendResetEmail extends Mailable
         $this->subject=$subject;
         $this->link=$link;
         $this->name=$name;
-
     }
 
     /**
@@ -40,12 +39,10 @@ class SendResetEmail extends Mailable
         $e_link=$this->link;
         $e_name=$this->name;
 
-
         $data = array(
             'link' => $e_link,
             'imie' => $e_name
         );
-
         return $this->from('kursphp@interaktywnie.com')
             ->view('mail.resetPassword')->subject($e_subject)->with($data);
     }
