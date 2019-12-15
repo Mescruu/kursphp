@@ -17,7 +17,7 @@ class CreateQuizTable extends Migration
             $table->increments('id');
             $table->integer('idTemat');
             $table->string('typ');
-            $table->integer('waga')->nullable();
+            $table->integer('mnoznik')->nullable();
             $table->timestamps();
         });
     }
