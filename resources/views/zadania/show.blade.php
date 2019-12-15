@@ -138,10 +138,11 @@
                                         <button class="btn btn-info mr-sm-2 mb-2">Wstaw plik</button>
                                         <input type="file" id="fileInput" name="file" class="form-control-file" multiple onchange="showname()"/>
 
-                                        <button type="submit" class="btn btn-info mb-2">
-                                            Zatwierdź
-                                        </button>
+                                        
                                     </div>
+                                    <button type="submit" class="btn btn-info mb-2">
+                                            Zatwierdź
+                                    </button>
 
                                 </div>
                                 <div id="showfile" class="col-12 d-flex justify-content-center">

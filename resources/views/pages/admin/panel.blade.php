@@ -719,7 +719,7 @@
                                     <div class="card-header" id="headingOne">
                                         <h5 class=" h-100 my-auto">
                                             Dodaj Temat
-                                            <a href="/tematy/utworz" class="btn btn-info add mr-2"> + Temat</a>
+                                            <button class="btn btn-info add mr-2" onclick="addSubject()"> + Temat</button>
                                         </h5>
                                     </div>
                                 </div>
@@ -772,7 +772,7 @@
                                             <button class="btn btn-warning add mr-2" onclick="restoreSubject({{$i->id}},'{{$i->nazwa}}');">Przywróć</button>
                                             <a href="/tematy/{{$i->id}}/edycja" class="btn btn-info add mr-2">Edytuj</a>
                                             <a href="/tematy/{{$i->id}}/grupy" class="btn btn-info add mr-2">Przypisz Grupy</a>
-                                            <a href="/tematy/{{$i->id}}" class="btn btn-info add mr-2">Zobacz</a>
+                                            <a href="/tematy/{{$i->id}}" class="btn btn-info add mr-2">Pokaż</a>
                                         </div>
                                     @endforeach
                                 </div>
@@ -793,11 +793,12 @@
                                     <thead>
                                     <tr>
                                         <th scope="col" class="text-center">#</th>
-                                        <th scope="col" class="text-center">typ</th>
-                                        <th scope="col" class="text-center">ilosc pytań</th>
-                                        <th scope="col" class="text-center">link</th>
-                                        <th scope="col" class="text-center">edycja</th>
-                                        <th scope="col" class="text-center">usun</th>
+                                        <th scope="col" class="text-center">Typ</th>
+                                        <th scope="col" class="text-center">Ilość pytań</th>
+                                        <th scope="col" class="text-center">Temat</th>
+                                        <th scope="col" class="text-center">Link</th>
+                                        <th scope="col" class="text-center">Edycja</th>
+                                        <th scope="col" class="text-center">Usuń</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -811,14 +812,18 @@
                                                 {{$quiz->iloscPytan}}
 
                                             </td>
-                                            <td>
-                                                <a href="quizy/{{$quiz->id}}" class="btn btn-info w-100 mr-2"> przejdź</a>
+                                            <td class="text-center">
+                                                {{$quiz->tematNazwa}}
+
                                             </td>
                                             <td>
-                                                <a href="quizy/{{$quiz->id}}/edycja" class="btn btn-info w-100 mr-2"> edytuj</a>
+                                                <a href="quizy/{{$quiz->id}}" class="btn btn-info w-100 mr-2">Przejdź</a>
                                             </td>
                                             <td>
-                                                <a href="quizy/{{$quiz->id}}/usun"  onclick="return confirm('Tej operacji nie da się cofnąć!')" class="btn btn-info w-100 mr-2"> usun</a>
+                                                <a href="quizy/{{$quiz->id}}/edycja" class="btn btn-info w-100 mr-2">Edytuj</a>
+                                            </td>
+                                            <td>
+                                                <a href="quizy/{{$quiz->id}}/usun"  onclick="return confirm('Tej operacji nie da się cofnąć!')" class="btn btn-danger w-100 mr-2">Usuń</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -875,7 +880,9 @@
 
                                                         <select name="nazwa-tematu" class="form-control" value="{{ old('nazwa-tematu') }}" required>
                                                             @foreach($tematy as $temat)
+                                                                @if(!$temat->maZadanie)
                                                                     <option>{{$temat->nazwa}}</option>
+                                                                @endif
                                                             @endforeach
                                                         </select>
 
@@ -920,12 +927,12 @@
                                     <thead>
                                     <tr>
                                         <th scope="col" class="text-center">#</th>
-                                        <th scope="col" class="text-center">Zadanie</th>
+                                        <th scope="col" class="text-center">Tytuł</th>
                                         <th scope="col" class="text-center">Temat</th>
                                         <th scope="col" class="text-center">Treść</th>
                                         <th scope="col" class="text-center">Edycja</th>
-                                        <th scope="col" class="text-center">Odpowiedzi</th>
-                                        <th scope="col" class="text-center">Usun</th>
+                                        <th scope="col" class="text-center">Rozwiązania</th>
+                                        <th scope="col" class="text-center">Usuń</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -956,7 +963,7 @@
                                                 <a href="#rozwiazanie{{$zadanie->id}}" data-toggle="collapse"  aria-expanded="false" aria-controls="rozwiazanie{{$zadanie->id}}"  class="btn btn-info w-100 mr-2">Rozwiązania</a>
                                             </td>
                                             <td>
-                                                <a href="zadania/{{$zadanie->id}}/usun"  onclick="return confirm('Tej operacji nie da się cofnąć!')" class="btn btn-info w-100 mr-2"> usun</a>
+                                                <a href="zadania/{{$zadanie->id}}/usun"  onclick="return confirm('Zamierzasz usunąć zadanie oraz przypisane do niego rozwiązania. Tej operacji nie da się cofnąć!')" class="btn btn-danger w-100 mr-2">Usuń</a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -1018,9 +1025,11 @@
                                                                         <select name="nazwa-tematu" class="form-control" value="{{ old('nazwa-tematu') }}" required>
                                                                             <option>{{$zadanie->lab}} </option>
                                                                         @foreach($tematy as $temat)
+                                                                        @if(!$temat->maZadanie)
                                                                             @if($temat->nazwa!==$zadanie->lab)
                                                                                 <option>{{$temat->nazwa}}</option>
                                                                                 @endif
+                                                                        @endif
                                                                             @endforeach
                                                                         </select>
 
@@ -1069,12 +1078,12 @@
                                                             <thead>
                                                             <tr>
                                                                 <th scope="col">#</th>
-                                                                <th scope="col">Imie studenta</th>
+                                                                <th scope="col">Imię studenta</th>
                                                                 <th scope="col">Nazwisko student</th>
                                                                 <th scope="col">Data wstawienia</th>
                                                                 <th scope="col">Data aktualizacji</th>
                                                                 <th scope="col">Status</th>
-                                                                <th scope="col">link</th>
+                                                                <th scope="col">Link</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -1164,7 +1173,9 @@
 
                                                         <select name="nazwa-tematu" class="form-control" value="{{ old('nazwa-tematu') }}" required>
                                                             @foreach($tematy as $temat)
+                                                            @if(!$temat->maWyklad)
                                                                 <option>{{$temat->nazwa}}</option>
+                                                            @endif
                                                             @endforeach
                                                         </select>
 
@@ -1206,11 +1217,11 @@
                                     <thead>
                                     <tr>
                                         <th scope="col" class="text-center">#</th>
-                                        <th scope="col" class="text-center">Wykład</th>
+                                        <th scope="col" class="text-center">Tytuł</th>
                                         <th scope="col" class="text-center">Temat</th>
-                                        <th scope="col" class="text-center">link</th>
-                                        <th scope="col" class="text-center">edycja</th>
-                                        <th scope="col" class="text-center">usun</th>
+                                        <th scope="col" class="text-center">Link</th>
+                                        <th scope="col" class="text-center">Edycja</th>
+                                        <th scope="col" class="text-center">Usuń</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -1225,13 +1236,13 @@
                                                 {{$wyklad->lab}}
                                             </td>
                                             <td>
-                                                <a href="wyklady/{{$wyklad->id}}" class="btn btn-info w-100 mr-2"> przejdź</a>
+                                                <a href="wyklady/{{$wyklad->id}}" class="btn btn-info w-100 mr-2">Otwórz</a>
                                             </td>
                                             <td>
                                                 <a href="#edytuj{{$wyklad->id}}" data-toggle="collapse"  aria-expanded="false" aria-controls="edytuj{{$wyklad->id}}"  class="btn btn-info w-100 mr-2">Edytuj</a>
                                             </td>
                                             <td>
-                                                <a href="wyklady/{{$wyklad->id}}/usun"  onclick="return confirm('Tej operacji nie da się cofnąć!')" class="btn btn-info w-100 mr-2"> usun</a>
+                                                <a href="wyklady/{{$wyklad->id}}/usun"  onclick="return confirm('Tej operacji nie da się cofnąć!')" class="btn btn-danger w-100 mr-2">Usuń</a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -1263,10 +1274,12 @@
                                                                        <select name="nazwa-tematu" class="form-control" value="{{$wyklad->lab}}" required>
                                                                            <option>{{$wyklad->lab}}</option>
                                                                        @foreach($tematy as $temat)
+                                                                       @if(!$temat->maWyklad)
                                                                                @if($temat->nazwa!=$wyklad->lab)
                                                                                    <option>{{$temat->nazwa}}</option>
                                                                                @endif
-                                                                           @endforeach
+                                                                        @endif
+                                                                        @endforeach
                                                                        </select>
 
                                                                        @if ($errors->has('nazwa-tematu'))

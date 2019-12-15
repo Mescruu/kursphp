@@ -4,12 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Powiadomienie;
 use App\Rozwiazanie;
-use App\Temat;
 use App\User;
-use App\Wyklad;
 use App\Zadanie;
 use Carbon\Carbon;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -133,11 +130,11 @@ class ZadaniaController extends Controller
                         'updated_at' => Carbon::now()
                     ]);
 
-                return redirect('/panel/')->with('success', 'Wyklad "'.$request->input('nazwa-zadania').'" został edytowany');
+                return redirect('/panel/')->with('success', 'Zadanie "'.$request->input('nazwa-zadania').'" zostało edytowane.');
 
         }else
         {
-            return redirect()->back()->with('error', trans('Brak dostepu'));
+            return redirect()->back()->with('error', trans('Brak dostepu!'));
         }
     }
 
@@ -165,11 +162,11 @@ class ZadaniaController extends Controller
                 ]
             );
 
-            return redirect('/panel/')->with('success', 'Uudało się dodać zadanie');
+            return redirect('/panel/')->with('success', 'Udało się dodać zadanie.');
 
 
         } else {
-            return redirect('/panel/')->with('errors', 'Nie udało się dodać wykładu');
+            return redirect('/panel/')->with('errors', 'Brak dostępu.');
         }
     }
 
@@ -187,10 +184,10 @@ class ZadaniaController extends Controller
 
             Storage::disk('rozwiazania')->deleteDirectory($id);
 
-            return redirect('/panel/')->with('success', 'Uudało się usunąć rozwiązania');
+            return redirect('/panel/')->with('success', 'Udało się usunąć zadanie.');
 
         } else {
-            return redirect('/panel/')->with('errors', 'Nie udało się dodać wykładu');
+            return redirect('/panel/')->with('errors', 'Brak dostępu.');
         }
     }
 
@@ -246,14 +243,14 @@ class ZadaniaController extends Controller
 
                         $grupa = DB::table('grupa')->where('id', $user->idGrupa)->get()->first();
 
-                        Powiadomienie::createImportantNotification($grupa->idNauczyciel, "Uzytkownik " . Auth::user()->imie . " " . Auth::user()->nazwisko. $msg." rozwiązanie do zadania \"".$zadanie->nazwa."\" Grupa: ".$grupa->nazwa);
+                        Powiadomienie::createImportantNotification($grupa->idNauczyciel, "Uzytkownik " . Auth::user()->imie . " " . Auth::user()->nazwisko. $msg." rozwiązanie do zadania \"".$zadanie->nazwa."\", Grupa: ".$grupa->nazwa);
                     }
 
                     return redirect()->back()->with('success', 'Dodano rozwiązanie.');
 
                 }
                 else{
-                    return redirect()->back()->with('errors', 'Nie udało się zapisać pliku, być może katalog nie jest zapisywalny. Daj użytkownikowi błąd.');
+                    return redirect()->back()->with('errors', 'Nie udało się zapisać pliku, być może katalog nie jest zapisywalny.');
                 }
             }
             else

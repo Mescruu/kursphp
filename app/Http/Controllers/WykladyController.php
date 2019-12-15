@@ -30,13 +30,12 @@ class WykladyController extends Controller
 
     public function remove($id)
     {
-        //wyswitla rzeczy zwiazane z konkretnym tematem o id $id
         if(Wyklad::find($id)->delete())
         {
-            return redirect('/panel')->with('success', trans('Usnięty został wyklad'));
+            return redirect('/panel')->with('success', trans('Wykład został usunięty.'));
 
         }else{
-            return redirect('/panel')->with('error', trans('Coś poszło źle'));
+            return redirect('/panel')->with('error', trans('Coś poszło nie tak.'));
         }
 
     }
@@ -73,12 +72,12 @@ class WykladyController extends Controller
 //                    Storage::disk('wyklady')->put($file, '');
                         Storage::delete(storage_path().'/wyklady/copy'.$file); // usuniecie backupu
 
-                        return redirect('/panel/')->with('success', 'Wyklad '.$request->input('tytul-wykladu').' został edytowany');
+                        return redirect('/panel/')->with('success', 'Wyklad '.$request->input('tytul-wykladu').' został edytowany.');
                     }
                     else{
                         rename(storage_path().'/wyklady/copy'.$file, storage_path().'/wyklady/'.$file);// spowrotem
 
-                        return redirect('/panel/')->with('errors', 'Nie udało się zapisać pliku, być może katalog nie jest zapisywalny. Daj użytkownikowi błąd.');
+                        return redirect('/panel/')->with('errors', 'Nie udało się zapisać pliku, być może katalog nie jest zapisywalny.');
                     }
                 }
                 else
@@ -104,7 +103,7 @@ class WykladyController extends Controller
 
         }else
         {
-            return redirect()->back()->with('error', trans('Brak dostepu'));
+            return redirect()->back()->with('error', trans('Brak dostepu.'));
         }
     }
 
@@ -144,20 +143,20 @@ class WykladyController extends Controller
 
                 if ($request->file('file')->move(storage_path().'/wyklady/',$file)) {
 //                    Storage::disk('wyklady')->put($file, '');
-                    return redirect('/panel/')->with('success', 'Utworzono wyklad ' . $wyklad->nazwa . '.');
+                    return redirect('/panel/')->with('success', 'Utworzono wyklad ' . $wyklad->tytul . '.');
                 }
                 else{
-                    return redirect('/panel/')->with('errors', 'Nie udało się zapisać pliku, być może katalog nie jest zapisywalny. Daj użytkownikowi błąd.');
+                    return redirect('/panel/')->with('errors', 'Nie udało się zapisać pliku, być może katalog nie jest zapisywalny.');
                 }
             }
             else
             {
-                return redirect('/panel/')->with('errors', 'Nie udało się dodać wykładu');
+                return redirect('/panel/')->with('errors', 'Nie udało się dodać wykładu.');
             }
 
 
         } else {
-            return redirect('/panel/')->with('errors', 'Zly plik');
+            return redirect('/panel/')->with('errors', 'Brak dostępu.');
         }
     }
 }

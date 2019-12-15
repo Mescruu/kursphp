@@ -75,6 +75,9 @@ class AdminFeaturesController extends Controller {
             }
 
             //Przypisanie nazw grup do każdego tematu, który jest im udostępniony
+            //oraz informacja, czy temat posiada już zadanie
+            //oraz informacja, czy temat posiada już quizy
+            //oraz informacja, czy temat posiada już wykład
             foreach($tematy as $temat){
                 $nazwyGrup = [];
                 $grupy = DB::table('temat')
@@ -87,9 +90,41 @@ class AdminFeaturesController extends Controller {
                     array_push($nazwyGrup, $grupa->nazwa);
                 }
                 $temat->grupy = $nazwyGrup;
+                
+                //czy temat ma zadanie
+                $zadanieTemat = DB::table('zadanie')
+                        ->where('idTemat', $temat->id)
+                        ->value('id');
+                if($zadanieTemat !== null){
+                    $temat->maZadanie = true;
+                }else{
+                    $temat->maZadanie = false;
+                }
+                
+                //czy temat ma quiz
+                $quizTemat = DB::table('quiz')
+                        ->where('idTemat', $temat->id)
+                        ->value('id');
+                if($quizTemat !== null){
+                    $temat->maQuiz = true;
+                }else{
+                    $temat->maQuiz = false;
+                }
+                
+                //czy temat ma wyklad
+                $wykladTemat = DB::table('wyklad')
+                        ->where('idTemat', $temat->id)
+                        ->value('id');
+                if($wykladTemat !== null){
+                    $temat->maWyklad = true;
+                }else{
+                    $temat->maWyklad = false;
+                }
+                
             }
 
             //Ilość pytań w każdym z quizów
+            //oraz nazwa tematu, do którego quiz jest przypisany
             $iloscPytan = [];
             $index = 0;
             foreach($quizy as $quiz){
@@ -104,7 +139,11 @@ class AdminFeaturesController extends Controller {
                 }
                 $quiz->iloscPytan =  $iloscPytan[$index];
 
-                    $index++;
+                $index++;
+                
+                $quiz->tematNazwa = DB::table('temat')
+                        ->where('id', $quiz->idTemat)
+                        ->value('nazwa');
             }
 
             //Ilość punktów każdego studenta i przypisanie studenta do grupy
@@ -157,10 +196,10 @@ class AdminFeaturesController extends Controller {
             $grupa=Grupa::find($id);
             $grupa->delete();
 
-            return redirect('/panel/')->with('success', 'Uudało się usunąć grupę');
+            return redirect('/panel/')->with('success', 'Uudało się usunąć grupę.');
 
         } else {
-            return redirect('/panel/')->with('errors', 'Nie udało się dodać wykładu');
+            return redirect('/panel/')->with('errors', 'Nie udało się usunąć grupy.');
         }
     }
 
@@ -188,7 +227,7 @@ class AdminFeaturesController extends Controller {
                 'updated_at' => Carbon::now()
             ]);
 
-        return redirect()->back()->with('success', trans('Udało się edytować grupę'));
+        return redirect()->back()->with('success', trans('Udało się edytować grupę.'));
 
     }
     public function Groups(Request $request) {//sposób na przerzucenie zmiennej:
