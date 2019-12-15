@@ -46,8 +46,11 @@
 
                             <select name="nazwa-tematu" class="form-control " required>
                                 @foreach($tematy as $temat)
+
+                                @endforeach        @if(!$temat->maQuiz)
                                     <option>{{$temat->nazwa}}</option>
-                                @endforeach
+                                @endif
+
                             </select>
                         </div>
 

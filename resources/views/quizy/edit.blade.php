@@ -73,7 +73,7 @@
                         <div class="col-3 mb-4">
                             <label for="typ" class="control-label">typ testu</label>
 
-                            <select name="typ" class="form-control " id="typ" value="{{$typ}}" required>
+                            <select name="typ" class="form-control " onchange="checkWeight(this.value)" id="typ" value="{{$typ}}" required>
                                 @if($typ==="quiz")
                                     <option>quiz</option>
                                     <option>kolokwium</option>
@@ -90,11 +90,13 @@
                             <select name="nazwa-tematu" class="form-control " required>
                                 <option>{{$nazwaTematu}}</option>
 
-
                                 @foreach($tematy as $temat)
-                                    @if($nazwaTematu!==$temat->nazwa)
-                                        <option>{{$temat->nazwa}}</option>
+                                    @if(!$temat->maQuiz)
+                                        @if($nazwaTematu!==$temat->nazwa)
+                                            <option>{{$temat->nazwa}}</option>
+                                        @endif
                                     @endif
+
                                 @endforeach
 
                             </select>
@@ -235,8 +237,6 @@
     }
     function setValOnRange(newVal){
 
-
-                document.getElementById("rangeInput").value =newVal;
                 setInputs(newVal);
 
     }
@@ -293,7 +293,7 @@
             '                                        <div class="card text-dark bg-light mb-3 row-eq-height w-100">\n' +
             '                                            <div class="card-header"><h3>A</h3></div>\n' +
             '                                            <div class="card-body">\n' +
-            '                                                <p class="card-text">Odpowiedź a.</p>\n' +
+            '                                                <p class="card-text">Odpowiedź poprawna</p>\n' +
             '\n' +
             '                                                <textarea type="text" class="form-control" name="odpPoprawna'+id+'"></textarea>\n' +
             '\n' +
@@ -305,7 +305,7 @@
             '                                        <div class="card text-dark bg-light mb-3 row-eq-height w-100">\n' +
             '                                            <div class="card-header"><h3>B</h3></div>\n' +
             '                                            <div class="card-body">\n' +
-            '                                                <p class="card-text">Odpowiedź b.</p>\n' +
+            '                                                <p class="card-text">Odpowiedź a.</p>\n' +
             '\n' +
             '                                                <textarea type="text" class="form-control" name="odpA'+id+'" > </textarea>\n' +
             '\n' +
@@ -316,7 +316,7 @@
             '                                        <div class="card text-dark bg-light mb-3 row-eq-height w-100">\n' +
             '                                            <div class="card-header "><h3>C</h3></div>\n' +
             '                                            <div class="card-body">\n' +
-            '                                                <p class="card-text">Odpowiedź c.</p>\n' +
+            '                                                <p class="card-text">Odpowiedź b.</p>\n' +
             '\n' +
             '                                                <textarea type="text" class="form-control" name="odpB'+id+'" > </textarea>\n' +
             '\n' +
@@ -327,7 +327,7 @@
             '                                        <div class="card text-dark bg-light mb-3 row-eq-height w-100">\n' +
             '                                            <div class="card-header"><h3>D</h3></div>\n' +
             '                                            <div class="card-body">\n' +
-            '                                                <p class="card-text">Odpowiedź d.</p>\n' +
+            '                                                <p class="card-text">Odpowiedź c.</p>\n' +
             '\n' +
             '                                                <textarea type="text" class="form-control" name="odpC'+id+'"> </textarea>\n' +
             '\n' +

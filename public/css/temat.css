@@ -145,19 +145,15 @@ body{
 }
 .topic-section form #buttons-left .btn-point{
     background: url("/storage/icons/Icons_editor/icon_listpoint_white.svg");
-
 }
 .topic-section form #buttons-left .btn-highlight{
     background: url("/storage/icons/Icons_editor/icon_highlight_white.svg");
-
 }
 .topic-section form #buttons-left .btn-name{
     background: url("/storage/icons/Icons_editor/icon_name_white.svg");
-
 }
 .topic-section form #buttons-left .btn-path{
     background: url("/storage/icons/Icons_editor/icon_path_white.svg");
-
 }
 
 .topic-section form #buttons-left .btn-img,
@@ -545,7 +541,7 @@ body{
         width: 100%;
     }
     .topic-section form #buttons-left .btn-editor{
-        width: 8.3333%;
+        width: 12.5%;
     }
 
     .topic-section form #buttons-left .btn-editor input{
@@ -587,7 +583,7 @@ body{
 
 
     .topic-section form #buttons-left .btn-editor{
-        width: 16.66666%;
+        width: 25%;
     }
 
 

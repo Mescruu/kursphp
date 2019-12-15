@@ -780,11 +780,16 @@
                             
                             <!-- Treść zakładki QUIZY -->
                             <div class="tab-pane fade  overflow-auto" id="pills-quizy" role="tabpanel" aria-labelledby="pills-quizy-tab">
+
                                 <div class="card">
                                     <div class="card-header" id="headingOne">
                                         <h5 class=" h-100 my-auto">
-                                            Dodaj Quiz
-                                            <a href="/quizy/utworz" class="btn btn-info add mr-2"> + Quiz</a>
+                                            @if($zajete['quiz'])
+                                                Utworz temat, aby dodać quiz
+                                            @else
+                                                Dodaj Quiz
+                                                <a href="/quizy/utworz" class="btn btn-info add mr-2"> + Quiz</a>
+                                            @endif
                                         </h5>
                                     </div>
                                 </div>
@@ -842,9 +847,15 @@
                                 <div class="card">
                                     <div class="card-header" id="headingOne">
                                         <h5 class=" h-100 my-auto">
-                                            Dodaj Zadanie
 
-                                            <a href="#createGroup" data-toggle="collapse"  aria-expanded="false" aria-controls="createGroup"  class="btn btn-info add">+ Zadanie</a>
+
+                                            @if($zajete['zadanie']==1)
+                                                Utworz temat, aby dodać zadanie
+                                            @else
+                                                Dodaj Zadanie
+                                                <a href="#createGroup" data-toggle="collapse"  aria-expanded="false" aria-controls="createGroup"  class="btn btn-info add">+ Zadanie</a>
+                                            @endif
+
 
                                         </h5>
                                     </div>
@@ -1136,9 +1147,15 @@
                                 <div class="card">
                                     <div class="card-header" id="headingOne">
                                         <h5 class=" h-100 my-auto">
-                                            Dodaj Wykład
 
-                                            <a href="#createGroup" data-toggle="collapse"  aria-expanded="false" aria-controls="createGroup"  class="btn btn-info add">+ Wykład</a>
+                                            @if($zajete['wyklad'])
+                                                Utworz temat, aby dodać wyklad
+                                            @else
+                                                Dodaj Wykład
+                                                <a href="#createGroup" data-toggle="collapse"  aria-expanded="false" aria-controls="createGroup"  class="btn btn-info add">+ Wykład</a>
+                                            @endif
+
+
 
                                         </h5>
                                     </div>

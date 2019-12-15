@@ -78,6 +78,14 @@ class AdminFeaturesController extends Controller {
             //oraz informacja, czy temat posiada już zadanie
             //oraz informacja, czy temat posiada już quizy
             //oraz informacja, czy temat posiada już wykład
+
+            $zajete = [
+                'quiz' => 0,
+                'zadanie' => 0,
+                'wyklad' => 0
+            ];
+
+
             foreach($tematy as $temat){
                 $nazwyGrup = [];
                 $grupy = DB::table('temat')
@@ -97,6 +105,7 @@ class AdminFeaturesController extends Controller {
                         ->value('id');
                 if($zadanieTemat !== null){
                     $temat->maZadanie = true;
+                    $zajete['zadanie']++;
                 }else{
                     $temat->maZadanie = false;
                 }
@@ -107,6 +116,8 @@ class AdminFeaturesController extends Controller {
                         ->value('id');
                 if($quizTemat !== null){
                     $temat->maQuiz = true;
+                    $zajete['quiz']++;
+
                 }else{
                     $temat->maQuiz = false;
                 }
@@ -117,10 +128,36 @@ class AdminFeaturesController extends Controller {
                         ->value('id');
                 if($wykladTemat !== null){
                     $temat->maWyklad = true;
+                    $zajete['wyklad']++;
+
                 }else{
                     $temat->maWyklad = false;
                 }
                 
+            }
+
+            if($zajete['wyklad']===count($tematy)){
+                $zajete['wyklad']=1;
+            }
+            else
+            {
+                $zajete['wyklad']=0;
+            }
+
+            if($zajete['quiz']===count($tematy)){
+                $zajete['quiz']=1;
+            }
+            else
+            {
+                $zajete['quiz']=0;
+            }
+
+            if($zajete['zadanie']===count($tematy)){
+                $zajete['zadanie']=1;
+            }
+            else
+            {
+                $zajete['zadanie']=0;
             }
 
             //Ilość pytań w każdym z quizów
@@ -179,7 +216,7 @@ class AdminFeaturesController extends Controller {
             }
             $editTask= session('editTask');
             session()->forget('editTask');
-            return view('pages.admin.panel', ['quizy'=>$quizy, 'group' => $group, 'studenci' => $studenci, 'nauczyciele' => $nauczyciele,
+            return view('pages.admin.panel', ['quizy'=>$quizy,'zajete'=>$zajete,'group' => $group, 'studenci' => $studenci, 'nauczyciele' => $nauczyciele,
                 'editTask'=>$editTask,
                 'notification' => $notification, 'kryterium' => $kryterium, 'tematy' => $tematy, 'wyklady'=>$wyklady, 'zadania'=>$zadania]);
         }

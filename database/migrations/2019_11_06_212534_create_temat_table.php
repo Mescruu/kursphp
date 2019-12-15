@@ -16,7 +16,7 @@ class CreateTematTable extends Migration
         Schema::create('temat', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('nazwa')->nullable()->unique();
+            $table->string('nazwa')->nullable();
             $table->string('opis')->nullable();
 
             $table->timestamps();

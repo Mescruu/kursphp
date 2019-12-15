@@ -247,6 +247,20 @@ class QuizController extends Controller
 
         $tematy=Temat::get();
 
+        foreach ($tematy as $temat)
+        {
+            //czy temat ma quiz
+            $quizTemat = DB::table('quiz')
+                ->where('idTemat', $temat->id)
+                ->value('id');
+            if($quizTemat !== null){
+                $temat->maQuiz = true;
+            }else{
+                $temat->maQuiz = false;
+            }
+        }
+
+
         return view ('quizy.create')->with('tematy', $tematy);
     }
 
@@ -294,7 +308,23 @@ class QuizController extends Controller
         $iloscPytan=count($pytania);
 
         $tematy=Temat::get();
-        $nazwaTematu = DB::table('temat')->where('id',$id)->value('nazwa');
+
+        foreach ($tematy as $temat)
+        {
+            //czy temat ma quiz
+            $quizTemat = DB::table('quiz')
+                ->where('idTemat', $temat->id)
+                ->value('id');
+            if($quizTemat !== null){
+                $temat->maQuiz = true;
+            }else{
+                $temat->maQuiz = false;
+            }
+        }
+
+
+
+        $nazwaTematu = DB::table('temat')->where('id',$quiz->idTemat)->value('nazwa');
 
 
         return view ('quizy.edit', ['nazwaTematu'=>$nazwaTematu,'tematy'=>$tematy, 'pytania'=>$pytania,'ilosc'=>$iloscPytan, 'quiz'=>$quiz, 'id'=>$id,'typ' => $quiz->typ]);
