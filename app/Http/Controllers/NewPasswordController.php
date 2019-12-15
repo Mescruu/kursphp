@@ -121,12 +121,12 @@ class NewPasswordController extends Controller
 
         //Jezeli się udało
         if ($this->sendSuccessEmail($tokenData->email)) {
-            return view('pages.profil')->with('status', trans('Udało się! Zapisz swoje nowe hasło.'));
+            return view('pages.home')->with('status', trans('Udało się! Zapisz swoje nowe hasło.'));
         } else {
 
             if(!Auth::guest()){
 
-                return view('pages.profil')->with('status', trans('Udało się! Zapisz swoje nowe hasło.'));
+                return view('pages.home')->with('status', trans('Udało się! Zapisz swoje nowe hasło.'));
             }
 
             return redirect()->back()->withErrors(['email' => trans('Coś poszło nie tak. Spróbuj ponownie za chwilę.')]);

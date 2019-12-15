@@ -784,7 +784,7 @@
                                     <div class="card-header" id="headingOne">
                                         <h5 class=" h-100 my-auto">
                                             Dodaj Quiz
-                                            <a href="/panel/dodajstudenta" class="btn btn-info add mr-2"> + Quiz</a>
+                                            <a href="/quizy/utworz" class="btn btn-info add mr-2"> + Quiz</a>
                                         </h5>
                                     </div>
                                 </div>
