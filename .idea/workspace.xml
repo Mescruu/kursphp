@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0f7a7229-3c61-4762-beac-3e936d815d6d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NewPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NewPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/admin/panel.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/admin/panel.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="0f7a7229-3c61-4762-beac-3e936d815d6d" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,11 +25,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/NewPasswordController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
+            <state relative-caret-position="289">
+              <caret line="122" column="57" lean-forward="true" selection-start-line="122" selection-start-column="57" selection-end-line="122" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/css/zadanie.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="62">
+              <caret line="29" column="53" selection-start-line="29" selection-start-column="53" selection-end-line="29" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -99,15 +105,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="201">
               <caret line="207" selection-start-line="207" selection-end-line="207" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/quizy/create.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="62" column="26" selection-start-line="62" selection-start-column="26" selection-end-line="62" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -187,7 +184,6 @@
         <option value="$PROJECT_DIR$/public/css/quiz.css" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/WykladyController.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/admin/addpoints.blade.php" />
-        <option value="$PROJECT_DIR$/public/css/zadanie.css" />
         <option value="$PROJECT_DIR$/resources/views/zadania/show.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/tematy/show.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" />
@@ -213,6 +209,7 @@
         <option value="$PROJECT_DIR$/app/Quiz.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/admin/panel.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/NewPasswordController.php" />
+        <option value="$PROJECT_DIR$/public/css/zadanie.css" />
       </list>
     </option>
   </component>
@@ -528,12 +525,12 @@
       <workItem from="1576266834313" duration="18939000" />
       <workItem from="1576323571745" duration="144000" />
       <workItem from="1576324022968" duration="17823000" />
-      <workItem from="1576439872895" duration="9817000" />
+      <workItem from="1576439872895" duration="9908000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="360168000" />
+    <option name="totallyTimeSpent" value="360259000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -592,13 +589,6 @@
           <folding>
             <element signature="e#40#54#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/zadanie.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="48" column="20" selection-start-line="48" selection-start-column="20" selection-end-line="48" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -917,8 +907,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/NewPasswordController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
+        <state relative-caret-position="289">
+          <caret line="122" column="57" lean-forward="true" selection-start-line="122" selection-start-column="57" selection-end-line="122" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/zadanie.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="62">
+          <caret line="29" column="53" selection-start-line="29" selection-start-column="53" selection-end-line="29" selection-end-column="53" />
         </state>
       </provider>
     </entry>

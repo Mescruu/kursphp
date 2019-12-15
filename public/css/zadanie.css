@@ -27,7 +27,7 @@ body{
     line-height: 28px;
 }
 .pokaz-zadanie-section .zip{
-    background: url("/storage/icons/zip.svg");
+    background: url("/storage/icons/icon_zip_darkblue.svg");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
