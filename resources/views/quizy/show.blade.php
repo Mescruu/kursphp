@@ -34,7 +34,7 @@
         @if(isset($quiz->wyklad))
             @if($quiz->wyklad!="empty")
                 <div class="btn-diagonal btn-slanted float-left">
-                    <a href="/wyklady/{{$quiz->wyklad}}" >Wyklad</a>
+                    <a href="/wyklady/{{$quiz->wyklad}}" >Wykład</a>
                 </div>
             @endif
         @endif
@@ -63,29 +63,28 @@
                 <div class="row ">
                     <div class="col-12">
                         <div class="card text-dark bg-light mb-3 row-eq-height w-100">
-                            <div class="card-header"><h3>Powodzenia!</h3></div>
+                            <div class="card-header"><h2>Powodzenia!</h2></div>
                             <div class="card-body">
                                 <p class="text-center">
-
-                                    @if($typ=="kolokwium")
-                                    To jest kolokwium! Nie będzie można powtórzyć tego testu!
-                                    @else
-                                    informacje o quizie
-                                    @endif
-
+                                    Ten quiz składa się z <strong>{{$ilosc}}</strong> pytań. 
+                                    Do każdego pytania przypisane są 4 odpowiedzi, z których tylko jedna jest poprawna. 
+                                    Po ukończeniu quizu otrzymasz wynik w postaci ilości poprawnie udzielonych odpowiedzi 
+                                    oraz będziesz miał/a możliwość sprawdzenia, na które pytania odpowiedziałeś/aś poprawnie 
+                                    (w przypadku błędnej odpowiedzi - która odpowiedź była prawidłowa).
                                 </p>
-                                <h4 class="text-center">Jesteś Gotów?!</h4>
-                                    <hr>
-                                <a href="
-                                 @if(Auth::user()->typ==\App\User::$admin)
-                                      /panel
+                                @if($typ=="kolokwium")
+                                    <p class="text-center">To jest kolokwium! Nie będzie można powtórzyć tego testu!</p>
                                 @endif
-                                @if(Auth::user()->typ==\App\User::$user)
-                                    /profil
+                                @if($wynik!=null)
+                                <p class="text-center">
+                                    Rozwiązałeś/aś ostatnio ten quiz i otrzymałeś/aś wynik:<br>
+                                    <strong>{{$wynik->wynik}}</strong>
+                                </p>
                                 @endif
-
-                                " class="btn btn-info col-3 offset-3">Nie</a>
-                                <button class="btn btn-info col-3" onClick="start()">Tak!</button>
+                                <hr>
+                                    <a href="/tematy/{{$quiz->temat}}" class="btn btn-info col-3 offset-3">Powrót</a>
+                                
+                                <button class="btn btn-info col-3" onClick="start()">Rozpocznij</button>
                             </div>
                         </div>
                     </div>
@@ -193,7 +192,7 @@
                 <div class="row w-25 mx-auto">
                     <div class="col-12">
                         <div class="card text-dark bg-light mb-3 row-eq-height w-100">
-                            <div class="card-header"><h3 class="text-center">Wyniki!</h3></div>
+                            <div class="card-header"><h3 class="text-center">Koniec!</h3></div>
                             <div class="card-body">
 
                                 <button type="submit" class="btn btn-info col-12"  id="checkOdp">Sprawdź Odpowiedzi</button>

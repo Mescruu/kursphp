@@ -35,7 +35,7 @@
         @if(isset($quiz->wyklad))
             @if($quiz->wyklad!="empty")
                 <div class="btn-diagonal btn-slanted float-left">
-                    <a href="/wyklady/{{$quiz->wyklad}}" >Wyklad</a>
+                    <a href="/wyklady/{{$quiz->wyklad}}" >Wykład</a>
                 </div>
             @endif
         @endif
@@ -186,22 +186,25 @@
                 <div class="row ">
                     <div class="col-12">
                         <div class="card text-dark bg-light mb-3 row-eq-height w-100">
-                            <div class="card-header"><h3>Twoje wyniki</h3></div>
+                            <div class="card-header"><h2>Twój wynik</h2></div>
                             <div class="card-body">
-                                <h4 class="text-center">{{$zdobytePunkty}}/{{$wszystkiePunkty}}</h4>
-                                <hr>
-                                <p class="text-center">informacje o quizie</p>
+                                <h3 class="text-center">{{$zdobytePunkty}}/{{$wszystkiePunkty}}</h3>
+                                
+                                <p class="text-center">
+                                    @if($zdobytePunkty/$wszystkiePunkty < 0.5)
+                                        Musisz się bardziej postarać...
+                                    @elseif($zdobytePunkty/$wszystkiePunkty < 0.75)
+                                        Całkiem nieźle!
+                                    @elseif($zdobytePunkty/$wszystkiePunkty < 1)
+                                        Tak blisko!
+                                    @elseif($zdobytePunkty/$wszystkiePunkty == 1)
+                                        Gratulacje!
+                                    @endif
+                                </p>
 
                                 <div class="d-flex justify-content-center">
 
-                                    <a href="
-                                    @if(Auth::user()->typ==\App\User::$admin)
-                                            /panel
-                                    @endif
-                                    @if(Auth::user()->typ==\App\User::$user)
-                                            /profil
-                                    @endif
-                                            " class="btn btn-info col-3 mx-1">Powrót</a>
+                                    <a href="/tematy/{{$quiz->temat}}" class="btn btn-info col-3 mx-1">Powrót</a>
                                     <a href="/quizy/{{$id}}"   class="btn btn-info col-3 mx-1">Powtórz test!</a>
                                     <button onclick="showall()" id="showQuestions" class="btn btn-info col-3 mx-1">Pokaz swoje odpowiedzi</button>
 

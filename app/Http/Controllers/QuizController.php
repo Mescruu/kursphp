@@ -28,7 +28,10 @@ class QuizController extends Controller
     {
         $quiz = Quiz::find($id);
         $pytania = Pytanie::get()->where('idQuiz', $id);
-        $wynik = Wynik::get()->where('idQuiz', $id);
+        $wynik = DB::table('wynik')
+                ->where('idQuiz', $id)
+                ->where('idUzytkownik', Auth::user()->id)
+                ->first();
 
 
         $wyklad = DB::table('wyklad')->where('idTemat',$quiz->idTemat)->get()->first();
@@ -55,9 +58,6 @@ class QuizController extends Controller
         else{
             $quiz->zadanie="empty";
         }
-
-
-
 
         if($quiz->typ==="kolokwium"&&$wynik!==null&&Auth::user()->typ!='nauczyciel'){
 
@@ -96,7 +96,7 @@ class QuizController extends Controller
         $iloscPytan=count($pytania);
 
 
-        return view ('quizy.show', ['pytania'=>$pytania,'ilosc'=>$iloscPytan, 'id'=>$id,'typ' => $quiz->typ,'quiz'=> $quiz, 'seed'=>$seed]);
+        return view ('quizy.show', ['pytania'=>$pytania,'ilosc'=>$iloscPytan, 'id'=>$id,'typ' => $quiz->typ,'quiz'=> $quiz, 'seed'=>$seed, 'wynik'=>$wynik]);
 
     }
 
@@ -218,9 +218,14 @@ class QuizController extends Controller
 
 
         }
-
-        Wynik::create($results);
-
+        
+        $wynik = DB::table('wynik')->where('idQuiz', $id)->where('idUzytkownik', Auth::user()->id)->first();
+        if($wynik != null){
+            DB::table('wynik')->where('idQuiz', $id)->where('idUzytkownik', Auth::user()->id)->update(['wynik' => $results['wynik'], 'updated_at' => Carbon::now()]);
+        }else{
+            Wynik::create($results);
+        }
+        
         return view ('quizy.odpowiedzi', ['pytania'=>$pytania,'wszystkiePunkty'=>$iloscPytan, 'quiz'=>$quiz, 'id'=>$id,'zdobytePunkty' => $allPoints]);
     }
 

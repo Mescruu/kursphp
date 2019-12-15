@@ -29,7 +29,7 @@
         @if(isset($temat->wyklad))
             @if($temat->wyklad!="empty")
                 <div class="btn-diagonal btn-slanted float-left">
-                    <a href="/wyklady/{{$temat->wyklad}}" >Wyklad</a>
+                    <a href="/wyklady/{{$temat->wyklad}}" >Wykład</a>
                 </div>
             @endif
         @endif
@@ -67,8 +67,12 @@
                     <div class="col-12">
                         <h1>{{$temat->nazwa}}</h1>
                         <hr class="w-80">
+                        <h2>{{$temat->opis}}</h2>
+                        <hr class="w-80">
                         @if(isset($temat->updated_at))
                             <small class="text-center mx-auto">Ostatnio edytowany {{$temat->updated_at}}</small>
+                        @else
+                            <small class="text-center mx-auto">Ostatnio edytowany {{$temat->created_at}}</small>
                         @endif
                     </div>
 

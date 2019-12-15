@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Temat;
-use App\User;
 use App\ListaGrup;
-use App\Wyklad;
 use App\Zadanie;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -164,9 +163,10 @@ class TematyController extends Controller {
             Storage::disk('tematy')->put($id . '/phtml.txt', $trescAktualnaHTML);
             Storage::disk('tematy')->put($id . '/abb.txt', request('text'));
             Storage::disk('tematy')->put($id . '/ahtml.txt', request('texthtml'));
+            DB::table('temat')->where('id', $id)->update(['updated_at' => Carbon::now()]);
             return redirect()->back()->with('success', 'Udało się zaktualizować temat!');
         } else {
-            return redirect('/tematy/' . $id);
+            return redirect('/tematy/' . $id)->with('error', 'Brak dostępu.');
         }
     }
 
@@ -266,13 +266,14 @@ class TematyController extends Controller {
                 Storage::disk('tematy')->put($id . '/ahtml.txt', $trescPoprzedniaHTML);
                 Storage::disk('tematy')->put($id . '/pbb.txt', $trescAktualnaBBCode);
                 Storage::disk('tematy')->put($id . '/phtml.txt', $trescAktualnaHTML);
+                DB::table('temat')->where('id', $id)->update(['updated_at' => Carbon::now()]);
 
                 return redirect()->back()->with('success', 'Przywrócono treść tematu ' . $nazwa . '.');
             } else {
                 return redirect()->back()->with('error', 'Taki temat nie istnieje.');
             }
         } else {
-            return redirect('/tematy/' . $id);
+            return redirect('/tematy/' . $id)->with('error', 'Brak dostępu.');
         }
     }
 
