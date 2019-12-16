@@ -344,12 +344,11 @@
                                     </h5>
                                     <div class="flex-fill text-right">
                                         <a href="#edytuj{{$grupa->id}}" data-toggle="collapse"  aria-expanded="false" aria-controls="edytuj{{$grupa->id}}"  class="btn btn-info mr-auto">Edytuj</a>
-                                        <a href="panel/usungrupe/{{$grupa->id}}"  onclick="return confirm('Tej operacji nie da się cofnąć!')" class="btn btn-info"> usun</a>
+                                        <a href="#usun{{$grupa->id}}" data-toggle="collapse" aria-expanded="false" aria-controls="usun{{$grupa->id}}" class="btn btn-danger">Usuń</a>
                                     </div>
                                 </div>
 
-                                <div class="collapse border"
-                                     id="edytuj{{$grupa->id}}">
+                                <div class="collapse border"id="edytuj{{$grupa->id}}">
                                     <div class="card-body create-group-body">
 
                                         <form class="form-signin justify-content-center " method="POST" action="/panel/edytujgrupe/{{$grupa->id}}">
@@ -399,6 +398,13 @@
                                             </div>
                                         </form>
 
+                                    </div>
+                                </div>
+                            
+                                <div class="collapse border" id="usun{{$grupa->id}}">
+                                    <div class="card-body create-group-body">
+                                        <a href="/panel/usungrupe/{{$grupa->id}}-1" onclick="return confirm('Zamierzasz usunąć grupę oraz studentów przypisanych do niej. Tej operacji nie da się cofnąć!')" class="btn float-right btn-danger">Usuń grupę razem ze studentami</a>
+                                        <a href="/panel/usungrupe/{{$grupa->id}}-0" onclick="return confirm('Zamierzasz usunąć grupę pozostawiając nieprzypisanych studentów. Stracą oni wtedy dostęp do udostępnionych tej grupie tematów. Tej operacji nie da się cofnąć!')" class="btn float-right btn-danger mr-2 mb-2">Usuń grupę</a>
                                     </div>
                                 </div>
 
@@ -452,6 +458,9 @@
                                                     {{$i->iloscPunktow}}
                                                 </td>
                                                 <td>
+                                                    <a href="/panel/usunuzytkownika/{{$i->id}}" onclick="return confirm('Zamierzasz usunąć użytkownika {{$i->imie}} {{$i->nazwisko}} oraz wszystkie dane związane z nim. Tej operacji nie da się cofnąć!')" class="btn btn-danger float-right ml-2">
+                                                        Usuń
+                                                    </a>
                                                     <a href="/panel/uzytkownik/{{$i->id}}" class="btn btn-info add">
                                                         Edytuj
                                                     </a>
@@ -552,6 +561,9 @@
                                         </td>
                                     </tr>
                                 </table>
+                                <a href="/panel/usunuzytkownika/{{$i->id}}" onclick="return confirm('Zamierzasz usunąć użytkownika {{$i->imie}} {{$i->nazwisko}} oraz wszystkie dane związane z nim. Tej operacji nie da się cofnąć!')" class="btn btn-danger float-right ml-2">
+                                    Usuń
+                                </a>
                                 <a href="/panel/uzytkownik/{{$i->id}}" class="btn btn-info add">Edytuj</a>
                             </div>
                             @endforeach
@@ -615,6 +627,11 @@
                                         </td>
                                     </tr>
                                 </table>
+                                @if(Auth::user()->id !== $i->id)
+                                <a href="/panel/usunuzytkownika/{{$i->id}}" onclick="return confirm('Zamierzasz usunąć użytkownika {{$i->imie}} {{$i->nazwisko}} oraz wszystkie dane związane z nim. Tej operacji nie da się cofnąć!')" class="btn btn-danger float-right ml-2">
+                                    Usuń
+                                </a>
+                                @endif
                             </div>
                             @endforeach
                         </div>

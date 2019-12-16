@@ -222,21 +222,25 @@ class AdminFeaturesController extends Controller {
         }
     }
 
-    public function removeGroups($id)
+    public function removeGroup($id, $zeStudentami)
     {
         if (Auth::user()->typ == \App\User::$admin) {
 
-
             $listagrup = DB::table('listagrup')->where('idGrupa', $id);
             $listagrup->delete();
-
-            $grupa=Grupa::find($id);
+            
+            if($zeStudentami === '1'){
+                $studenci = DB::table('uzytkownik')->where('idGrupa', $id);
+                $studenci->delete();
+            }
+            
+            $grupa = Grupa::find($id);
+            //$grupaNazwa = $grupa->nazwa;
             $grupa->delete();
 
-            return redirect('/panel/')->with('success', 'Uudało się usunąć grupę.');
-
-        } else {
-            return redirect('/panel/')->with('errors', 'Nie udało się usunąć grupy.');
+                return redirect('/panel/')->with('success', 'Udało się usunąć grupę '.$grupaNazwa.'.');
+        }else{
+            return redirect('/panel/')->with('error', 'Brak dostępu.');
         }
     }
 
@@ -475,7 +479,7 @@ class AdminFeaturesController extends Controller {
                 'updated_at' => Carbon::now()
             ]);
 
-        return redirect()->back()->with('success', trans('Udało się zminić grupę'));
+        return redirect()->back()->with('success', trans('Udało się zmienić grupę.'));
     }
 
     public function EditUser($id) {
@@ -534,6 +538,48 @@ class AdminFeaturesController extends Controller {
                 'piec' => Storage::disk('kryterium')->get('5.txt'),
             ];
         return view('pages.admin.edytujkryterium', ['kryterium' => $kryterium]);
+    }
+    
+    public function removeUser($id){
+        
+        if (Auth::user()->typ == \App\User::$admin) {
+        
+            if($powiadomienia = DB::table('powiadomienie')->where('idUzytkownik', $id)){
+                $powiadomienia->delete();
+            }
+            
+            if($punkty = DB::table('punkty')->where('idStudent', $id)){
+                $punkty->delete();
+            }
+            
+            if($punkty = DB::table('punkty')->where('idNauczyciel', $id)){
+                $punkty->delete();
+            }
+            
+            if($rozwiazania = DB::table('rozwiazanie')->where('idUzytkownik', $id)){
+                $rozwiazania->delete();
+            }
+            
+            if($wyniki = DB::table('wynik')->where('idUzytkownik', $id)){
+                $wyniki->delete();
+            }
+            
+            $imie = '';
+            $nazwisko = '';
+            
+            if($uzytkownik = User::find($id)){
+                $imie = $uzytkownik->imie;
+                $nazwisko = $uzytkownik->nazwisko;
+                $uzytkownik->delete();
+            }else{
+                return redirect()->back()->with('error', 'Taki użytkownik nie istnieje.');
+            }
+            
+            return redirect('/panel')->with('success', 'Usunięto użytkownika '.$imie.' '.$nazwisko.'.');
+            
+        }else{
+            return redirect()->back()->with('error', 'Brak dostępu.');
+        }
     }
 
 }
