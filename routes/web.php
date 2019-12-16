@@ -51,13 +51,14 @@ Route::get('/panel', 'AdminFeaturesController@panel');
 
 Route::post('/panel/dodajgrupe', 'AdminFeaturesController@Groups');
 Route::post('/panel/edytujgrupe/{id}', 'AdminFeaturesController@EditGroups');
-Route::get('/panel/usungrupe/{id}', 'AdminFeaturesController@removeGroups');
+Route::get('/panel/usungrupe/{id}-{zeStudentami}', 'AdminFeaturesController@removeGroup');
 
 Route::get('/panel/dodajstudenta', 'AdminFeaturesController@Student');
 Route::get('/panel/dodajstudentazpliku', 'AdminFeaturesController@StudentFile');
 Route::post('/panel/dodajstudentazpliku/dodaj', 'AdminFeaturesController@addFromFile'); //wstawianie z pliku studentow
 
 Route::get('/panel/dodajnauczyciela', 'AdminFeaturesController@Nauczyciel');
+Route::get('/panel/usunuzytkownika/{id}', 'AdminFeaturesController@removeUser');
 
 Route::get('/panel/edytujkryterium', 'AdminFeaturesController@EdytujKryterium');
 
