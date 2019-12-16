@@ -230,13 +230,13 @@ function podglad() {
     text = escapeHtml(text);
     text = text.replace(/\[\-\]/g, '<hr>');
     text = text.replace(/\[\*\]/g, '&#9679'+'\u00a0');
-    var html = '<div class="label-preview ">\n' +
-        '                                <h2>Podgląd:</h2>\n'+
+    var html = '<div class="container"><div class="card"><div class="row">' +
+        '<div class="label-preview">\n' +
+        '<h2>Podgląd:</h2>\n'+
         '<input type="button" class="btn-info" id="exit" value="x" onclick="exitPage();"></input>'+
-        '                            </div>' +
-        '<div id="page" class="container-fluid">';
+        '</div><div id="page" class="col-12"><div class="tresc">';
 
-    html += bbcodeParser.bbcodeToHtml(text)+'</div>';
+    html += bbcodeParser.bbcodeToHtml(text)+'</div></div></div></div>';
 
     document.getElementById("formatted").innerHTML = html;
     document.getElementById("formatted").classList.add("show");

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Powiadomienie;
 use App\Temat;
 use App\ListaGrup;
 use App\Zadanie;
@@ -150,6 +151,7 @@ class TematyController extends Controller {
     }
 
     public function update($id) {
+        $temat=Temat::find($id);
         if (Auth::user()->typ == \App\User::$admin) {
             $array = [
                 'nazwa' => request('nazwa'),
@@ -164,6 +166,27 @@ class TematyController extends Controller {
             Storage::disk('tematy')->put($id . '/abb.txt', request('text'));
             Storage::disk('tematy')->put($id . '/ahtml.txt', request('texthtml'));
             DB::table('temat')->where('id', $id)->update(['updated_at' => Carbon::now()]);
+
+            $uzytkownicy = DB::table('temat')
+                ->join('listagrup', 'listagrup.idTemat', '=', 'temat.id')
+                ->join('grupa', 'listagrup.idGrupa', '=', 'grupa.id')
+                ->join('uzytkownik', 'uzytkownik.idGrupa','=','grupa.id')
+                ->where('temat.id', $id)
+                ->select('uzytkownik.id')
+                ->get();
+
+            foreach ($uzytkownicy as $uzytkownik){
+                Powiadomienie::createNotification($uzytkownik->id,"Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." zedytował temat ".$temat->nazwa);
+            }
+
+            $nauczyciele = DB::table('uzytkownik')->where('typ', \App\User::$admin)->get();
+            foreach ($nauczyciele as $nauczyciel){
+                if($nauczyciel->id!=Auth::user()->id){
+                    Powiadomienie::createNotification($nauczyciel->id,"Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." zedytował temat ".$temat->nazwa);
+                }
+            }
+
+
             return redirect()->back()->with('success', 'Udało się zaktualizować temat!');
         } else {
             return redirect('/tematy/' . $id)->with('error', 'Brak dostępu.');

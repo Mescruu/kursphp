@@ -30,7 +30,7 @@ class AddPointsController extends Controller
         $punkty = Punkty::create($array);
         
         $user = User::find($id);
-        Powiadomienie::createNotification($id,"Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." przyznał Ci punkty!:".request('ilosc')."pkt");
+        Powiadomienie::createNotification($id,"Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." przyznał Ci ".request('ilosc')."pkt.");
         
         return redirect('/panel/uzytkownik/'.$id)->back()->with('success', 'Udało się dodać punkty ('.request('ilosc').') użytkownikowi '.$user->imie." ".$user->nazwisko."!");
     }

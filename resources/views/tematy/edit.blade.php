@@ -56,7 +56,7 @@
 
                     <div class="row">
 
-                        <div class="col-xl-8 col-md-10 col-sm-12 mx-auto editorFrame p-2 pb-0">
+                        <div class="col-xl-8 col-md-10 col-sm-12 mx-auto editorFrame p-2 pb-0" id="edytor">
                             <input type="text" name="nazwa" class="title" placeholder="Tytuł" value="{{$temat->nazwa}}">
                         </div>
                         
@@ -136,16 +136,14 @@
 
 
 
-                    <div class="container-fluid view"> <!--kontener/pojemnik calej siatki-->
+                    <div class="view w-100"> <!--kontener/pojemnik calej siatki-->
 
 
-                        <div colspan="2" id="formatted">
+                        <div id="formatted">
 
-                            <div class="label-preview">
-                                <h2>Podgląd:</h2>
-                            </div>
-
-
+                                <div class="label-preview">
+                                    <h2>Podgląd:</h2>
+                                </div>
                         </div>
                     </div>
 

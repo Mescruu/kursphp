@@ -51,7 +51,7 @@ Route::get('/panel', 'AdminFeaturesController@panel');
 
 Route::post('/panel/dodajgrupe', 'AdminFeaturesController@Groups');
 Route::post('/panel/edytujgrupe/{id}', 'AdminFeaturesController@EditGroups');
-Route::post('/panel/usungrupe/{id}', 'AdminFeaturesController@removeGroups');
+Route::get('/panel/usungrupe/{id}', 'AdminFeaturesController@removeGroups');
 
 Route::get('/panel/dodajstudenta', 'AdminFeaturesController@Student');
 Route::get('/panel/dodajstudentazpliku', 'AdminFeaturesController@StudentFile');

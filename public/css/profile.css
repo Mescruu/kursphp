@@ -72,3 +72,14 @@ background-color: whitesmoke;
 }
 
 
+@media (max-width: 767.98px) {
+
+    .title-section {
+        background: -webkit-linear-gradient(-20deg, rgb(38, 43, 82) 55%, rgba(129, 133, 189, 0.5) 55.1%, rgba(79, 91, 147, 1) 0%);
+    }
+}
+@media (max-width: 575.98px) {
+    .title-section {
+        background:rgb(38, 43, 82);
+    }
+}

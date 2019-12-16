@@ -344,7 +344,7 @@
                                     </h5>
                                     <div class="flex-fill text-right">
                                         <a href="#edytuj{{$grupa->id}}" data-toggle="collapse"  aria-expanded="false" aria-controls="edytuj{{$grupa->id}}"  class="btn btn-info mr-auto">Edytuj</a>
-                                        <a href="panel/usungrupe/{{$grupa->id}}/usun"  onclick="return confirm('Tej operacji nie da się cofnąć!')" class="btn btn-info"> usun</a>
+                                        <a href="panel/usungrupe/{{$grupa->id}}"  onclick="return confirm('Tej operacji nie da się cofnąć!')" class="btn btn-info"> usun</a>
                                     </div>
                                 </div>
 
@@ -359,7 +359,7 @@
 
                                                 <div class="col-xs-12 col-sm-6 mb-2">
                                                     <div class="form-group{{ $errors->has('nazwa-grupy') ? ' has-error' : '' }}">
-
+                                                        <label for="nazwa-grupy" class="control-label">Nazwa grupy</label>
                                                         <input id="nazwa-grupy" type="text" placeholder="Nazwa grupy" class="form-control" name="nazwa-grupy" value="{{$grupa->nazwa}}" required autofocus>
 
                                                         @if ($errors->has('nazwa-grupy'))
@@ -371,7 +371,7 @@
                                                 </div>
                                                 <div class="col-xs-12 col-sm-6 mb-2">
                                                     <div class="form-group{{ $errors->has('nauczyciel') ? ' has-error' : '' }}">
-
+                                                        <label for="nauczyciel" class="control-label">Imie i nazwisko naczyciela</label>
                                                         <select name="nauczyciel" class="form-control" value="{{ old('nauczyciel') }}" required>
                                                             <option>{{$grupa->nauczyciel->imie}} {{$grupa->nauczyciel->nazwisko}}</option>
 

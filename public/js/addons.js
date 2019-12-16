@@ -8,6 +8,13 @@ $( window ).resize(function() {
 
 $( document ).ready(function() {
     checkWidth();
+
+    // $("#page").css({
+    //     'width': ($("#edytor").width() + 'px')
+    // });
+    // $(".label-preview").css({
+    //     'width': ($("#edytor").width() + 'px')
+    // });
 });
 
 

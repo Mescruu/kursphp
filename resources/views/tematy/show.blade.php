@@ -16,7 +16,7 @@
             <a href="/tematy/{{$temat->id}}" >Temat</a>
         </h2>
     </div>
-    <div class="col-md-6 col-sm-8 col-xs-2">
+    <div class="col-md-8 col-sm-8 col-xs-2">
 
         @if(Auth::user()->typ==\App\User::$admin)
             <div class="btn-diagonal btn-slanted float-left">
