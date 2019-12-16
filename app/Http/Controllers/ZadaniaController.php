@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\CheckUserType;
 use App\Powiadomienie;
 use App\Rozwiazanie;
 use App\User;
@@ -16,6 +17,11 @@ use Illuminate\Support\Facades\Storage;
 
 class ZadaniaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(CheckUserType::class, ['except' => ['show','answer','link']]);
+    }
 
 
     public  function  link($id, $user){

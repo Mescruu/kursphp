@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\CheckUserType;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -9,11 +11,12 @@ use Illuminate\Support\Facades\Storage;
 
 class EditCriterionController extends Controller
 {
+    //ADMIN
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(CheckUserType::class);
     }
-    
+
     public function EditCriterion(){
         $this->validate(request(), [
             'trzy' => 'required|max:3|',

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\CheckUserType;
 use App\Powiadomienie;
 use App\Temat;
 use App\ListaGrup;
@@ -16,14 +17,17 @@ class TematyController extends Controller {
 
     //
     public function __construct() {
-        //blokowanie jeżeli użytkownik nie przejdzie autoryzacji wtedy wysyla go do strony z logowaniem
-        //wyjątkami są strony index, gdzie wysiwetlane są tematy
-        $this->middleware('auth');
+        $this->middleware(CheckUserType::class, ['except' => ['show','index']]);
     }
 
     public function show($id) {
         //wyswitla rzeczy zwiazane z konkretnym tematem o id $id
         $temat = Temat::find($id);
+
+        if($temat==null){
+            return redirect()->back()->with('error', trans('Nie ma takiego tematu'));
+        }
+
 
         $wyklad = DB::table('wyklad')->where('idTemat', $id)->get()->first();
         if ($wyklad != null) {
@@ -93,6 +97,9 @@ class TematyController extends Controller {
 
     public function edit($id) {
         $temat = Temat::find($id);
+        if($temat==null){
+            return redirect()->back()->with('error', trans('Nie ma takiego tematu'));
+        }
 
         $wyklad = DB::table('wyklad')->where('idTemat', $id)->get()->first();
         if ($wyklad != null) {
@@ -152,6 +159,10 @@ class TematyController extends Controller {
 
     public function update($id) {
         $temat=Temat::find($id);
+        if($temat==null){
+            return redirect()->back()->with('error', trans('Nie ma takiego tematu'));
+        }
+
         if (Auth::user()->typ == \App\User::$admin) {
             $array = [
                 'nazwa' => request('nazwa'),
@@ -221,8 +232,11 @@ class TematyController extends Controller {
     }
 
     public function delete($id) {
-        if (Auth::user()->typ == \App\User::$admin) {
             $temat = Temat::find($id);
+        if($temat==null){
+            return redirect()->back()->with('error', trans('Nie ma takiego tematu'));
+        }
+
             if (!is_null($temat)) {
 
                 $zadanie = Zadanie::find($id);
@@ -269,14 +283,14 @@ class TematyController extends Controller {
             } else {
                 return redirect()->back()->with('error', 'Taki temat nie istnieje.');
             }
-        } else {
-            return redirect('/tematy/' . $id);
-        }
     }
 
     public function restore($id) {
-        if (Auth::user()->typ == \App\User::$admin) {
             $temat = Temat::find($id);
+            if($temat==null){
+                return redirect()->back()->with('error', trans('Nie ma takiego tematu'));
+            }
+
             if (!is_null($temat)) {
                 $nazwa = $temat->nazwa;
 
@@ -295,9 +309,6 @@ class TematyController extends Controller {
             } else {
                 return redirect()->back()->with('error', 'Taki temat nie istnieje.');
             }
-        } else {
-            return redirect('/tematy/' . $id)->with('error', 'Brak dostępu.');
-        }
     }
 
     /**

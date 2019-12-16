@@ -34,7 +34,7 @@
         @if(isset($quiz->wyklad))
             @if($quiz->wyklad!="empty")
                 <div class="btn-diagonal btn-slanted float-left">
-                    <a href="/wyklady/{{$quiz->wyklad}}" >Wykład</a>
+                    <a href="/wyklady/{{$quiz->wyklad}}"  target="_blank" rel="noopener noreferrer">Wykład</a>
                 </div>
             @endif
         @endif

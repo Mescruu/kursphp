@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Grupa;
+use App\Http\Middleware\CheckUserType;
 use App\Powiadomienie;
 use App\Punkty;
 use App\Pytanie;
@@ -22,12 +23,17 @@ class QuizController extends Controller
     //
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(CheckUserType::class, ['except' => ['show','checkAnswers','seedShuffle']]);
     }
 
     public function show($id)
     {
         $quiz = Quiz::find($id);
+
+        if($quiz==null){
+            return redirect()->back()->with('error', trans('Nie ma takiego quizu'));
+        }
+
         $pytania = Pytanie::get()->where('idQuiz', $id);
         $wynik = DB::table('wynik')
                 ->where('idQuiz', $id)
@@ -106,6 +112,11 @@ class QuizController extends Controller
     {
 
         $quiz = Quiz::get()->where('id', $id)->first();
+
+        if($quiz==null){
+            return redirect()->back()->with('error', trans('Nie ma takiego quizu'));
+        }
+
 
         $wyklad = DB::table('wyklad')->where('idTemat',$quiz->idTemat)->get()->first();
         if($wyklad!=null)
@@ -270,6 +281,11 @@ class QuizController extends Controller
 
 
         $quiz = Quiz::find($id);
+
+        if($quiz==null){
+            return redirect()->back()->with('error', trans('Nie ma takiego quizu'));
+        }
+
         $pytania = Pytanie::get()->where('idQuiz', $id);
 
         $wyklad = DB::table('wyklad')->where('idTemat',$quiz->idTemat)->get()->first();
@@ -431,11 +447,18 @@ class QuizController extends Controller
 
     public function remove($id)
     {
+        $quiz=Quiz::find($id);
+
+        if($quiz==null){
+            return redirect()->back()->with('error', trans('Nie ma takiego quizu'));
+        }
+
+
         $pytanie= DB::table('pytanie')->where('idQuiz',$id);
         $pytanie->delete();
 
         //wyswitla rzeczy zwiazane z konkretnym tematem o id $id
-       if(Quiz::find($id)->delete())
+       if($quiz->delete())
        {
            return redirect('/panel')->with('success', trans('Usnięty został Quiz'));
 
@@ -444,21 +467,4 @@ class QuizController extends Controller
        }
 
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //dostarcza wszystkich danych do Kontrolera
-
-        $quizy = Quiz::orderBy('id')->get(); //pobiera z bazy posortowane po id malejąco
-
-
-        //wyswietlenie kontentu strony /posts ktory znajduje sie w resources/posts/index
-        //razem ze zmienną $posts, w której znajdują się wszystkie rzeczy z modelu Post(tabela posts)
-        return view('quizy.index')->with('quizy', $quizy);
-    }
-
 }

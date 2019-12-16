@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Grupa;
+use App\Http\Middleware\CheckUserType;
 use App\Rozwiazanie;
 use App\Temat;
 use App\User;
@@ -15,18 +16,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Support\Facades\Gate;
+
 class AdminFeaturesController extends Controller {
 
     //ADMIN
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(CheckUserType::class);
     }
+
     public function panel() {
         //jezeli uzytkownik nie ma typu admin, wtedy zostaje przekierowany na adres profile
-        if (Auth::user()->typ==\App\User::$user) {
-            return redirect('/profil');
-        } else {
+
             $studenci = DB::table('uzytkownik')->where('typ', 'student')->orderBy('nazwisko', 'asc')->get();
             $nauczyciele = DB::table('uzytkownik')->where('typ', 'nauczyciel')->get();
             $group = Grupa::get();
@@ -219,13 +221,13 @@ class AdminFeaturesController extends Controller {
             return view('pages.admin.panel', ['quizy'=>$quizy,'zajete'=>$zajete,'group' => $group, 'studenci' => $studenci, 'nauczyciele' => $nauczyciele,
                 'editTask'=>$editTask,
                 'notification' => $notification, 'kryterium' => $kryterium, 'tematy' => $tematy, 'wyklady'=>$wyklady, 'zadania'=>$zadania]);
-        }
     }
 
     public function removeGroup($id, $zeStudentami)
     {
-        if (Auth::user()->typ == \App\User::$admin) {
-
+        if(!Gate::allows('admin-only', Auth::user())){
+            return redirect()->back()->with('error',  trans('Brak dostępu!'));
+        }
             $listagrup = DB::table('listagrup')->where('idGrupa', $id);
             $listagrup->delete();
             
@@ -239,13 +241,14 @@ class AdminFeaturesController extends Controller {
             $grupa->delete();
 
                 return redirect('/panel/')->with('success', 'Udało się usunąć grupę '.$grupaNazwa.'.');
-        }else{
-            return redirect('/panel/')->with('error', 'Brak dostępu.');
-        }
     }
 
     public function EditGroups(Request $request, $id)
     {
+        if(!Gate::allows('admin-only', Auth::user())){
+            return redirect()->back()->with('error',  trans('Brak dostępu!'));
+        }
+
         $this->validate($request,[
             'nazwa-grupy' => 'required|max:12',
         ]);
@@ -272,6 +275,10 @@ class AdminFeaturesController extends Controller {
 
     }
     public function Groups(Request $request) {//sposób na przerzucenie zmiennej:
+
+        if(!Gate::allows('admin-only', Auth::user())){
+            return redirect()->back()->with('error',  trans('Brak dostępu!'));
+        }
 
         //sposób na przerzucenie zmiennej:
         $this->validate($request,[
@@ -311,6 +318,10 @@ class AdminFeaturesController extends Controller {
 
 
     public function Student() {//sposób na przerzucenie zmiennej:
+
+        if(!Gate::allows('admin-only', Auth::user())){
+            return redirect()->back()->with('error',  trans('Brak dostępu!'));
+        }
         $grupy = DB::table('grupa')->get();
 
         return view('pages.admin.dodajstudenta')->with('grupy', $grupy);
@@ -549,10 +560,6 @@ class AdminFeaturesController extends Controller {
             }
             
             if($punkty = DB::table('punkty')->where('idStudent', $id)){
-                $punkty->delete();
-            }
-            
-            if($punkty = DB::table('punkty')->where('idNauczyciel', $id)){
                 $punkty->delete();
             }
             

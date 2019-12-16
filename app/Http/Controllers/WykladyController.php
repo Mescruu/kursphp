@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\CheckUserType;
 use App\Temat;
 use App\Wyklad;
 use Carbon\Carbon;
@@ -16,7 +17,7 @@ class WykladyController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(CheckUserType::class, ['except' => ['show']]);
     }
 
 
@@ -25,7 +26,11 @@ class WykladyController extends Controller
         $name = $id . ".pdf";
         $pdf = "/wyklady/" . $name;
         echo $pdf;
-        return response()->file(storage_path($pdf));
+        if(file_exists(storage_path().'/wyklady/'.$name)){
+            return response()->file(storage_path($pdf));
+        }else{
+            return redirect()->back()->with('error', trans('Nie ma takiego wykładu'));
+        }
     }
 
     public function remove($id)

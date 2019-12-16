@@ -14,7 +14,7 @@
             <a href="/tematy/<?php echo e($temat->id); ?>" >Temat</a>
         </h2>
     </div>
-    <div class="col-md-6 col-sm-8 col-xs-2">
+    <div class="col-md-8 col-sm-8 col-xs-2">
 
         <?php if(Auth::user()->typ==\App\User::$admin): ?>
             <div class="btn-diagonal btn-slanted float-left">
@@ -27,7 +27,7 @@
         <?php if(isset($temat->wyklad)): ?>
             <?php if($temat->wyklad!="empty"): ?>
                 <div class="btn-diagonal btn-slanted float-left">
-                    <a href="/wyklady/<?php echo e($temat->wyklad); ?>" >Wykład</a>
+                    <a href="/wyklady/<?php echo e($temat->wyklad); ?>"  target="_blank" rel="noopener noreferrer">Wykład</a>
                 </div>
             <?php endif; ?>
         <?php endif; ?>
@@ -43,7 +43,7 @@
         <?php if(isset($temat->zadanie)): ?>
             <?php if($temat->zadanie!="empty"): ?>
                 <div class="btn-diagonal btn-slanted float-left">
-                    <a href="/zadania/<?php echo e($temat->zadanie); ?>" >Zadanie</a>
+                    <a href="/zadania/<?php echo e($temat->zadanie); ?>">Zadanie</a>
                 </div>
             <?php endif; ?>
         <?php endif; ?>

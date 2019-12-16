@@ -29,7 +29,7 @@
         @if(isset($temat->wyklad))
             @if($temat->wyklad!="empty")
                 <div class="btn-diagonal btn-slanted float-left">
-                    <a href="/wyklady/{{$temat->wyklad}}" >Wykład</a>
+                    <a href="/wyklady/{{$temat->wyklad}}"  target="_blank" rel="noopener noreferrer">Wykład</a>
                 </div>
             @endif
         @endif
@@ -45,7 +45,7 @@
         @if(isset($temat->zadanie))
             @if($temat->zadanie!="empty")
                 <div class="btn-diagonal btn-slanted float-left">
-                    <a href="/zadania/{{$temat->zadanie}}" >Zadanie</a>
+                    <a href="/zadania/{{$temat->zadanie}}">Zadanie</a>
                 </div>
             @endif
         @endif

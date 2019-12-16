@@ -9,7 +9,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    //zmienne odwołujące się do typów w tabeli
+    //zmienne odwołujące się do typu użytkownika w tabeli uzytkownik
     public static $admin = 'nauczyciel';
     public static $user = 'student';
 

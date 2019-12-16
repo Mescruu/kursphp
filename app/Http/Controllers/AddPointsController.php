@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\CheckUserType;
 use App\Punkty;
 use App\Rozwiazanie;
 use App\User;
@@ -14,6 +15,12 @@ use Illuminate\Support\Facades\DB;
 
 class AddPointsController extends Controller
 {
+    //ADMIN
+    public function __construct()
+    {
+        $this->middleware(CheckUserType::class);
+    }
+
     public function AddPoints($id){
         $this->validate(request(), [
             'ilosc' => 'required',

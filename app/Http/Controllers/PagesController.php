@@ -38,25 +38,6 @@ class PagesController extends Controller
         return view('pages.home');
     }
 
-
-    public function about(){
-        //sposób na przerzucenie zmiennej:
-
-        $title  = 'About us';
-        return view('pages.about')->with('title', $title);   //drugi sposób
-    }
-
-    public function services(){
-        $data = array(
-            'title'=>'Services',
-            'services'=>['Web Design','Programming','SEO']
-        );
-
-        return view('pages.services')->with($data);   //drugi sposób
-    }
-
-
-
     ////PROFIL
 
     public function profil(){
@@ -65,7 +46,7 @@ class PagesController extends Controller
         $adminId = DB::table('grupa')->where('id', auth()->user()->idGrupa)->first();
         $notification = DB::table('powiadomienie')->where('idUzytkownik', Auth::user()->id)->orderBy('created_at','desc')->get();
 
-        if(Auth::user()->typ==Auth::user()->admin)
+        if(Auth::user()->typ==User::$admin)
         {
             return redirect('/panel');
         }else{

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\CheckUserType;
 use App\Powiadomienie;
 use App\User;
 use Illuminate\Http\Request;
@@ -12,7 +13,11 @@ use Illuminate\Support\Facades\DB;
 class InsertUserController extends Controller
 {
 
-
+    //ADMIN
+    public function __construct()
+    {
+        $this->middleware(CheckUserType::class, ['except' => ['activate']]);
+    }
 
 
     public function storeStudent()
