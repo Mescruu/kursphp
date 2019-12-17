@@ -130,18 +130,18 @@ class TematyController extends Controller {
 
     public function groups($id) {
         if (Auth::user()->typ == \App\User::$admin) {
-            $temat = DB::table('temat')->where('id', $id)->first();
-            $grupy = DB::table('grupa')->get();
-            $grupyWybrane = DB::table('temat')
+                $temat = DB::table('temat')->where('id', $id)->first();
+                $grupy = DB::table('grupa')->get();
+                $grupyWybrane = DB::table('temat')
                     ->join('listagrup', 'listagrup.idTemat', '=', 'temat.id')
                     ->join('grupa', 'listagrup.idGrupa', '=', 'grupa.id')
                     ->where('temat.id', $id)
                     ->select('grupa.*')
                     ->get();
-            $grupyWybraneID = [];
-            foreach ($grupyWybrane as $grupaWybrana) {
-                array_push($grupyWybraneID, $grupaWybrana->id);
-            }
+                $grupyWybraneID = [];
+                foreach ($grupyWybrane as $grupaWybrana) {
+                    array_push($grupyWybraneID, $grupaWybrana->id);
+                }
 
             foreach ($grupy as $grupa) {
                 if (in_array($grupa->id, $grupyWybraneID)) {
@@ -178,25 +178,8 @@ class TematyController extends Controller {
             Storage::disk('tematy')->put($id . '/ahtml.txt', request('texthtml'));
             DB::table('temat')->where('id', $id)->update(['updated_at' => Carbon::now()]);
 
-            $uzytkownicy = DB::table('temat')
-                ->join('listagrup', 'listagrup.idTemat', '=', 'temat.id')
-                ->join('grupa', 'listagrup.idGrupa', '=', 'grupa.id')
-                ->join('uzytkownik', 'uzytkownik.idGrupa','=','grupa.id')
-                ->where('temat.id', $id)
-                ->select('uzytkownik.id')
-                ->get();
 
-            foreach ($uzytkownicy as $uzytkownik){
-                Powiadomienie::createNotification($uzytkownik->id,"Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." zedytował temat ".$temat->nazwa);
-            }
-
-            $nauczyciele = DB::table('uzytkownik')->where('typ', \App\User::$admin)->get();
-            foreach ($nauczyciele as $nauczyciel){
-                if($nauczyciel->id!=Auth::user()->id){
-                    Powiadomienie::createNotification($nauczyciel->id,"Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." zedytował temat ".$temat->nazwa);
-                }
-            }
-
+            Powiadomienie::createNotificationWhenEdit($temat->id, "Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." zedytował temat ".$temat->nazwa);
 
             return redirect()->back()->with('success', 'Udało się zaktualizować temat!');
         } else {
@@ -205,6 +188,7 @@ class TematyController extends Controller {
     }
 
     public function updateGroups($id) {
+        $temat = Temat::find($id);
         $grupy = DB::table('grupa')->get();
         $grupyWybrane = DB::table('temat')
                 ->join('listagrup', 'listagrup.idTemat', '=', 'temat.id')
@@ -220,6 +204,8 @@ class TematyController extends Controller {
             if (request(strval($grupa->id))) {
                 if (!in_array($grupa->id, $grupyWybraneID)) {
                     ListaGrup::create(['idGrupa' => $grupa->id, 'idTemat' => $id]);
+                    Powiadomienie::createNotificationWhenGetAccess($grupa->id, "Twoja grupa otrzymała dostęp do tematu  ".$temat->nazwa.".");
+
                 }
             } else {
                 if (in_array($grupa->id, $grupyWybraneID)) {
@@ -238,6 +224,10 @@ class TematyController extends Controller {
         }
 
             if (!is_null($temat)) {
+
+
+                Powiadomienie::createNotificationWhenEdit($temat->id, "Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." usunął temat ".$temat->nazwa);
+
 
                 $zadanie = Zadanie::find($id);
                 if (!is_null($zadanie)) {
@@ -276,8 +266,12 @@ class TematyController extends Controller {
                 $nazwa = $temat->nazwa;
                 $listyGrup = ListaGrup::where('idTemat', $id);
                 $listyGrup->delete();
+
+
                 $temat->delete();
                 Storage::disk('tematy')->deleteDirectory($id);
+
+
 
                 return redirect()->back()->with('success', 'Usunięto temat ' . $nazwa . '.');
             } else {

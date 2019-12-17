@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Middleware\CheckUserType;
+use App\Powiadomienie;
 use App\Temat;
 use App\Wyklad;
 use Carbon\Carbon;
@@ -35,11 +36,19 @@ class WykladyController extends Controller
 
     public function remove($id)
     {
-        if(Wyklad::find($id)->delete())
-        {
-            return redirect('/panel')->with('success', trans('Wykład został usunięty.'));
+        $wyklad = Wyklad::find($id);
+        if($wyklad!=null){
+            $temat = Temat::find($wyklad->idTemat);
 
-        }else{
+            if($wyklad->delete())
+            {
+                Powiadomienie::createNotificationWhenEdit($temat->id, "Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." usunął wyklad z tematu ".$temat->nazwa);
+
+                return redirect('/panel')->with('success', trans('Wykład został usunięty.'));
+
+            }
+
+        } else{
             return redirect('/panel')->with('error', trans('Coś poszło nie tak.'));
         }
 
@@ -60,7 +69,7 @@ class WykladyController extends Controller
 
                 if ($request->file('file')->isValid()&&$request->file('file')) {
 
-                    $wyklad = DB::table('wyklad')
+                   DB::table('wyklad')
                         ->where('id', $id)
                         ->update(['tytul' => $request->input('tytul-wykladu'),
                             'idTemat' =>$temat->id,
@@ -76,6 +85,11 @@ class WykladyController extends Controller
                     if ($request->file('file')->move(storage_path().'/wyklady/',$file)) {
 //                    Storage::disk('wyklady')->put($file, '');
                         Storage::delete(storage_path().'/wyklady/copy'.$file); // usuniecie backupu
+
+                        $wyklad = Wyklad::find($id);
+                        $temat = Temat::find($wyklad->idTemat);
+                        Powiadomienie::createNotificationWhenEdit($temat->id, "Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." zedytował wyklad z tematu ".$temat->nazwa);
+
 
                         return redirect('/panel/')->with('success', 'Wyklad '.$request->input('tytul-wykladu').' został edytowany.');
                     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Middleware\CheckUserType;
 use App\Powiadomienie;
 use App\Rozwiazanie;
+use App\Temat;
 use App\User;
 use App\Zadanie;
 use Carbon\Carbon;
@@ -128,13 +129,19 @@ class ZadaniaController extends Controller
             $temat= DB::table('temat')->where('nazwa',$request->input('nazwa-tematu'))->first();
 
 
-                DB::table('zadanie')
+            DB::table('zadanie')
                     ->where('id', $id)
                     ->update(['nazwa' => $request->input('nazwa-zadania'),
                         'idTemat' =>$temat->id,
                         'tresc' => $request->input('tresc-zadania'),
                         'updated_at' => Carbon::now()
                     ]);
+
+            $zadanie = Zadanie::find($id);
+
+            $temat = Temat::find($zadanie->idTemat);
+            Powiadomienie::createNotificationWhenEdit($temat->id, "Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." zedytował zadanie z tematu ".$temat->nazwa);
+
 
                 return redirect('/panel/')->with('success', 'Zadanie "'.$request->input('nazwa-zadania').'" zostało edytowane.');
 
@@ -180,17 +187,26 @@ class ZadaniaController extends Controller
     {
 
         if (Auth::user()->typ == \App\User::$admin) {
-
-
-            $rozwiazania = DB::table('rozwiazanie')->where('idZadanie', $id);
-            $rozwiazania->delete();
-
             $zadanie=Zadanie::find($id);
-            $zadanie->delete();
 
-            Storage::disk('rozwiazania')->deleteDirectory($id);
+            if($zadanie!=null){
+                $temat = Temat::find($zadanie->idTemat);
+                Powiadomienie::createNotificationWhenEdit($temat->id, "Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." usunął zadanie z tematu ".$temat->nazwa);
 
-            return redirect('/panel/')->with('success', 'Udało się usunąć zadanie.');
+                $rozwiazania = DB::table('rozwiazanie')->where('idZadanie', $id);
+                $rozwiazania->delete();
+
+                $zadanie->delete();
+
+                Storage::disk('rozwiazania')->deleteDirectory($id);
+
+                return redirect('/panel/')->with('success', 'Udało się usunąć zadanie.');
+            }
+            else{
+                return redirect('/panel/')->with('errors', 'Nie ma takiego zadania.');
+
+            }
+
 
         } else {
             return redirect('/panel/')->with('errors', 'Brak dostępu.');

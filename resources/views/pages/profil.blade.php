@@ -25,7 +25,7 @@
                     <a class="nav-link active" id="v-pills-notifications-tab" data-toggle="pill" href="#v-pills-notifications" role="tab" aria-controls="v-pills-notifications" aria-selected="true">Powiadomienia
                         @if(isset($notification))
                           @if(count($notification)>0)
-                            <span class="float-right badge badge-primary badge-pill">
+                            <span id="notNumber" class="float-right badge badge-primary badge-pill">
                             {{count($notification)}}
                             </span>
                             @endif

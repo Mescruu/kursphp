@@ -46,10 +46,10 @@
 
                             <select name="nazwa-tematu" class="form-control " required>
                                 @foreach($tematy as $temat)
-
-                                @endforeach        @if(!$temat->maQuiz)
-                                    <option>{{$temat->nazwa}}</option>
-                                @endif
+                                    @if(!$temat->maQuiz)
+                                        <option>{{$temat->nazwa}}</option>
+                                    @endif
+                                @endforeach
 
                             </select>
                         </div>

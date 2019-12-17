@@ -432,6 +432,10 @@ class QuizController extends Controller
                     Pytanie::create($array);
                 }
             }
+            $quiz = Quiz::find($request->input('id'));
+            $temat = Temat::find($quiz->idTemat);
+            Powiadomienie::createNotificationWhenEdit($temat->id, "Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." zedytował quiz z tematu ".$temat->nazwa);
+
             if($request->input('id')=='new')
             {
                 return redirect('quizy/'.$quiz->id)->with('success', trans('Quiz został poprawnie załadowany'));
@@ -453,6 +457,8 @@ class QuizController extends Controller
             return redirect()->back()->with('error', trans('Nie ma takiego quizu'));
         }
 
+        $temat = Temat::find($quiz->idTemat);
+        Powiadomienie::createNotificationWhenEdit($temat->id, "Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." usunął quiz z tematu ".$temat->nazwa);
 
         $pytanie= DB::table('pytanie')->where('idQuiz',$id);
         $pytanie->delete();
