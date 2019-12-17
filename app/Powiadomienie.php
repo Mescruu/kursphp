@@ -12,23 +12,24 @@ class Powiadomienie extends Model
     protected $table = 'powiadomienie';
     public $primaryKey = 'id';
 
-    public static function createNotification($id, $content){
 
-        DB::table('powiadomienie')->insert(
-            ['komunikat' => $content, 'idUzytkownik'=> $id,'waga'=>'zwykle', 'created_at' => Carbon::now()]
-        );
-    }
     public static function createNotificationWhenGetAccess($id, $content)
     {
         $uzytkownicy = DB::table('uzytkownik')
             ->where('idGrupa', $id)
             ->get();
-
         foreach ($uzytkownicy as $uzytkownik){
             Powiadomienie::createNotification($uzytkownik->id,$content);
         }
     }
+    public static function createNotification($id, $content){
 
+        DB::table('powiadomienie')->insert(
+            ['komunikat' => $content, 'idUzytkownik'=> $id,
+             'waga'=>'zwykle', 'created_at' => Carbon::now()]
+                
+        );
+    }
     public static function createNotificationWhenEdit($id, $content)
     {
         $uzytkownicy = DB::table('temat')

@@ -432,12 +432,11 @@ class QuizController extends Controller
                     Pytanie::create($array);
                 }
             }
-            $quiz = Quiz::find($request->input('id'));
-            $temat = Temat::find($quiz->idTemat);
             Powiadomienie::createNotificationWhenEdit($temat->id, "Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." zedytował quiz z tematu ".$temat->nazwa);
 
             if($request->input('id')=='new')
             {
+
                 return redirect('quizy/'.$quiz->id)->with('success', trans('Quiz został poprawnie załadowany'));
             }
             else{
