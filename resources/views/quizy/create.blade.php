@@ -12,10 +12,6 @@
         <section class="quiz-section">
             <div class="container"> <!--kontener/pojemnik calej siatki-->
 
-{{--                <label>ilosc pytań</label>--}}
-{{--                <input type="range" class="form-control-range d-none"  id="rangeInput" min="1" max="20" step="1"--}}
-{{--                       value="{{$ilosc}}" onclick="warning()" oninput="setValOnInput(this.value)" onchange="setValOnInput(this.value)">--}}
-
                 <form class="form-signin justify-content-center " method="POST" action="/zatwierdzquiz">
 
                     {!! csrf_field() !!}
@@ -30,7 +26,7 @@
                             <label for="numberInput" class="control-label">ilość pytań</label>
 
                             <input type="number" min="1" max="20" step="1" id="numberInput" class="form-control "  placeholder="1"
-                                   oninput="setValOnRange(this.value)"  onclick="warning()" onchange="setValOnRange(this.value)">
+                                   oninput="setInputs(this.value)"  onclick="warning()" onchange="setInputs(this.value)">
                         </div>
                         <div class="col-3 mb-4">
                             <label for="typ" class="control-label">typ testu</label>

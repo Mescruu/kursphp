@@ -68,7 +68,7 @@
                             <label for="numberInput" class="control-label">ilość pytań</label>
 
                             <input type="number" min="1" max="20" step="1" id="numberInput" class="form-control "  placeholder="{{$ilosc}}"
-                                   oninput="setValOnRange(this.value)"  onclick="warning()" onchange="setValOnRange(this.value)">
+                                   oninput="setInputs(this.value)"  onclick="warning()" onchange="setInputs(this.value)">
                         </div>
                         <div class="col-3 mb-4">
                             <label for="typ" class="control-label">typ testu</label>

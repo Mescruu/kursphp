@@ -25,18 +25,6 @@ function warning() {
         clickCount++;
     }
 }
-function setValOnInput(newVal){
-
-
-    document.getElementById("numberInput").value =newVal;
-    setInputs(newVal);
-
-}
-function setValOnRange(newVal){
-
-    setInputs(newVal);
-
-}
 
 function setInputs(value) {
 
