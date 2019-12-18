@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(WynikTableSeeder::class);
         $this->call(ZadanieTableSeeder::class);
         $this->call(KryteriumFileSeeder::class);
+	$this->call(WykladTableSeeder::class);
     }
 }
