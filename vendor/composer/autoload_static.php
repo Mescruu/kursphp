@@ -328,7 +328,6 @@ class ComposerStaticInitfc07a1b53b534d3334ec5cb3f197c51f
         'CreateRozwiazanieTable' => __DIR__ . '/../..' . '/database/migrations/2019_11_12_232244_create_rozwiazanie_table.php',
         'CreateTematTable' => __DIR__ . '/../..' . '/database/migrations/2019_11_06_212534_create_temat_table.php',
         'CreateUzytkownikTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_uzytkownik_table.php',
-        'CreateWyklady' => __DIR__ . '/../..' . '/database/migrations/2019_12_08_195701_create_wyklady.php',
         'CreateWykladyTable' => __DIR__ . '/../..' . '/database/migrations/2019_12_08_195714_create_wyklady_table.php',
         'CreateWynikTable' => __DIR__ . '/../..' . '/database/migrations/2019_11_12_234156_create_wynik_table.php',
         'CreateZadanieTable' => __DIR__ . '/../..' . '/database/migrations/2019_11_12_225930_create_zadanie_table.php',
@@ -883,6 +882,7 @@ class ComposerStaticInitfc07a1b53b534d3334ec5cb3f197c51f
         'UzytkownikTableSeeder' => __DIR__ . '/../..' . '/database/seeds/UzytkownikTableSeeder.php',
         'WynikTableSeeder' => __DIR__ . '/../..' . '/database/seeds/WynikTableSeeder.php',
         'ZadanieTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ZadanieTableSeeder.php',
+        'kursphp' => __DIR__ . '/../..' . '/database/seeds/kursphp.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
