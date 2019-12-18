@@ -346,63 +346,71 @@ class AdminFeaturesController extends Controller {
     {
         //sposób na przerzucenie zmiennej:
         $this->validate($request,[
-            'grupa' => 'required',
+//            'grupa' => 'required',
             'Radio' => 'required',   //jest wymagane
             'file' => 'required|mimes:csv,txt' //jest wymagane, ustawienie że ma to byc plik, max 2mb
         ]);
 
         //pobranie grupy z nazwą
-        $group = DB::table('grupa')->where('nazwa',$request->input('grupa'))->get()->first();
 
         $file = $request->file('file');
+
 
         //Sprawdznie, czy plik jest w formacie UTF-8
         if (mb_check_encoding(file_get_contents($file), 'UTF-8')) {
 
 
-            // File Details
+            //oznaczenie zmiennych:
             $filename = $file->getClientOriginalName();
             $extension = $file->getClientOriginalExtension();
-            $tempPath = $file->getRealPath();
             $fileSize = $file->getSize();
-            $mimeType = $file->getMimeType();
 
-            // Valid File Extensions
+            // Sprwadzenie rozszerzenia.
             $valid_extension = array("csv");
 
-            // 2MB in Bytes
+            // Maksymalny rozmiar pliku:
             $maxFileSize = 2097152;
 
-            // Check file extension
+            // Sprawdzenie czy rozszerzenie się zgadza:
             if(in_array(strtolower($extension),$valid_extension)){
 
-                // Check file size
+                // Sprawdzenie, czy rozmiar się zgadza
                 if($fileSize <= $maxFileSize){
 
-                    // File upload location
+                    // Wrzucenie pliku
                     $location = 'uploads';
 
-                    // Upload file
+                    // Przeniesienie pliku
                     $file->move($location,$filename);
-
-                    // Import CSV to Database
                     $filepath = public_path($location."/".$filename);
 
-                    // Reading file
+                    // Odczyt pliku
                     $file = fopen($filepath,"r");
-
                     $importData_arr = array();
                     $i = 0;
 
                     while (($filedata = fgetcsv($file, 1000, $request->input('Radio'))) !== FALSE) {
                         $num = count($filedata );
+                        // Usuwanie pierwszych 3 linijek w których znajduje się:
+                        //Lp; Nazwisko i imiona studenta; Księga; nrAlbumu; Status;
+                        //Rok akademicki: 2019/2020
+                        //Przedmiot: ...
+                        //Grupa: GL01
 
-                        // Skip first row (Remove below comment if you want to skip the first row)
 
-                        if($i == 0){
+                        if($i==2){
+                            $goupname = substr($filedata[0], 7);
+                            $group = DB::table('grupa')->where('nazwa',$goupname)->get()->first();
+                            if($group===null) {
+                                return redirect()->back()->with('error', trans('W bazie nie ma grupy o nazwie: ' . $goupname));
+                                }
+
+                            }
+                        if($i <= 3){
                             $i++;
                             continue;
                         }
+
 
                         for ($c=0; $c < $num; $c++) {
                             $importData_arr[$i][] = $filedata [$c];
@@ -411,24 +419,31 @@ class AdminFeaturesController extends Controller {
                     }
                     fclose($file);
 
-                    // Insert to MySQL database
+                    // Wrzucenie linijek kodu do bazy danych
                     foreach($importData_arr as $importData){
 
 
-                        $user = DB::select('SELECT * FROM uzytkownik WHERE nrAlbumu="'.$importData[2].'"');
+                        $user = DB::select('SELECT * FROM uzytkownik WHERE nrAlbumu="'.$importData[3].'"');
 
 
                         if($user!=null){
-                            return redirect()->back()->with('error', trans('W bazie znajduje się użytkownik o numerze albumu: '.$importData[2]));
+                            return redirect()->back()->with('error', trans('W bazie znajduje się użytkownik o numerze albumu: '.$importData[3]));
 
                          }else{
+
+
+                            $nazwa_uzytkownika = explode(" ", $importData[1]);
+                            if(isset($nazwa_uzytkownika[2])){
+                                $imie=$nazwa_uzytkownika[1]." ".$nazwa_uzytkownika[2];
+
+                            }
                             DB::table('uzytkownik')->insert(
-                                ['imie' => $importData[0],
-                                    'nazwisko'=> $importData[1],
-                                    "nrAlbumu"=>$importData[2],
+                                ['imie' => $imie,
+                                    'nazwisko'=> $nazwa_uzytkownika[0],
+                                    "nrAlbumu"=>$importData[3],
                                     "idGrupa"=>(int)$group->id,
                                     "typ"=>User::$user,
-                                    "haslo"=> bcrypt($importData[0].$importData[2]),
+                                    "haslo"=> bcrypt($nazwa_uzytkownika[0].$importData[2]),
                                     'created_at' => Carbon::now()]
                             );
                         }
@@ -436,7 +451,7 @@ class AdminFeaturesController extends Controller {
 
                     }
 
-                    return redirect()->back()->with('success', trans('Użytkownicy zostali dodani do grupy: '.$request->input('grupa').'!'));
+                    return redirect()->back()->with('success', trans('Użytkownicy zostali dodani do grupy: '.$group->nazwa.'!'));
                 }else{
                     return redirect()->back()->with('error', trans('Plik jest za duży! Maksymalny rozmiar to 2MB'));
                 }
@@ -452,9 +467,7 @@ class AdminFeaturesController extends Controller {
 
         }
 
-
-
-        // Redirect to index
+        // Redirect back
         return redirect()->back()->with('error', trans('cos poszlo nie tak'));
     }
 

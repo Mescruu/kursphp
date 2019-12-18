@@ -72,10 +72,6 @@
 
                                                     </div>
 
-
-
-
-
                                                 </h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -83,19 +79,22 @@
                                             </div>
                                             <div class="modal-body">
 
+                                                <div  class="nicetooltip">
+                                                    Lp;
+                                                    <span class="tooltiptext">
+                                                             Liczba porządkowa
+                                                         </span>
+                                                </div>
 
                                                         <div  class="nicetooltip">
-                                                            imie;
-                                                            <span class="tooltiptext">
-                                                             Imię wprowadzanego użytkownika
-                                                         </span>
+                                                            Nazwisko i imiona studenta;
                                                         </div>
 
                                                          <div  class="nicetooltip">
 
-                                                         nazwisko;
+                                                          Księga;
                                                          <span class="tooltiptext">
-                                                             Nazwisko wprowadzanego użytkownika
+                                                             Oznaczenie księgi.
                                                          </span>
                                                          </div>
 
@@ -106,22 +105,49 @@
                                                              Numer albumu wprowadzanego użytkownika
                                                          </span>
                                                           </div>
-                                                 <br>
+
+                                                <div  class="nicetooltip">
+
+                                                    Status;
+                                                    <span class="tooltiptext">
+                                                             Status wprowadzanego użytkownika
+                                                         </span>
+                                                </div>
+                                                <br>
+                                                <div  class="nicetooltip">
+
+                                                    Przedmiot: Tworzenie aplikacji internetowych.
+                                                    <span class="tooltiptext">
+                                                             Nazwa przedmiotu.
+                                                         </span>
+                                                </div>
+                                                <br>
+                                                <div  class="nicetooltip">
+
+                                                    Grupa: GL01
+                                                    <span class="tooltiptext">
+                                                             Nazwa grupy.
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                Rok akademicki: 2019/2020 <br>
 
                                                             <div  class="nicetooltip">
-
-                                                            Jan;
+                                                                1;
+                                                                Kowalski Jan Michał;
+                                                                D;
+                                                                990011;
+                                                                S
                                                             <span class="tooltiptext">
                                                              Przykład
                                                          </span>
 
-                                                            Kowalski;
-
-                                                            990011
                                               <br>
-                                                            Anna;
-                                                            Nowak;
-                                                            990022
+                                                                2;
+                                                                Nowak Anna Julia;
+                                                                Z;
+                                                                990022;
+                                                                Dk
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-info" data-dismiss="modal">Wyjdź</button>
@@ -199,24 +225,24 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('grupa') ? ' has-error' : '' }}">
-                            <label for="grupa" class="col-md-4 control-label">Grupa</label>
+{{--                        <div class="form-group{{ $errors->has('grupa') ? ' has-error' : '' }}">--}}
+{{--                            <label for="grupa" class="col-md-4 control-label">Grupa</label>--}}
 
-                            <div class="col-12">
+{{--                            <div class="col-12">--}}
 
-                                <select name="grupa" class="form-control" value="{{ old('grupa') }}" required>
-                                    @foreach($grupy as $grupa)
-                                        <option>{{$grupa->nazwa}}</option>
-                                    @endforeach
-                                </select>
+{{--                                <select name="grupa" class="form-control" value="{{ old('grupa') }}" required>--}}
+{{--                                    @foreach($grupy as $grupa)--}}
+{{--                                        <option>{{$grupa->nazwa}}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
 
-                                @if ($errors->has('grupa'))
-                                    <span class="help-block">
-                                    <strong>{{ $errors->first('grupa') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
+{{--                                @if ($errors->has('grupa'))--}}
+{{--                                    <span class="help-block">--}}
+{{--                                    <strong>{{ $errors->first('grupa') }}</strong>--}}
+{{--                                </span>--}}
+{{--                                @endif--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
 
                         

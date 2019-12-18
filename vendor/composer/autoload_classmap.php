@@ -18,7 +18,6 @@ return array(
     'CreateRozwiazanieTable' => $baseDir . '/database/migrations/2019_11_12_232244_create_rozwiazanie_table.php',
     'CreateTematTable' => $baseDir . '/database/migrations/2019_11_06_212534_create_temat_table.php',
     'CreateUzytkownikTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_uzytkownik_table.php',
-    'CreateWyklady' => $baseDir . '/database/migrations/2019_12_08_195701_create_wyklady.php',
     'CreateWykladyTable' => $baseDir . '/database/migrations/2019_12_08_195714_create_wyklady_table.php',
     'CreateWynikTable' => $baseDir . '/database/migrations/2019_11_12_234156_create_wynik_table.php',
     'CreateZadanieTable' => $baseDir . '/database/migrations/2019_11_12_225930_create_zadanie_table.php',
@@ -573,4 +572,5 @@ return array(
     'UzytkownikTableSeeder' => $baseDir . '/database/seeds/UzytkownikTableSeeder.php',
     'WynikTableSeeder' => $baseDir . '/database/seeds/WynikTableSeeder.php',
     'ZadanieTableSeeder' => $baseDir . '/database/seeds/ZadanieTableSeeder.php',
+    'kursphp' => $baseDir . '/database/seeds/kursphp.php',
 );
