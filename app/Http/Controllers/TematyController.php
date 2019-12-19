@@ -312,23 +312,7 @@ class TematyController extends Controller {
      */
     public function index() {
 
-        $tematy = DB::table('temat')->orderBy('nazwa', 'asc')->get();
-        $wyklady = DB::table('wyklad')->get();
-
-        foreach ($tematy as $temat) {
-
-            foreach ($wyklady as $wyklad) {
-
-
-                if ($wyklad->idTemat === $temat->id) {
-                    $temat->wykladID = $wyklad->id;
-                    $temat->wyklad = $wyklad->tytul;
-                    break;
-                }
-            }
-        }
-
-        return view('tematy.index')->with('tematy', $tematy);
+        return view('tematy.index');
     }
 
     public function uploadImage(Request $request) {
