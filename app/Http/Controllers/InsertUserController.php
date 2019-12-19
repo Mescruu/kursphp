@@ -26,7 +26,7 @@ class InsertUserController extends Controller
 
         //Wyswietlany błąd.
         $messages = [
-            'required' => 'Wszystkie pola są wyamgane',
+            'required' => 'Wszystkie pola są wymagane',
             'max' => 'To pole może mieć maksymalnie 10 znaków.',
             'unique' => 'Już istnieje wpis o takiej wartości.'
         ];
