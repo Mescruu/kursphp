@@ -880,9 +880,9 @@ class ComposerStaticInitfc07a1b53b534d3334ec5cb3f197c51f
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
         'TypeError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/TypeError.php',
         'UzytkownikTableSeeder' => __DIR__ . '/../..' . '/database/seeds/UzytkownikTableSeeder.php',
+        'WykladTableSeeder' => __DIR__ . '/../..' . '/database/seeds/WykladTableSeeder.php',
         'WynikTableSeeder' => __DIR__ . '/../..' . '/database/seeds/WynikTableSeeder.php',
         'ZadanieTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ZadanieTableSeeder.php',
-        'kursphp' => __DIR__ . '/../..' . '/database/seeds/kursphp.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

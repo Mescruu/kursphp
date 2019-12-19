@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
 
 class AdminFeaturesController extends Controller {
 
@@ -249,9 +250,22 @@ class AdminFeaturesController extends Controller {
             return redirect()->back()->with('error',  trans('Brak dostępu!'));
         }
 
-        $this->validate($request,[
+        //Wyswietlany błąd.
+        $messages = [
+            'max' => 'Nazwa grupy może mieć maksymalnie 12 znaków'
+        ];
+
+        //Sprawdzanie danych wejsiowych
+        $validator = Validator::make($request->all(), [
             'nazwa-grupy' => 'required|max:12',
-        ]);
+        ],$messages);
+
+        //Sprawdzenie czy dane są poprawne.
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         $pieces = explode(" ", $request->input('nauczyciel'));
 
@@ -280,10 +294,23 @@ class AdminFeaturesController extends Controller {
             return redirect()->back()->with('error',  trans('Brak dostępu!'));
         }
 
-        //sposób na przerzucenie zmiennej:
-        $this->validate($request,[
+        //Wyswietlany błąd.
+        $messages = [
+            'max' => 'Nazwa grupy może mieć maksymalnie 12 znaków'
+        ];
+
+        //Sprawdzanie danych wejsiowych
+        $validator = Validator::make($request->all(), [
             'nazwa-grupy' => 'required|max:12',
-        ]);
+        ],$messages);
+
+        //Sprawdzenie czy dane są poprawne.
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
 
         $pieces = explode(" ", $request->input('nauczyciel'));
 
@@ -344,12 +371,25 @@ class AdminFeaturesController extends Controller {
 
     public function addFromFile(Request $request)
     {
-        //sposób na przerzucenie zmiennej:
-        $this->validate($request,[
-//            'grupa' => 'required',
+        //Wyswietlany błąd.
+        $messages = [
+            'required' => 'Pole jest wymagane',
+            'mimes' => 'Wymagany format pliku: csv'
+        ];
+
+        //Sprawdzanie danych wejsiowych
+        $validator = Validator::make($request->all(), [
             'Radio' => 'required',   //jest wymagane
             'file' => 'required|mimes:csv,txt' //jest wymagane, ustawienie że ma to byc plik, max 2mb
-        ]);
+           ],$messages);
+
+        //Sprawdzenie czy dane są poprawne.
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
 
         //pobranie grupy z nazwą
 

@@ -7,7 +7,7 @@
                 pb-4
         @endif
 
-        h-100" href="{{ url('/') }}"><img src="/storage/logo.png" width="30" height="30" class="d-inline-block mr-1 align-bottom ml-0" alt="{{ config('app.name', 'kurs php') }}"> kurs PHP</a>
+        h-100" href="{{ url('/') }}"><img src="{{ url('/storage/logo.png')}}" width="30" height="30" class="d-inline-block mr-1 align-bottom ml-0" alt="{{ config('app.name', 'kurs php') }}"> kurs PHP</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainmenu"
                 aria-controls="mainmenu" aria-expanded="false" aria-label="Przełącznik nawigacji">
@@ -27,10 +27,10 @@
                 <!--                    jezeli jest "active" dodatkowo w klasie, wtedy pokazuje, na której stronie jesteśmy-->
                 <li class="nav-item d-flex align-items-start">
                     @if(Auth::user()->typ==\App\User::$admin)
-                    <a class="nav-link" href="/panel">Panel administracyjny</a>
+                    <a class="nav-link" href="{{ url('/panel')}}">Panel administracyjny</a>
                     @endif
                     @if(Auth::user()->typ==\App\User::$user)
-                    <a class="nav-link" href="/profil">Profil</a>
+                    <a class="nav-link" href="{{ url('/profil')}}">Profil</a>
                     @endif
                 </li>
                 <!--                    submenu-->
@@ -42,13 +42,13 @@
                     <!--                        pojemnik na podmenu-->
                     <!--                        aria-labelledby przez co jest rozwijalne,  aria-haspopup, pokazuje czy jest to submenu, które się dodatkowo rozwija-->
                     <div class="dropdown-menu" aria-labelledby="#submenu" aria-haspopup="true">
-                        <a class="dropdown-item" href="/tematy">Lista tematów</a>
+                        <a class="dropdown-item" href="{{ url('/tematy')}}">Lista tematów</a>
                         <!--                            jest to separator pomiedzy odnosnikami-->
                         <div class="dropdown-divider"></div>
 
                         @if(count($listaTematow)>=1)
                         @foreach($listaTematow as $temat)
-                        <a class="dropdown-item" href="/tematy/{{$temat->id}}">{{$temat->nazwa}}</a>
+                        <a class="dropdown-item" href="{{ url('/tematy/'.$temat->id)}}">{{$temat->nazwa}}</a>
                         @endforeach
                         @endif
 

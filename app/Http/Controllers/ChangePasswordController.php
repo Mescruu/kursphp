@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ChangePasswordController extends Controller
 {
@@ -28,10 +29,28 @@ class ChangePasswordController extends Controller
             return redirect()->back()->with("error","Nowe hasło nie może być takie samo jak obecne!");
         }
 
-        $this->validate(request(), [
+
+        //Wyswietlany błąd.
+        $messages = [
+            'exists' => 'Ten :attribute - nie zgadza się.',
+            'string' => 'Hasło musi być łańcuchem znaków.',
+            'confirmed' => 'Hasła nie są takie same.',
+            'min' => 'Pole z hasłem musi zawierać conajmniej 6 znaków'
+        ];
+
+        //Sprawdzanie danych wejsiowych
+        $validator = Validator::make(request()->all(), [
             'current-password' => 'required',
             'new-password' => 'required|string|min:6|confirmed',
-        ]);
+        ],$messages);
+
+        //Sprawdzenie czy dane są poprawne.
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
 
         //Change Password
         $user = Auth::user();

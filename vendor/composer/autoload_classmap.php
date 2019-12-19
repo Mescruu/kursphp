@@ -570,7 +570,7 @@ return array(
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'TypeError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/TypeError.php',
     'UzytkownikTableSeeder' => $baseDir . '/database/seeds/UzytkownikTableSeeder.php',
+    'WykladTableSeeder' => $baseDir . '/database/seeds/WykladTableSeeder.php',
     'WynikTableSeeder' => $baseDir . '/database/seeds/WynikTableSeeder.php',
     'ZadanieTableSeeder' => $baseDir . '/database/seeds/ZadanieTableSeeder.php',
-    'kursphp' => $baseDir . '/database/seeds/kursphp.php',
 );

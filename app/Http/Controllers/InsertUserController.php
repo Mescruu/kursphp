@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class InsertUserController extends Controller
 {
@@ -22,11 +23,27 @@ class InsertUserController extends Controller
 
     public function storeStudent()
     {
-        $this->validate(request(), [
+
+        //Wyswietlany błąd.
+        $messages = [
+            'required' => 'Wszystkie pola są wyamgane',
+            'max' => 'To pole może mieć maksymalnie 10 znaków.',
+            'unique' => 'Już istnieje wpis o takiej wartości.'
+        ];
+
+        //Sprawdzanie danych wejsiowych
+        $validator = Validator::make(request()->all(), [
             'imie' => 'required',
             'nazwisko' => 'required',
             'nrAlbumu' => 'required|max:10|unique:uzytkownik',
-        ]);
+        ],$messages);
+
+        //Sprawdzenie czy dane są poprawne.
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
 
         $array = [
@@ -49,10 +66,29 @@ class InsertUserController extends Controller
     
     public function createTeacher() //NIE DZIAŁA?
     {
-        $this->validate(request(), [
+
+        //Wyswietlany błąd.
+        $messages = [
+            'required' => 'Wszystkie pola są wyamgane',
+            'email' => 'To pole musi mieć format email',
+            'confirmed' => 'Podane hasła muszą być takie same.',
+            'unique' => 'Już istnieje wpis o takiej wartości.',
+            'min' => 'Hasło musi mieć co najmniej 6 znaków'
+        ];
+
+        //Sprawdzanie danych wejsiowych
+        $validator = Validator::make(request()->all(), [
             'email' => 'required|email|unique:uzytkownik',
             'haslo' => 'required|confirmed|min:6',
-        ]);
+        ],$messages);
+
+        //Sprawdzenie czy dane są poprawne.
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
 
         $array = [
             'imie' => request('imie'),
@@ -72,11 +108,31 @@ class InsertUserController extends Controller
 
     public function activate()
     {
-        $this->validate(request(), [
+
+        //Wyswietlany błąd.
+        $messages = [
+            'required' => 'Wszystkie pola są wyamgane',
+            'email' => 'To pole musi mieć format email',
+            'unique' => 'Już istnieje :attribute o takiej wartości.',
+            'min' => 'Hasło musi mieć co najmniej 6 znaków',
+            'max' => 'Numer albumu może mieć maksymalnie 10 znaków'
+        ];
+
+        //Sprawdzanie danych wejsiowych
+        $validator = Validator::make(request()->all(), [
             'nrAlbumu' => 'required|max:10|',
             'haslo' => 'required|min:6',
             'email' => 'required|email|unique:uzytkownik'
-        ]);
+        ],$messages);
+
+        //Sprawdzenie czy dane są poprawne.
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
             $password =  bcrypt(request('haslo'));
             $user = DB::select('SELECT * FROM uzytkownik 
             WHERE haslo="'.$password.'" and nrAlbumu="'.request('nrAlbumu').'" ');

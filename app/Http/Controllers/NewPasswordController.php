@@ -69,7 +69,7 @@ class NewPasswordController extends Controller
 
         //Wyswietlany błąd.
         $messages = [
-            'exists' => 'Ten :attribute - nie zgadzda się.',
+            'exists' => 'Ten :attribute - nie zgadza się.',
             'required' => 'Wszystkie pola są wymagane.',
             'confirmed' => 'Hasła nie są takie same.',
             'min' => 'Pole z hasłem musi zawierać conajmniej 6 znaków'

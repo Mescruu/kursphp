@@ -35,9 +35,9 @@
                 <div class="signin">
 
                         @if($rozwiazanie=="empty")
-                        <form class="form-signin justify-content-center " method="POST" action="/addpoints/{{$user->id}}">
+                        <form class="form-signin justify-content-center " method="POST" action="{{ url('/addpoints/'.$user->id)}}">
                         @else
-                        <form class="form-signin justify-content-center " method="POST" action="/rateAnAnswer/{{$user->id}}/{{$rozwiazanie}}">
+                        <form class="form-signin justify-content-center " method="POST" action="{{ url('/rateAnAnswer/'.$user->id.'/'.$rozwiazanie)}}">
                        @endif
 
                         {{ csrf_field() }}

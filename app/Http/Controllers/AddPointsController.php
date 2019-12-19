@@ -22,6 +22,8 @@ class AddPointsController extends Controller
     }
 
     public function AddPoints($id){
+
+
         $this->validate(request(), [
             'ilosc' => 'required',
             'komentarz' => 'required',
