@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Console\Input\Input;
 
 class WykladyController extends Controller
@@ -57,10 +58,25 @@ class WykladyController extends Controller
     {
         if (Auth::user()->typ == \App\User::$admin) {
 
-            $this->validate($request, [
+
+            //Wyswietlany błąd.
+            $messages = [
+                'mimes' => 'Plik musi być w formacie pdf.',
+                'max' => 'Tytuł może mieć maksymalnie 255 znaków.'
+            ];
+
+            //Sprawdzanie danych wejsiowych
+            $validator = Validator::make(request()->all(), [
                 'tytul-wykladu' => 'max:255',
                 'file' => 'mimes:pdf'
-            ]);
+            ],$messages);
+
+            //Sprawdzenie czy dane są poprawne.
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
 
             $temat= DB::table('temat')->where('nazwa',$request->input('nazwa-tematu'))->first();
 
@@ -132,11 +148,25 @@ class WykladyController extends Controller
         if (Auth::user()->typ == \App\User::$admin) {
 
 
+            //Wyswietlany błąd.
+            $messages = [
+                'required' => 'Pole jest wymagane',
+                'mimes' => 'Plik musi być w formacie pdf.',
+                'max' => 'To pole może mieć maksymalnie :attribute znaków.'
+            ];
 
-            $this->validate($request, [
+            //Sprawdzanie danych wejsiowych
+            $validator = Validator::make(request()->all(), [
                 'tytul-wykladu' => 'required|max:255',
                 'file' => 'required|mimes:pdf'
-            ]);
+            ],$messages);
+
+            //Sprawdzenie czy dane są poprawne.
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
 
             echo $request->input('nazwa-tematu');
 

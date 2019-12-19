@@ -320,16 +320,15 @@ class TematyController extends Controller {
 
         //Wyswietlany błąd.
         $messages = [
-            'required' => 'Pole jest wyamgane',
+            'required' => 'Pole jest wymagane',
             'email' => 'To pole musi mieć format email',
-            'mimes' => 'Już istnieje :attribute o takiej wartości.',
-            'min' => 'Hasło musi mieć co najmniej 6 znaków',
-            'max' => 'Numer albumu może mieć maksymalnie 10 znaków'
+            'mimes' => 'Akceptowane formaty plików: jpeg,png,jpg,gif,svg',
+            'max' => 'Maksymalny rozmiar obrazka: 5mb'
         ];
 
         //Sprawdzanie danych wejsiowych
         $validator = Validator::make(request()->all(), [
-            'imageUpload' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'imageUpload' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
         ],$messages);
 
         //Sprawdzenie czy dane są poprawne.

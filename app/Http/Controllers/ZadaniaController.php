@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ZadaniaController extends Controller
 {
@@ -120,11 +121,26 @@ class ZadaniaController extends Controller
 
         if (Auth::user()->typ == \App\User::$admin) {
 
+            //Wyswietlany błąd.
+            $messages = [
+                'required' => 'Pole jest wymagane',
+                'mimes' => 'Plik musi być w formacie pdf.',
+                'max' => 'Treść zadania może mieć maksymalnie : znaków.'
+            ];
 
-            $this->validate($request, [
+            //Sprawdzanie danych wejsiowych
+            $validator = Validator::make(request()->all(), [
                 'nazwa-zadania' => 'required|max:100',
                 'tresc-zadania' => 'max:255',
-            ]);
+            ],$messages);
+
+            //Sprawdzenie czy dane są poprawne.
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
 
             $temat= DB::table('temat')->where('nazwa',$request->input('nazwa-tematu'))->first();
 
