@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f7a7229-3c61-4762-beac-3e936d815d6d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AddPointsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AddPointsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminFeaturesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminFeaturesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ChangePasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ChangePasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EditCriterionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EditCriterionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/InsertUserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/InsertUserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NewPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NewPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/inc/navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/inc/navbar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/admin/addpoints.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/admin/addpoints.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/tematy/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/tematy/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TematyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TematyController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/framework/views/63a27ff1b4ff924bdb4f24c93a93d29fcf9436a1.php" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/views/63a27ff1b4ff924bdb4f24c93a93d29fcf9436a1.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,11 +37,50 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/InsertUserController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="192">
               <caret line="113" column="17" lean-forward="true" selection-start-line="113" selection-start-column="17" selection-end-line="113" selection-end-column="17" />
+              <folding>
+                <element signature="e#40#78#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PagesController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="719">
+              <caret line="51" column="14" lean-forward="true" selection-start-line="51" selection-start-column="14" selection-end-line="51" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PowiadomieniaController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/QuizController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-4092">
+              <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TematyController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="155">
+              <caret line="324" column="39" lean-forward="true" selection-start-line="324" selection-start-column="39" selection-end-line="324" selection-end-column="39" />
               <folding>
                 <element signature="e#40#78#0#PHP" expanded="true" />
               </folding>
@@ -75,8 +103,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/tematy/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="670">
-              <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="51" selection-end-column="42" />
+            <state relative-caret-position="160">
+              <caret line="46" column="13" selection-start-line="45" selection-start-column="61" selection-end-line="46" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -175,13 +203,13 @@
         <option value="$PROJECT_DIR$/resources/views/inc/navbar.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/admin/addpoints.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/NewPasswordController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/TematyController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/AddPointsController.php" />
         <option value="$PROJECT_DIR$/resources/views/tematy/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ChangePasswordController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/AdminFeaturesController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/EditCriterionController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/InsertUserController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/TematyController.php" />
       </list>
     </option>
   </component>
@@ -521,12 +549,12 @@
       <workItem from="1576581602076" duration="5583000" />
       <workItem from="1576695439713" duration="5431000" />
       <workItem from="1576758531453" duration="1875000" />
-      <workItem from="1576788286533" duration="2903000" />
+      <workItem from="1576788286533" duration="3157000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="399962000" />
+    <option name="totallyTimeSpent" value="400216000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -633,13 +661,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PagesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="51" column="14" lean-forward="true" selection-start-line="51" selection-start-column="14" selection-end-line="51" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/tematy/show.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
@@ -658,13 +679,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PowiadomieniaController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -699,13 +713,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/QuizController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5775">
-          <caret line="407" selection-start-line="407" selection-end-line="407" />
         </state>
       </provider>
     </entry>
@@ -828,16 +835,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TematyController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="334" column="6" lean-forward="true" selection-start-line="334" selection-start-column="6" selection-end-line="334" selection-end-column="6" />
-          <folding>
-            <element signature="e#40#78#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-236">
@@ -875,8 +872,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/tematy/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="51" selection-end-column="42" />
+        <state relative-caret-position="160">
+          <caret line="46" column="13" selection-start-line="45" selection-start-column="61" selection-end-line="46" selection-end-column="42" />
         </state>
       </provider>
     </entry>
@@ -935,6 +932,37 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="113" column="17" lean-forward="true" selection-start-line="113" selection-start-column="17" selection-end-line="113" selection-end-column="17" />
+          <folding>
+            <element signature="e#40#78#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PagesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="719">
+          <caret line="51" column="14" lean-forward="true" selection-start-line="51" selection-start-column="14" selection-end-line="51" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PowiadomieniaController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/QuizController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4092">
+          <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TematyController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="324" column="39" lean-forward="true" selection-start-line="324" selection-start-column="39" selection-end-line="324" selection-end-column="39" />
           <folding>
             <element signature="e#40#78#0#PHP" expanded="true" />
           </folding>

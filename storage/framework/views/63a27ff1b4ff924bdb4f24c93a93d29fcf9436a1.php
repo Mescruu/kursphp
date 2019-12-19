@@ -7,7 +7,7 @@
                 pb-4
         <?php endif; ?>
 
-        h-100" href="<?php echo e(url('/')); ?>"><img src="/storage/logo.png" width="30" height="30" class="d-inline-block mr-1 align-bottom ml-0" alt="<?php echo e(config('app.name', 'kurs php')); ?>"> kurs PHP</a>
+        h-100" href="<?php echo e(url('/')); ?>"><img src="<?php echo e(url('/storage/logo.png')); ?>" width="30" height="30" class="d-inline-block mr-1 align-bottom ml-0" alt="<?php echo e(config('app.name', 'kurs php')); ?>"> kurs PHP</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainmenu"
                 aria-controls="mainmenu" aria-expanded="false" aria-label="Przełącznik nawigacji">
@@ -27,10 +27,10 @@
                 <!--                    jezeli jest "active" dodatkowo w klasie, wtedy pokazuje, na której stronie jesteśmy-->
                 <li class="nav-item d-flex align-items-start">
                     <?php if(Auth::user()->typ==\App\User::$admin): ?>
-                    <a class="nav-link" href="/panel">Panel administracyjny</a>
+                    <a class="nav-link" href="<?php echo e(url('/panel')); ?>">Panel administracyjny</a>
                     <?php endif; ?>
                     <?php if(Auth::user()->typ==\App\User::$user): ?>
-                    <a class="nav-link" href="/profil">Profil</a>
+                    <a class="nav-link" href="<?php echo e(url('/profil')); ?>">Profil</a>
                     <?php endif; ?>
                 </li>
                 <!--                    submenu-->
@@ -42,13 +42,13 @@
                     <!--                        pojemnik na podmenu-->
                     <!--                        aria-labelledby przez co jest rozwijalne,  aria-haspopup, pokazuje czy jest to submenu, które się dodatkowo rozwija-->
                     <div class="dropdown-menu" aria-labelledby="#submenu" aria-haspopup="true">
-                        <a class="dropdown-item" href="/tematy">Lista tematów</a>
+                        <a class="dropdown-item" href="<?php echo e(url('/tematy')); ?>">Lista tematów</a>
                         <!--                            jest to separator pomiedzy odnosnikami-->
                         <div class="dropdown-divider"></div>
 
                         <?php if(count($listaTematow)>=1): ?>
                         <?php $__currentLoopData = $listaTematow; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $temat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <a class="dropdown-item" href="/tematy/<?php echo e($temat->id); ?>"><?php echo e($temat->nazwa); ?></a>
+                        <a class="dropdown-item" href="<?php echo e(url('/tematy/'.$temat->id)); ?>"><?php echo e($temat->nazwa); ?></a>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <?php endif; ?>
 

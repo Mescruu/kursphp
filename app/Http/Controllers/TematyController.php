@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class TematyController extends Controller {
 
@@ -316,9 +317,28 @@ class TematyController extends Controller {
     }
 
     public function uploadImage(Request $request) {
-        $this->validate($request, [
+
+        //Wyswietlany błąd.
+        $messages = [
+            'required' => 'Pole jest wyamgane',
+            'email' => 'To pole musi mieć format email',
+            'mimes' => 'Już istnieje :attribute o takiej wartości.',
+            'min' => 'Hasło musi mieć co najmniej 6 znaków',
+            'max' => 'Numer albumu może mieć maksymalnie 10 znaków'
+        ];
+
+        //Sprawdzanie danych wejsiowych
+        $validator = Validator::make(request()->all(), [
             'imageUpload' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        ],$messages);
+
+        //Sprawdzenie czy dane są poprawne.
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
 
         $input = $request->imageUpload;
         $input = time() . '.' . $request->imageUpload->extension();
