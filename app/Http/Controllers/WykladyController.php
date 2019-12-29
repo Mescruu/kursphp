@@ -8,12 +8,10 @@ use App\Temat;
 use App\Wyklad;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Symfony\Component\Console\Input\Input;
 
 class WykladyController extends Controller
 {
@@ -46,9 +44,7 @@ class WykladyController extends Controller
                 Powiadomienie::createNotificationWhenEdit($temat->id, "Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." usunął wyklad z tematu ".$temat->nazwa);
 
                 return redirect('/panel')->with('success', trans('Wykład został usunięty.'));
-
             }
-
         } else{
             return redirect('/panel')->with('error', trans('Coś poszło nie tak.'));
         }
@@ -57,7 +53,6 @@ class WykladyController extends Controller
     public function edit(Request $request, $id)
     {
         if (Auth::user()->typ == \App\User::$admin) {
-
 
             //Wyswietlany błąd.
             $messages = [
@@ -80,7 +75,6 @@ class WykladyController extends Controller
 
             $temat= DB::table('temat')->where('nazwa',$request->input('nazwa-tematu'))->first();
 
-
             if($request->file('file')!=null){
 
                 if ($request->file('file')->isValid()&&$request->file('file')) {
@@ -94,24 +88,17 @@ class WykladyController extends Controller
 
                     $file =$id.'.pdf';
 
-
                     rename(storage_path().'/wyklady/'.$file,storage_path().'/wyklady/copy'.$file);
 
-
                     if ($request->file('file')->move(storage_path().'/wyklady/',$file)) {
-//                    Storage::disk('wyklady')->put($file, '');
                         Storage::delete(storage_path().'/wyklady/copy'.$file); // usuniecie backupu
-
                         $wyklad = Wyklad::find($id);
                         $temat = Temat::find($wyklad->idTemat);
                         Powiadomienie::createNotificationWhenEdit($temat->id, "Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." zedytował wyklad z tematu ".$temat->nazwa);
-
-
                         return redirect('/panel/')->with('success', 'Wyklad '.$request->input('tytul-wykladu').' został edytowany.');
                     }
                     else{
                         rename(storage_path().'/wyklady/copy'.$file, storage_path().'/wyklady/'.$file);// spowrotem
-
                         return redirect('/panel/')->with('errors', 'Nie udało się zapisać pliku, być może katalog nie jest zapisywalny.');
                     }
                 }
@@ -119,8 +106,6 @@ class WykladyController extends Controller
                 {
                     return redirect('/panel/')->with('errors', 'Nie udało się edytować wykładu');
                 }
-
-
             }
             else{
                DB::table('wyklad')
@@ -129,13 +114,8 @@ class WykladyController extends Controller
                         'idTemat' =>$temat->id,
                         'updated_at' => Carbon::now()
                     ]);
-
                 return redirect('/panel/')->with('success', 'Wyklad '.$request->input('tytul-wykladu').' został edytowany');
-
             }
-
-
-
         }else
         {
             return redirect()->back()->with('error', trans('Brak dostepu.'));
@@ -144,9 +124,7 @@ class WykladyController extends Controller
 
     public function create(Request $request)
     {
-
         if (Auth::user()->typ == \App\User::$admin) {
-
 
             //Wyswietlany błąd.
             $messages = [
@@ -174,10 +152,8 @@ class WykladyController extends Controller
 
             echo $temat->id;
 
-
             //https://www.php.net/manual/en/ini.core.php#ini.post-max-size
             if ($request->file('file')->isValid()) {
-
 
                 $wyklad = Wyklad::create(
                     ['tytul' => $request->input('tytul-wykladu'),
@@ -186,12 +162,9 @@ class WykladyController extends Controller
                     ]
                 );
 
-
                 $file =$wyklad->id.'.pdf';
 
-
                 if ($request->file('file')->move(storage_path().'/wyklady/',$file)) {
-//                    Storage::disk('wyklady')->put($file, '');
                     return redirect('/panel/')->with('success', 'Utworzono wyklad ' . $wyklad->tytul . '.');
                 }
                 else{
@@ -202,8 +175,6 @@ class WykladyController extends Controller
             {
                 return redirect('/panel/')->with('errors', 'Nie udało się dodać wykładu.');
             }
-
-
         } else {
             return redirect('/panel/')->with('errors', 'Brak dostępu.');
         }

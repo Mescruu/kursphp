@@ -16,19 +16,16 @@ use Illuminate\Support\Facades\Validator;
 
 class TematyController extends Controller {
 
-    //
     public function __construct() {
         $this->middleware(CheckUserType::class, ['except' => ['show','index']]);
     }
 
     public function show($id) {
-        //wyswitla rzeczy zwiazane z konkretnym tematem o id $id
         $temat = Temat::find($id);
 
         if($temat==null){
             return redirect()->back()->with('error', trans('Nie ma takiego tematu'));
         }
-
 
         $wyklad = DB::table('wyklad')->where('idTemat', $id)->get()->first();
         if ($wyklad != null) {
@@ -52,18 +49,6 @@ class TematyController extends Controller {
         if (Auth::user()->typ !== 'nauczyciel') {
 
             $user_idGrupa = Auth::user()->idGrupa;
-
-
-
-
-
-//            $grupa_user = DB::table('temat')
-//                        ->join('listagrup', 'listagrup.idTemat', '=', 'temat.id')
-//                        ->join('grupa', 'listagrup.idGrupa', '=', 'grupa.id')
-//                        ->where('temat.id', $id)
-//                        ->where('grupa.id', $user_idGrupa)
-//                        ->select('grupa.*')
-//                        ->get();
 
             $lista = DB::table('listagrup')->where('idGrupa', $user_idGrupa)->where('idTemat', $id)->count();
 
@@ -143,7 +128,6 @@ class TematyController extends Controller {
                 foreach ($grupyWybrane as $grupaWybrana) {
                     array_push($grupyWybraneID, $grupaWybrana->id);
                 }
-
             foreach ($grupy as $grupa) {
                 if (in_array($grupa->id, $grupyWybraneID)) {
                     $grupa->checked = 'checked';
@@ -151,7 +135,6 @@ class TematyController extends Controller {
                     $grupa->checked = '';
                 }
             }
-
             return view('tematy.groups', ['temat' => $temat, 'grupy' => $grupy]);
         } else {
             return redirect('/tematy/' . $id);
@@ -163,7 +146,6 @@ class TematyController extends Controller {
         if($temat==null){
             return redirect()->back()->with('error', trans('Nie ma takiego tematu'));
         }
-
         if (Auth::user()->typ == \App\User::$admin) {
             $array = [
                 'nazwa' => request('nazwa'),
@@ -178,7 +160,6 @@ class TematyController extends Controller {
             Storage::disk('tematy')->put($id . '/abb.txt', request('text'));
             Storage::disk('tematy')->put($id . '/ahtml.txt', request('texthtml'));
             DB::table('temat')->where('id', $id)->update(['updated_at' => Carbon::now()]);
-
 
             Powiadomienie::createNotificationWhenEdit($temat->id, "Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." zedytował temat ".$temat->nazwa);
 
@@ -206,7 +187,6 @@ class TematyController extends Controller {
                 if (!in_array($grupa->id, $grupyWybraneID)) {
                     ListaGrup::create(['idGrupa' => $grupa->id, 'idTemat' => $id]);
                     Powiadomienie::createNotificationWhenGetAccess($grupa->id, "Twoja grupa otrzymała dostęp do tematu  ".$temat->nazwa.".");
-
                 }
             } else {
                 if (in_array($grupa->id, $grupyWybraneID)) {
@@ -223,12 +203,9 @@ class TematyController extends Controller {
         if($temat==null){
             return redirect()->back()->with('error', trans('Nie ma takiego tematu'));
         }
-
             if (!is_null($temat)) {
 
-
                 Powiadomienie::createNotificationWhenEdit($temat->id, "Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." usunął temat ".$temat->nazwa);
-
 
                 $zadanie = Zadanie::find($id);
                 if (!is_null($zadanie)) {
@@ -238,25 +215,15 @@ class TematyController extends Controller {
                     if (!is_null($rozwiazania)) {
                         $rozwiazania->delete();
                     }
-
                     $zadanie->delete();
                     Storage::disk('rozwiazania')->deleteDirectory($id);
                 }
 
-
-
-
                 $quiz = DB::table('quiz')->where('idTemat', $id);
-//                $pytanie = DB::table('pytanie')->where('idQuiz', $quiz->id);
 
                 if (!is_null($quiz)) {
-//                    if(!is_null($pytanie)) {
-//                        $pytanie = DB::table('pytanie')->where('idQuiz', $quiz->id);
-//                        $pytanie->delete();
-//                    }
                     $quiz->delete();
                 }
-
                 $wyklad = DB::table('wyklad')->where('idTemat', $id);
 
                 if (!is_null($wyklad)) {
@@ -268,11 +235,8 @@ class TematyController extends Controller {
                 $listyGrup = ListaGrup::where('idTemat', $id);
                 $listyGrup->delete();
 
-
                 $temat->delete();
                 Storage::disk('tematy')->deleteDirectory($id);
-
-
 
                 return redirect()->back()->with('success', 'Usunięto temat ' . $nazwa . '.');
             } else {
@@ -306,11 +270,6 @@ class TematyController extends Controller {
             }
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index() {
 
         return view('tematy.index');
@@ -338,7 +297,6 @@ class TematyController extends Controller {
                 ->withInput();
         }
 
-
         $input = $request->imageUpload;
         $input = time() . '.' . $request->imageUpload->extension();
         $request->imageUpload->move(public_path('images'), $input);
@@ -355,8 +313,6 @@ class TematyController extends Controller {
             array_push($images_ready, $image);
         }
         $js_array = json_encode($images_ready);
-        //$js_array = json_encode($images);
         echo $js_array;
     }
-
 }

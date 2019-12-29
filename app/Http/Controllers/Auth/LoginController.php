@@ -41,10 +41,8 @@ class LoginController extends Controller
     protected function authenticated()
     {
         //po zatwierdzeniu zalogowania, do zmiennej sesyjnej zostaje pobrana zmienna z tematami do nawigacji
-
         $tematy = Temat::orderBy('nazwa','asc')->get(); //pobiera z bazy posortowane po id malejąco
-
-            session(['listaTematow' => $tematy]);
+        session(['listaTematow' => $tematy]);
     }
 
     protected function sendFailedLoginResponse(Request $request)

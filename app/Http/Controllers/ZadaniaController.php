@@ -10,7 +10,6 @@ use App\User;
 use App\Zadanie;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -19,13 +18,10 @@ use Illuminate\Support\Facades\Validator;
 
 class ZadaniaController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware(CheckUserType::class, ['except' => ['show','answer','link']]);
     }
-
-
     public  function  link($id, $user){
 
         if (Auth::user()->typ == \App\User::$admin) {
@@ -36,10 +32,8 @@ class ZadaniaController extends Controller
             $zadanie = Zadanie::find($id);
             $file =Auth::user()->id."-".$zadanie->id.'.zip';
         }
-
         if($file==null){
             return redirect()->back()->with('error', trans('Nie ma takiego pliku'));
-
         }else{
             return response()->download(
                 storage_path()."/rozwiazania/".$id."/".$file,
@@ -49,8 +43,6 @@ class ZadaniaController extends Controller
             );
         }
     }
-
-
     public function show($id)
     {
         $zadanie = Zadanie::find($id);
@@ -74,7 +66,6 @@ class ZadaniaController extends Controller
             $zadanie->temat="empty";
         }
 
-
         $wyklad = DB::table('wyklad')->where('idTemat',$temat->id)->get()->first();
         if($wyklad!=null)
         {
@@ -94,18 +85,12 @@ class ZadaniaController extends Controller
 
         $file =Auth::user()->id."-".$zadanie->id.'.zip';
 
-
-
         if (file_exists(storage_path()."/rozwiazania/".$id."/".$file)){
-
-//            $privateFile = Storage::files(storage_path()."rozwiazania/".$file);
-
             $zadanie->url="link";
 
         }else{
             $zadanie->url="empty";
         }
-
 
         return view('zadania.show')->with('zadanie', $zadanie);
     }
@@ -117,10 +102,7 @@ class ZadaniaController extends Controller
 
     public function edit(Request $request, $id)
     {
-
-
         if (Auth::user()->typ == \App\User::$admin) {
-
             //Wyswietlany błąd.
             $messages = [
                 'required' => 'Pole jest wymagane',
@@ -141,9 +123,7 @@ class ZadaniaController extends Controller
                     ->withInput();
             }
 
-
             $temat= DB::table('temat')->where('nazwa',$request->input('nazwa-tematu'))->first();
-
 
             DB::table('zadanie')
                     ->where('id', $id)
@@ -157,10 +137,7 @@ class ZadaniaController extends Controller
 
             $temat = Temat::find($zadanie->idTemat);
             Powiadomienie::createNotificationWhenEdit($temat->id, "Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." zedytował zadanie z tematu ".$temat->nazwa);
-
-
-                return redirect('/panel/')->with('success', 'Zadanie "'.$request->input('nazwa-zadania').'" zostało edytowane.');
-
+            return redirect('/panel/')->with('success', 'Zadanie "'.$request->input('nazwa-zadania').'" zostało edytowane.');
         }else
         {
             return redirect()->back()->with('error', trans('Brak dostepu!'));
@@ -169,19 +146,14 @@ class ZadaniaController extends Controller
 
     public function create(Request $request)
     {
-
         if (Auth::user()->typ == \App\User::$admin) {
-
 
             $this->validate($request, [
                 'nazwa-zadania' => 'required|max:100',
                 'tresc-zadania' => 'max:255',
             ]);
 
-
             $temat = DB::table('temat')->where('nazwa', $request->input('nazwa-tematu'))->first();
-
-
 
             Zadanie::create(
                 ['nazwa' => $request->input('nazwa-zadania'),
@@ -193,7 +165,6 @@ class ZadaniaController extends Controller
 
             return redirect('/panel/')->with('success', 'Udało się dodać zadanie.');
 
-
         } else {
             return redirect('/panel/')->with('errors', 'Brak dostępu.');
         }
@@ -201,7 +172,6 @@ class ZadaniaController extends Controller
 
     public function remove($id)
     {
-
         if (Auth::user()->typ == \App\User::$admin) {
             $zadanie=Zadanie::find($id);
 
@@ -220,9 +190,7 @@ class ZadaniaController extends Controller
             }
             else{
                 return redirect('/panel/')->with('errors', 'Nie ma takiego zadania.');
-
             }
-
 
         } else {
             return redirect('/panel/')->with('errors', 'Brak dostępu.');
@@ -232,18 +200,13 @@ class ZadaniaController extends Controller
     public function answer(Request $request, $id)
     {
         $zadanie = Zadanie::find($id);
-        $temat= DB::table('temat')->where('id',$zadanie->idTemat)->first();
-
-
+        DB::table('temat')->where('id',$zadanie->idTemat)->first();
 
             $this->validate($request, [
                 'file' => 'required|mimes:zip'
             ]);
 
             if ($request->file('file')->isValid()) {
-
-
-
 
                 $file =Auth::user()->id."-".$zadanie->id.'.zip';
 
@@ -254,7 +217,6 @@ class ZadaniaController extends Controller
                     DB::table('rozwiazanie')
                         ->where('idZadanie', $id)->where('idUzytkownik', Auth::user()->id)
                         ->update(['updated_at' => Carbon::now()]);
-
                 }else{
                     $msg=" przesłał";
 
@@ -268,12 +230,9 @@ class ZadaniaController extends Controller
                     );
 
                 }
-
                 File::makeDirectory(storage_path()."/rozwiazania/".$id, $mode = 0777, true, true);
 
                 if ($request->file('file')->move(storage_path().'/rozwiazania/'.$id,$file)) {
-
-
 
                     if(Auth::user()->typ!='nauczyciel') {
 
@@ -283,9 +242,7 @@ class ZadaniaController extends Controller
 
                         Powiadomienie::createImportantNotification($grupa->idNauczyciel, "Uzytkownik " . Auth::user()->imie . " " . Auth::user()->nazwisko. $msg." rozwiązanie do zadania \"".$zadanie->nazwa."\", Grupa: ".$grupa->nazwa);
                     }
-
                     return redirect()->back()->with('success', 'Dodano rozwiązanie.');
-
                 }
                 else{
                     return redirect()->back()->with('errors', 'Nie udało się zapisać pliku, być może katalog nie jest zapisywalny.');
@@ -295,7 +252,5 @@ class ZadaniaController extends Controller
             {
                 return redirect()->back()->with('errors', 'Nie udało się dodać pliku!');
             }
-
     }
-
 }

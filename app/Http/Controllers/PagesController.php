@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Powiadomienie;
 use Illuminate\Support\Facades\DB;
 use App\Grupa;
 use App\Punkty;
 use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
@@ -21,17 +19,12 @@ class PagesController extends Controller
     }
 
     public function index(){
-        //sposób na przerzucenie zmiennej:
         $title  = 'Kurs PHP';
         if(Auth::guest()){
             return view('pages.index', compact('title'));
         }else{
             return redirect('/home');
         }
-        
-
-//        return view('pages.index')->with('title', $title);   //drugi sposób
-
     }
     
     public function home(){
@@ -41,9 +34,8 @@ class PagesController extends Controller
     ////PROFIL
 
     public function profil(){
-        //sposób na przerzucenie zmiennej:
 
-        $adminId = DB::table('grupa')->where('id', auth()->user()->idGrupa)->first();
+        DB::table('grupa')->where('id', auth()->user()->idGrupa)->first();
         $notification = DB::table('powiadomienie')->where('idUzytkownik', Auth::user()->id)->orderBy('created_at','desc')->get();
 
         if(Auth::user()->typ==User::$admin)
@@ -52,7 +44,6 @@ class PagesController extends Controller
         }else{
             $grupa  = Grupa::find(auth()->user()->idGrupa);
             $punkty = Punkty::where('idStudent', (auth()->user()->id))->orderBy('created_at', 'desc')->get();
-            //$punkty = DB::table('punkty')->where('idStudent', auth()->user()->id);
             $nazwaGrupy = 'Brak';
             $iloscPunktow = 0;
             $nauczyciele = [];
@@ -79,14 +70,10 @@ class PagesController extends Controller
 
 
     public function punkty(){
-
-
-
         $punkty = DB::table('punkty')->where('idStudent', auth()->user()->id)->orderByRaw('created_at DESC')->get();
         $nauczyciele = array();
         $iterations = 0;
         foreach($punkty as $wpis){
-            $nauczyciel = "";
             $temp = DB::table('uzytkownik')->where('id', $wpis->idNauczyciel)->first();
             $nauczyciel = $temp->imie . " " . $temp->nazwisko;
             array_push($nauczyciele, $nauczyciel);
@@ -101,7 +88,4 @@ class PagesController extends Controller
         );
         return view('pages.punkty')->with($data);
     }
-
-
-
 }

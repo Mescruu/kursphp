@@ -33,7 +33,6 @@ class ListaTematowComposer {
                         $temat->wyklad = $wyklad->tytul;
                         $temat->wykladID = $wyklad->id;
                     }
-                    
                 }
                 $view->with('listaTematow', $listaTematow);
             }

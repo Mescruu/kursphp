@@ -3,10 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Middleware\CheckUserType;
-use App\User;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 

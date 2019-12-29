@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Middleware\CheckUserType;
-use App\Powiadomienie;
 use App\User;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -57,14 +54,12 @@ class InsertUserController extends Controller
 
 
 
-        $student = User::create($array);
-
-        //auth()->login($user);
+        User::create($array);
 
         return redirect()->back()->with('success', 'Udało się utworzyć studenta o numerze albumu: '.\request('nrAlbumu'));
     }
     
-    public function createTeacher() //NIE DZIAŁA?
+    public function createTeacher()
     {
 
         //Wyswietlany błąd.
@@ -98,9 +93,7 @@ class InsertUserController extends Controller
             'typ' => 'nauczyciel',
         ];
 
-        $nauczyciel = User::create($array);
-
-        //auth()->login($user);
+        User::create($array);
 
         return redirect()->back()->with('success', 'Udało się utworzyć nauczyciela: '.\request('imie')." ".\request('nazwisko'));
     }
@@ -132,10 +125,9 @@ class InsertUserController extends Controller
                 ->withInput();
         }
 
+        $password =  bcrypt(request('haslo'));
+        $user = DB::table('uzytkownik')->where('haslo',$password)->where('nrAlbumu', request('nrAlbumu'))->get();
 
-            $password =  bcrypt(request('haslo'));
-            $user = DB::select('SELECT * FROM uzytkownik 
-            WHERE haslo="'.$password.'" and nrAlbumu="'.request('nrAlbumu').'" ');
 
         if(!is_null($user)){
             DB::table('uzytkownik')
@@ -147,6 +139,5 @@ class InsertUserController extends Controller
         }else{
             return redirect('/')->withErrors('error', 'Dane są błędne!');
         }
-        //return redirect('/')->with('success', 'Aktywowales konto! Uzupelnij dane i zacznij korzystać z platformy'.\request('nrAlbumu'));
     }
 }

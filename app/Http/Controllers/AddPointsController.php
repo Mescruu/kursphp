@@ -4,18 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Middleware\CheckUserType;
 use App\Punkty;
-use App\Rozwiazanie;
 use App\User;
 use App\Powiadomienie;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
 class AddPointsController extends Controller
 {
-    //ADMIN
     public function __construct()
     {
         $this->middleware(CheckUserType::class);
@@ -36,7 +32,7 @@ class AddPointsController extends Controller
             'komentarz' => request('komentarz')
         ];
         
-        $punkty = Punkty::create($array);
+        Punkty::create($array);
         
         $user = User::find($id);
         Powiadomienie::createNotification($id,"Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." przyznał Ci ".request('ilosc')."pkt.");
@@ -59,7 +55,7 @@ class AddPointsController extends Controller
             'komentarz' => request('komentarz')
         ];
 
-        $punkty = Punkty::create($array);
+        Punkty::create($array);
 
 
         DB::table('rozwiazanie')

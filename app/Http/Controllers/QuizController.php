@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Grupa;
 use App\Http\Middleware\CheckUserType;
 use App\Powiadomienie;
 use App\Punkty;
 use App\Pytanie;
 use App\Quiz;
 use App\Temat;
-use App\User;
 use App\Wynik;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -67,7 +64,6 @@ class QuizController extends Controller
         }
 
         if($quiz->typ==="kolokwium"&&$wynik!==null&&Auth::user()->typ!='nauczyciel'){
-
             return redirect('/profil')->with('error', trans('Już brałeś udział w tym kolokwium!'));
         }
 
@@ -85,13 +81,9 @@ class QuizController extends Controller
                 'odpC'=>$pytanie->odpC
             ];
 
-
-
-
             $table = array_values($array);
 
-           $this->seedShuffle($table,$seed+$index);
-
+            $this->seedShuffle($table,$seed+$index);
 
             $pytanie->a=$table[0];
             $pytanie->b=$table[1];
@@ -99,12 +91,9 @@ class QuizController extends Controller
             $pytanie->d=$table[3];
         }
 
-
         $iloscPytan=count($pytania);
 
-
         return view ('quizy.show', ['pytania'=>$pytania,'ilosc'=>$iloscPytan, 'id'=>$id,'typ' => $quiz->typ,'quiz'=> $quiz, 'seed'=>$seed, 'wynik'=>$wynik]);
-
     }
 
 
@@ -116,7 +105,6 @@ class QuizController extends Controller
         if($quiz==null){
             return redirect()->back()->with('error', trans('Nie ma takiego quizu'));
         }
-
 
         $wyklad = DB::table('wyklad')->where('idTemat',$quiz->idTemat)->get()->first();
         if($wyklad!=null)
@@ -143,8 +131,6 @@ class QuizController extends Controller
             $quiz->zadanie="empty";
         }
 
-
-
         $pytania = Pytanie::get()->where('idQuiz', $id);
 
         $iloscPytan = count($pytania);
@@ -153,36 +139,28 @@ class QuizController extends Controller
 
         $allPoints=0;
 
-
         $seed=(int)$request->input('seed')-count($pytania)+4;
-
 
         foreach ($pytania as $pytanie){
             $index++;
             $pytanie->nr = $index;
-
 
             if ($request->input('odpowiedz'.$index)!=nullOrEmptyString()){
 
                 $pytanie->twojaOdp = $request->input('odpowiedz'.$index);
 
                 if($pytanie->odpPoprawna==($request->input('odpowiedz'.$index))){
-
                     $allPoints++;
-
-
                 }
             }
 
             //szuflowanie pytań
-
             $array=[
                 'odpPoprawna'=>$pytanie->odpPoprawna,
                 'odpA'=>$pytanie->odpA,
                 'odpB'=>$pytanie->odpB,
                 'odpC'=>$pytanie->odpC
             ];
-
 
             $table = array_values($array);
 
@@ -192,7 +170,6 @@ class QuizController extends Controller
             $pytanie->b=$table[1];
             $pytanie->c=$table[2];
             $pytanie->d=$table[3];
-
         }
 
         $results=[
@@ -201,8 +178,6 @@ class QuizController extends Controller
             'wynik'=>$allPoints.'/'.$index,
             'created_at'=>Carbon::now()
         ];
-
-
 
         if($quiz->typ=="kolokwium"){
 
@@ -214,7 +189,6 @@ class QuizController extends Controller
 
                 Powiadomienie::createImportantNotification($grupa->idNauczyciel,"Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." uzyskał ".$allPoints.'/'.$index." punktów z kolokwium");
 
-
                 $array2 = [
                     'idStudent' => (int)$user->id,
                     'idNauczyciel' => $grupa->idNauczyciel,
@@ -222,21 +196,17 @@ class QuizController extends Controller
                     'komentarz' => 'Kolokwium z '.Carbon::now()
                 ];
 
-
                 $nauczyciel = DB::table('uzytkownik')->where('id',$grupa->idNauczyciel)->get()->first();
                 Punkty::create($array2);
                 Powiadomienie::createNotification($user->id,"Uzytkownik ". $nauczyciel->imie." ". $nauczyciel->nazwisko." przyznał Ci punkty!:".$allPoints."pkt za kolokwium!");
             }
-
         }
-        
         $wynik = DB::table('wynik')->where('idQuiz', $id)->where('idUzytkownik', Auth::user()->id)->first();
         if($wynik != null){
             DB::table('wynik')->where('idQuiz', $id)->where('idUzytkownik', Auth::user()->id)->update(['wynik' => $results['wynik'], 'updated_at' => Carbon::now()]);
         }else{
             Wynik::create($results);
         }
-        
         return view ('quizy.odpowiedzi', ['pytania'=>$pytania,'wszystkiePunkty'=>$iloscPytan, 'quiz'=>$quiz, 'id'=>$id,'zdobytePunkty' => $allPoints]);
     }
 
@@ -254,13 +224,9 @@ class QuizController extends Controller
 
     public function create()
     {
-        //wyswitla rzeczy zwiazane z konkretnym tematem o id $id
-
         $tematy=Temat::get();
-
         foreach ($tematy as $temat)
         {
-            //czy temat ma quiz
             $quizTemat = DB::table('quiz')
                 ->where('idTemat', $temat->id)
                 ->value('id');
@@ -270,22 +236,15 @@ class QuizController extends Controller
                 $temat->maQuiz = false;
             }
         }
-
-
         return view ('quizy.create')->with('tematy', $tematy);
     }
 
     public function edit($id)
     {
-        //wyswitla rzeczy zwiazane z konkretnym tematem o id $id
-
-
         $quiz = Quiz::find($id);
-
         if($quiz==null){
             return redirect()->back()->with('error', trans('Nie ma takiego quizu'));
         }
-
         $pytania = Pytanie::get()->where('idQuiz', $id);
 
         $wyklad = DB::table('wyklad')->where('idTemat',$quiz->idTemat)->get()->first();
@@ -313,8 +272,6 @@ class QuizController extends Controller
             $quiz->zadanie="empty";
         }
 
-
-
         $index=0;
         foreach ($pytania as $pytanie){
            $index++;
@@ -327,7 +284,6 @@ class QuizController extends Controller
 
         foreach ($tematy as $temat)
         {
-            //czy temat ma quiz
             $quizTemat = DB::table('quiz')
                 ->where('idTemat', $temat->id)
                 ->value('id');
@@ -338,19 +294,14 @@ class QuizController extends Controller
             }
         }
 
-
-
         $nazwaTematu = DB::table('temat')->where('id',$quiz->idTemat)->value('nazwa');
-
 
         return view ('quizy.edit', ['nazwaTematu'=>$nazwaTematu,'tematy'=>$tematy, 'pytania'=>$pytania,'ilosc'=>$iloscPytan, 'quiz'=>$quiz, 'id'=>$id,'typ' => $quiz->typ]);
     }
 
     public function confirm(Request $request)
     {
-
         $request->input('mnoznik');
-
 
         $error=false;
 
@@ -362,7 +313,6 @@ class QuizController extends Controller
 
                 $error=true;
             }
-
         }
 
         if ($error){
@@ -372,10 +322,8 @@ class QuizController extends Controller
 
             $limit = (sizeof($request->all())-6)/5;
 
-
             if($request->input('id')=='new')
             {
-
                 $temat = DB::table('temat')->where('nazwa', $request->input('nazwa-tematu'))->first();
 
                 $array = [
@@ -401,7 +349,6 @@ class QuizController extends Controller
 
                     Pytanie::create($array);
                 }
-
             }else{
                 $pytanie= DB::table('pytanie')->where('idQuiz',$request->input('id'));
                 $pytanie->delete();
@@ -418,7 +365,6 @@ class QuizController extends Controller
                     ]);
 
                 for ($index=1;$index<=$limit;$index++){
-
                     $array = [
                         'idQuiz' => $request->input('id'),
                         'tresc' => $request->input('tresc'.$index),
@@ -428,7 +374,6 @@ class QuizController extends Controller
                         'odpC' => $request->input('odpC'.$index),
                         'created_at' => Carbon::now()
                     ];
-
                     Pytanie::create($array);
                 }
             }
@@ -436,15 +381,12 @@ class QuizController extends Controller
 
             if($request->input('id')=='new')
             {
-
                 return redirect('quizy/'.$quiz->id)->with('success', trans('Quiz został poprawnie załadowany'));
             }
             else{
                 return redirect('quizy/'.$request->input('id'))->with('success', trans('Quiz został poprawnie załadowany'));
             }
-
         }
-
     }
 
 
@@ -462,14 +404,11 @@ class QuizController extends Controller
         $pytanie= DB::table('pytanie')->where('idQuiz',$id);
         $pytanie->delete();
 
-        //wyswitla rzeczy zwiazane z konkretnym tematem o id $id
        if($quiz->delete())
        {
            return redirect('/panel')->with('success', trans('Usnięty został Quiz'));
-
        }else{
            return redirect('/panel')->with('error', trans('Coś poszło źle'));
        }
-
     }
 }

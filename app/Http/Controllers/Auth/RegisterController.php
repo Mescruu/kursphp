@@ -63,9 +63,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $tematy = Temat::orderBy('id','desc')->get(); //pobiera z bazy posortowane po id malejąco
+        $tematy = Temat::orderBy('id','desc')->get();
         session(['listaTematow' => $tematy]);
-
 
         return User::create([
             'imie' => $data['name'],

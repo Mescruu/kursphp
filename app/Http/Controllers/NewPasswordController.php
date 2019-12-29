@@ -6,7 +6,6 @@ use App\Mail\SendResetEmail;
 use App\Temat;
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -18,7 +17,7 @@ class NewPasswordController extends Controller
 {
     public function validatePasswordRequest (Request $request){
 
-            Auth::logout();
+        Auth::logout();
 
         $user = DB::table('uzytkownik')->where('email', '=', $request->email)->first();
 
@@ -27,7 +26,7 @@ class NewPasswordController extends Controller
             return redirect()->back()->withErrors(['email' => trans('Uzytkownik o takim mailu nie istnieje.')]);
         }
 
-//Tworzenie tokenu resetowania hasła
+        //Tworzenie tokenu resetowania hasła
         DB::table('password_resets')->insert([
             'email' => $request->email,
             'token' => str_random(60),
@@ -35,8 +34,7 @@ class NewPasswordController extends Controller
         ]);
 
         //pobranie tokenu potrzebnego do utworzenia nowego hasła.
-            $tokenData = DB::table('password_resets')
-            ->where('email', $request->email)->first();
+          $tokenData = DB::table('password_resets')->where('email', $request->email)->first();
 
         if ($this->sendResetEmail($request->email, $tokenData->token)) {
             //Jezeli się uda:
@@ -66,7 +64,6 @@ class NewPasswordController extends Controller
     }
     public function resetPassword(Request $request)
     {
-
         //Wyswietlany błąd.
         $messages = [
             'exists' => 'Ten :attribute - nie zgadza się.',
@@ -81,63 +78,54 @@ class NewPasswordController extends Controller
             'password' => 'required|min:6|confirmed'
         ],$messages);
 
-
-
         //Sprawdzenie czy dane są poprawne.
-
         if ($validator->fails()) {
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
         }
 
-
         $password = $request->password;
-// Sprawdzenie tokena
-        $tokenData = DB::table('password_resets')
-            ->where('token', $request->token)->first();
+        // Sprawdzenie tokena
+        $tokenData = DB::table('password_resets')->where('token', $request->token)->first();
 
 
-// Redirect the user back to the password reset request form if the token is invalid
-        if (!$tokenData) return view('auth.passwords.email');
+    // Przekierowuje użytkownika z powrotem do formularza żądania resetowania hasła, jeśli token jest nieprawidłowy
+        if (!$tokenData){
+            return view('auth.passwords.email');
+        }
 
         $user = User::where('email', $tokenData->email)->first();
-// Redirect the user back if the email is invalid
-        if (!$user) return redirect()->back()->withErrors(['email' => 'Email not found']);
-//Hash and update the new password
+// Przekierowuje użytkownika z powrotem, jeśli adres e-mail jest nieprawidłowy
+       if (!$user){
+           return redirect()->back()->withErrors(['email' => 'Nie ma takiego maila w bazie danych!']);
+       }
         $user->haslo = \Hash::make($password);
-        $user->update(); //or $user->save();
+        $user->update();
 
-        //login the user immediately they change password successfully
+        //logowanie uzytkownika
         Auth::login($user);
 
-        $tematy = Temat::orderBy('id','desc')->get(); //pobiera z bazy posortowane po id malejąco
+        $tematy = Temat::orderBy('id','desc')->get();
         session(['listaTematow' => $tematy]);
 
-
-        //Delete the token
-        DB::table('password_resets')->where('email', $user->email)
-            ->delete();
+        //Usuwa token
+        DB::table('password_resets')->where('email', $user->email)->delete();
 
         //Jezeli się udało
         if ($this->sendSuccessEmail($tokenData->email)) {
             return view('pages.home')->with('status', trans('Udało się! Zapisz swoje nowe hasło.'));
         } else {
-
             if(!Auth::guest()){
 
                 return view('pages.home')->with('status', trans('Udało się! Zapisz swoje nowe hasło.'));
             }
-
             return redirect()->back()->withErrors(['email' => trans('Coś poszło nie tak. Spróbuj ponownie za chwilę.')]);
         }
 
     }
     private function sendSuccessEmail($email)
     {
-
             Mail::to($email)->send(new SendResetEmail('Resetowanie hasła!', 'Twoje hasło zostało ustawione','Uzytkowniku'));
-
     }
-
 }

@@ -46,7 +46,4 @@ class SendResetEmail extends Mailable
         return $this->from('kursphp@interaktywnie.com')
             ->view('mail.resetPassword')->subject($e_subject)->with($data);
     }
-
-
-
 }

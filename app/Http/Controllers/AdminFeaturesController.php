@@ -28,7 +28,6 @@ class AdminFeaturesController extends Controller {
     }
 
     public function panel() {
-        //jezeli uzytkownik nie ma typu admin, wtedy zostaje przekierowany na adres profile
 
             $studenci = DB::table('uzytkownik')->where('typ', 'student')->orderBy('nazwisko', 'asc')->get();
             $nauczyciele = DB::table('uzytkownik')->where('typ', 'nauczyciel')->get();
@@ -87,8 +86,6 @@ class AdminFeaturesController extends Controller {
                 'zadanie' => 0,
                 'wyklad' => 0
             ];
-
-
             foreach($tematy as $temat){
                 $nazwyGrup = [];
                 $grupy = DB::table('temat')
@@ -238,7 +235,6 @@ class AdminFeaturesController extends Controller {
             }
             
             $grupa = Grupa::find($id);
-            //$grupaNazwa = $grupa->nazwa;
             $grupa->delete();
 
                 return redirect('/panel/')->with('success', 'Udało się usunąć grupę '.$grupaNazwa.'.');
@@ -288,7 +284,7 @@ class AdminFeaturesController extends Controller {
         return redirect()->back()->with('success', trans('Udało się edytować grupę.'));
 
     }
-    public function Groups(Request $request) {//sposób na przerzucenie zmiennej:
+    public function Groups(Request $request) {
 
         if(!Gate::allows('admin-only', Auth::user())){
             return redirect()->back()->with('error',  trans('Brak dostępu!'));
@@ -344,7 +340,7 @@ class AdminFeaturesController extends Controller {
     }
 
 
-    public function Student() {//sposób na przerzucenie zmiennej:
+    public function Student() {
 
         if(!Gate::allows('admin-only', Auth::user())){
             return redirect()->back()->with('error',  trans('Brak dostępu!'));
@@ -360,10 +356,8 @@ class AdminFeaturesController extends Controller {
 
 
     public function StudentFile()
-    { //dodawanie studentow z pliku csv
-
+    {
         $grupy = DB::table('grupa')->get();
-
         return view('pages.admin.dodajstudentazpliku')->with('grupy', $grupy);
     }
 
@@ -391,8 +385,6 @@ class AdminFeaturesController extends Controller {
         }
 
 
-        //pobranie grupy z nazwą
-
         $file = $request->file('file');
 
 
@@ -408,7 +400,7 @@ class AdminFeaturesController extends Controller {
             // Sprwadzenie rozszerzenia.
             $valid_extension = array("csv");
 
-            // Maksymalny rozmiar pliku:
+            // Ustalenie maksymalnego rozmiaru pliku:
             $maxFileSize = 2097152;
 
             // Sprawdzenie czy rozszerzenie się zgadza:
@@ -443,9 +435,8 @@ class AdminFeaturesController extends Controller {
                             $group = DB::table('grupa')->where('nazwa',$goupname)->get()->first();
                             if($group===null) {
                                 return redirect()->back()->with('error', trans('W bazie nie ma grupy o nazwie: ' . $goupname));
-                                }
-
                             }
+                        }
                         if($i <= 3){
                             $i++;
                             continue;
@@ -462,20 +453,14 @@ class AdminFeaturesController extends Controller {
                     // Wrzucenie linijek kodu do bazy danych
                     foreach($importData_arr as $importData){
 
-
                         $user = DB::select('SELECT * FROM uzytkownik WHERE nrAlbumu="'.$importData[3].'"');
-
 
                         if($user!=null){
                             return redirect()->back()->with('error', trans('W bazie znajduje się użytkownik o numerze albumu: '.$importData[3]));
-
                          }else{
-
-
                             $nazwa_uzytkownika = explode(" ", $importData[1]);
                             if(isset($nazwa_uzytkownika[2])){
                                 $imie=$nazwa_uzytkownika[1]." ".$nazwa_uzytkownika[2];
-
                             }
                             DB::table('uzytkownik')->insert(
                                 ['imie' => $imie,
@@ -487,28 +472,17 @@ class AdminFeaturesController extends Controller {
                                     'created_at' => Carbon::now()]
                             );
                         }
-
-
                     }
-
                     return redirect()->back()->with('success', trans('Użytkownicy zostali dodani do grupy: '.$group->nazwa.'!'));
                 }else{
                     return redirect()->back()->with('error', trans('Plik jest za duży! Maksymalny rozmiar to 2MB'));
                 }
-
             }else{
                 return redirect()->back()->with('error', trans('zle rozszerzenie pliku'));
             }
-
-
         }else{
-
             return redirect()->back()->with('error', trans('Plik nie jest w formacie UTF-8 - mogą wystąpić błędy z wprowadzonymi danymi'));
-
         }
-
-        // Redirect back
-        return redirect()->back()->with('error', trans('cos poszlo nie tak'));
     }
 
 
@@ -516,8 +490,7 @@ class AdminFeaturesController extends Controller {
     function csvToArray($filename = '', $delimiter = ';')
     {
         if (!file_exists($filename) || !is_readable($filename))
-            return false;
-
+        return false;
         $header = null;
         $data = array();
         if (($handle = fopen($filename, 'r')) !== false)
@@ -531,7 +504,6 @@ class AdminFeaturesController extends Controller {
             }
             fclose($handle);
         }
-
         return $data;
     }
 
@@ -549,7 +521,6 @@ class AdminFeaturesController extends Controller {
     public function EditUser($id) {
         $user = DB::table('uzytkownik')->where('id', $id)->first();
         $grupy = DB::table('grupa')->get();
-
         $nazwaGrupy = DB::table('grupa')->where('id', $user->idGrupa)->value('nazwa');
         $punkty = Punkty::where('idStudent', $id)->orderBy('created_at', 'desc')->get();
         $iloscPunktow = 0;
@@ -574,23 +545,19 @@ class AdminFeaturesController extends Controller {
 
     public function AddPoints($id) {
         $user = User::find($id);
-
         $data = array(
             'user' => $user,
             'rozwiazanie' => "empty"
         );
-
         return view('pages.admin.addpoints')->with($data);
     }
 
     public function rateAnAnswer($id, $answerID) {
         $user = User::find($id);
-
         $data = array(
             'user' => $user,
             'rozwiazanie' => $answerID
         );
-
         return view('pages.admin.addpoints')->with($data);
     }
 
@@ -605,13 +572,11 @@ class AdminFeaturesController extends Controller {
     }
     
     public function removeUser($id){
-        
         if (Auth::user()->typ == \App\User::$admin) {
-        
             if($powiadomienia = DB::table('powiadomienie')->where('idUzytkownik', $id)){
                 $powiadomienia->delete();
             }
-            
+
             if($punkty = DB::table('punkty')->where('idStudent', $id)){
                 $punkty->delete();
             }
@@ -626,7 +591,7 @@ class AdminFeaturesController extends Controller {
             
             $imie = '';
             $nazwisko = '';
-            
+
             if($uzytkownik = User::find($id)){
                 $imie = $uzytkownik->imie;
                 $nazwisko = $uzytkownik->nazwisko;

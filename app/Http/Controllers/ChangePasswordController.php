@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ChangePasswordController extends Controller
@@ -20,15 +17,14 @@ class ChangePasswordController extends Controller
 
 
         if (!(\Hash::check(request('current-password'), Auth::user()->haslo))) {
-            // The passwords matches
+            // hasła nie są takie same
             return redirect()->back()->with("error","Aktualne hasło nie zgadza się z Twoim obecnym hasłem!");
         }
 
         if(strcmp(request('current-password'), request('new-password')) == 0){
-            //Current password and new password are same
+            //hasła są takie same
             return redirect()->back()->with("error","Nowe hasło nie może być takie samo jak obecne!");
         }
-
 
         //Wyswietlany błąd.
         $messages = [
@@ -51,16 +47,11 @@ class ChangePasswordController extends Controller
                 ->withInput();
         }
 
-
         //Change Password
         $user = Auth::user();
         $user->haslo = bcrypt(request('new-password'));
         $user->save();
 
-
-
-
         return redirect()->back()->with("success","Password changed successfully !");
-
     }
 }

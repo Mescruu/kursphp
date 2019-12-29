@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Powiadomienie;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class PowiadomieniaController extends Controller
 {
