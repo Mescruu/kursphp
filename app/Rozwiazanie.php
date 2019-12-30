@@ -18,5 +18,4 @@ class Rozwiazanie extends Model
         return $this->belongsTo('App\User','idUzytkownik');
     }
     
-    //public function uzytkownik(){}
 }

@@ -102,7 +102,7 @@
 
                         @if($zadanie->url!="empty")
                             <h5 class="text-center w-100">
-                                Twoj plik
+                                Twój plik
                             </h5>
                             <div class="text-center  w-100 m-5">
                                 <a class="mx-auto p-5 zip" href="{{$zadanie->id}}/{{Auth::user()->id}}/link"></a>
@@ -146,7 +146,7 @@
 
                                 </div>
                                 <div id="showfile" class="col-12 d-flex justify-content-center">
-                                    <div id="name">brak pliku</div>
+                                    <div id="name">Brak pliku</div>
                                     <div id="size"></div>
                                 </div>
                             </form>

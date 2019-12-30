@@ -23,13 +23,13 @@
                 <div class="card-header form-navbar">
                     <div class="row">
                         <div class="col-3 mb-4">
-                            <label for="numberInput" class="control-label">ilość pytań</label>
+                            <label for="numberInput" class="control-label">Liczba pytań</label>
 
                             <input type="number" min="1" max="20" step="1" id="numberInput" class="form-control "  placeholder="1"
                                    oninput="setInputs(this.value)"  onclick="warning()" onchange="setInputs(this.value)">
                         </div>
                         <div class="col-3 mb-4">
-                            <label for="typ" class="control-label">typ testu</label>
+                            <label for="typ" class="control-label">Typ testu</label>
 
                             <select name="typ" class="form-control"   onchange="checkWeight(this.value)" required>
                                 <option>quiz</option>
@@ -51,7 +51,7 @@
                         </div>
 
                         <div class="col-1 mb-4 d-none" id="weight">
-                            <label for="mnoznik" class="control-label">Mnoznik</label>
+                            <label for="mnoznik" class="control-label">Mnożnik</label>
                             <input type="number" min="1" name="mnoznik" class="form-control"  value="1">
                         </div>
 

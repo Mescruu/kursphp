@@ -136,7 +136,7 @@
 
 
 
-                    <div class="view w-100"> <!--kontener/pojemnik calej siatki-->
+                    <div class="view w-100">
 
 
                         <div id="formatted">
@@ -152,7 +152,7 @@
             </div>
         </section>
         <section class="window-section">
-            <div class="container-fluid"> <!--kontener/pojemnik calej siatki-->
+            <div class="container-fluid">
 
                 <div id="opcje">
                     <div id="frame">

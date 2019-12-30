@@ -67,25 +67,4 @@ class PagesController extends Controller
             return view('pages.profil')->with($data);
         }
     }
-
-
-    public function punkty(){
-        $punkty = DB::table('punkty')->where('idStudent', auth()->user()->id)->orderByRaw('created_at DESC')->get();
-        $nauczyciele = array();
-        $iterations = 0;
-        foreach($punkty as $wpis){
-            $temp = DB::table('uzytkownik')->where('id', $wpis->idNauczyciel)->first();
-            $nauczyciel = $temp->imie . " " . $temp->nazwisko;
-            array_push($nauczyciele, $nauczyciel);
-            $iterations++;
-        }
-        $data = array(
-            'iterations' => $iterations,
-            'ilosc' => $punkty->pluck('ilosc')->toArray(),
-            'komentarz' => $punkty->pluck('komentarz')->toArray(),
-            'nauczyciel' => $nauczyciele,
-            'data' => $punkty->pluck('created_at')->toArray()
-        );
-        return view('pages.punkty')->with($data);
-    }
 }

@@ -13,7 +13,6 @@ class User extends Authenticatable
     public static $admin = 'nauczyciel';
     public static $user = 'student';
 
-    //nazwa tabeli uzytkownik. przez dodanie do zmiennej $table "laravel"(Auth) wie, ze jest to tabela uzytkownika
     protected $table = 'uzytkownik';
 
 
@@ -26,7 +25,6 @@ class User extends Authenticatable
         'imie','email','nazwisko','nrAlbumu', 'idGrupa', 'haslo','typ',
     ];
 
-//    protected $primaryKey = 'id'; gdyby chciec ustawic primary key
 
     /**
      * The attributes that should be hidden for arrays.
@@ -48,14 +46,7 @@ class User extends Authenticatable
         $this->attributes['haslo'] = bcrypt($password);
     }
 
-
-
-
-
-    public  function  post(){
-        return $this->hasMany('App\Post'); //User ma wiele postów., ale post ma jednego usera //Relacja jeden do wielu.
-    }
-    //Nowe połączenia
+    //Relacje
     public  function  grupa(){
         return $this->belongsTo('App\Grupa','idGrupa');
     }

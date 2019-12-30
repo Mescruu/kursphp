@@ -1,7 +1,5 @@
-
 let input = document.getElementById("startValue").value;
 let clickCount = 0;
-// alert(input);
 checkWeight(document.getElementById("typ").value);
 
 function checkWeight(newVal) {

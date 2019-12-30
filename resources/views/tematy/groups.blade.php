@@ -40,8 +40,6 @@
                         
                         @foreach($grupy as $grupa)
                         <div class="form-group">
-                            <!--<label for="{{$grupa->id}}" class="col-md-4 control-label"><input type="checkbox" id="{{$grupa->id}}" name="{{$grupa->id}}" {{$grupa->checked}}>{{$grupa->nazwa}}</label>-->
-
                             <label class="container">
                                 <input type="hidden" name="{{$grupa->id}}" value="0" />
                                 <input type="checkbox" name="{{$grupa->id}}" value="1" {{$grupa->checked}}><span class="checkmark"></span><span class="text">{{$grupa->nazwa}}</span>

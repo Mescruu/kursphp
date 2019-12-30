@@ -1,4 +1,3 @@
-// JS function to convert BBCode and HTML code - http;//coursesweb.net/javascript/
 var BBCodeHTML = function() {
   var me = this;            // stores the object instance
   var token_match = /{[A-Z_]+[0-9]*}/ig;
@@ -153,20 +152,7 @@ var BBCodeHTML = function() {
   }
 
   // adds BBCodes and their HTML
-//  me.addBBCode('[s]{TEXT}[/s]', '<span style="text-decoration:line-through;">{TEXT}</span>');
-//  me.addBBCode('[url={URL}]{TEXT}[/url]', '<a href="{URL}" title="link" target="_blank">{TEXT}</a>');
-//  me.addBBCode('[url]{URL}[/url]', '<a href="{URL}" title="link" target="_blank">{URL}</a>');
-//  me.addBBCode('[url={LINK}]{TEXT}[/url]', '<a href="{LINK}" title="link" target="_blank">{TEXT}</a>');
-//  me.addBBCode('[url]{LINK}[/url]', '<a href="{LINK}" title="link" target="_blank">{LINK}</a>');
-//  me.addBBCode('[img={URL} width={NUMBER1} height={NUMBER2}]{TEXT}[/img]', '<img src="{URL}" width="{NUMBER1}" height="{NUMBER2}" alt="{TEXT}" />');
-//  me.addBBCode('[img]{URL}[/img]', '<img src="{URL}" alt="{URL}" />');
-//  me.addBBCode('[img={LINK} width={NUMBER1} height={NUMBER2}]{TEXT}[/img]', '<img src="{LINK}" width="{NUMBER1}" height="{NUMBER2}" alt="{TEXT}" />');
-//  me.addBBCode('[highlight={COLOR}]{TEXT}[/highlight]', '<span style="background-color:{COLOR}">{TEXT}</span>');
-//  me.addBBCode('[quote="{TEXT1}"]{TEXT2}[/quote]', '<div class="quote"><cite>{TEXT1}</cite><p>{TEXT2}</p></div>');
-//  me.addBBCode('[quote]{TEXT}[/quote]', '<cite>{TEXT}</cite>');
-//  me.addBBCode('[blockquote]{TEXT}[/blockquote]', '<blockquote>{TEXT}</blockquote>');
-  
-  //nasze
+
   me.addBBCode('[b]{TEXT}[/b]', '<span class="bb-b">{TEXT}</span>');
   me.addBBCode('[i]{TEXT}[/i]', '<span class="bb-i">{TEXT}</span>');
   me.addBBCode('[u]{TEXT}[/u]', '<span class="bb-u">{TEXT}</span>');

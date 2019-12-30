@@ -34,8 +34,6 @@ $('#editform').submit(function() {
 
 $(document).on('change', ".imageUpload", function() { //Wrzucenie nowego obrazka
     var file_data = $('#imageUpload').prop('files')[0];
-//    var form_data_tmp = new FormData();
-//    var form_data = formDataToJSON(form_data_tmp);
     var form_data = new FormData();
     form_data.append('imageUpload', file_data);
     $.ajax({
@@ -220,7 +218,6 @@ function escapeHtml(text) {
             .replace(/>/g, "&gt")
             .replace(/"/g, "&quot")
             .replace(/'/g, "&#039")
-            //.replace(/ /g, '\u00a0')
             .replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
             .replace(/\n/g, '<br>');
 }
