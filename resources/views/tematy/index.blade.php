@@ -32,8 +32,6 @@
                                 <div class="card">
                                     <div class="card-header" id="heading{{$temat->id}}">
                                             <a class="btn btn-info float-left" href="/tematy/{{$temat->id}}">{{$temat->nazwa}}</a>
-                                        PHP
-                                        P
                                         <span class="text-center px-4  w-auto short-des">
                                             {{$temat->opis}}
                                         </span>
