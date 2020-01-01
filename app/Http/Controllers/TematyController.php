@@ -207,10 +207,10 @@ class TematyController extends Controller {
 
                 Powiadomienie::createNotificationWhenEdit($temat->id, "Uzytkownik ". Auth::user()->imie." ". Auth::user()->nazwisko." usunął temat ".$temat->nazwa);
 
-                $zadanie = Zadanie::find($id);
+                $zadanie = DB::table('zadanie')->where('idTemat', $id)->first();
                 if (!is_null($zadanie)) {
 
-                    $rozwiazania = DB::table('rozwiazanie')->where('idZadanie', $zadanie->id);
+                    $rozwiazania = DB::table('rozwiazanie')->where('idZadanie', $zadanie->id)->first();
 
                     if (!is_null($rozwiazania)) {
                         $rozwiazania->delete();

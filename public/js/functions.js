@@ -218,6 +218,7 @@ function escapeHtml(text) {
             .replace(/>/g, "&gt")
             .replace(/"/g, "&quot")
             .replace(/'/g, "&#039")
+            .replace(/;/g, "&#59")
             .replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
             .replace(/\n/g, '<br>');
 }
