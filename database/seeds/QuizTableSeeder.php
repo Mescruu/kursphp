@@ -12,26 +12,5 @@ class QuizTableSeeder extends Seeder
             'typ' => 'quiz',
             'mnoznik' => 1
         ]);
-        
-        DB::table('quiz')->insert([
-            'id' => 2,
-            'idTemat' => 2,
-            'typ' => 'quiz',
-            'mnoznik' => 1
-        ]);
-        
-        DB::table('quiz')->insert([
-            'id' => 3,
-            'idTemat' => 2,
-            'typ' => 'quiz',
-            'mnoznik' => 1
-        ]);
-        
-        DB::table('quiz')->insert([
-            'id' => 4,
-            'idTemat' => 3,
-            'typ' => 'quiz',
-            'mnoznik' => 1
-        ]);
     }
 }

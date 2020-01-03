@@ -31,8 +31,6 @@
                                 <div class="card">
                                     <div class="card-header" id="heading<?php echo e($temat->id); ?>">
                                             <a class="btn btn-info float-left" href="/tematy/<?php echo e($temat->id); ?>"><?php echo e($temat->nazwa); ?></a>
-                                        PHP
-                                        P
                                         <span class="text-center px-4  w-auto short-des">
                                             <?php echo e($temat->opis); ?>
 
