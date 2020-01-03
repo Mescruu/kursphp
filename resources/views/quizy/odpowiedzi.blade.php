@@ -15,7 +15,7 @@
 
         </h2>
     </div>
-    <div class="col-md-4 col-sm-8 col-xs-2">
+    <div class="col-md-6 col-sm-8 col-xs-2">
 
         @if(Auth::user()->typ==\App\User::$admin)
             <div class="btn-diagonal btn-slanted float-left">
@@ -70,7 +70,7 @@
                                 <div class="card text-dark bg-light mb-3 row-eq-height w-100">
                                     <div class="card-header"><h3>Pytanie {{$pytanie->nr}}.</h3></div>
                                     <div class="card-body">
-                                        <p class="card-text">Treść pytania</p>
+                                        <p class="card-text">{{$pytanie->tresc}}</p>
                                     </div>
                                 </div>
                             </div>

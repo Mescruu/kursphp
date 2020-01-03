@@ -107,7 +107,7 @@
                                     <div class="card text-dark bg-light mb-3 row-eq-height w-100">
                                         <div class="card-header"><h3>Pytanie {{$pytanie->nr}}.</h3></div>
                                         <div class="card-body">
-                                            <p class="card-text">Treść pytania</p>
+                                            <p class="card-text">{{$pytanie->tresc}}</p>
                                         </div>
                                     </div>
                                 </div>
