@@ -177,7 +177,7 @@ język kodowania działający po stronie klienta.'
         DB::table('pytanie')->insert([
             'id' => 15,
             'idQuiz' => 3,
-            'tresc' => 'Która z funkcji PCRE zwraca tablicę ciągów pasujących do wzorca?',
+            'tresc' => 'Która funkcja PCRE zwraca tablicę ciągów pasujących do wzorca?',
             'odpPoprawna' => 'preg_grep',
             'odpA' => 'preg_filter',
             'odpB' => 'preg_math',
@@ -195,7 +195,7 @@ język kodowania działający po stronie klienta.'
         DB::table('pytanie')->insert([
             'id' => 17,
             'idQuiz' => 3,
-            'tresc' => 'Co umożliwia funkcja FILTER_SANITIZE_NUMBER_INT',
+            'tresc' => 'Co umożliwia funkcja FILTER_SANITIZE_NUMBER_INT?',
             'odpPoprawna' => 'Usuwa wszystkie znaki poza cyframi oraz znakami plus i minus.',
             'odpA' => 'Usuwa wszystkie znaki poza cyframi oraz znakami "*" i "/".',
             'odpB' => 'Usuwa wszystkie znaki poza cyframi',
@@ -214,10 +214,10 @@ język kodowania działający po stronie klienta.'
             'id' => 19,
             'idQuiz' => 4,
             'tresc' => 'Czym różni się require_once() od require()?',
-            'odpPoprawna' => 'Identyczne działanie jak require(), poza tym, że PHP sprawdzi czy żądany plik nie został już dołączony i jeśli tak to nie dołączy go ponownie',
+            'odpPoprawna' => 'Identyczne działanie jak require(), poza tym, że PHP sprawdzi, czy żądany plik nie został już dołączony i jeśli tak to nie dołączy go ponownie',
             'odpA' => 'Niczym. Identyczne działanie jak require',
-            'odpB' => 'Identyczne działanie jak require(), poza tym, że PHP sprawdzi czy żądany plik nie został już dołączony i jeśli tak to odświeży plik - załaduje go ponownie',
-            'odpC' => 'Identyczne działanie jak require(), poza tym, że PHP sprawdzi czy żądany plik zostanie dołączony tylko raz.'
+            'odpB' => 'Identyczne działanie jak require(), poza tym, że PHP sprawdzi, czy żądany plik nie został już dołączony i jeśli tak to odświeży plik - załaduje go ponownie',
+            'odpC' => 'Identyczne działanie jak require(), poza tym, że PHP sprawdzi, czy żądany plik zostanie dołączony tylko raz.'
         ]);
 
         DB::table('pytanie')->insert([

@@ -9,12 +9,12 @@
 
 @section('undernav')
 
-    <div class="col-md-4 col-sm-4 col-xs-3 float-left">
+    <div class="col-md-4 col-sm-2 col-xs-3 float-left">
         <h2 >
             <a href="/quizy/{{$quiz->id}}" >Quiz</a>
         </h2>
     </div>
-    <div class="col-md-8 col-sm-8 col-xs-2">
+    <div class="col-md-8 col-sm-10 col-xs-2">
 
         @if(Auth::user()->typ==\App\User::$admin)
             <div class="btn-diagonal btn-slanted float-left">

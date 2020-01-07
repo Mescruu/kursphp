@@ -202,9 +202,24 @@ class ZadaniaController extends Controller
         $zadanie = Zadanie::find($id);
         DB::table('temat')->where('id',$zadanie->idTemat)->first();
 
-            $this->validate($request, [
-                'file' => 'required|mimes:zip'
-            ]);
+
+        //Wyswietlany błąd.
+        $messages = [
+            'mimes' => 'Plik musi być w formacie zip.',
+            'required' => 'Pole jest wymagane.'
+        ];
+
+        //Sprawdzanie danych wejsiowych
+        $validator = Validator::make(request()->all(), [
+            'file' => 'required|mimes:zip'
+        ],$messages);
+
+        //Sprawdzenie czy dane są poprawne.
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
             if ($request->file('file')->isValid()) {
 
