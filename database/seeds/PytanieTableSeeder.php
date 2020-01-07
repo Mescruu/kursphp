@@ -10,10 +10,14 @@ class PytanieTableSeeder extends Seeder
             'id' => 1,
             'idQuiz' => 1,
             'tresc' => 'Co to jest PHP?',
-            'odpPoprawna' => 'PHP ("PHP: Hypertext Preprocesor") jest to język skryptowy działający po stronie serwera',
-            'odpA' => 'PHP ("PHP: Hypertext Postprocesor") jest to język skryptowy działający po stronie serwera',
-            'odpB' => 'PHP ("PHP: Hypertext Preprocesor") jest to język skryptowy działający po stronie klienta',
-            'odpC' => 'PHP ("PHP: Hypertext Preprocesor") jest to język kodowania działający po stronie klienta'
+            'odpPoprawna' => 'PHP ("PHP: Hypertext Preprocesor") to
+język skryptowy działający po stronie serwera.',
+            'odpA' => 'PHP ("PHP: Hypertext Postprocesor") to
+język skryptowy działający po stronie serwera.',
+            'odpB' => 'PHP ("PHP: Hypertext Preprocesor") to
+język skryptowy działający po stronie klienta.',
+            'odpC' => 'PHP ("PHP: Hypertext Preprocesor") to
+język kodowania działający po stronie klienta.'
         ]);
 
         DB::table('pytanie')->insert([
@@ -162,7 +166,7 @@ class PytanieTableSeeder extends Seeder
         DB::table('pytanie')->insert([
             'id' => 14,
             'idQuiz' => 2,
-            'tresc' => 'Która z podanych funkcji pozwoli na zamiane wszystkich znalezionych fragmentów tekstu "tekst" na "nowy_tekst" w ciagu "ciąg"?',
+            'tresc' => 'Która z podanych funkcji pozwoli na zamianę wszystkich znalezionych fragmentów tekstu "tekst" na "nowy_tekst" w ciagu "ciąg"?',
             'odpPoprawna' => 'string str_replace(string tekst, string nowy_tekst, string ciag);',
             'odpA' => 'string strreplace(string tekst, string nowy_tekst, string ciag);',
             'odpB' => 'string streplace(string tekst, string nowy_tekst, string ciag);',
@@ -210,10 +214,10 @@ class PytanieTableSeeder extends Seeder
             'id' => 19,
             'idQuiz' => 4,
             'tresc' => 'Czym różni się require_once() od require()?',
-            'odpPoprawna' => 'Identyczne działanie jak require(), poza tym że PHP sprawdzi, czy żądany plik nie został już dołączony i jeśli tak to nie dołączy go ponownie',
+            'odpPoprawna' => 'Identyczne działanie jak require(), poza tym, że PHP sprawdzi, czy żądany plik nie został już dołączony i jeśli tak to nie dołączy go ponownie',
             'odpA' => 'Niczym. Identyczne działanie jak require',
-            'odpB' => 'Identyczne działanie jak require(), poza tym że PHP sprawdzi, czy żądany plik nie został już dołączony i jeśli tak to odświeży plik - załaduje go ponownie',
-            'odpC' => 'Identyczne działanie jak require(), poza tym że PHP sprawdzi, czy żądany plik zostanie dołączony tylko raz.'
+            'odpB' => 'Identyczne działanie jak require(), poza tym, że PHP sprawdzi, czy żądany plik nie został już dołączony i jeśli tak to odświeży plik - załaduje go ponownie',
+            'odpC' => 'Identyczne działanie jak require(), poza tym, że PHP sprawdzi, czy żądany plik zostanie dołączony tylko raz.'
         ]);
 
         DB::table('pytanie')->insert([
