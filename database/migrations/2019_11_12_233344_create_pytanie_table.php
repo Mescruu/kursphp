@@ -16,7 +16,7 @@ class CreatePytanieTable extends Migration
         Schema::create('pytanie', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('idQuiz');
-            $table->string('tresc');
+            $table->text('tresc');
             $table->string('odpPoprawna');
             $table->string('odpA');
             $table->string('odpB');

@@ -17,7 +17,7 @@ class CreateZadanieTable extends Migration
             $table->increments('id');
             $table->integer('idTemat');
             $table->string('nazwa');
-            $table->string('tresc');
+            $table->text('tresc');
             $table->timestamps();
         });
     }

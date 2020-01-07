@@ -35,10 +35,10 @@ class UzytkownikTableSeeder extends Seeder
         
         DB::table('uzytkownik')->insert([
             'id' => 3,
-            'imie' => 'Kasia',
-            'nazwisko' => 'Mitrus',
-            'nrAlbumu' => 86370,
-            'email' => 'mitruskasia@gmail.com',
+            'imie' => 'Maciej',
+            'nazwisko' => 'Domagała',
+            'nrAlbumu' => 86371,
+            'email' => 'domagalam@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 1,
             'typ' => 'student'
@@ -60,7 +60,7 @@ class UzytkownikTableSeeder extends Seeder
             'imie' => 'Dawid',
             'nazwisko' => 'Pasieka',
             'nrAlbumu' => 86449,
-            'email' => 'fizykajestglupia@gmail.com',
+            'email' => 'pasieka.d@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 1,
             'typ' => 'student'
@@ -93,7 +93,7 @@ class UzytkownikTableSeeder extends Seeder
             'imie' => 'Agnieszka',
             'nazwisko' => 'Kula',
             'nrAlbumu' => 86402,
-            'email' => 'kuladajefula@gmail.com',
+            'email' => 'kulaa@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 2,
             'typ' => 'student'
@@ -146,9 +146,9 @@ class UzytkownikTableSeeder extends Seeder
         DB::table('uzytkownik')->insert([
             'id' => 13,
             'imie' => 'Dawid',
-            'nazwisko' => 'Podsiadło',
+            'nazwisko' => 'Nowak',
             'nrAlbumu' => 86192,
-            'email' => 'gumowaryba@gmail.com',
+            'email' => 'd.nowak@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 3,
             'typ' => 'student'

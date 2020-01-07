@@ -10,32 +10,31 @@ class TematTableSeeder extends Seeder
         DB::table('temat')->insert([
             'id' => 1,
             'nazwa' => 'Laboratorium 1',
-            'opis' => 'Wstęp do programowania w języku PHP',
+            'opis' => 'Środowisko NetBeans, wprowadzenie do PHP.',
         ]);
-        Storage::disk('tematy')->put('1/ahtml.txt', '<strong>Lorem ipsum</strong>');
-        Storage::disk('tematy')->put('1/abb.txt', '[b]Lorem ipsum[/b]');
-        Storage::disk('tematy')->put('1/phtml.txt', '<strong>Lorem ipus</strong>');
-        Storage::disk('tematy')->put('1/pbb.txt', '[b]Lorem ipus[/b]');
-        
         
         DB::table('temat')->insert([
             'id' => 2,
             'nazwa' => 'Laboratorium 2',
-            'opis' => 'Pierwsza strona',
+            'opis' => 'Podstawy obsługi formularzy w skryptach PHP.',
         ]);
-        Storage::disk('tematy')->put('2/ahtml.txt', '<em>Lorem ipsum</em>');
-        Storage::disk('tematy')->put('2/abb.txt', '[i]Lorem ipsum[/i]');
-        Storage::disk('tematy')->put('2/phtml.txt', '');
-        Storage::disk('tematy')->put('2/pbb.txt', '');
         
         DB::table('temat')->insert([
             'id' => 3,
             'nazwa' => 'Laboratorium 3',
-            'opis' => 'Pasek nawigacji',
+            'opis' => 'Operacje na plikach.',
         ]);
-        Storage::disk('tematy')->put('3/ahtml.txt', 'Paski nawigacji są bardzo <strong>przydatne</strong>');
-        Storage::disk('tematy')->put('3/abb.txt', 'Paski nawigacji są bardzo [b]przydatne[/b]');
-        Storage::disk('tematy')->put('3/phtml.txt', '');
-        Storage::disk('tematy')->put('3/pbb.txt', '');
+        
+        DB::table('temat')->insert([
+            'id' => 4,
+            'nazwa' => 'Laboratorium 4',
+            'opis' => 'Walidacja formularza, praca z filtrami.',
+        ]);
+        
+        DB::table('temat')->insert([
+            'id' => 5,
+            'nazwa' => 'Laboratorium 5',
+            'opis' => 'Przesyłanie zdjęć na serwer, praca z plikami i katalogami.',
+        ]);
     }
 }
