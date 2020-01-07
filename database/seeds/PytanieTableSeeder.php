@@ -10,14 +10,10 @@ class PytanieTableSeeder extends Seeder
             'id' => 1,
             'idQuiz' => 1,
             'tresc' => 'Co to jest PHP?',
-            'odpPoprawna' => 'PHP ("PHP: Hypertext Preprocesor") jest to
-język skryptowy działający po stronie serwera',
-            'odpA' => 'PHP ("PHP: Hypertext Postprocesor") jest to
-język skryptowy działający po stronie serwera',
-            'odpB' => 'PHP ("PHP: Hypertext Preprocesor") jest to
-język skryptowy działający po stronie klienta',
-            'odpC' => 'PHP ("PHP: Hypertext Preprocesor") jest to
-język kodowania działający po stronie klienta'
+            'odpPoprawna' => 'PHP ("PHP: Hypertext Preprocesor") jest to język skryptowy działający po stronie serwera',
+            'odpA' => 'PHP ("PHP: Hypertext Postprocesor") jest to język skryptowy działający po stronie serwera',
+            'odpB' => 'PHP ("PHP: Hypertext Preprocesor") jest to język skryptowy działający po stronie klienta',
+            'odpC' => 'PHP ("PHP: Hypertext Preprocesor") jest to język kodowania działający po stronie klienta'
         ]);
 
         DB::table('pytanie')->insert([
@@ -69,7 +65,7 @@ język kodowania działający po stronie klienta'
         DB::table('pytanie')->insert([
             'id' => 5,
             'idQuiz' => 1,
-            'tresc' => 'Który operator logiczny, nie występuje w php?',
+            'tresc' => 'Który operator logiczny nie występuje w php?',
             'odpPoprawna' => 'nor',
             'odpA' => 'xor',
             'odpB' => 'or',
@@ -177,7 +173,7 @@ język kodowania działający po stronie klienta'
         DB::table('pytanie')->insert([
             'id' => 15,
             'idQuiz' => 3,
-            'tresc' => 'Która w funkcji PCRE zwraca tablicę ciągów pasujących do wzorca?',
+            'tresc' => 'Która funkcja PCRE zwraca tablicę ciągów pasujących do wzorca?',
             'odpPoprawna' => 'preg_grep',
             'odpA' => 'preg_filter',
             'odpB' => 'preg_math',
@@ -195,15 +191,11 @@ język kodowania działający po stronie klienta'
         DB::table('pytanie')->insert([
             'id' => 17,
             'idQuiz' => 3,
-            'tresc' => 'Co umożliwia funkcja FILTER_SANITIZE_NUMBER_INT',
-            'odpPoprawna' => 'Usuwa wszystkie
-znaki poza cyframi oraz znakami plus i minus.',
-            'odpA' => 'Usuwa wszystkie
-znaki poza cyframi oraz znakami "*" i "/".',
-            'odpB' => 'Usuwa wszystkie
-znaki poza cyframi',
-            'odpC' => 'Usuwa wszystkie
-znaki poza cyframi oraz znakami matematycznymi.'
+            'tresc' => 'Co umożliwia funkcja FILTER_SANITIZE_NUMBER_INT?',
+            'odpPoprawna' => 'Usuwa wszystkie znaki poza cyframi oraz znakami plus i minus.',
+            'odpA' => 'Usuwa wszystkie znaki poza cyframi oraz znakami "*" i "/".',
+            'odpB' => 'Usuwa wszystkie znaki poza cyframi',
+            'odpC' => 'Usuwa wszystkie znaki poza cyframi oraz znakami matematycznymi.'
         ]);
         DB::table('pytanie')->insert([
             'id' => 18,
@@ -218,10 +210,10 @@ znaki poza cyframi oraz znakami matematycznymi.'
             'id' => 19,
             'idQuiz' => 4,
             'tresc' => 'Czym różni się require_once() od require()?',
-            'odpPoprawna' => 'Identyczne działanie jak require(), poza tym, że PHP sprawdzi czy żądany plik nie został już dołączony i jeśli tak to nie dołączy go ponownie',
+            'odpPoprawna' => 'Identyczne działanie jak require(), poza tym że PHP sprawdzi, czy żądany plik nie został już dołączony i jeśli tak to nie dołączy go ponownie',
             'odpA' => 'Niczym. Identyczne działanie jak require',
-            'odpB' => 'Identyczne działanie jak require(), poza tym, że PHP sprawdzi czy żądany plik nie został już dołączony i jeśli tak to odświeży plik - załaduje go ponownie',
-            'odpC' => 'Identyczne działanie jak require(), poza tym, że PHP sprawdzi czy żądany plik zostanie dołączony tylko raz.'
+            'odpB' => 'Identyczne działanie jak require(), poza tym że PHP sprawdzi, czy żądany plik nie został już dołączony i jeśli tak to odświeży plik - załaduje go ponownie',
+            'odpC' => 'Identyczne działanie jak require(), poza tym że PHP sprawdzi, czy żądany plik zostanie dołączony tylko raz.'
         ]);
 
         DB::table('pytanie')->insert([
@@ -275,7 +267,7 @@ znaki poza cyframi oraz znakami matematycznymi.'
             'idQuiz' => 5,
             'tresc' => 'Wskaż zdanie prawdziwe na temat klasy typu "final".',
             'odpPoprawna' => 'Jeśli cała klasa jest zdefiniowana jako final, to nie można po niej dziedziczyć.',
-            'odpA' => 'Jeśli cała klasa jest zdefiniowana jako final, to można po niej dziedziczyć ze wszyskich klas.',
+            'odpA' => 'Jeśli cała klasa jest zdefiniowana jako final, to można po niej dziedziczyć ze wszystkich klas.',
             'odpB' => 'Jeśli cała klasa jest zdefiniowana jako final, nie można jej edytować - jest to wersja ostateczna.',
             'odpC' => 'Jeśli cała klasa jest zdefiniowana jako final, nie może dziedziczyć po innej klasie.'
         ]);
@@ -283,8 +275,8 @@ znaki poza cyframi oraz znakami matematycznymi.'
             'id' => 26,
             'idQuiz' => 5,
             'tresc' => 'Czym kończy się deklaracja klasy?',
-            'odpPoprawna' => 'kropką - "."',
-            'odpA' => 'średnikiem - ";"',
+            'odpPoprawna' => 'średnikiem - ";"',
+            'odpA' => 'kropką - "."',
             'odpB' => 'nawiasem kwadratowym - "]"',
             'odpC' => 'nawiasem okrągłym - ")"'
         ]);
