@@ -21,10 +21,6 @@
                                                             Interaktywny kurs programowania w języku PHP został stworzony na potrzeby prowadzenia zajęć z Tworzenia Aplikacji Internetowych na V semestrze kierunku Informatyka.<br>
                                                             Za pomocą zadań dodatkowych i quizów przypisanych do tematów zajęć, możesz sprawdzić swoją wiedzę.<br>
                                                             Aby skorzystać z platformy zaloguj się lub aktywuj konto. Hasło do aktywacji konta podaje prowadzący zajęcia.
-<!--                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam at dignissim diam. Nam consequat efficitur egestas.
-                                                                Curabitur dapibus, mauris eu interdum rhoncus, diam ligula tempus orci, ac semper purus nisi in mi.
-                                                                Nunc vehicula sagittis placerat. Vivamus pharetra pretium porttitor.
-                                                                Nam ornare est id odio interdum ullamcorper eget et risus.-->
                                                         </div>
 
                                                 </div>
