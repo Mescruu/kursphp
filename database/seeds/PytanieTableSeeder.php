@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class PytanieTableSeeder extends Seeder
 {
@@ -17,7 +18,9 @@ język skryptowy działający po stronie serwera.',
             'odpB' => 'PHP ("PHP: Hypertext Preprocesor") to
 język skryptowy działający po stronie klienta.',
             'odpC' => 'PHP ("PHP: Hypertext Preprocesor") to
-język kodowania działający po stronie klienta.'
+język kodowania działający po stronie klienta.',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
         DB::table('pytanie')->insert([
@@ -43,7 +46,9 @@ język kodowania działający po stronie klienta.'
 – Informacyjny: 2xx
 – Powodzenie: 3xx
 – Przekierowanie: 4xx
-– Błąd klienta: 5xx'
+– Błąd klienta: 5xx',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
         DB::table('pytanie')->insert([
@@ -53,7 +58,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'strtolower()',
             'odpA' => 'strtoupper()',
             'odpB' => 'ucfirst()',
-            'odpC' => 'ucwords()'
+            'odpC' => 'ucwords()',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
         DB::table('pytanie')->insert([
@@ -63,7 +70,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'stripslashes()',
             'odpA' => 'strip_tags()',
             'odpB' => 'addslashes()',
-            'odpC' => 'rmslashes()'
+            'odpC' => 'rmslashes()',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
         DB::table('pytanie')->insert([
@@ -73,7 +82,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'nor',
             'odpA' => 'xor',
             'odpB' => 'or',
-            'odpC' => '&&'
+            'odpC' => '&&',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
         DB::table('pytanie')->insert([
@@ -83,7 +94,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => '1nazwazmiennej',
             'odpA' => 'nazwa_zmiennej1',
             'odpB' => 'NazwaZmiennej1',
-            'odpC' => 'nazwazmiennej'
+            'odpC' => 'nazwazmiennej',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
         DB::table('pytanie')->insert([
@@ -93,7 +106,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => '{ komentarz }',
             'odpA' => '//komentarz',
             'odpB' => '/* komentarz  */',
-            'odpC' => '# komentarz'
+            'odpC' => '# komentarz',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
 
@@ -104,7 +119,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'showVar $foo;',
             'odpA' => 'printf("%s\n",  $foo);',
             'odpB' => 'echo $foo;',
-            'odpC' => 'print $foo;'
+            'odpC' => 'print $foo;',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
 
@@ -115,7 +132,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => '$ceny=array("Zeszyt"=>2, "Blok"=>8, "Kredki"=>4);',
             'odpA' => '$ceny=array("Zeszyt"=2, "Blok"=8, "Kredki"=4);',
             'odpB' => '$ceny=table($Zeszyt=>2, $Blok=>8, $Kredki=>4);',
-            'odpC' => '$ceny=table("Zeszyt"=>2, "Blok"=>8, "Kredki"=>4);'
+            'odpC' => '$ceny=table("Zeszyt"=>2, "Blok"=>8, "Kredki"=>4);',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
 
@@ -126,7 +145,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'asort()',
             'odpA' => 'ksort()',
             'odpB' => 'arsort()',
-            'odpC' => 'rsort()'
+            'odpC' => 'rsort()',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
 
@@ -137,7 +158,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'r+',
             'odpA' => 'r',
             'odpB' => 'b',
-            'odpC' => 'q+'
+            'odpC' => 'q+',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
 
@@ -148,7 +171,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'file_exists()',
             'odpA' => 'f_exists()',
             'odpB' => 'if_exists()',
-            'odpC' => 'exists()'
+            'odpC' => 'exists()',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
 
@@ -159,7 +184,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'operator "="',
             'odpA' => 'strcasecmp()',
             'odpB' => 'strcmp',
-            'odpC' => 'operator "=="'
+            'odpC' => 'operator "=="',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
 
@@ -170,7 +197,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'string str_replace(string tekst, string nowy_tekst, string ciag);',
             'odpA' => 'string strreplace(string tekst, string nowy_tekst, string ciag);',
             'odpB' => 'string streplace(string tekst, string nowy_tekst, string ciag);',
-            'odpC' => 'string string_replace(string tekst, string nowy_tekst, string ciag);'
+            'odpC' => 'string string_replace(string tekst, string nowy_tekst, string ciag);',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
 
@@ -181,7 +210,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'preg_grep',
             'odpA' => 'preg_filter',
             'odpB' => 'preg_math',
-            'odpC' => 'preg_quote'
+            'odpC' => 'preg_quote',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         DB::table('pytanie')->insert([
             'id' => 16,
@@ -190,7 +221,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'Funkcja pobiera zmienne zewnętrzne (np. z formularzy) i opcjonalnie je filtruje.',
             'odpA' => 'Funkcja pobiera zmienne zewnętrzne i tworzy tablicę z "true", bądź "false".',
             'odpB' => 'Funkcja sprawdza, czy zmienna została przefiltrowana.',
-            'odpC' => 'Funkcja sprawdza, czy zmienna istnieje.'
+            'odpC' => 'Funkcja sprawdza, czy zmienna istnieje.',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         DB::table('pytanie')->insert([
             'id' => 17,
@@ -199,7 +232,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'Usuwa wszystkie znaki poza cyframi oraz znakami plus i minus.',
             'odpA' => 'Usuwa wszystkie znaki poza cyframi oraz znakami "*" i "/".',
             'odpB' => 'Usuwa wszystkie znaki poza cyframi',
-            'odpC' => 'Usuwa wszystkie znaki poza cyframi oraz znakami matematycznymi.'
+            'odpC' => 'Usuwa wszystkie znaki poza cyframi oraz znakami matematycznymi.',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         DB::table('pytanie')->insert([
             'id' => 18,
@@ -208,7 +243,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => '1funkcja',
             'odpA' => 'funkcja1',
             'odpB' => 'funkcja_1',
-            'odpC' => 'funkcja'
+            'odpC' => 'funkcja',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         DB::table('pytanie')->insert([
             'id' => 19,
@@ -217,7 +254,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'Identyczne działanie jak require(), poza tym, że PHP sprawdzi, czy żądany plik nie został już dołączony i jeśli tak to nie dołączy go ponownie',
             'odpA' => 'Niczym. Identyczne działanie jak require',
             'odpB' => 'Identyczne działanie jak require(), poza tym, że PHP sprawdzi, czy żądany plik nie został już dołączony i jeśli tak to odświeży plik - załaduje go ponownie',
-            'odpC' => 'Identyczne działanie jak require(), poza tym, że PHP sprawdzi, czy żądany plik zostanie dołączony tylko raz.'
+            'odpC' => 'Identyczne działanie jak require(), poza tym, że PHP sprawdzi, czy żądany plik zostanie dołączony tylko raz.',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
         DB::table('pytanie')->insert([
@@ -227,7 +266,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'filemtime()',
             'odpA' => 'fileotime()',
             'odpB' => 'fileatime()',
-            'odpC' => 'filemodtime()'
+            'odpC' => 'filemodtime()',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         DB::table('pytanie')->insert([
             'id' => 21,
@@ -236,7 +277,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'pathinfo("nazwa_pliku") – pobiera informację o nazwie pliku i zwraca ją w postaci tablicy asocjacyjnej czterech elementów o kluczach: dirname, basename,extension, filename',
             'odpA' => 'pathinfo("nazwa_pliku") – pobiera informację o nazwie pliku i zwraca ją w postaci ciągu znaków o treści: lokalizacja-nazwa-rozszerzenie',
             'odpB' => 'pathinfo("nazwa_pliku") – pobiera informację o nazwie pliku i zwraca ją. ',
-            'odpC' => 'pathinfo("nazwa_pliku") – pobiera informację o nazwie pliku i zwraca ją w postaci tablicy asocjacyjnej czterech elementów o kluczach: dirname, name, extension, date'
+            'odpC' => 'pathinfo("nazwa_pliku") – pobiera informację o nazwie pliku i zwraca ją w postaci tablicy asocjacyjnej czterech elementów o kluczach: dirname, name, extension, date',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         DB::table('pytanie')->insert([
             'id' => 22,
@@ -245,7 +288,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'Umożliwia otwarcie katalogu do odczytu. Funkcja zwraca uchwyt katalogu.',
             'odpA' => 'Umożliwia wyświetlenie zawartości katalogu.',
             'odpB' => 'Umożliwia utworzenie katalogu.',
-            'odpC' => 'Umożliwia otwarcie katalogu do odczytu. Funkcja zwraca nazwę katalogu.'
+            'odpC' => 'Umożliwia otwarcie katalogu do odczytu. Funkcja zwraca nazwę katalogu.',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
         DB::table('pytanie')->insert([
@@ -255,7 +300,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'public',
             'odpA' => 'protected',
             'odpB' => 'private',
-            'odpC' => 'Żadne z wymienionych.'
+            'odpC' => 'Żadne z wymienionych.',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         DB::table('pytanie')->insert([
             'id' => 24,
@@ -264,7 +311,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'Wszystkie metody interfejsu muszą być prywatne.',
             'odpA' => 'Interfejs jest definiowany za pomocą słowa kluczowego interface.',
             'odpB' => 'Klasa nie może implementować dwóch interfejsów, które posiadają tak samo nazwane metody.',
-            'odpC' => 'Interfejsy mogą po sobie dziedziczyć tak jak zwykłe klasy.'
+            'odpC' => 'Interfejsy mogą po sobie dziedziczyć tak jak zwykłe klasy.',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         DB::table('pytanie')->insert([
             'id' => 25,
@@ -273,7 +322,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'Jeśli cała klasa jest zdefiniowana jako final, to nie można po niej dziedziczyć.',
             'odpA' => 'Jeśli cała klasa jest zdefiniowana jako final, to można po niej dziedziczyć ze wszystkich klas.',
             'odpB' => 'Jeśli cała klasa jest zdefiniowana jako final, nie można jej edytować - jest to wersja ostateczna.',
-            'odpC' => 'Jeśli cała klasa jest zdefiniowana jako final, nie może dziedziczyć po innej klasie.'
+            'odpC' => 'Jeśli cała klasa jest zdefiniowana jako final, nie może dziedziczyć po innej klasie.',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         DB::table('pytanie')->insert([
             'id' => 26,
@@ -282,7 +333,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'średnikiem - ";"',
             'odpA' => 'kropką - "."',
             'odpB' => 'nawiasem kwadratowym - "]"',
-            'odpC' => 'nawiasem okrągłym - ")"'
+            'odpC' => 'nawiasem okrągłym - ")"',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         DB::table('pytanie')->insert([
             'id' => 27,
@@ -291,7 +344,9 @@ język kodowania działający po stronie klienta.'
             'odpPoprawna' => 'Object Oriented Programming',
             'odpA' => 'Object Of Programming',
             'odpB' => 'Operator Object Programming',
-            'odpC' => 'Object Organized Programming'
+            'odpC' => 'Object Organized Programming',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
     }
 }

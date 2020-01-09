@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class ZadanieTableSeeder extends Seeder
 {
@@ -19,7 +20,9 @@ class ZadanieTableSeeder extends Seeder
                     'na które technologie oddano głos i inkrementować w pliku odpowiednie liczniki). Możesz '.
                     'wykorzystać przykład ankiety z wykładu 2. '.
                     'Strona z wynikami powinna pokazać liczby głosów oddanych na każdy z języków po '.
-                    'wielokrotnym głosowaniu (np. C-12, CPP–10, …, JavaScript–21).'
+                    'wielokrotnym głosowaniu (np. C-12, CPP–10, …, JavaScript–21).',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
     }
 }

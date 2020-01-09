@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class UzytkownikTableSeeder extends Seeder
 {
@@ -19,7 +20,9 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'bartek.chom@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 1,
-            'typ' => 'student'
+            'typ' => 'student',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -30,7 +33,9 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'mescruu@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 1,
-            'typ' => 'student'
+            'typ' => 'student',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -41,7 +46,9 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'domagalam@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 1,
-            'typ' => 'student'
+            'typ' => 'student',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -52,7 +59,9 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'kadzieja97@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 1,
-            'typ' => 'student'
+            'typ' => 'student',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -63,7 +72,9 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'pasieka.d@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 1,
-            'typ' => 'student'
+            'typ' => 'student',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -74,7 +85,9 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'pawel.pieczywo@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 2,
-            'typ' => 'student'
+            'typ' => 'student',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -85,7 +98,9 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'fajar@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 2,
-            'typ' => 'student'
+            'typ' => 'student',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -96,7 +111,9 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'kulaa@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 2,
-            'typ' => 'student'
+            'typ' => 'student',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -107,7 +124,9 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'crazy.mike@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 2,
-            'typ' => 'student'
+            'typ' => 'student',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -118,7 +137,9 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'raiwona@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 3,
-            'typ' => 'student'
+            'typ' => 'student',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -129,7 +150,9 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'ptakulina@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 3,
-            'typ' => 'student'
+            'typ' => 'student',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -140,7 +163,9 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'denny.m@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 3,
-            'typ' => 'student'
+            'typ' => 'student',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -151,7 +176,9 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'd.nowak@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 3,
-            'typ' => 'student'
+            'typ' => 'student',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -162,7 +189,9 @@ class UzytkownikTableSeeder extends Seeder
             'email' => 'anozwidelec@gmail.com',
             'haslo' => bcrypt('123456'),
             'idGrupa' => 3,
-            'typ' => 'student'
+            'typ' => 'student',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -171,7 +200,9 @@ class UzytkownikTableSeeder extends Seeder
             'nazwisko' => 'Pańczyk',
             'email' => 'b.panczyk@pollub.pl',
             'haslo' => bcrypt('123456'),
-            'typ' => 'nauczyciel'
+            'typ' => 'nauczyciel',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -180,7 +211,9 @@ class UzytkownikTableSeeder extends Seeder
             'nazwisko' => 'Dzieńkowski',
             'email' => 'm.dzienkowski@pollub.pl',
             'haslo' => bcrypt('123456'),
-            'typ' => 'nauczyciel'
+            'typ' => 'nauczyciel',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         
         DB::table('uzytkownik')->insert([
@@ -189,7 +222,9 @@ class UzytkownikTableSeeder extends Seeder
             'nazwisko' => 'Szuster',
             'email' => 't.szuster@pollub.pl',
             'haslo' => bcrypt('123456'),
-            'typ' => 'nauczyciel'
+            'typ' => 'nauczyciel',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
     }
 }
